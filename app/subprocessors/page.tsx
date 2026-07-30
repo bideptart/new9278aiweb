@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function SubProcessorsPage() {
   return (
     <LegalPage title="Sub-Processor" accent="List." name="Sub-Processor List" path="/subprocessors">
+      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         A sub-processor is a third party 9278.ai engages to process personal data to help provide the Services, per the{" "}
         <Link href="/privacy">Privacy Policy</Link> and <Link href="/dpa">DPA</Link>. We impose data-protection terms on

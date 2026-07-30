@@ -12,6 +12,7 @@ export const metadata: Metadata = pageSeo({
 export default function E911Page() {
   return (
     <LegalPage title="Emergency Calling" accent="(E911) Notice." name="Emergency Calling (E911) Notice" path="/e911" eyebrow="Safety">
+      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         <strong>IMPORTANT SAFETY NOTICE.</strong> The Services are internet-based (interconnected voice) and are not a
         full replacement for traditional or mobile telephone service. Emergency calling may be limited or unavailable, and
@@ -32,6 +33,9 @@ export default function E911Page() {
         <li>
           Because numbers are nomadic, the registered address may not match your actual location when you call.
         </li>
+        <li>
+          For multi-line telephone systems (MLTS) or PBX environments, you must ensure your configuration passes detailed dispatchable location information to emergency services.
+        </li>
       </ul>
 
       <h2>2. Your Responsibilities</h2>
@@ -50,6 +54,11 @@ export default function E911Page() {
         affirmative acknowledgment of these 911 limitations at activation. Equivalent obligations apply in other markets.
         Emergency-calling capability varies by country and number type; contact{" "}
         <a href="mailto:support@9278.ai">support@9278.ai</a> for the position in a specific country.
+      </p>
+
+      <h2>4. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by law, 9278.ai and its affiliates, directors, officers, and employees shall not be liable for any direct, indirect, incidental, or consequential damages arising out of or relating to the inability to access emergency services using the Services, or any failure in routing or providing accurate location information for emergency calls.
       </p>
 
       <h2>Contact</h2>

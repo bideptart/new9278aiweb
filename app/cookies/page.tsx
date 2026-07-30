@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function CookiePolicyPage() {
   return (
     <LegalPage title="Cookie" accent="Policy." name="Cookie Policy" path="/cookies">
+      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         This Cookie Policy explains how 9278.ai uses cookies and similar technologies (including localStorage and
         sessionStorage) on its websites and dashboard. It supports our <Link href="/privacy">Privacy Policy</Link>.

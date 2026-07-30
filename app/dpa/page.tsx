@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function DpaPage() {
   return (
     <LegalPage title="Data Processing" accent="Agreement." name="Data Processing Agreement" path="/dpa">
+      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         This Data Processing Agreement (&ldquo;DPA&rdquo;) forms part of the{" "}
         <Link href="/terms">Master Services Agreement</Link> between Ace Peak Invest Pte Ltd operating 9278.ai
@@ -55,7 +56,7 @@ export default function DpaPage() {
         <li>implement the Annex II security measures (GDPR Art. 32);</li>
         <li>assist the Customer with data-subject requests, security, breach notification, and DPIAs (Arts. 32–36);</li>
         <li>
-          notify the Customer without undue delay and, where feasible, within 24 hours of becoming aware of a personal
+          notify the Customer without undue delay and, where feasible, within 72 hours of becoming aware of a personal
           data breach affecting Customer Personal Data;
         </li>
         <li>

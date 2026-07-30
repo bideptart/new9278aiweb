@@ -12,6 +12,7 @@ export const metadata: Metadata = pageSeo({
 export default function AccessibilityPage() {
   return (
     <LegalPage title="Accessibility" accent="Statement." name="Accessibility Statement" path="/accessibility">
+      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         9278.ai wants its websites, dashboard, and applications to be usable by everyone, including people who use
         assistive technology.
@@ -39,7 +40,7 @@ export default function AccessibilityPage() {
       <p>
         We design for keyboard and screen-reader use, clear focus states, readable contrast, and meaningful labels and
         alt text, and we support browser/OS accessibility features. Current status: partially conforming with WCAG 2.1
-        AA; some third-party components and newer features may not yet fully conform. We review accessibility on an
+        AA; some third-party components and newer features may not yet fully conform. We evaluate our conformance using a combination of automated scanning tools and manual testing with assistive technologies. We review accessibility on an
         ongoing basis as we ship changes.
       </p>
 

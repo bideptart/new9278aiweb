@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function AiDisclosurePage() {
   return (
     <LegalPage title="AI Voice Disclosure &" accent="Responsible-AI." name="AI Voice Disclosure & Responsible-AI Policy" path="/ai-disclosure">
+      <p className="mb-8 text-sm text-muted-foreground">Last updated on 30 July 2026</p>
       <p>
         This Policy supplements the <Link href="/terms">Terms</Link>,{" "}
         <Link href="/acceptable-use">AUP</Link>, <Link href="/privacy">Privacy Policy</Link>, and{" "}

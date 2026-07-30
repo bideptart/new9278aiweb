@@ -44,7 +44,7 @@ export default function TermsOfServicePage() {
             <h1 className="mt-6 text-balance text-4xl font-serif font-normal tracking-tight md:text-6xl">
               Terms of <span className="text-primary">Service.</span>
             </h1>
-            <p className="mt-5 text-sm text-muted-foreground">Last updated on 24 June 2026</p>
+            <p className="mt-5 text-sm text-muted-foreground">Last updated on 30 July 2026</p>
           </ScrollReveal>
         </div>
       </section>
@@ -334,6 +334,12 @@ export default function TermsOfServicePage() {
           Use of integrations and third-party platforms (carriers, CRMs, calendars, model providers, app stores, etc.)
           is subject to their respective terms, which you are responsible for complying with.
         </p>
+        <h3>7.5 API Usage and Rate Limiting</h3>
+        <p>
+          You may access the Services via our provided APIs. You agree to use the APIs in accordance with our
+          documentation and not to circumvent any programmatic limits. We may enforce rate limits, suspend API access,
+          or block requests that we determine to be abusive, disproportionately large, or in violation of this Agreement.
+        </p>
 
         <h2 id="privacy-data">8. Privacy, Data Protection, and Content</h2>
         <h3>8.1 Privacy Policy</h3>
@@ -461,6 +467,12 @@ export default function TermsOfServicePage() {
           Provisions that by their nature should survive termination (including Sections 5, 8, 9, 12, 13, 14, and 15)
           will survive.
         </p>
+        <h3>11.5 Data Portability</h3>
+        <p>
+          Prior to termination of your account, you are responsible for exporting your configuration, logs, and
+          recording data. We are not obligated to provide data export assistance after termination, and data will be
+          permanently deleted according to our standard retention policies.
+        </p>
 
         <h2 id="liability">12. Limitation of Liability</h2>
         <h3>12.1 General Limitation</h3>
@@ -576,6 +588,11 @@ export default function TermsOfServicePage() {
         </p>
         <h3>15.13 Survival</h3>
         <p>Sections that by their nature should survive termination will survive.</p>
+        <h3>15.14 Anti-Bribery</h3>
+        <p>
+          You agree not to offer, give, or accept any bribe, kickback, or other improper payment or advantage in
+          connection with this Agreement, and you will comply with all applicable anti-corruption and anti-bribery laws.
+        </p>
 
         <h2 id="warranties">16. Warranties, Disclaimers, and Contact</h2>
         <h3>16.1 &ldquo;As Is&rdquo;</h3>

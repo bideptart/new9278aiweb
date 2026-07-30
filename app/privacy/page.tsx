@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
             <h1 className="mt-6 text-balance text-4xl font-serif font-normal tracking-tight md:text-6xl">
               Privacy <span className="text-primary">Policy.</span>
             </h1>
-            <p className="mt-5 text-sm text-muted-foreground">Last updated on 24 June 2026</p>
+            <p className="mt-5 text-sm text-muted-foreground">Last updated on 30 July 2026</p>
           </ScrollReveal>
         </div>
       </section>
@@ -222,6 +222,49 @@ export default function PrivacyPolicyPage() {
           which it is deleted or anonymized.
         </p>
 
+        <h3>2.6 AI and Machine Learning Data</h3>
+        <p>
+          Because 9278.ai is an AI voice agent platform, certain data is processed specifically in connection with
+          artificial intelligence and machine learning functionality:
+        </p>
+        <ul>
+          <li>
+            <strong>AI Inputs:</strong> Prompts, system instructions, voice audio, documents, and knowledge-base
+            content you provide to configure or interact with AI-powered features of the Services.
+          </li>
+          <li>
+            <strong>AI Outputs:</strong> Generated speech, text responses, conversation summaries, and derived
+            analytics produced by the AI engine during calls or other interactions.
+          </li>
+          <li>
+            <strong>AI Metadata:</strong> Model selection, token usage, latency metrics, request timestamps, and
+            error codes logged for operations, billing, and service improvement.
+          </li>
+          <li>
+            <strong>Third-Party AI Providers:</strong> Certain AI capabilities (such as large language models,
+            speech-to-text, or text-to-speech) may be delivered via third-party providers. When this occurs, your
+            AI Inputs and related data are transmitted to those providers under their respective terms and privacy
+            policies, as identified on our{" "}
+            <Link href="/subprocessors">Sub-Processor List</Link>.
+          </li>
+          <li>
+            <strong>Voice Biometric Data:</strong> Processing of voice recordings and voice characteristics through
+            our AI engine may constitute biometric data under certain laws (e.g., the Illinois Biometric Information
+            Privacy Act). You, as the customer deploying the AI voice agent, are responsible for obtaining all
+            legally required consents before processing voice biometric data through the Services.
+          </li>
+          <li>
+            <strong>Automated Decision-Making:</strong> If you use our AI Services to make automated decisions that
+            produce legal or similarly significant effects on individuals, you are responsible for ensuring compliance
+            with applicable laws (including GDPR Article 22), providing appropriate notice, and offering individuals
+            the right to contest such decisions or request human review.
+          </li>
+        </ul>
+        <p>
+          We do not use your AI Inputs or Outputs to train general-purpose AI models. Customer AI data is processed
+          solely to deliver and improve the Services for you.
+        </p>
+
         <h2 id="how-we-use">3. How We Use Your Personal Information</h2>
         <p>
           We use your personal information for purposes based on legitimate business interests, the performance of our
@@ -296,6 +339,37 @@ export default function PrivacyPolicyPage() {
         <p>
           Even after account cancellation or expiration, you may receive certain communications from our sales and
           marketing teams, which you can opt out of.
+        </p>
+
+        <h3>3.6 Legal Basis for Processing (EU/UK)</h3>
+        <p>
+          If you are located in the European Economic Area (EEA) or the United Kingdom (UK), our lawful basis for
+          collecting and using your personal information depends on the data concerned and the context in which we
+          collect it. We generally rely on the following bases:
+        </p>
+        <ul>
+          <li>
+            <strong>Performance of a Contract:</strong> Processing necessary to provide the Services you have
+            requested, manage your account, process payments, and fulfill our contractual obligations to you.
+          </li>
+          <li>
+            <strong>Legitimate Interests:</strong> Processing necessary for our legitimate interests (or those of a
+            third party) where such interests are not overridden by your rights &mdash; for example, improving our
+            Services, ensuring security, preventing fraud, and conducting analytics.
+          </li>
+          <li>
+            <strong>Legal Obligation:</strong> Processing necessary to comply with applicable laws, regulations,
+            court orders, or other legal processes, including telecommunications regulations.
+          </li>
+          <li>
+            <strong>Consent:</strong> Where we rely on your consent to process personal information (for example,
+            for marketing communications or optional cookies), you may withdraw your consent at any time without
+            affecting the lawfulness of processing carried out before withdrawal.
+          </li>
+        </ul>
+        <p>
+          Where we process personal information based on legitimate interests, we balance those interests against
+          your data protection rights and will not process your data where your rights override our interests.
         </p>
 
         <h2 id="how-we-share">4. How We Share Your Information</h2>
@@ -475,17 +549,66 @@ export default function PrivacyPolicyPage() {
           To exercise these rights, contact us using the details in Section 13. Requests typically receive a response
           within one month, or as otherwise required by law.
         </p>
+        <h3>6.9 Additional U.S. State Privacy Rights</h3>
+        <p>
+          Residents of states with comprehensive privacy laws &mdash; including Virginia (VCDPA), Colorado (CPA),
+          Connecticut (CTDPA), Texas (TDPSA), Oregon (OCPA), Montana (MCDPA), and other states that have enacted
+          similar legislation &mdash; may have rights to:
+        </p>
+        <ul>
+          <li>Confirm whether we are processing your personal data.</li>
+          <li>Access, correct, or delete your personal data.</li>
+          <li>Obtain a portable copy of your personal data.</li>
+          <li>
+            Opt out of targeted advertising, the sale of personal data, or profiling that produces legal or similarly
+            significant effects.
+          </li>
+        </ul>
+        <p>
+          We do not sell your personal information or use it for targeted advertising based on cross-context
+          behavioral profiles. To exercise any of these rights, contact us using the details in Section 13. If we
+          deny your request, you may appeal the decision by contacting us, and if you are not satisfied with our
+          response, you may contact your state&apos;s Attorney General.
+        </p>
+        <h3>6.10 Right to Lodge a Complaint</h3>
+        <p>
+          If you are located in the EU, UK, or another jurisdiction with a data protection authority, you have the
+          right to lodge a complaint with your local supervisory authority if you believe our processing of your
+          personal information infringes applicable data protection law. We encourage you to contact us first so we
+          can try to resolve your concern, but you are entitled to lodge a complaint at any time.
+        </p>
 
         <h2 id="international-transfers">7. International Data Transfers</h2>
         <p>
-          As a global service, your information may be transferred to, stored, and processed in countries other than
-          your own, including the locations where we, our affiliates, or our service providers operate. These countries
-          may have different data protection laws.
+          As a global service operated from Singapore, your information may be transferred to, stored, and processed
+          in countries other than your own, including Singapore, the United States, and other locations where we, our
+          affiliates, or our service providers operate. These countries may have data protection laws that differ from
+          those of your jurisdiction.
         </p>
         <p>
-          By using the Services and submitting information, you acknowledge such transfers. Where required, we put in
-          place appropriate safeguards — such as standard contractual clauses or reliance on adequacy decisions — in
-          accordance with applicable data protection laws.
+          Where we transfer personal data from the European Economic Area (EEA), United Kingdom (UK), or Switzerland
+          to countries not deemed to provide an adequate level of protection, we rely on appropriate safeguards,
+          including:
+        </p>
+        <ul>
+          <li>
+            <strong>Standard Contractual Clauses (SCCs):</strong> EU Commission-approved contractual clauses that
+            provide adequate protection for personal data transferred outside the EEA.
+          </li>
+          <li>
+            <strong>UK International Data Transfer Agreement (IDTA) or Addendum:</strong> Where applicable for
+            transfers from the United Kingdom.
+          </li>
+          <li>
+            <strong>Adequacy Decisions:</strong> Reliance on adequacy decisions issued by the European Commission or
+            UK Secretary of State, where applicable.
+          </li>
+        </ul>
+        <p>
+          For detailed information on our international transfer mechanisms, including the specific safeguards
+          applied, please refer to our{" "}
+          <Link href="/dpa">Data Processing Agreement</Link>. By using the Services and submitting information,
+          you acknowledge and consent to such transfers.
         </p>
 
         <h2 id="childrens-privacy">8. Children&apos;s Privacy</h2>
@@ -562,6 +685,10 @@ export default function PrivacyPolicyPage() {
           </li>
           <li>
             <strong>Voice:</strong> <a href="tel:+13474744009">+1 347-474-4009</a>
+          </li>
+          <li>
+            <strong>Data Protection / Privacy (DPO):</strong>{" "}
+            <a href="mailto:privacy@9278.ai">privacy@9278.ai</a>
           </li>
         </ul>
 

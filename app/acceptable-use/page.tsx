@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function AcceptableUsePage() {
   return (
     <LegalPage title="Acceptable Use" accent="Policy." name="Acceptable Use Policy" path="/acceptable-use">
+      <p className="mb-8 text-sm text-muted-foreground">Last updated on 30 July 2026</p>
       <p>
         This Acceptable Use Policy (&ldquo;AUP&rdquo;) is part of the <Link href="/terms">Master Services Agreement</Link>.
         It applies to you, your users, and any AI agent you configure. Breach can lead to suspension or termination
@@ -98,9 +99,10 @@ export default function AcceptableUsePage() {
 
       <h2>6. Service Integrity and Fraud</h2>
       <p>
-        Do not resell except as your plan permits; place artificial, fraudulent, or traffic-pumping traffic; share one
+        Do not resell except as your plan permits; place artificial, fraudulent, or traffic-pumping traffic (including
+        routing calls to premium-rate or high-risk international destinations for toll fraud); share one
         account to evade limits; or degrade the Services for others. 9278.ai runs fraud and toll-fraud monitoring and may
-        block suspicious traffic.
+        block suspicious traffic or specific international destinations.
       </p>
 
       <h2>7. Enforcement</h2>

@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function RefundPolicyPage() {
   return (
     <LegalPage title="Billing, Refund &" accent="Cancellation." name="Billing, Refund & Cancellation Policy" path="/refund-policy">
+      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         This policy is part of the <Link href="/terms">Master Services Agreement</Link> and explains billing, renewals,
         cancellation, and refunds for the Services.
@@ -21,7 +22,7 @@ export default function RefundPolicyPage() {
       <h2>1. Charges</h2>
       <p>
         Charges include recurring subscription fees and usage fees (per-minute, per-number, add-ons) at the rates shown
-        in the Service. Usage is billed in arrears or drawn from a prepaid balance. All fees are exclusive of taxes.
+        in the Service. Usage is billed in arrears or drawn from a prepaid balance. All fees are in US Dollars (USD) unless otherwise specified, and are exclusive of taxes.
       </p>
 
       <h2>2. Payment Terms</h2>

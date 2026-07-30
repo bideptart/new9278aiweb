@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function RecordingNoticePage() {
   return (
     <LegalPage title="Recording & Monitoring" accent="Notice." name="Call & Interaction Recording and Monitoring Notice" path="/recording-notice">
+      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         This Notice explains the recording and monitoring features of the Services and the consent obligations that
         apply when you use them. It supports the <Link href="/terms">MSA</Link>,{" "}

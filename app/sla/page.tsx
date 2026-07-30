@@ -13,6 +13,7 @@ export const metadata: Metadata = pageSeo({
 export default function SlaPage() {
   return (
     <LegalPage title="Service Level" accent="Agreement." name="Service Level Agreement (SLA)" path="/sla">
+      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         This SLA forms part of the <Link href="/terms">Master Services Agreement</Link> and applies to paid
         subscriptions in good standing.
@@ -65,7 +66,7 @@ export default function SlaPage() {
       <p>
         Service credits are the Customer&apos;s sole and exclusive remedy for availability shortfalls. To claim, email{" "}
         <a href="mailto:support@9278.ai">support@9278.ai</a> within 30 days of the affected month. Credits apply to
-        future invoices and are not refunded in cash.
+        future invoices and are not refunded in cash. In no event shall total service credits exceed 100% of the monthly fee for the affected Services.
       </p>
 
       <h2>Contact</h2>
