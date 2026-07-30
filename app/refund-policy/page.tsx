@@ -13,7 +13,6 @@ export const metadata: Metadata = pageSeo({
 export default function RefundPolicyPage() {
   return (
     <LegalPage title="Billing, Refund &" accent="Cancellation." name="Billing, Refund & Cancellation Policy" path="/refund-policy">
-      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         This policy is part of the <Link href="/terms">Master Services Agreement</Link> and explains billing, renewals,
         cancellation, and refunds for the Services.
@@ -55,7 +54,24 @@ export default function RefundPolicyPage() {
         handling on exit follow the MSA, <Link href="/dpa">DPA</Link>, and <Link href="/privacy">Privacy Policy</Link>.
       </p>
 
-      <h2>6. Refunds</h2>
+      <h2>6. Failed or Duplicate Payments</h2>
+      <p>
+        Where a Customer has been incorrectly charged due to duplicate transactions, payment gateway errors or technical
+        failures attributable to the Company, the affected amount shall be refunded or credited after verification.
+        Refunds shall be processed to the original payment method within the applicable processing period. This
+        provision supports fair business practices under the Consumer Protection Act, 2019.
+      </p>
+
+      <h2>7. Payment Gateway Failures</h2>
+      <p>
+        The Company shall not be responsible for delays caused solely by banks, payment gateways, card issuers or UPI
+        providers. However, where payment has been successfully received by the Company but the Service has not been
+        activated due to a technical error attributable to the Company, appropriate corrective action, including
+        activation, credit adjustment or refund, shall be undertaken. This allocation of responsibility is governed by
+        the Indian Contract Act, 1872.
+      </p>
+
+      <h2>8. Refunds</h2>
       <p>
         As a business service, subscription fees and used prepaid credit are generally non-refundable once a term or
         usage has started, except where this policy or mandatory law provides otherwise, or where the Services were
@@ -64,11 +80,26 @@ export default function RefundPolicyPage() {
         or 30 days (others).
       </p>
 
-      <h2>7. Disputed Charges and Chargebacks</h2>
+      <h2>9. Disputed Charges and Chargebacks</h2>
       <p>
         Contact <a href="mailto:support@9278.ai">support@9278.ai</a> before disputing a charge with your bank; most
-        issues resolve within one business day. Accounts with chargebacks may be suspended pending investigation.
-        Statutory consumer rights, where they apply, are not affected.
+        issues resolve within one business day. Billing disputes must be raised in writing within fifteen (15) days of
+        the invoice or charge date, with sufficient detail to establish the basis for any adjustment. Accounts with
+        chargebacks may be suspended pending investigation. Statutory consumer rights, where they apply, are not
+        affected.
+      </p>
+
+      <h2>10. Data Deletion After Cancellation</h2>
+      <p>
+        Upon cancellation or termination of the Services, Customer data, call recordings, transcripts and associated
+        information may be retained only for the period required to comply with applicable laws, resolve disputes,
+        enforce contractual rights or satisfy regulatory obligations. Thereafter, such data may be securely deleted or
+        anonymized in accordance with the Digital Personal Data Protection Act, 2023 (DPDPA) and the Company&apos;s{" "}
+        <Link href="/privacy">Privacy Policy</Link>. Further retention windows, controller/processor roles, and
+        jurisdiction-specific requirements (including India DPDP, Brazil LGPD, EU/UK GDPR, Singapore PDPA, and CCPA)
+        are described in the <Link href="/dpa">DPA</Link>,{" "}
+        <Link href="/country-requirements">Country-Specific Requirements</Link>, and{" "}
+        <Link href="/trust">Trust &amp; Security Center</Link>.
       </p>
 
       <h2>Contact</h2>

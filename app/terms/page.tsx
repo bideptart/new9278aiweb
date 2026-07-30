@@ -55,6 +55,18 @@ export default function TermsOfServicePage() {
           These Terms of Service (&ldquo;Agreement&rdquo;) govern your access to and use of the 9278.ai platform
           operated by Ace Peak Invest Pte Ltd. Please read them carefully before using the Services.
         </p>
+        <p>
+          This Agreement, together with our{" "}
+          <Link href="/acceptable-use">Acceptable Use Policy</Link>,{" "}
+          <Link href="/privacy">Privacy Policy</Link>, <Link href="/cookies">Cookie Policy</Link>,{" "}
+          <Link href="/dpa">Data Processing Agreement</Link>,{" "}
+          <Link href="/ai-disclosure">AI Voice Disclosure &amp; Responsible-AI Policy</Link>,{" "}
+          <Link href="/recording-notice">Recording &amp; Monitoring Notice</Link>,{" "}
+          <Link href="/refund-policy">Billing, Refund &amp; Cancellation Policy</Link>,{" "}
+          <Link href="/sla">Service Level Agreement</Link>, and{" "}
+          <Link href="/e911">Emergency Calling (E911) Notice</Link> (each as updated from time to time), forms the
+          complete agreement between you and us regarding the Services.
+        </p>
 
         <h2 id="acceptance">1. Acceptance and Modification of Terms</h2>
         <h3>1.1 Acceptance</h3>
@@ -87,6 +99,14 @@ export default function TermsOfServicePage() {
         </p>
         <h3>1.7 Review Terms Regularly</h3>
         <p>You are responsible for reviewing this Agreement periodically to stay informed of any updates.</p>
+        <h3>1.8 Automated and AI-Assisted Acceptance</h3>
+        <p>
+          To the extent you use or permit any software, automated system, or other agent (including bots or AI tools)
+          to access or use the Services on your behalf — including to create accounts, register for Services, or accept
+          this Agreement — you agree that any such action constitutes your authorized act and binding acceptance. You
+          remain fully responsible for all activity conducted through your account, credentials, API keys, or other
+          authorized access methods.
+        </p>
 
         <h2 id="description">2. Description of Services</h2>
         <h3>2.1 General</h3>
@@ -171,8 +191,12 @@ export default function TermsOfServicePage() {
         </p>
         <h3>3.4 Account Security and Responsibility</h3>
         <p>
-          You are responsible for safeguarding your credentials, your self-hosted environment, and all activity that
-          occurs under your account. Notify us promptly of any unauthorized use.
+          You are responsible for safeguarding your credentials, API keys, and self-hosted environment, and for all
+          activity that occurs under your account. You must take reasonable steps to protect passwords and API keys from
+          disclosure to or access by unauthorized parties, and notify us promptly if you become aware of any possible or
+          actual unauthorized use, misuse, or access. You are responsible for any charges arising from unauthorized
+          access not caused by us, and will assist us in preventing and remedying any breach, including filing or
+          assisting with law-enforcement reports where appropriate.
         </p>
         <h3>3.5 Account Ownership</h3>
         <p>
@@ -204,6 +228,24 @@ export default function TermsOfServicePage() {
           Voice credit does not automatically renew. You choose when to top up. Where you opt in to any auto-recharge
           feature, you authorize us to charge your payment method to maintain a credit balance, and you may disable it
           at any time.
+        </p>
+        <h3>4.4 Promotional, Usage, and Trial Credits</h3>
+        <p>
+          From time to time, 9278.ai may, at its sole discretion, grant you promotional, beta, referral, or signup
+          credits (&ldquo;Promotional Credits&rdquo;). Promotional Credits are not payment, have no cash or monetary
+          value, are non-transferable, and are non-refundable. Unless otherwise stated at the time of grant,
+          Promotional Credits expire six (6) months from the date they are awarded and will be automatically removed
+          from your account after expiry. Promotional Credits will be applied before paid voice credit. We reserve the
+          right to revoke, adjust, or refuse Promotional Credits in cases of suspected fraud, abuse, or gaming of any
+          promotion, in our sole discretion.
+        </p>
+        <h3>4.5 Plan Tier Recurring Charges (Where Applicable)</h3>
+        <p>
+          Where you subscribe to a plan with monthly recurring charges (&ldquo;MRCs&rdquo;) such as seat, agent,
+          workspace, or feature licenses, such MRCs are invoiced monthly in advance on the invoice anniversary date
+          and are non-refundable. Non-recurring charges (&ldquo;NRCs&rdquo;) such as setup, onboarding, dedicated
+          support, or migration fees are invoiced in advance and are due prior to the Service Commencement Date for
+          that feature.
         </p>
 
         <h2 id="fees">5. Fees, Payments, and Billing</h2>
@@ -251,26 +293,101 @@ export default function TermsOfServicePage() {
           If your credit balance is exhausted or a charge fails, affected Services (including active agents and calls)
           may be suspended or limited until sufficient credit is available.
         </p>
-        <h3>5.9 Chargebacks</h3>
+        <h3>5.9 Billing Disputes</h3>
+        <p>
+          Any billing dispute or request for a billing adjustment must be made in good faith and in writing within
+          fifteen (15) days of the invoice or charge date, with sufficient detail and documentation to establish the
+          basis for the adjustment. We will work with you in good faith to resolve disputes. You agree to pay the
+          undisputed portion of any invoice within the applicable payment period.
+        </p>
+        <h3>5.10 Chargebacks</h3>
         <p>
           You agree to contact us to resolve billing concerns before initiating a chargeback. Chargebacks made in bad
           faith may result in suspension or termination.
         </p>
-        <h3>5.10 Credit Expiration</h3>
+        <h3>5.11 Credit Expiration</h3>
         <p>
           Unused voice credit expires at the end of its validity period (currently 60 days from purchase) and is not
           recoverable or refundable after expiry.
         </p>
-        <h3>5.11 Taxes / VAT</h3>
+        <h3>5.12 Taxes / VAT</h3>
         <p>
           Fees are exclusive of taxes. You are responsible for any applicable VAT, GST, sales, or similar taxes, which
           may be added to your charges.
         </p>
-        <h3>5.12 Refund Policy</h3>
+        <h3>5.13 Refund Policy</h3>
         <p>
           Except where required by applicable law, voice credit and fees are non-refundable. Specific refund
           eligibility, if any, is described at <Link href="/pricing">www.9278.ai/pricing</Link> or our{" "}
           <Link href="/faq">FAQ</Link>.
+        </p>
+        <h3>5.14 Pass-Through Charges</h3>
+        <p>
+          In addition to the fees above, you are responsible for any pass-through charges levied by underlying
+          carriers, providers, regulators, or numbering administrators. These include, without limitation:
+          payphone and inmate-calling origination surcharges; toll-free origination and access charges; carrier,
+          CLEC, or CNAM-database fees; SMS/MMS termination, campaign-registry, and short-code or 10DLC-related
+          carrier fees; number porting and port-out fees; number-inventory or monthly number maintenance fees
+          imposed by your carrier; regulatory, universal-service, USF-type, or similar surcharges; and taxes, duties,
+          or assessments passed through by any provider. Such pass-through charges are separate from, and are not
+          credited against, any minimum revenue commitment or spend commitment you may have.
+        </p>
+        <h3>5.15 Late Payment, Collection Costs, and Suspension</h3>
+        <p>
+          Any amount not paid by the due date or any negative prepaid balance that is not promptly topped up may
+          bear a late-payment charge equal to the lesser of one point five percent (1.5%) per month (simple interest)
+          or the maximum rate permitted by applicable law, calculated from the due date to the date of actual payment.
+          If charges are not paid in full within ten (10) days of the due date (or if your prepaid balance is
+          negative and not restored), we reserve the right to suspend all or any portion of the Services immediately,
+          without notice, until all past-due amounts, including late charges, are paid in full. You agree to pay on
+          demand all reasonable out-of-pocket costs of collection, including reasonable attorneys&apos; fees and court
+          costs, whether or not any action or suit is instituted by us.
+        </p>
+        <h3>5.16 Billing Corrections and Supplemental Invoicing</h3>
+        <p>
+          We reserve the right to correct any invoice or rating errors and to issue corrected or supplemental
+          invoices for previously unbilled or underbilled amounts related to the Services, including usage charges,
+          pass-throughs, taxes, fees, surcharges, regulatory assessments, and third-party data delays, where such
+          amounts were omitted, delayed, or misstated due to late or missing records, rating or metering errors,
+          third-party data delays, fraud investigations, or other billing or processing errors. Each corrected or
+          supplemental invoice will itemise the applicable adjustments. Corrections may be issued for any period
+          within the applicable statutory limitation period.
+        </p>
+        <h3>5.17 Credit Limits, Cash Deposits, and Security</h3>
+        <p>
+          We may, upon written notice, impose a monthly credit limit, require a cash deposit, or require a letter of
+          credit or other form of security, in each case in an amount determined by us in our reasonable business
+          judgment based on creditworthiness, payment history, spend volumes, fraud risk, or overall changes in your
+          financial condition. If you are delinquent in the payment of fees, or if your financial condition materially
+          and adversely changes, we may require you to provide such security within ten (10) days following our
+          written request. Failure to provide requested security is a material breach and may result in suspension or
+          termination.
+        </p>
+        <h3>5.18 Right of Offset</h3>
+        <p>
+          To the fullest extent permitted by applicable law, 9278.ai shall have the right to deduct, set off, or
+          recoup against any and all obligations we may owe to you (whether under this Agreement, any credit balance,
+          any other current or future agreement, or otherwise) any and all amounts you owe to us (whether under this
+          Agreement, any other current or future agreement, past-due or disputed invoices, chargebacks, or otherwise),
+          without prior notice and regardless of whether the obligations arose under the same or different agreements,
+          services, or invoices.
+        </p>
+        <h3>5.19 Taxes, Surcharges, and Exemption Certificates</h3>
+        <p>
+          &ldquo;Taxes&rdquo; means any and all applicable national, federal, provincial, state, and local taxes,
+          duties, tariffs, levies, fees, surcharges, and assessments, including without limitation sales, use, value-
+          added (VAT), goods-and-services (GST), excise, franchise, property, commercial gross-receipts, licence,
+          privilege, stamp, withholding, USF, universal-service, and other similar charges imposed by any government
+          authority, whether charged to or against you, us, or the end-user. You are solely responsible for, and
+          shall pay, all applicable Taxes with respect to your purchase, use, or provision of the Services. If you
+          assert an exemption from any Taxes, you shall provide us with valid, current tax-exemption certificates,
+          resale certificates, VAT/GST registration numbers, or equivalent documentation acceptable to the relevant
+          taxing authority, and you shall maintain and update such certificates as required. The submission of an
+          exemption certificate does not relieve you of Taxes unless and until we confirm in writing that the
+          exemption has been accepted and applied to your account. You agree to indemnify and hold us harmless from
+          and against any Taxes (including associated interest, penalties, and reasonable professional fees) imposed
+          on us by any taxing authority relating to or arising out of your asserted exemption or your failure to
+          provide accurate, timely documentation.
         </p>
 
         <h2 id="conduct">6. User Conduct and Restrictions on Use</h2>
@@ -280,6 +397,14 @@ export default function TermsOfServicePage() {
           regulations, including telecommunications, telemarketing, robocall, anti-spam, data protection, and
           consumer-protection laws (for example, where applicable, the TCPA, TSR, GDPR, and analogous laws in the
           jurisdictions where you operate and call).
+        </p>
+        <h3>6.1a India — TRAI and DPDP</h3>
+        <p>
+          If you place or receive calls to or from India, you must comply with TRAI&apos;s Telecom Commercial
+          Communications Customer Preference Regulations (TCCCPR), including use of registered commercial numbers
+          (such as 160-series), DND/NDNC registry scrubbing, documented consent requirements, and disclosure that calls
+          are AI-generated where required. You are the data fiduciary under India&apos;s Digital Personal Data Protection
+          Act (DPDP Act) for personal data of individuals you call; 9278.ai acts as your data processor for that data.
         </p>
         <h3>6.2 AI Disclosure and Consent</h3>
         <p>
@@ -340,6 +465,33 @@ export default function TermsOfServicePage() {
           documentation and not to circumvent any programmatic limits. We may enforce rate limits, suspend API access,
           or block requests that we determine to be abusive, disproportionately large, or in violation of this Agreement.
         </p>
+        <h3>7.6 Conduit Role and Customer Content</h3>
+        <p>
+          9278.ai is a software and connectivity platform that enables your AI voice agents. We do not initiate calls,
+          select call recipients, or determine the content of communications transmitted through the Services. You are
+          solely responsible for the content of information and communications transmitted using the Services and for
+          ensuring that your agents&apos; behavior complies with applicable law.
+        </p>
+        <h3>7.7 STIR/SHAKEN and Robocall Mitigation</h3>
+        <p>
+          If you are a voice service provider, gateway provider, or intermediate provider under applicable US law, you
+          represent that you are registered with the FCC Robocall Mitigation Database and comply with STIR/SHAKEN and
+          related robocall-mitigation requirements (47 CFR § 64.6305). We may suspend traffic if you breach these
+          obligations.
+        </p>
+        <h3>7.8 Traceback Cooperation</h3>
+        <p>
+          If you receive a traceback request from an administrator authorized by USTelecom&apos;s Industry Traceback
+          Group regarding suspicious robocalls, you agree to respond promptly in good faith, identify whether you are
+          the originating or transit provider, and identify the source of the calls without requiring a subpoena where
+          permitted by law.
+        </p>
+        <h3>7.9 Campaign and Contact-List Data</h3>
+        <p>
+          You are solely responsible for the accuracy, lawfulness, and consent status of any contact lists, CSV files,
+          or lead data you upload or use with the Services. You represent that you have obtained all required consents
+          before contacting individuals through your AI agents.
+        </p>
 
         <h2 id="privacy-data">8. Privacy, Data Protection, and Content</h2>
         <h3>8.1 Privacy Policy</h3>
@@ -379,6 +531,16 @@ export default function TermsOfServicePage() {
         <p>
           We may monitor use of the Services to maintain security, prevent abuse, and ensure compliance with this
           Agreement.
+        </p>
+        <h3>8.8a Fraud and Abuse Prevention</h3>
+        <p>
+          You acknowledge that 9278.ai may lawfully and automatically sample, record, analyze, and process call audio
+          solely to detect, prevent, and investigate fraud, abuse, toll fraud, or unlawful use of the Services, and to
+          protect our rights, users, and network. Such processing is limited to security and service-quality purposes
+          and does not constitute marketing or unrelated analytics. You are solely responsible for providing all
+          required disclosures and obtaining all consents from call participants, including any all-party consent
+          required under applicable state or national law, and for configuring any consent prompts or gating features
+          accordingly. Raw audio used for fraud prevention is deleted after processing into derived security data.
         </p>
         <h3>8.9 Promotional Use of Customer Name/Logo</h3>
         <p>
@@ -456,6 +618,42 @@ export default function TermsOfServicePage() {
           We may suspend or terminate your access, with or without notice, for violation of this Agreement, suspected
           fraud or abuse, non-payment, legal/regulatory reasons, or risk to the Services or others.
         </p>
+        <h3>11.2a Material Breach &amp; Cure Periods</h3>
+        <p>
+          Either party may terminate this Agreement, any Service Order, or any feature tier, for material breach, as
+          follows:
+        </p>
+        <ul>
+          <li>
+            If you (as Customer) commit a material breach that is capable of remedy, we will provide written notice
+            describing the breach, and you will have ten (10) days from the date of such notice (&ldquo;Customer
+            Remedy Period&rdquo;) to cure the breach. If you fail to cure within the Customer Remedy Period, we may
+            terminate on the expiry of that period. Breaches of payment obligations, fraud, deception, violations of
+            the <Link href="/acceptable-use">Acceptable Use Policy</Link>, or breaches that put the safety of persons
+            or the security or integrity of the Services at risk, are each deemed incapable of remedy for purposes
+            of this Section, and we may terminate or suspend immediately without a cure period.
+          </li>
+          <li>
+            If 9278.ai commits a material breach that is capable of remedy, you will provide written notice
+            describing the breach, and we will have ninety (90) days from the date of such notice (&ldquo;Company
+            Remedy Period&rdquo;) to cure the breach. You may terminate on the expiry of the Company Remedy Period
+            only if the breach remains uncured.
+          </li>
+        </ul>
+        <h3>11.2b Orderly Transition, Number Return, and Wind-Down</h3>
+        <p>
+          On any expiration or termination of this Agreement or of the Services to you, you acknowledge that 9278.ai
+          has no obligation to continue to provide any Services after the effective date of termination. You agree
+          that you will, within thirty (30) days after termination, effect an orderly and timely transition of your
+          agents, configurations, integrations, phone numbers, dial lists, recordings, transcripts, and data to
+          another provider or environment. You are solely responsible for exporting your data prior to the end of the
+          thirty-day window; after that window, we may delete data in accordance with our retention policies and
+          Section 11.3. You further agree that you will return, release, or cease using any numbers, credentials, API
+          keys, or carrier assignments that were provisioned through or on behalf of 9278.ai, and that you will not
+          use any 9278.ai-issued CLI, caller-ID, numbering, or network identity after termination. Where termination
+          occurs due to your breach or non-payment, we have no obligation to provide a transition window and may
+          suspend immediately.
+        </p>
         <h3>11.3 Effects of Termination</h3>
         <p>
           Upon termination, your right to use the Services ends and associated data — including agents, logs,
@@ -504,11 +702,12 @@ export default function TermsOfServicePage() {
         <h3>13.1 Indemnity Obligation</h3>
         <p>
           You agree to indemnify, defend, and hold harmless 9278.ai (Ace Peak Invest Pte Ltd), its affiliates, and their
-          officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, and
-          expenses (including reasonable legal fees) arising out of or related to: your use of the Services; your
-          content, agents, prompts, or knowledge sources; your calls, recordings, or messaging; your violation of this
-          Agreement or applicable law (including telemarketing, recording-consent, and data-protection laws); or your
-          infringement of any third-party rights.
+          officers, directors, employees, and agents from and against any claims, damages, liabilities, losses, fines,
+          penalties, and expenses (including reasonable legal fees) arising out of or related to: your use of the
+          Services; your content, agents, prompts, or knowledge sources; your calls, recordings, or messaging; your
+          violation of this Agreement or applicable law (including telemarketing, recording-consent, STIR/SHAKEN,
+          TRAI/TCCCPR, data-protection, and robocall-mitigation laws); regulatory actions brought by authorities such
+          as the FCC, FTC, TRAI, or equivalent bodies; or your infringement of any third-party rights.
         </p>
 
         <h2 id="disputes">14. Dispute Resolution and Arbitration</h2>
@@ -592,6 +791,14 @@ export default function TermsOfServicePage() {
         <p>
           You agree not to offer, give, or accept any bribe, kickback, or other improper payment or advantage in
           connection with this Agreement, and you will comply with all applicable anti-corruption and anti-bribery laws.
+        </p>
+        <h3>15.15 Confidentiality</h3>
+        <p>
+          Each party agrees to hold the other&apos;s non-public business, technical, and pricing information in
+          confidence and use it only to perform under this Agreement, except as required by law or with the other
+          party&apos;s consent. This obligation survives for five (5) years after disclosure. We treat client data and
+          business information as confidential and do not disclose it to third parties without consent, except as
+          described in our Privacy Policy or as required by law.
         </p>
 
         <h2 id="warranties">16. Warranties, Disclaimers, and Contact</h2>

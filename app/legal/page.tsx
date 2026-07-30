@@ -44,6 +44,14 @@ const GROUPS: { heading: string; docs: Doc[] }[] = [
       { title: "Accessibility Statement", href: "/accessibility", description: "Our commitment to WCAG, ADA, EAA, and the UK Equality Act." },
     ],
   },
+  {
+    heading: "Trust, compliance & legal process",
+    docs: [
+      { title: "Trust & Security Center", href: "/trust", description: "Security program, certifications, data residency, and sub-processor oversight." },
+      { title: "Law Enforcement Guidelines", href: "/law-enforcement", description: "How government authorities can request data and our approach to legal process." },
+      { title: "Country-Specific Requirements", href: "/country-requirements", description: "Regional addenda, data-protection, and telecom rules by jurisdiction." },
+    ],
+  },
 ]
 
 export default function LegalCenterPage() {
@@ -78,8 +86,8 @@ export default function LegalCenterPage() {
               Compliance <span className="text-primary">Center.</span>
             </h1>
             <p className="mt-5 text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              9278.ai is operated by Ace Peak Invest Pte Ltd (Singapore) for the USA, EU, UK, and Latin America. Every
-              policy that governs the platform is here.
+              9278.ai is operated by Ace Peak Invest Pte Ltd (Singapore) for customers in the USA, EU, UK, India, Latin
+              America, and worldwide. Every policy that governs the platform is here.
             </p>
           </ScrollReveal>
         </div>

@@ -12,7 +12,6 @@ export const metadata: Metadata = pageSeo({
 export default function AccessibilityPage() {
   return (
     <LegalPage title="Accessibility" accent="Statement." name="Accessibility Statement" path="/accessibility">
-      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         9278.ai wants its websites, dashboard, and applications to be usable by everyone, including people who use
         assistive technology.
@@ -39,12 +38,20 @@ export default function AccessibilityPage() {
       <h2>2. What We Do and Current Status</h2>
       <p>
         We design for keyboard and screen-reader use, clear focus states, readable contrast, and meaningful labels and
-        alt text, and we support browser/OS accessibility features. Current status: partially conforming with WCAG 2.1
+        alt text, and we support browser/OS accessibility features. We aim to provide captions or transcripts for
+        pre-recorded audio and video content where we publish it. Current status: partially conforming with WCAG 2.1
         AA; some third-party components and newer features may not yet fully conform. We evaluate our conformance using a combination of automated scanning tools and manual testing with assistive technologies. We review accessibility on an
         ongoing basis as we ship changes.
       </p>
 
-      <h2>3. Get Help or Report a Barrier</h2>
+      <h2>3. Known Limitations</h2>
+      <p>
+        Some dashboard charts, live call visualizations, and third-party embedded components may not yet be fully
+        accessible to all assistive technologies. We are working to address these gaps and welcome specific feedback on
+        barriers you encounter.
+      </p>
+
+      <h2>4. Get Help or Report a Barrier</h2>
       <p>
         If you cannot access part of the Services or need information in another format, contact{" "}
         <a href="mailto:accessibility@9278.ai">accessibility@9278.ai</a>. We will acknowledge within 5 business days and

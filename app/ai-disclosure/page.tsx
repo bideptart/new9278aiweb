@@ -13,7 +13,6 @@ export const metadata: Metadata = pageSeo({
 export default function AiDisclosurePage() {
   return (
     <LegalPage title="AI Voice Disclosure &" accent="Responsible-AI." name="AI Voice Disclosure & Responsible-AI Policy" path="/ai-disclosure">
-      <p className="mb-8 text-sm text-muted-foreground">Last updated on 30 July 2026</p>
       <p>
         This Policy supplements the <Link href="/terms">Terms</Link>,{" "}
         <Link href="/acceptable-use">AUP</Link>, <Link href="/privacy">Privacy Policy</Link>, and{" "}
@@ -44,6 +43,15 @@ export default function AiDisclosurePage() {
         prior-express-consent requirements. You must obtain the required consent before any AI-voice outbound or
         marketing call and honour do-not-call and revocation rules. The FTC prohibits deceptive or unfair AI-voice
         practices.
+      </p>
+
+      <h2>3a. India — TRAI AI-Calling Requirements</h2>
+      <p>
+        In India, AI-powered commercial communications must comply with TRAI&apos;s TCCCPR regulations, including
+        routing through registered commercial numbers (160-series), scrubbing against the DND/NDNC registry, obtaining
+        and documenting consent, and disclosing on every call that the caller is an AI-generated voice where required.
+        You, as the business deploying the agent, are responsible for consent and compliance; 9278.ai provides
+        tooling to support TRAI-safe calling but does not assume your compliance obligations.
       </p>
 
       <h2>4. Human Escalation</h2>

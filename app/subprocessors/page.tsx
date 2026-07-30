@@ -13,13 +13,17 @@ export const metadata: Metadata = pageSeo({
 export default function SubProcessorsPage() {
   return (
     <LegalPage title="Sub-Processor" accent="List." name="Sub-Processor List" path="/subprocessors">
-      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         A sub-processor is a third party 9278.ai engages to process personal data to help provide the Services, per the{" "}
         <Link href="/privacy">Privacy Policy</Link> and <Link href="/dpa">DPA</Link>. We impose data-protection terms on
         each and require appropriate safeguards (EU SCCs / UK IDTA where relevant). Business customers can subscribe to
         change notifications at <a href="mailto:privacy@9278.ai">privacy@9278.ai</a>; we give at least 14 days&apos;
-        notice before adding a new sub-processor that processes Customer Personal Data.
+        notice before adding a new sub-processor that processes Customer Personal Data. Our full vendor and
+        sub-processor management program (pre-onboarding assessment, annual review, change-notice procedures, transfer
+        impact assessments, and audit evidence) is described in the{" "}
+        <Link href="/trust">Trust &amp; Security Center</Link>, with jurisdiction-specific transfer mechanisms (Swiss
+        adapted SCCs, Singapore PDPA Part IX, Brazil LGPD Art. 33–35, etc.) in the{" "}
+        <Link href="/country-requirements">Country-Specific Requirements</Link> page.
       </p>
 
       <h2>1. Infrastructure and Platform</h2>
@@ -74,6 +78,10 @@ export default function SubProcessorsPage() {
           <strong>Hostinger</strong> — transactional and contact email delivery.
         </li>
       </ul>
+      <p>
+        Google Calendar and other integration providers act as independent controllers for data processed within their
+        own platforms when you connect them to your agent. See our Privacy Policy for Google API Limited Use terms.
+      </p>
       <p>
         App stores (Apple, Google) act as independent controllers for their own platform processing and are not 9278.ai
         sub-processors.

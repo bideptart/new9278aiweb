@@ -122,6 +122,10 @@ export default function PrivacyPolicyPage() {
             personal information that you choose to include.
           </li>
           <li>
+            <strong>Campaign and Contact-List Data:</strong> Phone numbers, names, and other contact details you upload
+            via CSV files, CRM integrations, or other lead sources for outbound calling campaigns.
+          </li>
+          <li>
             <strong>Communications:</strong> Information you provide when contacting our sales, support, or other teams,
             including records and copies of your correspondence.
           </li>
@@ -190,8 +194,22 @@ export default function PrivacyPolicyPage() {
             support and measure our marketing efforts.
           </li>
           <li>
-            <strong>Publicly Available Sources:</strong> Information from public sources, such as your professional
-            profile, that we believe is relevant to your use of our Services.
+            <strong>Publicly Available Sources:</strong> Information from public sources that we believe is relevant
+            to evaluating, onboarding, and supporting your use of the Services, including — where permitted by
+            applicable law — professional-networking and social-media profiles (such as LinkedIn, Facebook,
+            X/Twitter, and comparable services), business registries, press articles, and company websites.
+          </li>
+          <li>
+            <strong>Identity, Fraud, and Credit Providers:</strong> Information from identity-verification, KYC,
+            anti-fraud, and business-information providers to comply with regulatory requirements and mitigate risk
+            where permitted by law.
+          </li>
+          <li>
+            <strong>Visitors to Our Offices &amp; NDA Counterparties:</strong> If you visit one of our facilities
+            (where applicable) or sign a non-disclosure agreement or similar confidentiality undertaking with us,
+            we may process your name, company, title, contact details, government-issued ID (where necessary for
+            building or data-centre access), signature, and NDA terms for the legitimate interests of physical
+            security, visitor management, and the protection of our confidential information and trade secrets.
           </li>
         </ul>
         <p>
@@ -263,6 +281,53 @@ export default function PrivacyPolicyPage() {
         <p>
           We do not use your AI Inputs or Outputs to train general-purpose AI models. Customer AI data is processed
           solely to deliver and improve the Services for you.
+        </p>
+
+        <h3>2.7 Sensitive Personal Information</h3>
+        <p>
+          We may collect certain categories of sensitive personal information where necessary to provide the Services,
+          including account login credentials, financial/payment information (processed by our payment partners), voice
+          recordings and voice characteristics (which may constitute biometric data under certain laws), and precise
+          geolocation data where emergency-calling or location features are enabled. We use sensitive personal
+          information only as permitted by applicable law and do not use it for purposes incompatible with the reason
+          it was collected.
+        </p>
+
+        <h3>2.8 Sensory, Device, and IoT Data (Where Collected)</h3>
+        <p>
+          Depending on the Services and features you use, we may also process:
+        </p>
+        <ul>
+          <li>
+            <strong>Sensory and QA/Training Data:</strong> Recordings of calls or screen shares you have with our
+            sales, customer-success, or support teams, for quality assurance, onboarding, training, and internal
+            coaching purposes. Where required by applicable law, we will capture consent (for example, via an
+            automated prompt or party acknowledgement) before recording such interactions. Recordings are retained
+            for a rolling defined period and then deleted unless longer retention is required by law.
+          </li>
+          <li>
+            <strong>Device and Telecommunications Identifiers:</strong> Where the platform handles SIM, eSIM, or
+            mobile/IoT connectivity (e.g. in future or custom deployments), unique device and subscriber identifiers
+            such as IMSI, ICCID, and IMEI, together with network connectivity data (signal strength, data usage,
+            session duration, roaming status, and cell-level location), for the purposes of network routing,
+            billing, compliance with telecommunications regulations, and emergency services.
+          </li>
+          <li>
+            <strong>Geolocation Information:</strong> Approximate and, where you enable it, precise geolocation
+            information derived from IP address, caller-ID registration address, calling party number, device GPS,
+            or cell-tower/mobile-network triangulation, for purposes including call routing, emergency services,
+            account and billing regionality, and compliance with geographic restrictions where required.
+          </li>
+        </ul>
+
+        <h3>2.9 Purpose Limitation</h3>
+        <p>
+          For the avoidance of doubt, we will not use personal data we collected for a materially different,
+          unrelated, or incompatible purpose without first providing you (or, where appropriate, the applicable
+          controller) with notice of the new purpose and, where required by applicable law, obtaining your explicit
+          consent. Where processing is to be carried out for a purpose other than that for which the personal data
+          was collected, we will record the new purpose and ensure that it is compatible with the original purpose
+          or supported by a valid legal basis.
         </p>
 
         <h2 id="how-we-use">3. How We Use Your Personal Information</h2>
@@ -355,22 +420,62 @@ export default function PrivacyPolicyPage() {
           <li>
             <strong>Legitimate Interests:</strong> Processing necessary for our legitimate interests (or those of a
             third party) where such interests are not overridden by your rights &mdash; for example, improving our
-            Services, ensuring security, preventing fraud, and conducting analytics.
+            Services, ensuring security, preventing fraud, conducting internal analytics, running and measuring the
+            effectiveness of direct marketing within applicable rules, and protecting our legal rights and interests
+            and those of our customers. Where we process on the basis of legitimate interests and the interest is
+            not already apparent from the description above, we document the balancing test in our Record of
+            Processing Activities and can summarise it on request.
           </li>
           <li>
             <strong>Legal Obligation:</strong> Processing necessary to comply with applicable laws, regulations,
-            court orders, or other legal processes, including telecommunications regulations.
+            court orders, or other legal processes, including telecommunications regulations, tax, accounting, and
+            sanctions/export-control compliance.
           </li>
           <li>
             <strong>Consent:</strong> Where we rely on your consent to process personal information (for example,
-            for marketing communications or optional cookies), you may withdraw your consent at any time without
-            affecting the lawfulness of processing carried out before withdrawal.
+            for marketing communications, optional cookies, or other optional features), you may withdraw your
+            consent at any time without affecting the lawfulness of processing carried out before withdrawal.
           </li>
         </ul>
         <p>
           Where we process personal information based on legitimate interests, we balance those interests against
           your data protection rights and will not process your data where your rights override our interests.
         </p>
+
+        <h3>3.7 Controller vs. Processor / Service-Provider Roles</h3>
+        <p>
+          Because the Services both enable our business relationship with <em>you</em> (the customer) and help you
+          serve the individuals who call or are called by your AI agents, we can operate in different legal roles
+          under data-protection legislation depending on the data and processing activity:
+        </p>
+        <ul>
+          <li>
+            <strong>9278.ai as Controller:</strong> We act as a controller in respect of personal data we collect and
+            use for our own business purposes, including: customer and billing account information; website visitor,
+            marketing, and lead information; sales, support, and onboarding correspondence; security and fraud
+            investigations; visitor and NDA records; and records of complaints, disputes, and legal claims. In
+            these roles, 9278.ai (Ace Peak Invest Pte Ltd) determines why and how the data is processed, and is
+            responsible for compliance with applicable controller obligations.
+          </li>
+          <li>
+            <strong>9278.ai as Processor / Service Provider:</strong> We act as a processor (or, under US state
+            privacy laws, a &ldquo;service provider&rdquo;) in respect of call audio, call recordings, transcripts,
+            conversation logs, agent prompts, contact/lead lists, CRM data, and other personal data that flows
+            through your AI voice agents at your direction and under your configuration. In these roles we process
+            personal data only on your documented instructions (as reflected in the Terms of Service, your account
+            and agent configuration, the DPA, and any applicable service order), and we do not use such data for
+            our own independent purposes (other than as necessary to provide, secure, maintain, and improve the
+            Services and to comply with law). Further details, including Standard Contractual Clauses for
+            international transfers, are in our <Link href="/dpa">Data Processing Agreement</Link>.
+          </li>
+          <li>
+            <strong>Controller vs Processor for communications metadata:</strong> For certain types of metadata about
+            calls (for example, CDR-level timestamps, calling/called numbers, and session identifiers) we may act
+            partly as a processor (performing billing, routing, and quality functions as your service provider) and
+            partly as a controller (for fraud, abuse, security, and lawful-compliance functions). We document and
+            handle each processing role separately, and further details are available on request.
+          </li>
+        </ul>
 
         <h2 id="how-we-share">4. How We Share Your Information</h2>
         <p>
@@ -499,6 +604,36 @@ export default function PrivacyPolicyPage() {
         </ul>
         <p>When data is no longer needed, we delete or anonymize it where possible and appropriate.</p>
 
+        <h3>5.3 Personal Data Breach &amp; Incident Notification</h3>
+        <p>
+          We maintain an incident-response plan (documented in the{" "}
+          <Link href="/trust">Trust &amp; Security Center</Link>) that addresses detection, assessment, containment,
+          eradication, recovery, and notification of personal-data breaches and other security incidents. In the
+          event of a breach of security leading to the accidental or unlawful destruction, loss, alteration,
+          unauthorised disclosure of, or access to, personal data transmitted, stored, or otherwise processed on or
+          through the Services:
+        </p>
+        <ul>
+          <li>
+            We will, where required by the GDPR, UK GDPR, DPDP Act, CCPA/CPRA, and comparable applicable laws,
+            notify the competent supervisory authority(ies) within the applicable statutory timelines (for example,
+            within 72 hours of becoming aware of a GDPR-qualifying breach, where feasible), and where the breach
+            is likely to result in a high risk to the rights and freedoms of individuals, we will also notify the
+            affected data subjects without undue delay, to the extent and in the manner required by law.
+          </li>
+          <li>
+            Where we act as a processor and a breach affects customer-controlled personal data, we will notify you,
+            as the controller, without undue delay after becoming aware of the breach and will provide reasonable
+            cooperation in meeting any controller notification or data-subject communication obligations that apply
+            to you, as further detailed in the <Link href="/dpa">DPA</Link>.
+          </li>
+          <li>
+            All notifications are subject to the legitimate interests of security, prevention of further
+            compromise, and requirements of law enforcement. We may delay or redact a notification where law
+            enforcement advises that public disclosure would impede a criminal investigation or threaten safety.
+          </li>
+        </ul>
+
         <h2 id="your-rights">6. Your Rights and Choices</h2>
         <p>
           Depending on your location and applicable law (e.g., the EU/UK GDPR, the CCPA/CPRA, and other applicable data
@@ -537,7 +672,12 @@ export default function PrivacyPolicyPage() {
           Where applicable, California consumers have rights including the right to know the categories and specific
           pieces of personal data collected, the right to deletion, the right to correction, and the right to opt out of
           the &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of personal information. We do not sell your personal
-          information.
+          information. Only you, or someone legally authorized to act on your behalf (including an authorized agent
+          with written authorization signed by you), may submit a verifiable consumer request. We may request additional
+          information to verify your identity before processing a request. We will respond within forty-five (45) days of
+          receipt, or notify you if a reasonable extension is needed. We will not discriminate against you for exercising
+          your CCPA/CPRA rights. If you have concerns, you may contact the California Privacy Protection Agency at{" "}
+          <a href="https://cppa.ca.gov" target="_blank" rel="noopener noreferrer">cppa.ca.gov</a>.
         </p>
         <h3>6.8 GDPR Rights (for EU/UK Individuals)</h3>
         <p>
@@ -576,6 +716,16 @@ export default function PrivacyPolicyPage() {
           right to lodge a complaint with your local supervisory authority if you believe our processing of your
           personal information infringes applicable data protection law. We encourage you to contact us first so we
           can try to resolve your concern, but you are entitled to lodge a complaint at any time.
+        </p>
+        <h3>6.11 India — DPDP Act Rights</h3>
+        <p>
+          If you are located in India or your personal data is processed under India&apos;s Digital Personal Data
+          Protection Act (DPDP Act), you may have rights as a data principal, including the right to access, correct,
+          erase, and withdraw consent for personal data we process as a data fiduciary (for example, your account
+          data). For caller data processed on behalf of our business customers, the customer is generally the data
+          fiduciary and you should contact them first; we assist our customers in fulfilling data-principal requests
+          as their processor. To exercise rights against 9278.ai directly, contact{" "}
+          <a href="mailto:privacy@9278.ai">privacy@9278.ai</a>.
         </p>
 
         <h2 id="international-transfers">7. International Data Transfers</h2>
@@ -639,6 +789,59 @@ export default function PrivacyPolicyPage() {
           their practices or content. Review their privacy policies before sharing personal information. Interactions
           through integrated third-party platforms (e.g., carriers, CRMs, calendars, or support tools) are subject to
           their privacy policies.
+        </p>
+
+        <h2 id="google-api">10a. Google User Data (Limited Use)</h2>
+        <p>
+          If you connect Google Calendar or other Google services to your agent, we request only the minimum access
+          needed to check availability and create or update calendar events on your behalf during calls. Google account
+          tokens are stored encrypted and used solely to perform those actions. We do not use Google user data for
+          advertising, do not sell or share it, and do not use it to train general-purpose AI or machine-learning models.
+          9278.ai&apos;s use and transfer of information received from Google APIs adheres to the Google API Services
+          User Data Policy, including the Limited Use requirements. You can disconnect Google access at any time from
+          your account settings or from your Google Account permissions page; we delete stored tokens upon
+          disconnection.
+        </p>
+
+        <h2 id="cpni">10b. Customer Proprietary Network Information (CPNI)</h2>
+        <p>
+          If you are a US telecommunications customer, certain information about your use of voice services — such as
+          the numbers you call, when you call, and call duration — may constitute Customer Proprietary Network
+          Information (CPNI) protected under 47 U.S.C. § 222. Without your consent, we will not use or disclose your
+          CPNI except as permitted by law, including to provide and bill for the Services, to protect against fraud or
+          unauthorized use, or as otherwise required by applicable regulations.
+        </p>
+
+        <h2 id="lgpd-pdpa">10c. Brazil (LGPD) &amp; Singapore (PDPA) — Additional Information</h2>
+        <h3>10c.1 Brazil — Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018)</h3>
+        <p>
+          If your personal data is processed in or from Brazil and the LGPD applies, you may have additional rights
+          as a titular de dados pessoais, including the right to: confirm the existence of processing; access your
+          data; correct incomplete, inaccurate, or out-of-date data; anonymize, block, or delete unnecessary or
+          excessive data or data not processed in compliance with the LGPD; request portability of your personal data
+          to another service or product provider (where technically and legally feasible); delete your personal data
+          where processing was based on consent; be informed about the sharing of your personal data and the entities
+          with whom we share it; be informed about the possibility of denying consent and the consequences of such
+          denial; and revoke your consent to processing at any time. Complaints about our handling of personal data
+          may be directed to the Autoridade Nacional de Proteção de Dados (ANPD) at{" "}
+          <a href="https://www.gov.br/anpd" target="_blank" rel="noopener noreferrer">www.gov.br/anpd</a>. For more
+          detail on controller/processor roles, transfer mechanisms, and other LGPD requirements, see{" "}
+          <Link href="/country-requirements">Country-Specific Requirements</Link> (Section 5).
+        </p>
+        <h3>10c.2 Singapore — Personal Data Protection Act 2012 (PDPA)</h3>
+        <p>
+          As a Singapore-incorporated company, 9278.ai complies with the Singapore PDPA as applicable to our
+          collection, use, disclosure, transfer, and retention of personal data. In particular: we provide the
+          information in this Privacy Policy as our &ldquo;privacy policy&rdquo; for the purposes of the PDPA; we
+          collect, use, or disclose personal data only for purposes that are reasonable in the circumstances and
+          disclosed to you (or, where required by the PDPA, for which we have obtained your consent); and we have
+          processes in place to ensure the accuracy, protection, and (when required) destruction or anonymisation
+          of personal data, and to respond to access and correction requests and Do-Not-Call (DNC) obligations.
+          Singapore residents may also wish to refer to the{" "}
+          <Link href="/country-requirements">Country-Specific Requirements</Link> page (Section 9) for additional
+          DNC and cross-border transfer information. Complaints about our PDPA handling may be directed to the
+          Personal Data Protection Commission (PDPC) at{" "}
+          <a href="https://www.pdpc.gov.sg" target="_blank" rel="noopener noreferrer">www.pdpc.gov.sg</a>.
         </p>
 
         <h2 id="changes">11. Changes to This Privacy Policy</h2>

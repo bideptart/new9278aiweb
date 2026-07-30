@@ -13,7 +13,6 @@ export const metadata: Metadata = pageSeo({
 export default function DpaPage() {
   return (
     <LegalPage title="Data Processing" accent="Agreement." name="Data Processing Agreement" path="/dpa">
-      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         This Data Processing Agreement (&ldquo;DPA&rdquo;) forms part of the{" "}
         <Link href="/terms">Master Services Agreement</Link> between Ace Peak Invest Pte Ltd operating 9278.ai
@@ -53,11 +52,16 @@ export default function DpaPage() {
       <ul>
         <li>process only on documented instructions; flag instructions that appear to breach data-protection law;</li>
         <li>ensure authorised persons are bound by confidentiality;</li>
-        <li>implement the Annex II security measures (GDPR Art. 32);</li>
+        <li>
+          implement the Annex II security measures (GDPR Art. 32). An overview of our security program, certifications
+          roadmap, encryption, access controls, and vendor management is available in the{" "}
+          <Link href="/trust">Trust &amp; Security Center</Link>;
+        </li>
         <li>assist the Customer with data-subject requests, security, breach notification, and DPIAs (Arts. 32–36);</li>
         <li>
           notify the Customer without undue delay and, where feasible, within 72 hours of becoming aware of a personal
-          data breach affecting Customer Personal Data;
+          data breach affecting Customer Personal Data. Breach-incident response and notification procedures are further
+          detailed in the <Link href="/trust">Trust &amp; Security Center</Link>;
         </li>
         <li>
           on termination, delete or return Customer Personal Data within 30 days and confirm in writing, except where law
@@ -65,7 +69,8 @@ export default function DpaPage() {
         </li>
         <li>
           make available compliance information and allow audits on 30 business days&apos; notice (or provide an ISO 27001
-          / SOC 2 report in lieu); maintain Art. 30(2) records.
+          / SOC 2 report in lieu); maintain Art. 30(2) records. Enterprise customers may request audit evidence under
+          NDA via the <Link href="/trust">Trust &amp; Security Center</Link>.
         </li>
       </ul>
 
@@ -89,10 +94,18 @@ export default function DpaPage() {
         For transfers of Customer Personal Data from the EEA/UK to a country without an adequacy decision, the EU SCCs
         (Decision 2021/914), Module Two (Controller-to-Processor), and the UK IDTA/Addendum apply, completed with the
         Annex I details. 9278.ai, in Singapore, also complies with the PDPA Transfer Limitation Obligation. Transfer
-        impact assessments are conducted for third-country sub-processors.
+        impact assessments are conducted for third-country sub-processors. Jurisdiction-specific transfer mechanisms
+        (Swiss adapted SCCs, transfer impact assessment records, and supplementary measures) are further described in
+        the <Link href="/country-requirements">Country-Specific Requirements</Link> page.
       </p>
 
       <h2>7. Jurisdiction-Specific Terms</h2>
+      <p>
+        The terms below summarise processor addenda for major jurisdictions. Full regional addenda, data-residency
+        options, and telecom-specific requirements (EU AI Act, India TRAI TCCCPR/DLT, US 10DLC/STIR-SHAKEN, Australia
+        DNCR, Singapore DNC, Brazil ANPD, Canada PIPL/CASL, Mexico LFPDPPP and others) are maintained in the{" "}
+        <Link href="/country-requirements">Country-Specific Requirements</Link> page.
+      </p>
       <ul>
         <li>
           <strong>United States — CCPA/CPRA:</strong> 9278.ai is a &ldquo;service provider&rdquo;, not a &ldquo;third
@@ -107,9 +120,21 @@ export default function DpaPage() {
           <strong>Other Latin American countries:</strong> 9278.ai applies equivalent processor obligations under
           applicable national data-protection law.
         </li>
+        <li>
+          <strong>India — DPDP Act:</strong> Where Customer Personal Data relates to individuals in India, the Customer
+          is the data fiduciary and 9278.ai acts as a data processor (data processor under the DPDP Act). We process
+          such data only on documented instructions, implement reasonable security safeguards, notify the Customer of
+          breaches without undue delay, and assist with data-principal rights requests as required by law.
+        </li>
       </ul>
 
       <h2>8. Annex II — Security Measures (GDPR Art. 32)</h2>
+      <p>
+        The controls below are a summary; the full technical and organisational security program (including
+        certifications roadmap, BCDR RTO/RPO, continuous monitoring, vendor due-diligence lifecycle, AI-specific
+        safeguards, and audit evidence on request) is maintained in the{" "}
+        <Link href="/trust">Trust &amp; Security Center</Link>.
+      </p>
       <ul>
         <li>
           <strong>Encryption</strong> — TLS 1.2+ in transit, SRTP for media, AES-256 at rest for recordings/transcripts;

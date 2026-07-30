@@ -12,7 +12,6 @@ export const metadata: Metadata = pageSeo({
 export default function E911Page() {
   return (
     <LegalPage title="Emergency Calling" accent="(E911) Notice." name="Emergency Calling (E911) Notice" path="/e911" eyebrow="Safety">
-      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         <strong>IMPORTANT SAFETY NOTICE.</strong> The Services are internet-based (interconnected voice) and are not a
         full replacement for traditional or mobile telephone service. Emergency calling may be limited or unavailable, and
@@ -24,7 +23,8 @@ export default function E911Page() {
       <ul>
         <li>
           9278.ai may not be able to connect a call to emergency services (911 in the US, 112 in the EU/UK, and local
-          equivalents), and may not transmit your location or call-back number.
+          equivalents), and may not transmit your location or call-back number to the Public Safety Answering Point
+          (PSAP).
         </li>
         <li>
           Emergency calling will not work during an internet or power outage, if your device or account is not working,
@@ -42,8 +42,10 @@ export default function E911Page() {
       <ul>
         <li>
           Register and keep current an accurate physical service address for each user/number, so emergency calls route
-          to the correct centre (PSAP in the US).
+          to the correct PSAP. For multi-story buildings, include floor and suite numbers where applicable under MLTS or
+          Kari&apos;s Law requirements.
         </li>
+        <li>Inform end users not to block caller ID when placing emergency calls where that could affect routing.</li>
         <li>Inform every user and, where relevant, on-site visitors of these limitations.</li>
         <li>Maintain an alternative means (e.g. mobile or landline) of reaching emergency services.</li>
       </ul>

@@ -13,7 +13,6 @@ export const metadata: Metadata = pageSeo({
 export default function SlaPage() {
   return (
     <LegalPage title="Service Level" accent="Agreement." name="Service Level Agreement (SLA)" path="/sla">
-      <p><em>Last updated: 30 July 2026</em></p>
       <p>
         This SLA forms part of the <Link href="/terms">Master Services Agreement</Link> and applies to paid
         subscriptions in good standing.
@@ -41,7 +40,8 @@ export default function SlaPage() {
       </ul>
       <p>
         Support channels: email <a href="mailto:support@9278.ai">support@9278.ai</a> and the in-dashboard help, with
-        critical (P1) support available 24×7.
+        critical (P1) support available 24×7. We will use commercially reasonable efforts to restore core
+        call-handling functionality as quickly as practicable during an outage.
       </p>
 
       <h2>3. Exclusions</h2>
@@ -56,6 +56,11 @@ export default function SlaPage() {
         <li>suspension for breach or non-payment;</li>
         <li>beta features.</li>
       </ul>
+      <p>
+        Our business-continuity and disaster-recovery (BCDR) posture, tested incident-response procedures, encryption,
+        and infrastructure-resilience controls (including RTO/RPO targets and point-in-time recovery) are documented in
+        the <Link href="/trust">Trust &amp; Security Center</Link>.
+      </p>
 
       <h2>4. Service Credits</h2>
       <ul>

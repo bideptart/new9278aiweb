@@ -13,7 +13,6 @@ export const metadata: Metadata = pageSeo({
 export default function RecordingNoticePage() {
   return (
     <LegalPage title="Recording & Monitoring" accent="Notice." name="Call & Interaction Recording and Monitoring Notice" path="/recording-notice">
-      <p><strong>Last updated: 30 July 2026</strong></p>
       <p>
         This Notice explains the recording and monitoring features of the Services and the consent obligations that
         apply when you use them. It supports the <Link href="/terms">MSA</Link>,{" "}
@@ -44,13 +43,16 @@ export default function RecordingNoticePage() {
       <p>
         A recording of an identifiable person is personal data. Laws differ and a call can connect people in different
         places. The safe rule 9278.ai recommends is to treat every interaction as requiring all-party consent: announce
-        recording/monitoring and AI handling at the start and proceed only if participants agree.
+        recording/monitoring and AI handling at the start and proceed only if participants agree. Additional
+        jurisdiction-specific rules and addenda are maintained in the{" "}
+        <Link href="/country-requirements">Country-Specific Requirements</Link> page.
       </p>
       <ul>
         <li>
-          <strong>United States</strong> — federal one-party consent (18 U.S.C. §2511), but all-party-consent states
-          include California, Connecticut, Florida, Illinois, Maryland, Massachusetts, Montana, Nevada, New Hampshire,
-          Pennsylvania, and Washington. Breach can be criminal and civil.
+          <strong>United States</strong> — the Federal Wiretap Act (18 U.S.C. § 2511) permits one-party consent at the
+          federal level, but all-party-consent states include California, Connecticut, Florida, Illinois, Maryland,
+          Massachusetts, Montana, Nevada, New Hampshire, Pennsylvania, and Washington. Breach can be criminal and civil.
+          You must maintain records evidencing consent and provide proof upon request.
         </li>
         <li>
           <strong>United Kingdom &amp; EU</strong> — recording is personal-data processing under GDPR; you need a lawful
@@ -59,6 +61,12 @@ export default function RecordingNoticePage() {
         <li>
           <strong>Brazil &amp; Latin America</strong> — the LGPD and national laws require a lawful basis and notice;
           treat as all-party.
+        </li>
+        <li>
+          <strong>India</strong> — recording and processing of call audio may constitute personal-data processing under
+          the DPDP Act; you must obtain notice and consent from data principals and comply with TRAI requirements for
+          commercial communications. You are the data fiduciary for your callers; 9278.ai processes recordings as your
+          processor.
         </li>
       </ul>
 
@@ -75,7 +83,11 @@ export default function RecordingNoticePage() {
         9278.ai stores and processes recordings and transcripts on your behalf to provide the feature and secure the
         Services; 9278.ai does not sell them. Retention settings let you keep recordings no longer than necessary. On
         account closure, recordings remain available for export for a defined window, then are deleted, unless legal
-        retention applies.
+        retention applies. Circumstances under which recordings may be disclosed to government authorities, law
+        enforcement, or third parties under legal process are described in the{" "}
+        <Link href="/law-enforcement">Law Enforcement Guidelines</Link>. Security, encryption-at-rest, access controls,
+        and backup/BCDR for recorded content are summarised in the{" "}
+        <Link href="/trust">Trust &amp; Security Center</Link>.
       </p>
 
       <h2>5. AI Processing and Prohibited Use</h2>
@@ -83,7 +95,9 @@ export default function RecordingNoticePage() {
         Processing a recording with AI (transcription, summarisation, sentiment) is a distinct purpose requiring its own
         lawful basis and disclosure; the EU AI Act adds transparency duties. You must not use recording or AI voice to
         entrap, deceive, impersonate, or capture conversations unlawfully, or to record people under 18 without specific
-        legal advice and required consents.
+        legal advice and required consents. EU AI Act 2024/1689 high-risk use-case mapping, Brazil ANPD, India DPDP, and
+        other jurisdiction-specific AI and recording obligations are documented in the{" "}
+        <Link href="/country-requirements">Country-Specific Requirements</Link> page.
       </p>
 
       <h2>Contact</h2>
