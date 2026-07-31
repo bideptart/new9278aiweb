@@ -1,396 +1,408 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { ChevronLeft, ChevronRight, Phone, Infinity as InfinityIcon, Zap, Check, User, Bot } from "lucide-react"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import type React from "react"
+import { useEffect, useRef, useState } from "react"
+import { Zap, Split, Waves, Mic, PhoneOff, Grid2x2, Signal, Wifi, BatteryFull, ShieldCheck } from "lucide-react"
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react"
 import { ScrollReveal } from "@/components/animation/scroll-reveal"
 import { cn } from "@/lib/utils"
 
-function ZeroLagIllustration() {
-  const barCount = 56
-  const bars = Array.from({ length: barCount }, (_, i) => {
-    const mid = barCount / 2
-    const dist = Math.abs(i - mid)
-    // gentle bell curve with a bit of jitter so peaks don't look mechanical
-    const jitter = (i % 3) * 6 - 6
-    const base = 14 + Math.max(0, 58 - dist * 2.15) + jitter
-    return Math.max(8, Math.min(96, base))
-  })
+/* ==================================================================
+   Product mockup stage
+   ------------------------------------------------------------------
+   A 3D phone showing a live 9278.ai call, floating on a light stage
+   with glass stat cards orbiting it. The whole scene parallaxes
+   toward the cursor.
+
+   Millisecond figures shown sit inside 9278.ai's own published
+   sub-300ms first-word range. No numbers are put on any competing
+   stack — we have no source for those.
+   ================================================================== */
+
+const WAVE_BARS = 34
+
+/* ---------- live waveform inside the phone -------------------------- */
+
+function PhoneWave() {
+  const reduced = useReducedMotion()
+  const [bars, setBars] = useState<number[]>(() => new Array(WAVE_BARS).fill(0.12))
+  const n = useRef(0)
+
+  useEffect(() => {
+    if (reduced) return
+    const id = setInterval(() => {
+      n.current += 1
+      const k = n.current
+      const wob = 0.5 + 0.5 * Math.sin(k * 0.83) * Math.sin(k * 0.27)
+      setBars((prev) => [...prev.slice(1), 0.22 + wob * 0.72])
+    }, 70)
+    return () => clearInterval(id)
+  }, [reduced])
 
   return (
-    <div className="relative flex h-full w-full flex-col justify-center gap-5 overflow-hidden rounded-3xl bg-white px-8 py-8">
-      {/* status row */}
-      <div className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-          Analyzing live audio
-        </span>
-        <span className="font-mono text-[11px] tabular-nums text-muted-foreground">0ms latency</span>
-      </div>
-
-      {/* spectrum analyzer — bars stretch edge-to-edge */}
-      <div className="flex h-36 w-full items-center gap-[3px]">
-        {bars.map((h, i) => (
-          <span
-            key={i}
-            className="voice-bar min-w-0 flex-1 shrink-0 rounded-full"
-            style={{
-              height: `${h}%`,
-              animationDelay: `${(i * 70) % 1100}ms`,
-              backgroundImage: "linear-gradient(180deg, var(--primary), color-mix(in oklch, var(--primary) 40%, transparent))",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* flowing waveform trace */}
-      <svg viewBox="0 0 320 40" className="h-9 w-full" preserveAspectRatio="none" aria-hidden="true">
-        <path
-          d="M0 20 C 20 4, 40 36, 60 20 S 100 4, 120 20 S 160 36, 180 20 S 220 4, 240 20 S 280 36, 300 20 S 320 12, 320 20"
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          opacity="0.75"
+    <div className="flex h-12 items-center justify-center gap-[3px]">
+      {bars.map((h, i) => (
+        <span
+          key={i}
+          className="w-[3px] flex-none rounded-full bg-primary transition-[height] duration-150 ease-out"
+          style={{ height: `${Math.max(8, h * 100)}%`, opacity: 0.35 + (i / WAVE_BARS) * 0.65 }}
         />
-      </svg>
-
-      <div className="scan-line" />
+      ))}
     </div>
   )
 }
 
-function SmartInterruptIllustration() {
-  const [phase, setPhase] = useState<"listening" | "understanding" | "responding">("listening")
-  const callerBars = [30, 55, 40, 70, 45, 60, 35]
+/* ---------- the phone ---------------------------------------------- */
+
+function PhoneMockup() {
+  const reduced = useReducedMotion()
+  const [secs, setSecs] = useState(23)
 
   useEffect(() => {
-    setPhase("listening")
-    const t1 = setTimeout(() => setPhase("understanding"), 900)
-    const t2 = setTimeout(() => setPhase("responding"), 1400)
-    return () => {
-      clearTimeout(t1)
-      clearTimeout(t2)
-    }
-  }, [])
+    if (reduced) return
+    const id = setInterval(() => setSecs((s) => (s + 1) % 3600), 1000)
+    return () => clearInterval(id)
+  }, [reduced])
 
-  const cutAt = 128
-  const states: Array<{ key: typeof phase; label: string }> = [
-    { key: "listening", label: "Listening" },
-    { key: "understanding", label: "Understanding" },
-    { key: "responding", label: "Responding" },
-  ]
+  const mm = String(Math.floor(secs / 60)).padStart(2, "0")
+  const ss = String(secs % 60).padStart(2, "0")
 
   return (
-    <div className="relative flex h-full w-full flex-col justify-center gap-4 overflow-hidden rounded-[20px] bg-white px-6 py-6">
-      {/* soft red gradient wash */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,color-mix(in_oklch,var(--primary)_7%,transparent),transparent_65%)]" />
+    <div
+      className="relative h-[520px] w-[262px] rounded-[42px] p-[9px]"
+      style={{
+        backgroundImage: "linear-gradient(160deg, #f7f7f8, #dcdcdf 45%, #f4f4f5)",
+        boxShadow:
+          "0 60px 90px -40px rgba(0,0,0,0.38), 0 8px 20px -8px rgba(0,0,0,0.18), inset 0 1px 1px rgba(255,255,255,0.9)",
+      }}
+    >
+      {/* side buttons */}
+      <span aria-hidden className="absolute -left-[3px] top-[112px] h-11 w-[3px] rounded-l bg-black/15" />
+      <span aria-hidden className="absolute -left-[3px] top-[170px] h-11 w-[3px] rounded-l bg-black/15" />
+      <span aria-hidden className="absolute -right-[3px] top-[140px] h-16 w-[3px] rounded-r bg-black/15" />
 
-      {/* status row */}
-      <div className="relative flex items-center justify-between">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-          Barge-in detected
-        </span>
-        <span className="font-mono text-[11px] tabular-nums text-muted-foreground">no dead air</span>
-      </div>
+      {/* screen */}
+      <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[34px] bg-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_18%,color-mix(in_oklch,var(--primary)_11%,transparent),transparent_62%)]"
+        />
 
-      {/* left: human · center: collision moment · right: AI agent states */}
-      <div className="relative flex flex-1 flex-col items-center justify-center gap-6">
-        {/* center — waveform collision + glass barge-in card, scales to fill the square */}
-        <div className="relative h-full w-full flex-1">
-          <svg viewBox="0 0 320 140" className="h-full w-full" preserveAspectRatio="none" aria-hidden="true">
-            <path
-              d={`M0 70 C 16 44, 32 96, 48 70 S 80 44, 96 70 S 112 90, ${cutAt} 70`}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              className={cn("text-foreground/25 transition-opacity duration-500", phase !== "listening" && "opacity-40")}
-            />
-            <path
-              d={`M0 70 L ${cutAt} 70`}
-              fill="none"
-              stroke="var(--primary)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              opacity={phase === "responding" ? 0 : 0.3}
-              className="transition-opacity duration-300"
-            />
-            <path
-              d={`M${cutAt} 70 C ${cutAt + 16} 20, ${cutAt + 32} 120, ${cutAt + 48} 70 S ${cutAt + 80} 20, ${cutAt + 96} 70 S ${cutAt + 128} 112, ${cutAt + 160} 70`}
-              fill="none"
-              stroke="var(--primary)"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              className={cn("transition-opacity duration-300", phase === "responding" ? "opacity-95" : "opacity-0")}
-            />
-            <line x1={cutAt} y1="10" x2={cutAt} y2="130" stroke="var(--primary)" strokeWidth="1.5" strokeDasharray="3 4" opacity="0.45" />
-          </svg>
-
-          {/* collision glow burst */}
-          <span
-            className="pointer-events-none absolute top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-xl"
-            style={{ left: `${(cutAt / 320) * 100}%` }}
-          />
-          <span
-            className="pointer-events-none absolute top-2 flex h-3 w-3 -translate-x-1/2 items-center justify-center"
-            style={{ left: `${(cutAt / 320) * 100}%` }}
-          >
-            <span className="pulse-ring absolute inline-flex h-2.5 w-2.5 rounded-full text-primary" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
-          </span>
-
-          {/* glassmorphism barge-in card */}
-          <span
-            className="absolute bottom-2 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/60 bg-white/70 px-3 py-1.5 text-[11px] font-medium text-primary shadow-sm backdrop-blur-md"
-            style={{ left: `${(cutAt / 320) * 100}%` }}
-          >
-            <Zap className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" />
-            Barge-in
+        {/* status bar */}
+        <div className="relative flex items-center justify-between px-5 pb-1 pt-3">
+          <span className="font-mono text-[10px] font-semibold tabular-nums text-foreground/70">9:41</span>
+          <span className="flex items-center gap-1 text-foreground/45">
+            <Signal className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden="true" />
+            <Wifi className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden="true" />
+            <BatteryFull className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" />
           </span>
         </div>
 
-        {/* bottom row: human on the left, AI agent states on the right */}
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#F5F5F5] ring-1 ring-black/[0.06]">
-              <User className="h-5 w-5 text-[#374151]" strokeWidth={2.25} aria-hidden="true" />
+        {/* notch */}
+        <span
+          aria-hidden
+          className="absolute left-1/2 top-2 h-5 w-[86px] -translate-x-1/2 rounded-full bg-[#1b1b1e]"
+        />
+
+        {/* call header */}
+        <div className="relative mt-5 px-5 text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-primary">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            <div>
-              <p className="text-xs font-medium text-foreground/80">You</p>
-              <div className="mt-1 flex h-4 items-end gap-[2px]">
-                {callerBars.map((h, i) => (
-                  <span
+            On call
+          </span>
+          <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">Aria · 9278.ai</p>
+          <p className="mt-0.5 font-mono text-[11px] text-muted-foreground">
+            +1 (415) 555-0142 · {mm}:{ss}
+          </p>
+        </div>
+
+        {/* orb */}
+        <div className="relative mt-6 flex justify-center">
+          <div className="relative h-[122px] w-[122px]">
+            <motion.span
+              className="absolute inset-0 rounded-full bg-primary/25 blur-2xl"
+              animate={reduced ? undefined : { scale: [1, 1.16, 1], opacity: [0.5, 0.85, 0.5] }}
+              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            />
+            {[0, 1, 2].map((i) => (
+              <motion.span
+                key={i}
+                className="absolute inset-3 rounded-full border border-primary/35"
+                initial={{ scale: 0.6, opacity: 0 }}
+                animate={reduced ? undefined : { scale: [0.6, 1.35], opacity: [0.65, 0] }}
+                transition={{ duration: 2.8, repeat: Number.POSITIVE_INFINITY, ease: "easeOut", delay: i * 0.93 }}
+              />
+            ))}
+            <motion.span
+              className="absolute inset-4 rounded-full border border-dashed border-primary/25"
+              animate={reduced ? undefined : { rotate: 360 }}
+              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            />
+            <motion.span
+              className="absolute inset-[27%] rounded-full"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 34% 28%, color-mix(in oklch, var(--primary) 72%, white), var(--primary) 62%)",
+                boxShadow: "0 12px 30px -8px color-mix(in oklch, var(--primary) 65%, transparent)",
+              }}
+              animate={reduced ? undefined : { scale: [1, 1.07, 1] }}
+              transition={{ duration: 1.9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex h-5 items-center gap-[3px]">
+                {[0.5, 0.9, 1, 0.7, 0.85].map((peak, i) => (
+                  <motion.span
                     key={i}
-                    className={cn(
-                      "w-[2px] rounded-full bg-foreground/30 transition-opacity duration-300",
-                      phase === "listening" && "voice-bar",
-                    )}
-                    style={{ height: `${h}%`, animationDelay: `${(i * 90) % 700}ms`, opacity: phase === "listening" ? 1 : 0.3 }}
+                    className="block w-[2.5px] rounded-full bg-white"
+                    style={{ height: "100%", transformOrigin: "center" }}
+                    animate={reduced ? { scaleY: 0.4 } : { scaleY: [0.25, peak, 0.35, peak * 0.8, 0.25] }}
+                    transition={{
+                      duration: 1.1 + i * 0.08,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                      delay: i * 0.05,
+                    }}
                   />
                 ))}
               </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-2.5">
-            <div className="flex flex-col items-end gap-1">
-              {states.map((s) => (
-                <span
-                  key={s.key}
-                  className={cn(
-                    "inline-flex items-center gap-1.5 text-[11px] font-medium transition-colors duration-300",
-                    phase === s.key ? "text-primary" : "text-muted-foreground/50",
-                  )}
-                >
-                  {s.label}
-                  <span className={cn("h-1.5 w-1.5 rounded-full bg-current", phase === s.key && "animate-pulse")} />
-                </span>
-              ))}
-            </div>
-            <span
-              className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full ring-2 ring-white"
-              style={{
-                backgroundImage: "radial-gradient(circle at 35% 30%, color-mix(in oklch, var(--primary) 55%, white), var(--primary))",
-                boxShadow: "0 4px 14px color-mix(in oklch, var(--primary) 40%, transparent)",
-              }}
-            >
-              <Bot className="h-5 w-5 text-white" strokeWidth={2.25} aria-hidden="true" />
-            </span>
-          </div>
         </div>
-      </div>
 
-      <p className="relative font-mono text-[11px] text-muted-foreground">Interrupts mid-sentence · Responds in &lt;300ms · No dead air</p>
+        {/* live waveform */}
+        <div className="relative mt-5 px-5">
+          <PhoneWave />
+        </div>
+
+        {/* latency readout */}
+        <div className="relative mt-3 flex justify-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3 py-1.5 ring-1 ring-primary/15">
+            <Zap className="h-3 w-3 text-primary" strokeWidth={2.75} aria-hidden="true" />
+            <span className="font-mono text-[11px] font-bold tabular-nums text-primary">142ms</span>
+            <span className="text-[10px] text-muted-foreground">to first word</span>
+          </span>
+        </div>
+
+        {/* call controls */}
+        <div className="relative mt-auto flex items-center justify-center gap-4 pb-7">
+          {[
+            { Icon: Mic, tone: "soft" },
+            { Icon: PhoneOff, tone: "end" },
+            { Icon: Grid2x2, tone: "soft" },
+          ].map(({ Icon, tone }, i) => (
+            <span
+              key={i}
+              className={cn(
+                "flex items-center justify-center rounded-full",
+                tone === "end" ? "h-12 w-12 bg-primary" : "h-10 w-10 bg-black/[0.05]",
+              )}
+              style={
+                tone === "end"
+                  ? { boxShadow: "0 10px 22px -8px color-mix(in oklch, var(--primary) 70%, transparent)" }
+                  : undefined
+              }
+            >
+              <Icon
+                className={cn(tone === "end" ? "h-5 w-5 text-white" : "h-4 w-4 text-foreground/55")}
+                strokeWidth={2.25}
+                aria-hidden="true"
+              />
+            </span>
+          ))}
+        </div>
+
+        {/* home indicator */}
+        <span aria-hidden className="absolute bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 rounded-full bg-black/15" />
+      </div>
     </div>
   )
 }
 
-function UnlimitedCapacityIllustration() {
-  const ai = { x: 50, y: 50 }
+/* ---------- floating glass cards ----------------------------------- */
 
-  const polar = (r: number, i: number, count: number, startDeg: number) => {
-    const angle = startDeg + (i / count) * 360
-    const rad = (angle * Math.PI) / 180
-    return { x: ai.x + r * Math.cos(rad), y: ai.y + r * Math.sin(rad) }
+function FloatCard({
+  className,
+  delay = 0,
+  depth = 40,
+  children,
+}: {
+  className?: string
+  delay?: number
+  depth?: number
+  children: React.ReactNode
+}) {
+  const reduced = useReducedMotion()
+  return (
+    <motion.div
+      className={cn(
+        "absolute rounded-2xl border border-black/[0.06] bg-white/85 px-3.5 py-2.5 backdrop-blur-xl",
+        className,
+      )}
+      style={{
+        transform: `translateZ(${depth}px)`,
+        boxShadow: "0 24px 45px -22px rgba(0,0,0,0.28), 0 2px 6px -2px rgba(0,0,0,0.06)",
+      }}
+      animate={reduced ? undefined : { y: [0, -9, 0] }}
+      transition={{ duration: 5.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+/* ---------- the stage (cursor parallax) ---------------------------- */
+
+function MockupStage() {
+  const reduced = useReducedMotion()
+  const ref = useRef<HTMLDivElement | null>(null)
+  const nx = useMotionValue(0)
+  const ny = useMotionValue(0)
+  const cfg = { stiffness: 120, damping: 20, mass: 0.5 }
+  const sx = useSpring(nx, cfg)
+  const sy = useSpring(ny, cfg)
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-13, 13])
+  const rotateX = useTransform(sy, [-0.5, 0.5], [9, -9])
+
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = ref.current
+    if (!el || reduced) return
+    const r = el.getBoundingClientRect()
+    nx.set((e.clientX - r.left) / r.width - 0.5)
+    ny.set((e.clientY - r.top) / r.height - 0.5)
   }
-
-  // Center → 1 AI core · ring 1 → 4 customers · ring 2 → 8 customers · ring 3 → 20+ fading toward the edges
-  const ring1 = Array.from({ length: 4 }, (_, i) => polar(17, i, 4, -90))
-  const ring2 = Array.from({ length: 8 }, (_, i) => polar(30, i, 8, -68))
-  const ring3 = Array.from({ length: 20 }, (_, i) => polar(43, i, 20, -80))
-
-  const curvedPath = (x: number, y: number, bend: number) => {
-    const mx = (ai.x + x) / 2
-    const my = (ai.y + y) / 2
-    const dx = x - ai.x
-    const dy = y - ai.y
-    const len = Math.hypot(dx, dy) || 1
-    const px = -dy / len
-    const py = dx / len
-    const ctrlX = mx + px * len * bend
-    const ctrlY = my + py * len * bend
-    return `M ${ai.x} ${ai.y} Q ${ctrlX.toFixed(2)} ${ctrlY.toFixed(2)} ${x.toFixed(2)} ${y.toFixed(2)}`
-  }
-
-  const badgeClass =
-    "absolute inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[10px] font-medium text-foreground/80 shadow-sm ring-1 ring-black/[0.06]"
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-[20px] bg-white">
-      {/* background: subtle dotted grid + soft glow behind the AI core + red ambient glow near the bottom */}
-      <div className="bg-dots pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_75%)]" />
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={() => {
+        nx.set(0)
+        ny.set(0)
+      }}
+      className="relative mx-auto flex min-h-[560px] w-full max-w-[520px] items-center justify-center"
+      style={{ perspective: "1400px" }}
+    >
+      {/* stage glow + ground shadow */}
       <div
-        className="pointer-events-none absolute h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.14] blur-3xl"
-        style={{ left: `${ai.x}%`, top: `${ai.y}%` }}
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.09] blur-[90px]"
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-primary/[0.06] to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-14 left-1/2 h-8 w-[220px] -translate-x-1/2 rounded-[50%] bg-black/25 blur-2xl"
+      />
 
-      {/* network — one AI core, curved lines out to customer avatars, scaling toward the edges */}
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        {[...ring1, ...ring2].map((n, i) => (
-          <path
-            key={i}
-            d={curvedPath(n.x, n.y, i % 2 === 0 ? 0.14 : -0.14)}
-            fill="none"
-            stroke="var(--primary)"
-            strokeWidth="0.5"
-            strokeOpacity="0.3"
-            strokeLinecap="round"
-          />
-        ))}
-      </svg>
-
-      {/* third ring — 20+ customers fading toward the edges, unlimited scale */}
-      {ring3.map((n, i) => (
-        <span
-          key={i}
-          className="dot-float absolute rounded-full bg-primary"
-          style={{
-            left: `${n.x}%`,
-            top: `${n.y}%`,
-            width: 3.5,
-            height: 3.5,
-            opacity: 0.18 + (i % 3) * 0.09,
-            animationDelay: `${(i * 110) % 1400}ms`,
-            transform: "translate(-50%,-50%)",
-          }}
-        />
-      ))}
-
-      {/* second ring — 8 customers */}
-      {ring2.map((n, i) => (
-        <span
-          key={i}
-          className="absolute flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#F5F5F5] shadow-sm ring-1 ring-black/[0.06]"
-          style={{ left: `${n.x}%`, top: `${n.y}%` }}
-        >
-          <Phone className="h-2.5 w-2.5 text-[#374151]" strokeWidth={2.5} aria-hidden="true" />
-          <span className="absolute -bottom-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-1 ring-white" />
-        </span>
-      ))}
-
-      {/* first ring — 4 nearest customers */}
-      {ring1.map((n, i) => (
-        <span
-          key={i}
-          className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-md ring-1 ring-black/[0.08]"
-          style={{ left: `${n.x}%`, top: `${n.y}%` }}
-        >
-          <Phone className="h-3 w-3 text-[#374151]" strokeWidth={2.5} aria-hidden="true" />
-          <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-white" />
-        </span>
-      ))}
-
-      {/* central AI voice core */}
-      <span
-        className="absolute flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ring-2 ring-white"
-        style={{
-          left: `${ai.x}%`,
-          top: `${ai.y}%`,
-          backgroundImage: "radial-gradient(circle at 35% 30%, color-mix(in oklch, var(--primary) 55%, white), var(--primary))",
-          boxShadow:
-            "0 0 0 6px color-mix(in oklch, var(--primary) 10%, transparent), 0 4px 18px color-mix(in oklch, var(--primary) 45%, transparent)",
-        }}
+      <motion.div
+        className="relative"
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        animate={reduced ? undefined : { y: [0, -12, 0] }}
+        transition={{ duration: 6.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       >
-        <span className="pulse-ring absolute inline-flex h-full w-full rounded-full text-primary" />
-        <Phone className="relative h-4 w-4 text-white" strokeWidth={2.5} aria-hidden="true" />
-      </span>
+        <div style={{ transform: "translateZ(0px)" }}>
+          <PhoneMockup />
+        </div>
 
-      {/* floating UI badges */}
-      <span className={cn(badgeClass, "left-3 top-3 text-primary")}>
-        <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-        Unlimited Capacity
-      </span>
-      <span className={cn(badgeClass, "right-3 top-3 font-mono tabular-nums")}>
-        <Phone className="h-3 w-3 text-primary" strokeWidth={2.5} aria-hidden="true" />
-        1,284 Active Calls
-      </span>
-      <span className={cn(badgeClass, "bottom-3 left-1/2 -translate-x-1/2")}>
-        <InfinityIcon className="h-3 w-3 text-primary" strokeWidth={2.5} aria-hidden="true" />
-        Scaling Automatically
-      </span>
-      <span className={cn(badgeClass, "bottom-3 left-3")}>
-        <Zap className="h-3 w-3 text-primary" strokeWidth={2.5} aria-hidden="true" />
-        0 sec Queue
-      </span>
-      <span className={cn(badgeClass, "bottom-3 right-3")}>
-        <Check className="h-3 w-3 text-primary" strokeWidth={2.5} aria-hidden="true" />
-        No Busy Signals
-      </span>
+        {/* ── floating cards ───────────────────────────────────── */}
+
+        {/* latency + sparkline */}
+        <FloatCard className="-left-[112px] top-[46px] hidden w-[168px] sm:block" delay={0} depth={70}>
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-primary/10">
+              <Zap className="h-3 w-3 text-primary" strokeWidth={2.75} aria-hidden="true" />
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">First word</span>
+          </div>
+          <p className="mt-1.5 font-mono text-2xl font-bold leading-none tabular-nums text-primary">
+            280<span className="ml-0.5 text-xs font-medium text-primary/60">ms</span>
+          </p>
+          <div className="mt-2 flex h-7 items-end gap-[3px]">
+            {[168, 151, 194, 133, 176, 145, 142, 126, 189, 158].map((v, i) => (
+              <motion.span
+                key={i}
+                className="flex-1 origin-bottom rounded-sm bg-primary/70"
+                style={{ height: `${(v / 300) * 100}%` }}
+                animate={reduced ? undefined : { scaleY: [0.75, 1, 0.75] }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: i * 0.12,
+                }}
+              />
+            ))}
+          </div>
+        </FloatCard>
+
+        {/* barge-in */}
+        <FloatCard className="-right-[118px] top-[196px] hidden w-[182px] sm:block" delay={1.1} depth={95}>
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-primary/10">
+              <Split className="h-3 w-3 text-primary" strokeWidth={2.75} aria-hidden="true" />
+            </span>
+            <span className="text-[11px] font-semibold tracking-tight">Barge-in detected</span>
+          </div>
+          <p className="mt-1.5 text-[10px] leading-snug text-muted-foreground">
+            Caller talked over the agent — it yielded the floor instantly.
+          </p>
+          <div className="mt-2 flex items-center gap-[2px]">
+            {[0.35, 0.7, 1, 0.55, 0.85, 0.4, 0.15, 0.12, 0.14, 0.12].map((h, i) => (
+              <span
+                key={i}
+                className={cn("h-6 w-[3px] shrink-0 self-center rounded-full", i < 6 ? "bg-primary" : "bg-black/15")}
+                style={{ height: `${Math.max(3, h * 24)}px` }}
+              />
+            ))}
+            <span className="ml-1.5 font-mono text-[8px] uppercase text-muted-foreground">stopped</span>
+          </div>
+        </FloatCard>
+
+        {/* one hop */}
+        <FloatCard className="-left-[96px] bottom-[74px] hidden w-[156px] sm:block" delay={2.2} depth={55}>
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-primary/10">
+              <Waves className="h-3 w-3 text-primary" strokeWidth={2.75} aria-hidden="true" />
+            </span>
+            <span className="text-[11px] font-semibold tracking-tight">One hop</span>
+          </div>
+          <p className="mt-1.5 text-[10px] leading-snug text-muted-foreground">
+            Audio in, audio out. No speech-to-text relay in the middle.
+          </p>
+        </FloatCard>
+
+        {/* trust chip */}
+        <FloatCard className="-right-[78px] top-[92px] hidden sm:block" delay={3.1} depth={35}>
+          <span className="flex items-center gap-2">
+            <ShieldCheck className="h-3.5 w-3.5 text-primary" strokeWidth={2.5} aria-hidden="true" />
+            <span className="text-[11px] font-semibold tracking-tight">0 dead air</span>
+          </span>
+        </FloatCard>
+      </motion.div>
     </div>
   )
 }
 
-const items = [
+/* ------------------------------------------------------------------ */
+
+const facts = [
   {
-    Illustration: ZeroLagIllustration,
-    image: "/illustrations/zero-lag-conversations.png",
+    icon: Waves,
     title: "Zero-lag conversations",
     description:
-      "Native audio-to-audio modeling delivers natural warmth and real-time fluidity. No robotic dead air, no awkward pauses while a transcription pipeline catches up. Every response streams back in under 300ms, so the rhythm of the call feels exactly like talking to a person who's actually listening — not waiting on a model to catch up.",
-    fullBleed: true,
+      "Native audio-to-audio modeling delivers natural warmth and real-time fluidity. No robotic dead air while a transcription pipeline catches up — every response streams back in under 300ms.",
   },
   {
-    Illustration: SmartInterruptIllustration,
-    image: "/illustrations/smart-interruptions.png",
+    icon: Split,
     title: "Smart interruptions",
     description:
-      "Customers can talk over the agent at any moment. It stops, listens, and responds the way a real human would — not the way a chatbot pretends to. Barge-in detection kicks in instantly, so corrections, clarifications, and \"wait, actually\" moments never get talked over or ignored mid-sentence.",
-    fullBleed: true,
-  },
-  {
-    Illustration: UnlimitedCapacityIllustration,
-    image: "/illustrations/unlimited-capacity.png",
-    title: "Unlimited capacity",
-    description:
-      "Scale from one call to thousands simultaneously. No busy signals, no queue time, no per-seat math. Every caller gets the same agent, the same knowledge, and the same instant pickup — whether it's one call at 2am or a thousand during a product launch spike.",
-    fullBleed: true,
+      "Customers can talk over the agent at any moment. It stops, listens, and responds the way a real human would. Barge-in detection kicks in instantly — no talking over, no dead air.",
   },
 ]
 
 export function HumanExperience() {
   const reduced = useReducedMotion()
-  const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
-
-  useEffect(() => {
-    if (reduced || paused) return
-    const id = setInterval(() => setIndex((i) => (i + 1) % items.length), 2000)
-    return () => clearInterval(id)
-  }, [reduced, paused])
-
-  const active = items[index]
-  const Illustration = active.Illustration
-  const next = () => setIndex((i) => (i + 1) % items.length)
-  const prev = () => setIndex((i) => (i - 1 + items.length) % items.length)
 
   return (
     <section id="experience" className="relative overflow-hidden bg-muted/40">
@@ -405,163 +417,54 @@ export function HumanExperience() {
         transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-10 pt-8 md:px-6 md:pb-14 md:pt-10">
-        <ScrollReveal className="mx-auto max-w-4xl text-center">
-          <span className="ai-pill-cyan">
-            <span className="h-1 w-1 rounded-full bg-primary" />
-            The human-kind experience
-          </span>
-          <h2 className="mt-3 text-balance font-serif font-normal leading-[1.15] tracking-tight text-[7.5vw] sm:whitespace-nowrap sm:text-4xl sm:leading-[1.1] md:text-5xl">
-            Conversations indistinguishable from{" "}
-            <span className="text-primary">your best agent.</span>
-          </h2>
-          <p className="mt-3 text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-            9278.ai skips the brittle speech-to-text and text-to-speech relay and runs on a single audio-native engine — so
-            your callers hear pauses, emotion, and timing that feel right.
-          </p>
-        </ScrollReveal>
+      <div className="relative mx-auto w-full max-w-6xl px-4 pb-14 pt-8 md:px-6 md:pb-20 md:pt-10">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* ── left: the 3D product mockup ─────────────────────── */}
+          <ScrollReveal className="order-1">
+            <MockupStage />
+          </ScrollReveal>
 
-        <ScrollReveal className="mt-8">
-          <div className="grid items-start gap-4 lg:grid-cols-12 lg:gap-6">
-            {/* LEFT: visual panel, swaps with the active item — below the text on mobile, back to the left column at lg+ */}
-            <div className="order-2 lg:order-1 lg:col-span-6">
-              <div
-                className="experience-visual relative aspect-square w-full max-w-[300px] overflow-hidden rounded-3xl bg-white mx-auto lg:ml-auto lg:max-w-[320px] xl:max-w-[360px]"
-                style={{ border: "1px solid rgba(0,0,0,0.65)", boxShadow: "0 10px 30px -12px rgba(0,0,0,0.12)" }}
-              >
-                {!active.image && (
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,oklch(0.577_0.245_27.33/0.08),transparent_60%)]" />
-                )}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-0 flex items-center justify-center bg-white"
-                  >
-                    {active.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={active.image}
-                        alt={active.title}
-                        className="h-full w-full object-contain p-3"
-                      />
-                    ) : active.fullBleed ? (
-                      <div className="h-full w-full">
-                        <Illustration />
-                      </div>
-                    ) : (
-                      <span className="flex h-44 w-44 items-center justify-center rounded-3xl bg-primary/5 ring-1 ring-primary/15">
-                        <Illustration />
-                      </span>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* RIGHT: content, arrows + dots to navigate manually — above the visual on mobile, back to the right column at lg+ */}
-            <div
-              className="order-1 lg:order-2 lg:col-span-6"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
+          {/* ── right: the copy ──────────────────────────────────── */}
+          <div className="order-2">
+            <ScrollReveal>
               <span className="ai-pill-cyan">
                 <span className="h-1 w-1 rounded-full bg-primary" />
-                0{index + 1} / 0{items.length}
+                The human-kind experience
               </span>
+              <h2 className="mt-6 text-balance text-4xl font-serif font-normal leading-[1.1] tracking-tight md:text-5xl">
+                Conversations indistinguishable from <span className="text-primary">your best agent.</span>
+              </h2>
+              <p className="mt-5 text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+                9278.ai skips the brittle speech-to-text and text-to-speech relay and runs on a single audio-native
+                engine — so your callers hear pauses, emotion, and timing that feel right.
+              </p>
+            </ScrollReveal>
 
-              <div className="relative min-h-[290px] sm:min-h-[230px] md:min-h-[210px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute inset-x-0 top-0"
-                  >
-                    <h3 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">{active.title}</h3>
-                    <p className="mt-3 text-pretty leading-relaxed text-muted-foreground md:text-lg">
-                      {active.description}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Desktop/tablet: separate round arrow buttons + dots */}
-              <div className="mt-8 hidden items-center gap-3 sm:flex">
-                <button
-                  type="button"
-                  onClick={prev}
-                  aria-label="Previous"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/40 text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={next}
-                  aria-label="Next"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/40 text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-
-                <div className="ml-2 flex items-center gap-1.5">
-                  {items.map((item, i) => (
-                    <button
-                      key={item.title}
-                      type="button"
-                      onClick={() => setIndex(i)}
-                      aria-label={`Go to ${item.title}`}
-                      className={cn(
-                        "h-1.5 shrink-0 rounded-full transition-colors",
-                        i === index ? "w-6 bg-primary" : "w-1.5 bg-border",
-                      )}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile: single pill — prev arrow, dots, next arrow, below the visual */}
-            <div className="order-3 mt-2 flex items-center justify-center gap-4 rounded-full bg-card/40 px-4 py-2 sm:hidden">
-              <button
-                type="button"
-                onClick={prev}
-                aria-label="Previous"
-                className="flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <div className="flex items-center gap-1.5">
-                {items.map((item, i) => (
-                  <button
-                    key={item.title}
-                    type="button"
-                    onClick={() => setIndex(i)}
-                    aria-label={`Go to ${item.title}`}
-                    className={cn(
-                      "h-1.5 shrink-0 rounded-full transition-colors",
-                      i === index ? "w-6 bg-primary" : "w-1.5 bg-border",
-                    )}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={next}
-                aria-label="Next"
-                className="flex h-6 w-6 shrink-0 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
+            <div className="mt-9 flex flex-col gap-7">
+              {facts.map((f, i) => {
+                const Icon = f.icon
+                return (
+                  <ScrollReveal key={f.title} delay={0.1 + i * 0.1}>
+                    <div className="flex items-start gap-4">
+                      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 ring-1 ring-primary/15">
+                        <Icon className="h-[18px] w-[18px] text-primary" strokeWidth={2} aria-hidden="true" />
+                      </span>
+                      <div>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
+                          0{i + 1}
+                        </span>
+                        <h3 className="mt-1.5 text-xl font-semibold tracking-tight">{f.title}</h3>
+                        <p className="mt-2 text-pretty text-[15px] leading-relaxed text-muted-foreground">
+                          {f.description}
+                        </p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                )
+              })}
             </div>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   )

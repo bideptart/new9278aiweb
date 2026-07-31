@@ -1,117 +1,173 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+import type { LucideIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Mic, Volume2, Cpu, Radio } from "lucide-react"
-import { motion, useReducedMotion, type Variants } from "motion/react"
+import { ArrowRight, Headphones, Check, Zap, Globe2, PhoneCall, Star } from "lucide-react"
+import { animate, motion, useReducedMotion } from "motion/react"
+import { HeroVoiceOrbPanel, type CallConsoleHandle } from "@/components/sections/hero-voice-orb-panel"
+
+const PROOF = ["No porting required", "Live in an afternoon", "Cancel anytime"]
+
+type Stat = {
+  icon: LucideIcon
+  label: string
+  /** Static stats (like "24/7") skip this and just render `value`. */
+  loop?: { base: number; keyframes: number[]; duration: number; format: (n: number) => string }
+  value?: string
+}
+
+const STATS: Stat[] = [
+  {
+    icon: Zap,
+    label: "Response latency",
+    // Drifts inside the real sub-300ms range we advertise — never crosses it.
+    loop: { base: 260, keyframes: [260, 185, 250, 210, 295, 230, 260], duration: 13, format: (n) => `<${n}ms` },
+  },
+  {
+    icon: Globe2,
+    label: "Countries covered",
+    // Drifts upward from the 60+ floor we advertise — never dips under it.
+    loop: { base: 60, keyframes: [60, 68, 62, 71, 64, 60], duration: 15, format: (n) => `${n}+` },
+  },
+  {
+    icon: PhoneCall,
+    label: "Never misses a call",
+    // Not a number that fluctuates — "24/7" gets a live-pulse dot instead
+    // of a fake looping figure.
+    value: "24/7",
+  },
+]
+
+function StatCard({ stat, reduced }: { stat: Stat; reduced: boolean }) {
+  const [display, setDisplay] = useState(stat.loop ? stat.loop.format(stat.loop.base) : (stat.value ?? ""))
+
+  useEffect(() => {
+    if (!stat.loop || reduced) return
+    const { base, keyframes, duration, format } = stat.loop
+    // Plays through the drift once and stops — the keyframes are authored to
+    // end back on `base`, so it settles cleanly rather than drifting forever.
+    const controls = animate(base, keyframes, {
+      duration,
+      ease: "easeInOut",
+      onUpdate: (v) => setDisplay(format(Math.round(v))),
+    })
+    return () => controls.stop()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reduced])
+
+  const Icon = stat.icon
+  return (
+    <div className="group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-border/50 bg-card/60 px-3.5 py-3.5 backdrop-blur-sm transition-colors hover:border-primary/30 sm:px-4">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-3 -top-3 h-14 w-14 rounded-full bg-primary/[0.06] blur-xl transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <Icon className="h-4 w-4" aria-hidden="true" />
+      </span>
+      <dd className="relative flex items-center gap-1.5 font-serif text-xl font-normal tabular-nums leading-none tracking-tight text-primary sm:text-2xl">
+        {display}
+        {!stat.loop && (
+          <span className="relative flex h-1.5 w-1.5 translate-y-[1px]">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+          </span>
+        )}
+      </dd>
+      <dt className="relative text-[10.5px] leading-tight text-muted-foreground sm:text-xs">{stat.label}</dt>
+    </div>
+  )
+}
 
 export function Hero() {
   const reduced = useReducedMotion()
+  const consoleRef = useRef<CallConsoleHandle>(null)
 
-  const word: Variants = {
-    hidden: { opacity: 0, y: 24, filter: "blur(8px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
-    },
-  }
-
-  const headline = ["AI", "voice", "agents", "that"]
+  const fade = (delay: number) => ({
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
+  })
 
   return (
     <section className="relative overflow-hidden">
       {/* Layered background */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
+        className="pointer-events-none absolute inset-0 bg-grid opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_55%)]"
       />
-      <div
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[720px] bg-neural opacity-50" />
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[700px] bg-neural opacity-50"
+        className="pointer-events-none absolute -left-40 top-24 h-[440px] w-[440px] rounded-full blur-[130px] [will-change:transform]"
+        style={{ background: "var(--primary)", opacity: 0.07 }}
+        animate={reduced ? undefined : { x: [0, 60, -30, 0], y: [0, -30, 20, 0] }}
+        transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-32 h-[460px] w-[460px] rounded-full blur-[120px] [will-change:transform]"
-        style={{ background: "var(--ai-cyan)", opacity: 0.07 }}
-        animate={reduced ? undefined : { x: [0, 60, -40, 0], y: [0, -30, 20, 0] }}
-        transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/2 h-[420px] w-[420px] rounded-full blur-[120px] [will-change:transform]"
+        className="pointer-events-none absolute -right-28 top-1/2 h-[420px] w-[420px] rounded-full blur-[130px] [will-change:transform]"
         style={{ background: "var(--ai-magenta)", opacity: 0.05 }}
-        animate={reduced ? undefined : { x: [0, -50, 30, 0], y: [0, 30, -20, 0] }}
-        transition={{ duration: 22, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        animate={reduced ? undefined : { x: [0, -50, 25, 0], y: [0, 30, -20, 0] }}
+        transition={{ duration: 24, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       />
 
-      <div className="relative mx-auto grid min-h-[calc(100svh-5rem)] w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 py-4 md:px-6 md:py-6 lg:grid-cols-12 lg:gap-10">
-        {/* LEFT: Copy */}
-        <div className="lg:col-span-7">
-          {/* Status pill */}
+      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-4 pb-8 pt-6 md:px-6 md:pb-10 md:pt-8 lg:grid-cols-12 lg:gap-10">
+        {/* LEFT — copy */}
+        <div className="lg:col-span-6">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="inline-flex max-w-full items-center gap-2 rounded-full border border-border/60 bg-card/40 px-3.5 py-1.5 text-xs text-muted-foreground backdrop-blur-md sm:gap-3 sm:px-4"
+            {...fade(0.05)}
+            className="inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.06] px-3.5 py-1.5 text-[11px] font-medium text-primary backdrop-blur-md"
           >
-            <span className="relative flex h-2 w-2 shrink-0">
+            <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            <span className="shrink-0 font-medium text-foreground/90">Live</span>
-            <span className="h-3 w-px shrink-0 bg-border/80" />
-            <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-              v9278.audio-1
-            </span>
-            <span className="hidden h-3 w-px shrink-0 bg-border/80 sm:block" />
-            <Sparkles className="hidden h-3.5 w-3.5 shrink-0 text-primary sm:block" aria-hidden="true" />
-            <span className="hidden truncate sm:inline">Native audio · Sub-second latency · Self-hosted</span>
+            <span className="uppercase tracking-[0.16em]">AI voice agents · Live now</span>
           </motion.div>
 
-          {/* Headline */}
           <motion.h1
-            initial="hidden"
-            animate="visible"
-            transition={{ staggerChildren: 0.07, delayChildren: 0.2 }}
-            className="mt-5 text-balance text-4xl font-serif font-normal leading-[1.02] tracking-tight sm:text-5xl md:text-6xl"
+            {...fade(0.15)}
+            className="mt-5 text-balance font-serif text-[11vw] font-normal leading-[1.03] tracking-tight sm:text-5xl lg:text-6xl xl:text-[3.8rem]"
           >
-            {headline.map((w, i) => (
-              <motion.span key={`h-${i}`} variants={word} className="mr-3 inline-block">
-                {w}
+            Every call.
+            <br />
+            {/* Brush-stroke highlight with a one-off shimmer sweep */}
+            <span className="relative inline-block">
+              <motion.span
+                aria-hidden
+                className="absolute inset-x-[-0.18em] bottom-[0.08em] top-[0.14em] -z-10 origin-left overflow-hidden rounded-[0.28em] bg-primary/15"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.7, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transform: "skewX(-4deg)" }}
+              >
+                {!reduced && (
+                  <motion.span
+                    className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+                    initial={{ x: "-150%" }}
+                    animate={{ x: "400%" }}
+                    transition={{ duration: 1.1, delay: 1.5, ease: "easeInOut" }}
+                  />
+                )}
               </motion.span>
-            ))}
-            <br className="hidden md:block" />
-            <motion.span variants={word} className="mr-3 inline-block italic text-primary">
-              actually
-            </motion.span>
-            <motion.span variants={word} className="mr-3 inline-block italic text-primary">
-              sound
-            </motion.span>
-            <motion.span variants={word} className="mr-3 inline-block italic text-primary">
-              human.
-            </motion.span>
+              <span className="italic text-primary">Answered.</span>
+            </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.85 }}
-            className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground"
+            {...fade(0.32)}
+            className="mt-4 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground md:text-lg"
           >
-            Build, launch, and scale voice agents on a self-hosted control panel. Native audio, real interruptions,
-            and your own phone numbers — production-ready in an afternoon.
+            9278.ai answers on the first ring, in a voice your callers can&apos;t tell from a person — on the phone
+            number and carrier you already have. Press play and hear it for yourself.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-6 flex flex-row flex-wrap items-center gap-3"
-          >
+          <motion.div {...fade(0.42)} className="mt-5 flex flex-row flex-wrap items-center gap-3">
             <Button
               size="lg"
-              className="group btn-ai relative h-11 overflow-hidden rounded-full px-5 text-sm text-primary-foreground transition-all sm:h-12 sm:px-7 sm:text-base"
+              className="group btn-ai relative h-12 overflow-hidden rounded-full px-6 text-sm text-primary-foreground transition-all sm:px-7 sm:text-base"
             >
               <span className="relative z-10">Build your first agent</span>
               <ArrowRight
@@ -126,204 +182,52 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="group h-11 rounded-full border-border/70 bg-card/30 px-5 text-sm backdrop-blur-md hover:border-primary/50 hover:bg-card/50 sm:h-12 sm:px-7 sm:text-base"
+              onClick={() => consoleRef.current?.toggle()}
+              className="group h-12 rounded-full border-primary/25 bg-primary/[0.07] px-6 text-sm text-foreground backdrop-blur-md hover:border-primary/40 hover:bg-primary/[0.12] sm:px-7 sm:text-base"
             >
-              <Sparkles className="mr-2 h-4 w-4 transition-transform group-hover:rotate-12" aria-hidden="true" />
-              Features
+              <Headphones className="mr-2 h-4 w-4 text-primary transition-transform group-hover:scale-110" aria-hidden="true" />
+              Hear a real call
             </Button>
           </motion.div>
 
-          {/* Trust stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.25 }}
-            className="mt-8 flex flex-row flex-nowrap items-center gap-x-3 gap-y-3 border-t border-border/40 pt-5 sm:gap-x-10"
-          >
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold tracking-tight text-primary sm:text-2xl">&lt;300ms</p>
-              <p className="truncate text-[8px] uppercase tracking-widest text-muted-foreground sm:text-xs">Sub-second latency</p>
+          {/* Rating strip */}
+          <motion.div {...fade(0.48)} className="mt-4 flex items-center gap-2.5">
+            <div className="flex items-center gap-0.5 text-amber-400">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+              ))}
             </div>
-            <div className="h-8 w-px shrink-0 bg-border/60 sm:h-10" />
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold tracking-tight text-primary sm:text-2xl">Self-hosted</p>
-              <p className="truncate text-[8px] uppercase tracking-widest text-muted-foreground sm:text-xs">Your data, your stack</p>
-            </div>
-            <div className="h-8 w-px shrink-0 bg-border/60 sm:h-10" />
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold tracking-tight text-primary sm:text-2xl">Unlimited</p>
-              <p className="truncate text-[8px] uppercase tracking-widest text-muted-foreground sm:text-xs">Concurrent calls</p>
-            </div>
+            <p className="text-xs text-muted-foreground">
+              <span className="font-semibold text-foreground">4.9/5</span> from 500+ businesses
+            </p>
           </motion.div>
+
+          {/* Proof line */}
+          <motion.ul {...fade(0.56)} className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+            {PROOF.map((item) => (
+              <li key={item} className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Check className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </motion.ul>
+
+          {/* Stat strip */}
+          <motion.dl {...fade(0.64)} className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3">
+            {STATS.map((stat) => (
+              <StatCard key={stat.label} stat={stat} reduced={!!reduced} />
+            ))}
+          </motion.dl>
         </div>
 
-        {/* RIGHT: Live AI control panel */}
+        {/* RIGHT — live call console */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 30 }}
+          initial={{ opacity: 0, scale: 0.96, y: 24 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="relative lg:col-span-5"
+          transition={{ duration: 0.85, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          className="relative lg:col-span-6"
         >
-          <div className="relative ring-gradient rounded-3xl card-glow overflow-hidden">
-            {/* Subtle scan line for AI feel */}
-            <span className="scan-line" aria-hidden />
-
-            {/* Window-bar / header */}
-            <div className="relative flex items-center justify-between border-b border-border/40 bg-background/40 px-5 py-3">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-              </div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                agent_session · live
-              </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary ring-1 ring-primary/20">
-                <Cpu className="h-3 w-3" />
-                v1
-              </span>
-            </div>
-
-            <div className="p-5 md:p-6">
-              {/* Agent identity */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {/* AI orb */}
-                  <span className="relative flex h-10 w-10 items-center justify-center">
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background:
-                          "conic-gradient(from 0deg, var(--ai-cyan), var(--ai-violet), var(--ai-magenta), var(--ai-cyan))",
-                        filter: "blur(6px)",
-                        opacity: 0.7,
-                      }}
-                    />
-                    <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-background">
-                      <Radio className="h-3.5 w-3.5 text-primary" />
-                    </span>
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold tracking-tight">Aria · Sales Agent</p>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                      en-US · neural-audio
-                    </p>
-                  </div>
-                </div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-emerald-300 ring-1 ring-emerald-400/20">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                  On call
-                </span>
-              </div>
-
-              {/* Voice waveform */}
-              <div className="relative mt-5 flex h-24 items-center justify-center gap-[3px] overflow-hidden rounded-2xl border border-border/40 bg-background/40 px-6">
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-2 mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-                />
-                {Array.from({ length: 32 }).map((_, i) => {
-                  const heights = [18, 32, 56, 24, 70, 44, 88, 52, 30, 64, 42, 76, 22, 60]
-                  const h = heights[i % heights.length]
-                  return (
-                    <span
-                      key={i}
-                      className="voice-bar w-[3px] rounded-full"
-                      style={{
-                        height: `${h}%`,
-                        background:
-                          "linear-gradient(to top, var(--ai-cyan), var(--ai-violet) 60%, var(--ai-magenta))",
-                        animationDelay: `${(i * 60) % 900}ms`,
-                        animationDuration: `${900 + (i % 5) * 120}ms`,
-                      }}
-                    />
-                  )
-                })}
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 bottom-2 mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-accent/40 to-transparent"
-                />
-              </div>
-
-              {/* Conversation transcript */}
-              <div className="mt-5 space-y-2.5 text-sm">
-                <div className="flex items-start gap-3 rounded-xl border border-border/40 bg-background/30 p-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-card/80 text-muted-foreground ring-1 ring-border/60">
-                    <Volume2 className="h-3.5 w-3.5" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                      Caller · 00:14
-                    </p>
-                    <p className="mt-0.5 text-foreground/90">
-                      "Hi, I'm calling about the listing on Maple Street."
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3 rounded-xl border border-primary/20 bg-primary/[0.04] p-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary ring-1 ring-primary/30">
-                    <Mic className="h-3.5 w-3.5" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">
-                      Aria · 00:15 · generating
-                    </p>
-                    <p className="mt-0.5 text-foreground/90">
-                      "Of course — the 4-bed colonial. Are you looking to schedule a showing this week?"
-                      <span className="ml-1 inline-flex items-center gap-0.5 align-middle">
-                        <span className="dot-float h-1 w-1 rounded-full bg-primary" />
-                        <span
-                          className="dot-float h-1 w-1 rounded-full bg-primary"
-                          style={{ animationDelay: "0.2s" }}
-                        />
-                        <span
-                          className="dot-float h-1 w-1 rounded-full bg-primary"
-                          style={{ animationDelay: "0.4s" }}
-                        />
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Footer telemetry */}
-              <div className="mt-5 grid grid-cols-3 gap-2 rounded-xl border border-border/40 bg-background/30 p-3 text-center">
-                <div>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Ticket</p>
-                  <p className="mt-0.5 text-sm font-semibold text-primary">#9278-48XX</p>
-                </div>
-                <div className="border-x border-border/40">
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Sentiment</p>
-                  <p className="mt-0.5 text-sm font-semibold text-emerald-400">Positive</p>
-                </div>
-                <div>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Intent</p>
-                  <p className="mt-0.5 text-sm font-semibold text-foreground">Book showing</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating chips */}
-          <motion.div
-            aria-hidden
-            className="absolute -left-6 top-32 hidden rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-xs font-medium backdrop-blur-md md:flex md:items-center md:gap-2"
-            animate={reduced ? undefined : { y: [0, -8, 0] }}
-            transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          >
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
-            CRM updated
-          </motion.div>
-          <motion.div
-            aria-hidden
-            className="absolute -right-4 bottom-24 hidden rounded-full border border-border/60 bg-card/80 px-3 py-1.5 text-xs font-medium backdrop-blur-md md:flex md:items-center md:gap-2"
-            animate={reduced ? undefined : { y: [0, 8, 0] }}
-            transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
-          >
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            Calendar booked
-          </motion.div>
+          <HeroVoiceOrbPanel ref={consoleRef} />
         </motion.div>
       </div>
 
@@ -331,8 +235,8 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.4 }}
-        className="relative border-t border-border/40 bg-background/50 px-4 py-6 md:px-6"
+        transition={{ duration: 0.6, delay: 1 }}
+        className="relative border-t border-border/40 bg-background/50 px-4 py-4 md:px-6"
       >
         <p className="text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
           Connect your carrier account in two clicks
