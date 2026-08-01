@@ -468,18 +468,20 @@ const SLIDES: Slide[] = [
 /* floating status chips                                                */
 /* ------------------------------------------------------------------ */
 
-// This wrapper (`relative mx-auto w-full max-w-[440px] lg:max-w-[480px]`) sits
-// inside a wider grid column, so there's slack outside the card itself for
-// these to float in — offsets below are sized to clear the card almost
-// entirely (only a sliver behind it) using that slack, without reaching far
-// enough to hit the copy in the neighboring column.
+// Negative offsets (chips hanging *outside* the card, in the slack of the
+// grid column) get clipped by the section's `overflow-hidden` at real
+// desktop widths — the column doesn't always have 30-40px of slack to give,
+// so the badges were getting sliced off at the browser edge. Pinning them
+// just *inside* the card's own footprint means their box never exceeds
+// HeroShowcase's own width, so the whole thing always fits on screen
+// regardless of viewport size.
 const CHIPS = [
-  { icon: Gauge, label: "Sub-300ms response", pos: "-left-10 top-[14%]", depth: 1.5, delay: 0 },
-  { icon: ShieldCheck, label: "Carrier-grade uptime", pos: "-right-12 top-[6%]", depth: 2.2, delay: 0.6 },
-  { icon: Languages, label: "Multilingual", pos: "-right-14 top-[46%]", depth: 1.1, delay: 1.2 },
-  { icon: Globe2, label: "60+ countries", pos: "-left-14 top-[62%]", depth: 2.6, delay: 0.3 },
-  { icon: CalendarCheck, label: "Calendar booking", pos: "-right-10 bottom-[8%]", depth: 1.8, delay: 0.9 },
-  { icon: Database, label: "CRM connected", pos: "-left-10 bottom-[4%]", depth: 1.3, delay: 1.5 },
+  { icon: Gauge, label: "Sub-300ms response", pos: "left-2 top-[10%]", depth: 1.5, delay: 0 },
+  { icon: ShieldCheck, label: "Carrier-grade uptime", pos: "right-2 top-[4%]", depth: 2.2, delay: 0.6 },
+  { icon: Languages, label: "Multilingual", pos: "right-2 top-[46%]", depth: 1.1, delay: 1.2 },
+  { icon: Globe2, label: "60+ countries", pos: "left-2 top-[62%]", depth: 2.6, delay: 0.3 },
+  { icon: CalendarCheck, label: "Calendar booking", pos: "right-2 bottom-[10%]", depth: 1.8, delay: 0.9 },
+  { icon: Database, label: "CRM connected", pos: "left-2 bottom-[6%]", depth: 1.3, delay: 1.5 },
 ]
 
 function FloatingChip({
@@ -499,19 +501,25 @@ function FloatingChip({
 
   return (
     <motion.div
-      className={`pointer-events-none absolute z-20 hidden xl:block ${chip.pos}`}
+      className={`group pointer-events-auto absolute z-20 hidden xl:block ${chip.pos}`}
       style={reduced ? undefined : { x, y }}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.7 + chip.delay * 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.span
-        className="glass ring-gradient inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[10.5px] font-medium text-foreground shadow-sm"
+        className="glass ring-gradient relative flex h-9 w-9 items-center justify-center rounded-full shadow-sm"
         animate={reduced ? undefined : { y: [0, -7, 0] }}
         transition={{ duration: 4 + chip.depth, delay: chip.delay, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       >
-        <Icon className="h-3 w-3 text-primary" />
-        {chip.label}
+        <Icon className="h-3.5 w-3.5 text-primary" />
+
+        {/* label — only on hover, so at rest this is just a small badge
+            that comfortably clears the card instead of a wide pill that
+            can't. */}
+        <span className="glass pointer-events-none absolute left-1/2 top-full z-30 mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1.5 text-[10.5px] font-medium text-foreground opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100">
+          {chip.label}
+        </span>
       </motion.span>
     </motion.div>
   )
@@ -584,7 +592,7 @@ export function HeroShowcase() {
       ))}
 
       <motion.div
-        className="glass ring-gradient relative z-10 overflow-hidden rounded-[26px] p-1.5 [transform-style:preserve-3d] [will-change:transform]"
+        className="uc-border glass relative z-10 overflow-hidden rounded-[26px] p-1.5 [transform-style:preserve-3d] [will-change:transform]"
         style={reduced ? undefined : { rotateX, rotateY }}
         animate={reduced ? undefined : { y: [0, -10, 0] }}
         transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}

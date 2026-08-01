@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { Logo } from "@/components/logo"
+import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
 
 type FooterLink = { label: string; href: string; external?: boolean }
 
@@ -75,7 +78,7 @@ export function SiteFooter() {
 
       <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 py-16 md:grid-cols-12 md:px-6">
         {/* Brand */}
-        <div className="md:col-span-4">
+        <ScrollReveal className="md:col-span-4">
           <Link href="/" className="flex items-center" aria-label="9278.ai home">
             <Logo height={40} src="/logo-white.png" />
           </Link>
@@ -91,19 +94,27 @@ export function SiteFooter() {
             Customer dashboard
             <ArrowUpRight className="h-3.5 w-3.5 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-        </div>
+        </ScrollReveal>
 
         {/* Link columns — all 4 in one row, even on mobile */}
-        <div className="grid grid-cols-4 gap-x-2 gap-y-10 sm:gap-x-4 md:col-span-8 md:gap-8">
-          <FooterColumn title="Platform" links={PLATFORM} />
-          <FooterColumn title="Industries" links={INDUSTRIES} />
-          <FooterColumn title="Company" links={COMPANY} />
-          <FooterColumn title="Legal" links={LEGAL} />
-        </div>
+        <StaggerGroup className="grid grid-cols-4 gap-x-2 gap-y-10 sm:gap-x-4 md:col-span-8 md:gap-8">
+          <StaggerItem>
+            <FooterColumn title="Platform" links={PLATFORM} />
+          </StaggerItem>
+          <StaggerItem>
+            <FooterColumn title="Industries" links={INDUSTRIES} />
+          </StaggerItem>
+          <StaggerItem>
+            <FooterColumn title="Company" links={COMPANY} />
+          </StaggerItem>
+          <StaggerItem>
+            <FooterColumn title="Legal" links={LEGAL} />
+          </StaggerItem>
+        </StaggerGroup>
       </div>
 
       {/* Live status — just above the footer divider */}
-      <div className="relative mx-auto flex w-full max-w-7xl justify-center px-4 pb-6 md:justify-start md:px-6">
+      <ScrollReveal className="relative mx-auto flex w-full max-w-7xl justify-center px-4 pb-6 md:justify-start md:px-6">
         <div className="inline-flex items-center gap-2 text-xs text-slate-400">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -111,7 +122,7 @@ export function SiteFooter() {
           </span>
           All systems operational
         </div>
-      </div>
+      </ScrollReveal>
 
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex w-full max-w-7xl flex-row flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-6 text-[10px] text-slate-400 sm:text-xs md:px-6">

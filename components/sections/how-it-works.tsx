@@ -509,7 +509,7 @@ export function HowItWorks() {
           </StaggerGroup>
 
           {/* step dots — tiny progress affordance under the row */}
-          <div className="mt-8 flex items-center justify-center gap-2">
+          <ScrollReveal className="mt-8 flex items-center justify-center gap-2" delay={0.2}>
             {steps.map((s, i) => (
               <button
                 key={s.title}
@@ -522,7 +522,7 @@ export function HowItWorks() {
                 )}
               />
             ))}
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* closing CTA */}

@@ -547,6 +547,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
             backgroundImage: `radial-gradient(ellipse at 85% 0%, color-mix(in oklch, ${t.accent} 10%, transparent), transparent 60%)`,
           }}
         />
+        <span className="scan-line opacity-30" aria-hidden />
 
         <div className="relative flex items-start justify-between" style={{ transform: "translateZ(28px)" }}>
           <Quote className="h-7 w-7" style={{ color: `color-mix(in oklch, ${t.accent} 35%, transparent)` }} strokeWidth={2.5} aria-hidden="true" />
@@ -584,18 +585,47 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
           className="relative mt-5 flex items-center gap-3 border-t border-black/[0.06] pt-4"
           style={{ transform: "translateZ(10px)" }}
         >
-          <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ring-2 ring-white"
-            style={{
-              backgroundImage: `radial-gradient(circle at 35% 28%, color-mix(in oklch, ${t.accent} 60%, white), ${t.accent})`,
-            }}
-          >
-            {t.author
-              .split(" ")
-              .map((w) => w[0])
-              .slice(0, 2)
-              .join("")}
-          </span>
+          {/* avatar with a verification ring that draws itself in, plus a
+              pop-in check badge — borrowed from the "security card" idea of
+              visually confirming an identity, dialed back to fit a quote. */}
+          <div className="relative flex h-9 w-9 shrink-0 items-center justify-center">
+            <svg className="absolute inset-0 h-9 w-9 -rotate-90" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <motion.circle
+                cx="18"
+                cy="18"
+                r="16.25"
+                stroke={t.accent}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                whileInView={{ pathLength: 1, opacity: 0.6 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.3, ease: "easeInOut", delay: 0.15 }}
+              />
+            </svg>
+            <span
+              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-white ring-2 ring-white"
+              style={{
+                backgroundImage: `radial-gradient(circle at 35% 28%, color-mix(in oklch, ${t.accent} 60%, white), ${t.accent})`,
+              }}
+            >
+              {t.author
+                .split(" ")
+                .map((w) => w[0])
+                .slice(0, 2)
+                .join("")}
+            </span>
+            <motion.span
+              className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-white ring-2 ring-white"
+              style={{ background: t.accent }}
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 400, damping: 16, delay: 1.3 }}
+            >
+              <Check className="h-2.5 w-2.5" strokeWidth={3.5} aria-hidden="true" />
+            </motion.span>
+          </div>
           <div className="min-w-0">
             <p className="truncate text-[13px] font-semibold text-foreground">{t.author}</p>
             <p className="truncate text-[11px] text-muted-foreground">{t.role}</p>

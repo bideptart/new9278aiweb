@@ -26,9 +26,9 @@ export function PricingFeature() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-10">
+        <ScrollReveal className="mt-10" delay={0.1}>
           <PricingPlans />
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )
