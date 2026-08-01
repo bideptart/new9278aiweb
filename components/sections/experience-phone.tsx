@@ -531,11 +531,13 @@ function StageBackdrop() {
       <div className="absolute inset-0 bg-grid opacity-30 [mask-image:radial-gradient(ellipse_65%_65%_at_50%_45%,black_10%,transparent_75%)]" />
 
       {/* aurora glow */}
-      <motion.div
-        className="absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.14] blur-[110px]"
-        animate={reduced ? undefined : { scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
+      <div className="absolute left-1/2 top-1/2 h-[460px] w-[460px] -translate-x-1/2 -translate-y-1/2">
+        <motion.div
+          className="h-full w-full rounded-full bg-primary/[0.14] blur-[110px]"
+          animate={reduced ? undefined : { scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
+          transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+      </div>
       <motion.div
         className="absolute left-[30%] top-[20%] h-[220px] w-[220px] rounded-full bg-[var(--ai-magenta)]/[0.10] blur-[90px]"
         animate={reduced ? undefined : { scale: [1, 1.2, 1], opacity: [0.5, 0.85, 0.5] }}

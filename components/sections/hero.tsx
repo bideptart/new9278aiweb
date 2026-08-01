@@ -113,7 +113,7 @@ export function Hero() {
   })
 
   return (
-    <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden">
+    <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-white">
       <HeroBackground />
 
       <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-14">
@@ -143,7 +143,7 @@ export function Hero() {
           {/* headline */}
           <motion.h1
             {...reveal(1)}
-            className="mt-6 text-balance font-serif text-[13vw] font-normal leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.6rem]"
+            className="mt-6 text-balance font-serif text-[10.5vw] font-normal leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.6rem]"
           >
             Never miss
             <br />

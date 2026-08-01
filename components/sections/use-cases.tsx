@@ -195,22 +195,25 @@ function FrontDeskScene() {
         <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">always on</span>
       </div>
 
-      {/* the moment a call lands */}
-      <AnimatePresence>
-        <motion.span
-          key={beat}
-          initial={{ opacity: 0, y: 6, scale: 0.85 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="absolute bottom-0 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 ring-1 ring-primary/15"
-        >
-          <PhoneIncoming className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
-          <span className="font-mono text-[9px] tabular-nums text-primary">
-            {String(CALL_HOURS[beat]).padStart(2, "0")}:00 · answered
-          </span>
-        </motion.span>
-      </AnimatePresence>
+      {/* the moment a call lands — centering lives on a plain wrapper so
+          Framer's animated transform (y/scale) can't wipe it out */}
+      <span className="absolute bottom-0 left-1/2 -translate-x-1/2">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={beat}
+            initial={{ opacity: 0, y: 6, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary/10 px-2.5 py-1 ring-1 ring-primary/15"
+          >
+            <PhoneIncoming className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
+            <span className="font-mono text-[9px] tabular-nums text-primary">
+              {String(CALL_HOURS[beat]).padStart(2, "0")}:00 · answered
+            </span>
+          </motion.span>
+        </AnimatePresence>
+      </span>
     </div>
   )
 }
@@ -389,92 +392,132 @@ function MultilingualScene() {
   )
 }
 
-/* ---------- 04 · the booking grid ----------------------------------- */
+/* ---------- 04 · the agenda drop-in ---------------------------------
+   Instead of an abstract weekly grid, this plays the actual moment the
+   agent books: a day agenda with a free gap, which the AI finds,
+   fills with a caller's appointment, and syncs — on loop.            */
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"]
-const SLOTS = ["09:00", "11:30", "14:00"]
-/** Which cells are already taken before the agent books anything. */
-const TAKEN = new Set(["0-1", "1-0", "2-2", "3-1", "4-0", "1-2"])
-/** The cells the agent books, in order, on loop. */
-const BOOKINGS = ["2-0", "0-2", "3-2", "4-1"]
+const PHASE_STATUS = [
+  "Scanning Friday's calendar…",
+  "Open slot found · 10:30",
+  "Booked · Sarah M. — consultation",
+  "Calendar + CRM synced",
+]
 
 function BookingScene() {
   const reduced = useReducedMotion()
-  const [step, setStep] = useState(reduced ? BOOKINGS.length : 0)
+  const [phase, setPhase] = useState(reduced ? 3 : 0)
 
   useEffect(() => {
     if (reduced) return
-    const id = setInterval(() => setStep((s) => (s >= BOOKINGS.length ? 0 : s + 1)), 1300)
+    const id = setInterval(() => setPhase((p) => (p + 1) % 4), 1400)
     return () => clearInterval(id)
   }, [reduced])
 
-  const justBooked = step > 0 ? BOOKINGS[step - 1] : null
-  const [bd, bs] = justBooked ? justBooked.split("-").map(Number) : [0, 0]
+  const booked = phase >= 2
 
   return (
-    <div className="relative flex h-[136px] flex-col justify-center gap-2">
+    <div className="relative flex h-[136px] flex-col justify-center gap-1.5">
       <div className="flex items-center justify-between">
-        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">This week</p>
+        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">Friday agenda</p>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 ring-1 ring-primary/15">
           <CalendarCheck className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
           <span className="font-mono text-[8.5px] font-semibold uppercase tracking-wider text-primary">
-            {step} booked
+            {booked ? "auto-booked" : "searching"}
           </span>
         </span>
       </div>
 
-      {/* day columns × time rows */}
-      <div className="flex gap-1.5">
-        {DAYS.map((d, di) => (
-          <div key={d} className="flex min-w-0 flex-1 flex-col gap-1">
-            <span className="text-center text-[7.5px] font-medium uppercase tracking-wider text-muted-foreground/70">
-              {d}
-            </span>
-            {SLOTS.map((_, si) => {
-              const id = `${di}-${si}`
-              const taken = TAKEN.has(id)
-              const bookedIdx = BOOKINGS.indexOf(id)
-              const booked = bookedIdx > -1 && bookedIdx < step
-              const isNew = id === justBooked
-              return (
+      {/* the day, three rows: meeting · free gap the AI fills · meeting */}
+      <div className="space-y-1">
+        <div className="flex items-center gap-2">
+          <span className="w-8 shrink-0 font-mono text-[8px] tabular-nums text-muted-foreground/70">09:00</span>
+          <span className="flex h-[18px] flex-1 items-center rounded-md bg-foreground/[0.07] px-2 text-[8.5px] text-foreground/60">
+            Team standup
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="w-8 shrink-0 font-mono text-[8px] tabular-nums text-muted-foreground/70">10:30</span>
+          <span className="relative h-[22px] flex-1">
+            <AnimatePresence mode="wait">
+              {booked ? (
                 <motion.span
-                  key={id}
-                  animate={isNew ? { scale: [1, 1.18, 1] } : { scale: 1 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  key="booked"
+                  initial={{ opacity: 0, scale: 0.9, y: -6 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 24 }}
+                  className="absolute inset-0 flex items-center gap-1.5 rounded-md bg-gradient-to-r from-primary to-[color-mix(in_oklch,var(--primary)_75%,var(--ai-magenta))] px-2 shadow-[0_6px_14px_-6px_var(--primary)]"
+                >
+                  <Check className="h-2.5 w-2.5 shrink-0 text-white" strokeWidth={3.5} aria-hidden="true" />
+                  <span className="truncate text-[8.5px] font-semibold text-white">Sarah M. · Consultation</span>
+                  {phase === 3 && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="ml-auto shrink-0 rounded-full bg-white/20 px-1.5 py-px font-mono text-[7px] uppercase tracking-wider text-white"
+                    >
+                      synced
+                    </motion.span>
+                  )}
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="free"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   className={cn(
-                    "flex h-4 items-center justify-center rounded-[4px] transition-colors duration-500",
-                    booked
-                      ? "bg-primary"
-                      : taken
-                        ? "bg-foreground/15"
-                        : "bg-black/[0.045] ring-1 ring-black/[0.04]",
+                    "absolute inset-0 flex items-center justify-center rounded-md border border-dashed text-[8.5px] transition-colors duration-300",
+                    phase === 1
+                      ? "border-primary/60 bg-primary/[0.06] text-primary"
+                      : "border-black/15 text-muted-foreground/60",
                   )}
                 >
-                  {booked && <Check className="h-2 w-2 text-white" strokeWidth={4} aria-hidden="true" />}
+                  {phase === 1 ? "10:30 available" : "free slot"}
+                  {phase === 1 && (
+                    <motion.span
+                      aria-hidden
+                      className="absolute inset-0 rounded-md border border-primary/40"
+                      animate={{ opacity: [0.7, 0], scale: [1, 1.06] }}
+                      transition={{ duration: 0.9, repeat: Number.POSITIVE_INFINITY, ease: "easeOut" }}
+                    />
+                  )}
                 </motion.span>
-              )
-            })}
-          </div>
-        ))}
+              )}
+            </AnimatePresence>
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="w-8 shrink-0 font-mono text-[8px] tabular-nums text-muted-foreground/70">12:00</span>
+          <span className="flex h-[18px] flex-1 items-center rounded-md bg-foreground/[0.07] px-2 text-[8.5px] text-foreground/60">
+            Site visit · Elm St
+          </span>
+        </div>
       </div>
 
-      {/* confirmation line */}
-      <div className="h-[24px] overflow-hidden rounded-lg bg-black/[0.03] ring-1 ring-black/[0.05]">
+      {/* status line */}
+      <div className="h-[22px] overflow-hidden rounded-lg bg-black/[0.03] ring-1 ring-black/[0.05]">
         <AnimatePresence mode="wait">
           <motion.div
-            key={step}
+            key={phase}
             initial={{ y: 12, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -12, opacity: 0 }}
             transition={{ duration: 0.26, ease: "easeOut" }}
             className="flex h-full items-center gap-1.5 px-2.5"
           >
-            <span className="h-1 w-1 shrink-0 rounded-full bg-primary" />
-            <span className="truncate text-[9.5px] text-foreground/70">
-              {justBooked ? `${DAYS[bd]} · ${SLOTS[bs]} confirmed` : "Checking availability…"}
-            </span>
+            <span
+              className={cn(
+                "h-1 w-1 shrink-0 rounded-full",
+                phase === 3 ? "bg-emerald-500" : "bg-primary",
+              )}
+            />
+            <span className="truncate text-[9px] text-foreground/70">{PHASE_STATUS[phase]}</span>
             <span className="ml-auto shrink-0 font-mono text-[8px] uppercase tracking-wide text-primary">
-              {justBooked ? "synced" : "live"}
+              {phase === 3 ? "done" : "live"}
             </span>
           </motion.div>
         </AnimatePresence>

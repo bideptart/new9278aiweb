@@ -40,10 +40,10 @@ const LEGAL: FooterLink[] = [
 function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
   return (
     <div className="min-w-0">
-      <h3 className="text-[8px] font-semibold uppercase tracking-[0.1em] text-slate-200 sm:text-[11px] sm:tracking-[0.2em]">
+      <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-200 sm:tracking-[0.2em]">
         {title}
       </h3>
-      <ul className="mt-3 space-y-2 text-[10px] leading-snug sm:mt-5 sm:space-y-3 sm:text-sm">
+      <ul className="mt-3 space-y-2.5 text-xs leading-snug sm:mt-5 sm:space-y-3 sm:text-sm">
         {links.map((link) => (
           <li key={link.label}>
             {link.external ? (
@@ -97,7 +97,7 @@ export function SiteFooter() {
         </ScrollReveal>
 
         {/* Link columns — all 4 in one row, even on mobile */}
-        <StaggerGroup className="grid grid-cols-4 gap-x-2 gap-y-10 sm:gap-x-4 md:col-span-8 md:gap-8">
+        <StaggerGroup className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 sm:gap-x-4 md:col-span-8 md:gap-8">
           <StaggerItem>
             <FooterColumn title="Platform" links={PLATFORM} />
           </StaggerItem>

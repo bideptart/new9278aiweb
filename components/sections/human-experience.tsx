@@ -31,12 +31,14 @@ export function HumanExperience() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
       />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.03] blur-[110px] [will-change:transform]"
-        animate={reduced ? undefined : { scale: [1, 1.18, 1] }}
-        transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2">
+        <motion.div
+          aria-hidden="true"
+          className="h-full w-full rounded-full bg-primary/[0.03] blur-[110px] [will-change:transform]"
+          animate={reduced ? undefined : { scale: [1, 1.18, 1] }}
+          transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+      </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-4 pb-14 pt-8 md:px-6 md:pb-20 md:pt-10">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">

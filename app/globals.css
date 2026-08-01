@@ -12,8 +12,9 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.205 0 0);
 
-  /* Acepeak brand red — red-600 #DC2626 */
-  --primary: oklch(0.645 0.228 25.5);
+  /* Acepeak brand red — lightened (between red-400 and red-500) for a
+     softer feel across every section; original was red-600 #DC2626 */
+  --primary: oklch(0.70 0.196 25.5);
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0); /* neutral-100 #F5F5F5 */
@@ -25,33 +26,33 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
 
-  --destructive: oklch(0.645 0.228 25.5);
+  --destructive: oklch(0.70 0.196 25.5);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0); /* neutral-200 #E5E5E5 */
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.645 0.228 25.5);
+  --ring: oklch(0.70 0.196 25.5);
 
-  --chart-1: oklch(0.645 0.228 25.5); /* red-600 */
+  --chart-1: oklch(0.70 0.196 25.5); /* red-600 */
   --chart-2: oklch(0.828 0.189 84.43); /* amber-400 */
-  --chart-3: oklch(0.638 0.216 27);  /* red-700 */
-  --chart-4: oklch(0.646 0.222 14);    /* rose */
+  --chart-3: oklch(0.69 0.19 27);  /* red-700 */
+  --chart-4: oklch(0.71 0.185 14);    /* rose */
   --chart-5: oklch(0.446 0.043 257);   /* slate-600 */
 
   /* Brand-family extras — warm red→amber spectrum for decorative accents */
-  --ai-cyan: oklch(0.637 0.237 25.33); /* red-500 */
-  --ai-violet: oklch(0.638 0.216 27);/* red-700 */
-  --ai-magenta: oklch(0.646 0.222 14); /* rose */
+  --ai-cyan: oklch(0.70 0.20 25.33); /* lightened red */
+  --ai-violet: oklch(0.69 0.19 27);/* lightened deep red */
+  --ai-magenta: oklch(0.71 0.185 14); /* lightened rose */
   --ai-mint: oklch(0.828 0.189 84.43); /* amber-400 */
 
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.205 0 0);
-  --sidebar-primary: oklch(0.645 0.228 25.5);
+  --sidebar-primary: oklch(0.70 0.196 25.5);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.645 0.228 25.5);
+  --sidebar-ring: oklch(0.70 0.196 25.5);
   --button-ripple-color: oklch(0.205 0 0 / 0.18);
 }
 
@@ -166,11 +167,11 @@
 .text-aurora {
   background: linear-gradient(
     100deg,
-    oklch(0.645 0.228 25.5) 0%,
-    oklch(0.646 0.222 14) 25%,
-    oklch(0.638 0.216 27) 55%,
+    oklch(0.70 0.196 25.5) 0%,
+    oklch(0.71 0.185 14) 25%,
+    oklch(0.69 0.19 27) 55%,
     oklch(0.75 0.16 55) 85%,
-    oklch(0.645 0.228 25.5) 100%
+    oklch(0.70 0.196 25.5) 100%
   );
   /* Must come after the `background` shorthand — the shorthand resets
      background-size, which is what aurora-shift animates against. */
@@ -250,7 +251,7 @@
   left: 0;
   right: 0;
   height: 30%;
-  background: linear-gradient(180deg, transparent, oklch(0.645 0.228 25.5 / 0.05), transparent);
+  background: linear-gradient(180deg, transparent, oklch(0.70 0.196 25.5 / 0.05), transparent);
   animation: scan-y 6s linear infinite;
 }
 .dark .scan-line::after {
@@ -281,11 +282,11 @@
   background:
     conic-gradient(
       from var(--uc-angle),
-      oklch(0.645 0.228 25.5 / 0.55),
-      oklch(0.646 0.222 14 / 0.1) 25%,
-      oklch(0.645 0.228 25.5 / 0.06) 50%,
-      oklch(0.646 0.222 14 / 0.1) 75%,
-      oklch(0.645 0.228 25.5 / 0.55)
+      oklch(0.70 0.196 25.5 / 0.55),
+      oklch(0.71 0.185 14 / 0.1) 25%,
+      oklch(0.70 0.196 25.5 / 0.06) 50%,
+      oklch(0.71 0.185 14 / 0.1) 75%,
+      oklch(0.70 0.196 25.5 / 0.55)
     );
   animation: uc-border-spin 7s linear infinite;
   transition: filter 0.4s ease;
@@ -346,9 +347,9 @@
     /* Light red wash across the whole page — sections stay transparent
        and let this one background show through everywhere. */
     background-image:
-      radial-gradient(ellipse 80% 55% at 50% -10%, oklch(0.645 0.228 25.5 / 0.09), transparent 60%),
+      radial-gradient(ellipse 80% 55% at 50% -10%, oklch(0.70 0.196 25.5 / 0.09), transparent 60%),
       radial-gradient(ellipse 50% 40% at 100% 25%, oklch(0.828 0.189 84.43 / 0.04), transparent 60%),
-      radial-gradient(ellipse 50% 40% at 0% 70%, oklch(0.646 0.222 14 / 0.05), transparent 60%);
+      radial-gradient(ellipse 50% 40% at 0% 70%, oklch(0.71 0.185 14 / 0.05), transparent 60%);
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
@@ -359,7 +360,7 @@
       radial-gradient(ellipse 50% 40% at 0% 70%, oklch(0.72 0.2 13 / 0.09), transparent 60%);
   }
   ::selection {
-    background: oklch(0.645 0.228 25.5 / 0.22);
+    background: oklch(0.70 0.196 25.5 / 0.22);
     color: oklch(0.205 0 0);
   }
   .dark ::selection {
@@ -379,7 +380,7 @@
       oklch(1 0 0 / 0.24) 100%
     );
     box-shadow: none;
-    outline: 1px solid oklch(0.645 0.228 25.5 / 0.1);
+    outline: 1px solid oklch(0.70 0.196 25.5 / 0.1);
     backdrop-filter: blur(6px);
   }
   .dark .bubble-glass {
@@ -399,8 +400,8 @@
     background: linear-gradient(
       150deg,
       oklch(0.72 0.2 26),
-      oklch(0.645 0.228 25.5) 48%,
-      oklch(0.615 0.21 27)
+      oklch(0.70 0.196 25.5) 48%,
+      oklch(0.665 0.185 27)
     );
     box-shadow: none;
     outline: 1px solid oklch(1 0 0 / 0.35);
@@ -411,7 +412,7 @@
     background: conic-gradient(
       from 0deg,
       transparent 0deg,
-      oklch(0.645 0.228 25.5 / 0.7) 70deg,
+      oklch(0.70 0.196 25.5 / 0.7) 70deg,
       oklch(0.828 0.189 84.43 / 0.55) 130deg,
       transparent 220deg,
       transparent 360deg
@@ -459,9 +460,9 @@
     border-radius: inherit;
     background: linear-gradient(
       140deg,
-      oklch(0.645 0.228 25.5 / 0.55) 0%,
-      oklch(0.646 0.222 14 / 0.45) 35%,
-      oklch(0.638 0.216 27 / 0.45) 65%,
+      oklch(0.70 0.196 25.5 / 0.55) 0%,
+      oklch(0.71 0.185 14 / 0.45) 35%,
+      oklch(0.69 0.19 27 / 0.45) 65%,
       oklch(0.205 0 0 / 0.06) 90%
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -482,7 +483,7 @@
   /* Glow outlines — no shadow, just a hairline tint */
   .glow-primary {
     box-shadow: none;
-    outline: 1px solid oklch(0.645 0.228 25.5 / 0.18);
+    outline: 1px solid oklch(0.70 0.196 25.5 / 0.18);
   }
   .glow-accent {
     box-shadow: none;
@@ -509,7 +510,7 @@
     border-radius: inherit;
     background: radial-gradient(
       400px circle at var(--mx, 50%) var(--my, 50%),
-      oklch(0.645 0.228 25.5 / 0.16),
+      oklch(0.70 0.196 25.5 / 0.16),
       transparent 40%
     );
     opacity: 0;
@@ -557,14 +558,14 @@
   /* Warm-mesh: layered radial + conic gradients hinting at "compute" */
   .bg-neural {
     background:
-      radial-gradient(ellipse 40% 30% at 20% 30%, oklch(0.645 0.228 25.5 / 0.05), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 20% 30%, oklch(0.70 0.196 25.5 / 0.05), transparent 60%),
       radial-gradient(ellipse 35% 30% at 80% 20%, oklch(0.828 0.189 84.43 / 0.045), transparent 60%),
-      radial-gradient(ellipse 40% 35% at 65% 80%, oklch(0.646 0.222 14 / 0.04), transparent 60%),
+      radial-gradient(ellipse 40% 35% at 65% 80%, oklch(0.71 0.185 14 / 0.04), transparent 60%),
       conic-gradient(from 90deg at 50% 50%,
-        oklch(0.645 0.228 25.5 / 0.02),
+        oklch(0.70 0.196 25.5 / 0.02),
         oklch(0.828 0.189 84.43 / 0.02),
-        oklch(0.646 0.222 14 / 0.02),
-        oklch(0.645 0.228 25.5 / 0.02));
+        oklch(0.71 0.185 14 / 0.02),
+        oklch(0.70 0.196 25.5 / 0.02));
     filter: blur(0.5px);
   }
   .dark .bg-neural {
@@ -587,7 +588,7 @@
     transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
   .card-glow:hover {
-    border-color: oklch(0.645 0.228 25.5 / 0.4);
+    border-color: oklch(0.70 0.196 25.5 / 0.4);
     box-shadow: none;
   }
   .dark .card-glow {
@@ -610,7 +611,7 @@
   .testimonial-card:hover {
     transform: translateY(-5px);
     box-shadow: none;
-    border-color: oklch(0.645 0.228 25.5 / 0.3);
+    border-color: oklch(0.70 0.196 25.5 / 0.3);
   }
   .dark .testimonial-card {
     box-shadow: none;
@@ -656,7 +657,7 @@
   }
   .usecase-card:hover {
     box-shadow: none;
-    border-color: oklch(0.645 0.228 25.5 / 0.35);
+    border-color: oklch(0.70 0.196 25.5 / 0.35);
   }
   .dark .usecase-card {
     border: 1px solid oklch(1 0 0 / 0.08);
@@ -677,7 +678,7 @@
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: oklch(0.645 0.228 25.5);
+    color: oklch(0.70 0.196 25.5);
     background: linear-gradient(180deg, oklch(0.637 0.237 25.33 / 0.10), oklch(0.637 0.237 25.33 / 0.04));
     border: 1px solid oklch(0.637 0.237 25.33 / 0.3);
     border-radius: 9999px;
@@ -698,7 +699,7 @@
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: oklch(0.645 0.228 25.5);
+    color: oklch(0.70 0.196 25.5);
     background: linear-gradient(180deg, oklch(0.637 0.237 25.33 / 0.10), oklch(0.637 0.237 25.33 / 0.04));
     border: 1px solid oklch(0.637 0.237 25.33 / 0.3);
     border-radius: 9999px;
@@ -719,9 +720,9 @@
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: oklch(0.638 0.216 27);
-    background: linear-gradient(180deg, oklch(0.638 0.216 27 / 0.10), oklch(0.638 0.216 27 / 0.04));
-    border: 1px solid oklch(0.638 0.216 27 / 0.3);
+    color: oklch(0.69 0.19 27);
+    background: linear-gradient(180deg, oklch(0.69 0.19 27 / 0.10), oklch(0.69 0.19 27 / 0.04));
+    border: 1px solid oklch(0.69 0.19 27 / 0.3);
     border-radius: 9999px;
   }
   .dark .ai-pill-violet {
@@ -732,7 +733,7 @@
 
   /* Fancy gradient solid button background — Acepeak red */
   .btn-ai {
-    background: linear-gradient(135deg, oklch(0.645 0.228 25.5) 0%, oklch(0.638 0.216 27) 50%, oklch(0.646 0.222 14) 100%);
+    background: linear-gradient(135deg, oklch(0.70 0.196 25.5) 0%, oklch(0.69 0.19 27) 50%, oklch(0.71 0.185 14) 100%);
     color: oklch(0.985 0 0);
     box-shadow: none;
   }
@@ -751,7 +752,7 @@
 
   /* Full-panel red gradient — same spectrum as .btn-ai, for CTA cards */
   .bg-ai-gradient {
-    background: linear-gradient(135deg, oklch(0.645 0.228 25.5) 0%, oklch(0.638 0.216 27) 50%, oklch(0.646 0.222 14) 100%);
+    background: linear-gradient(135deg, oklch(0.70 0.196 25.5) 0%, oklch(0.69 0.19 27) 50%, oklch(0.71 0.185 14) 100%);
   }
   .dark .bg-ai-gradient {
     background: linear-gradient(135deg, oklch(0.637 0.237 25.33) 0%, oklch(0.704 0.191 22) 50%, oklch(0.72 0.2 13) 100%);

@@ -16,25 +16,27 @@
 import { useEffect, useRef } from "react"
 import { motion, useReducedMotion } from "motion/react"
 
+// Opacities are kept low so the hero reads as a clean white canvas — the
+// orbs are a whisper of color, not a pink wash.
 const ORBS = [
   {
     className: "-left-32 top-[-10%] h-[520px] w-[520px]",
     color: "var(--primary)",
-    opacity: 0.14,
+    opacity: 0.06,
     path: { x: [0, 80, -40, 0], y: [0, -50, 40, 0], scale: [1, 1.12, 0.95, 1] },
     duration: 22,
   },
   {
     className: "right-[-12%] top-[8%] h-[460px] w-[460px]",
     color: "var(--ai-magenta)",
-    opacity: 0.12,
+    opacity: 0.05,
     path: { x: [0, -70, 35, 0], y: [0, 55, -30, 0], scale: [1, 0.92, 1.1, 1] },
     duration: 26,
   },
   {
     className: "left-[38%] bottom-[-20%] h-[560px] w-[560px]",
     color: "var(--ai-mint)",
-    opacity: 0.08,
+    opacity: 0.04,
     path: { x: [0, 50, -60, 0], y: [0, -35, 25, 0], scale: [1, 1.08, 0.94, 1] },
     duration: 30,
   },

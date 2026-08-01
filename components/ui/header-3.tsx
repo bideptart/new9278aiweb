@@ -77,8 +77,8 @@ export function Header() {
 				</div>
 
 				{/* Center: Center-aligned Navbar Tags with Ambient Red Hover Glow */}
-				<div className="hidden md:flex items-center justify-center flex-1 mx-4">
-					<div className="rounded-full border border-border/60 bg-background/60 p-1.5 backdrop-blur-md shadow-xs transition-all duration-300 hover:border-primary/40 hover:bg-background/90 hover:shadow-[0_0_24px_-2px_rgba(220,38,38,0.22)] dark:hover:shadow-[0_0_28px_-2px_rgba(220,38,38,0.35)]">
+				<div className="hidden lg:flex items-center justify-center flex-1 mx-4">
+					<div className="rounded-full border border-border/60 bg-background/60 p-1.5 backdrop-blur-md shadow-xs transition-all duration-300 hover:border-primary/40 hover:bg-background/90 hover:shadow-[0_0_24px_-2px_rgba(243,90,90,0.22)] dark:hover:shadow-[0_0_28px_-2px_rgba(243,90,90,0.35)]">
 						<NavigationMenu>
 							<NavigationMenuList className="gap-1.5">
 								{/* Features Dropdown */}
@@ -215,13 +215,13 @@ export function Header() {
 				</div>
 
 				{/* Right: Actions with Pulsing Glow on CTA */}
-				<div className="hidden items-center gap-3 md:flex">
+				<div className="hidden items-center gap-3 lg:flex">
 					<Button variant="ghost" asChild className="h-9 rounded-full px-4 hover:bg-accent hover:text-primary transition-all duration-200 hover:scale-[1.03]">
 						<a href="https://voice.9278.ai/" target="_blank" rel="noopener noreferrer">
 							Sign In
 						</a>
 					</Button>
-					<Button asChild className="btn-ai h-9 rounded-full px-5 shadow-sm hover:shadow-[0_4px_25px_0_rgba(220,38,38,0.45)] transition-all duration-300 hover:scale-[1.04] active:scale-[0.98]">
+					<Button asChild className="btn-ai h-9 rounded-full px-5 shadow-sm hover:shadow-[0_4px_25px_0_rgba(243,90,90,0.45)] transition-all duration-300 hover:scale-[1.04] active:scale-[0.98]">
 						<Link href="/get-started" className="flex items-center gap-1 group/cta">
 							<span>Get Started</span>
 							<ArrowRight className="size-3.5 transition-transform duration-200 group-hover/cta:translate-x-0.5" />
@@ -234,7 +234,7 @@ export function Header() {
 					size="icon"
 					variant="outline"
 					onClick={() => setOpen(!open)}
-					className="md:hidden rounded-full size-9 border-border/60 hover:border-primary/50 hover:bg-accent transition-all duration-200"
+					className="lg:hidden rounded-full size-9 border-border/60 hover:border-primary/50 hover:bg-accent transition-all duration-200"
 					aria-expanded={open}
 					aria-controls="mobile-menu"
 					aria-label="Toggle menu"
@@ -296,7 +296,7 @@ function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
 			id="mobile-menu"
 			className={cn(
 				'bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur-xl',
-				'fixed top-16 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y border-border/40 md:hidden animate-in fade-in-0 duration-200',
+				'fixed top-18 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y border-border/40 lg:hidden animate-in fade-in-0 duration-200',
 			)}
 		>
 			<div

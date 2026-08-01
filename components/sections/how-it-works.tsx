@@ -500,7 +500,7 @@ export function HowItWorks() {
         </ScrollReveal>
 
         <div className="relative mt-16">
-          <StaggerGroup className="grid items-stretch gap-8 md:grid-cols-3 md:gap-10">
+          <StaggerGroup className="grid items-stretch gap-8 lg:grid-cols-3 lg:gap-10">
             {steps.map((step, i) => (
               <StaggerItem key={step.title} className="h-full">
                 <StepCard step={step} index={i} active={activeStep === i} />
@@ -516,11 +516,15 @@ export function HowItWorks() {
                 type="button"
                 onClick={() => setActiveStep(i)}
                 aria-label={`Show ${s.title}`}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeStep === i ? "w-7 bg-primary" : "w-1.5 bg-black/15 hover:bg-black/25",
-                )}
-              />
+                className="flex h-10 items-center px-1.5"
+              >
+                <span
+                  className={cn(
+                    "h-1.5 rounded-full transition-all duration-300",
+                    activeStep === i ? "w-7 bg-primary" : "w-1.5 bg-black/15 hover:bg-black/25",
+                  )}
+                />
+              </button>
             ))}
           </ScrollReveal>
         </div>

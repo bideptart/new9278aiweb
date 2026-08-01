@@ -15,18 +15,22 @@ export function CTA() {
             className="ring-gradient relative overflow-hidden rounded-[28px] border border-primary/35 px-6 py-6 md:px-8 md:py-8 [background-image:radial-gradient(circle_at_top_right,white,transparent_60%),linear-gradient(135deg,color-mix(in_oklch,var(--primary)_16%,white),color-mix(in_oklch,var(--primary)_6%,white))]"
           >
             {/* Drifting glow */}
-            <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/3 top-0 -z-10 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px] [will-change:transform]"
-              animate={reduced ? undefined : { x: [0, 60, -20, 0], y: [0, -30, 20, 0], scale: [1, 1.15, 1] }}
-              transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            />
-            <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute right-1/4 bottom-0 -z-10 h-[24rem] w-[24rem] translate-x-1/2 translate-y-1/2 rounded-full bg-accent/8 blur-[120px] [will-change:transform]"
-              animate={reduced ? undefined : { x: [0, -40, 20, 0], y: [0, 30, -10, 0], scale: [1, 1.1, 1] }}
-              transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            />
+            <div className="pointer-events-none absolute left-1/3 top-0 -z-10 h-[28rem] w-[28rem] -translate-x-1/2">
+              <motion.div
+                aria-hidden="true"
+                className="h-full w-full rounded-full bg-primary/10 blur-[120px] [will-change:transform]"
+                animate={reduced ? undefined : { x: [0, 60, -20, 0], y: [0, -30, 20, 0], scale: [1, 1.15, 1] }}
+                transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              />
+            </div>
+            <div className="pointer-events-none absolute right-1/4 bottom-0 -z-10 h-[24rem] w-[24rem] translate-x-1/2 translate-y-1/2">
+              <motion.div
+                aria-hidden="true"
+                className="h-full w-full rounded-full bg-accent/8 blur-[120px] [will-change:transform]"
+                animate={reduced ? undefined : { x: [0, -40, 20, 0], y: [0, 30, -10, 0], scale: [1, 1.1, 1] }}
+                transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              />
+            </div>
             {/* Subtle dot grid overlay */}
             <div
               aria-hidden
@@ -70,20 +74,20 @@ export function CTA() {
 
             {/* Trust strip */}
             <div className="relative mt-8 grid grid-cols-2 gap-x-2 gap-y-3 text-[11px] tracking-tight text-muted-foreground sm:flex sm:flex-wrap sm:items-center sm:gap-x-8 sm:text-xs sm:tracking-normal">
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <span className="inline-flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 Sub-second latency
               </span>
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <span className="inline-flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 Bring your own carrier
               </span>
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <span className="inline-flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 Self-hosted control panel
               </span>
-              <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+              <span className="inline-flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                 No contracts
               </span>
             </div>

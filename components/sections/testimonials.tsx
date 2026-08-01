@@ -140,7 +140,7 @@ function CallCard({ t }: { t: (typeof testimonials)[number] }) {
         aria-hidden
         className="pointer-events-none absolute inset-4 -z-10 rounded-[28px] bg-primary/[0.14] opacity-0 blur-2xl transition-opacity duration-500 group-hover/card:opacity-100"
       />
-      <figure className="testimonial-card ring-gradient group relative flex h-full w-[330px] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_2px_14px_rgba(17,17,17,0.05)] transition-shadow duration-300 hover:shadow-[0_28px_60px_-20px_color-mix(in_oklch,var(--primary)_32%,transparent)] sm:w-[368px]">
+      <figure className="testimonial-card ring-gradient group relative flex h-full w-[290px] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_2px_14px_rgba(17,17,17,0.05)] transition-shadow duration-300 hover:shadow-[0_28px_60px_-20px_color-mix(in_oklch,var(--primary)_32%,transparent)] sm:w-[368px]">
         {/* ambient wash */}
         <div
           aria-hidden
@@ -240,12 +240,14 @@ export function Testimonials() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-dots [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
       />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-primary/[0.05] blur-[120px] [will-change:transform]"
-        animate={reduced ? undefined : { scale: [1, 1.15, 1] }}
-        transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[34rem] w-[34rem] -translate-x-1/2">
+        <motion.div
+          aria-hidden="true"
+          className="h-full w-full rounded-full bg-primary/[0.05] blur-[120px] [will-change:transform]"
+          animate={reduced ? undefined : { scale: [1, 1.15, 1] }}
+          transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+      </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-8 md:px-6 md:pb-20 md:pt-10">
         <ScrollReveal className="mx-auto max-w-2xl text-center">
@@ -264,13 +266,18 @@ export function Testimonials() {
 
         {/* metrics */}
         <ScrollReveal className="mx-auto mt-9 max-w-2xl">
-          <div className="grid grid-cols-3 divide-x divide-border/60 overflow-hidden rounded-2xl border border-border/60 bg-white/70 backdrop-blur-sm">
-            {metrics.map((m) => {
+          {/* mobile: 2 tiles up top, 3rd centered full-width below; sm+: 3 across */}
+          <div className="grid grid-cols-2 overflow-hidden rounded-2xl border border-border/60 bg-white/70 backdrop-blur-sm sm:grid-cols-3">
+            {metrics.map((m, i) => {
               const Icon = m.icon
               return (
                 <div
                   key={m.label}
-                  className="group flex flex-col items-center gap-1 px-2 py-4 text-center transition-colors duration-300 hover:bg-primary/[0.03] sm:px-4"
+                  className={cn(
+                    "group flex flex-col items-center gap-1 px-2 py-4 text-center transition-colors duration-300 hover:bg-primary/[0.03] sm:px-4",
+                    i === 1 && "border-l border-border/60",
+                    i === 2 && "col-span-2 border-t border-border/60 sm:col-span-1 sm:border-l sm:border-t-0",
+                  )}
                 >
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/15 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-3 w-3 text-primary" strokeWidth={2.25} aria-hidden="true" />
@@ -289,10 +296,14 @@ export function Testimonials() {
 
         {/* drifting row of call cards */}
         <ScrollReveal className="mt-9 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-          <div className={cn("flex w-max items-stretch gap-5", !reduced && "marquee")}>
-            {(reduced ? testimonials : [...testimonials, ...testimonials]).map((t, i) => (
-              <CallCard key={`${t.author}-${i}`} t={t} />
-            ))}
+          {/* under reduced-motion the marquee is off, so the row must scroll
+              by hand or cards past the first would be unreachable */}
+          <div className={cn(reduced && "overflow-x-auto")}>
+            <div className={cn("flex w-max items-stretch gap-5", !reduced && "marquee")}>
+              {(reduced ? testimonials : [...testimonials, ...testimonials]).map((t, i) => (
+                <CallCard key={`${t.author}-${i}`} t={t} />
+              ))}
+            </div>
           </div>
         </ScrollReveal>
 

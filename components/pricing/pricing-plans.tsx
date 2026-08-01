@@ -310,22 +310,26 @@ export function PricingPlans() {
             aria-label="Previous plan"
             onClick={() => scrollToIndex(Math.max(0, activeIndex - 1))}
             disabled={activeIndex === 0}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors disabled:opacity-30"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {ordered.map((p, i) => (
               <button
                 key={p.id}
                 type="button"
                 aria-label={`Go to ${p.label}`}
                 onClick={() => scrollToIndex(i)}
-                className={cn(
-                  "h-2 rounded-full transition-all",
-                  i === activeIndex ? "w-6 bg-primary" : "w-2 bg-border",
-                )}
-              />
+                className="flex h-10 items-center px-1.5"
+              >
+                <span
+                  className={cn(
+                    "h-2 rounded-full transition-all",
+                    i === activeIndex ? "w-6 bg-primary" : "w-2 bg-border",
+                  )}
+                />
+              </button>
             ))}
           </div>
           <button
@@ -333,7 +337,7 @@ export function PricingPlans() {
             aria-label="Next plan"
             onClick={() => scrollToIndex(Math.min(ordered.length - 1, activeIndex + 1))}
             disabled={activeIndex === ordered.length - 1}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors disabled:opacity-30"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -387,10 +391,18 @@ export function PricingPlans() {
         ))}
       </div>
 
-      {/* Desktop: full comparison table */}
-      <ScrollReveal className="hidden overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_20px_50px_-35px_rgba(17,17,17,0.25)] md:block">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[640px] border-separate border-spacing-0 text-left text-sm">
+      {/* Desktop: full comparison table — the featured plan reads as its own
+          raised card (lifted, rounded, glowing) rather than just a tinted
+          column, so the hierarchy is obvious at a glance. */}
+      <ScrollReveal className="hidden md:block">
+        <div className="relative rounded-2xl border border-border/60 bg-white shadow-[0_20px_50px_-35px_rgba(17,17,17,0.25)]">
+        <div className="relative overflow-x-auto pt-3">
+          {/* ambient glow behind the featured column */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-[radial-gradient(38%_100%_at_63%_0%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_75%)]"
+          />
+          <table className="w-full min-w-[680px] border-separate border-spacing-0 text-left text-sm">
             <thead>
               <tr>
                 <th className="w-[26%] border-b border-border/60 bg-white p-5 align-bottom font-medium text-muted-foreground">
@@ -400,14 +412,16 @@ export function PricingPlans() {
                   <th
                     key={p.id}
                     className={cn(
-                      "relative border-b border-l border-border/60 p-5 text-center align-bottom",
-                      p.tag ? "bg-primary/[0.06]" : "bg-white",
+                      "relative border-b p-5 text-center align-bottom",
+                      p.tag
+                        ? "z-10 -translate-y-2 rounded-t-2xl border-x-2 border-t-2 border-primary/30 bg-[linear-gradient(180deg,color-mix(in_oklch,var(--primary)_9%,white),white)] shadow-[0_-14px_36px_-20px_color-mix(in_oklch,var(--primary)_55%,transparent)]"
+                        : "border-l border-border/60 bg-white",
                     )}
                   >
                     {p.tag && (
                       <span
                         aria-hidden
-                        className="absolute inset-x-0 top-0 h-[2.5px]"
+                        className="absolute inset-x-3 top-0 h-[3px] rounded-full"
                         style={{
                           backgroundImage:
                             "linear-gradient(90deg, transparent, var(--primary), color-mix(in oklch, var(--primary) 60%, var(--ai-magenta)), transparent)",
@@ -417,7 +431,7 @@ export function PricingPlans() {
                     <span className="text-base font-bold tracking-tight text-foreground">{p.label}</span>
                     {p.tag && (
                       <span className="mt-1.5 flex justify-center">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_-4px_var(--primary)]">
                           <span className="relative flex h-1.5 w-1.5">
                             <motion.span
                               className="absolute inline-flex h-full w-full rounded-full bg-white/80"
@@ -435,52 +449,64 @@ export function PricingPlans() {
               </tr>
             </thead>
             <tbody>
-              {COMPARISON_ROWS.map((row, i) => (
-                <tr
-                  key={row.label}
-                  className={cn(
-                    "group transition-colors",
-                    i % 2 === 1 ? "bg-card/30" : "bg-white",
-                  )}
-                >
-                  <td
+              {COMPARISON_ROWS.map((row, i) => {
+                const isLast = i === COMPARISON_ROWS.length - 1
+                return (
+                  <tr
+                    key={row.label}
                     className={cn(
-                      "border-border/40 p-5 font-medium text-muted-foreground transition-colors group-hover:bg-primary/[0.06]",
-                      i < COMPARISON_ROWS.length - 1 && "border-b",
+                      "group transition-colors",
+                      i % 2 === 1 ? "bg-card/30" : "bg-white",
                     )}
                   >
-                    <span className="flex items-center gap-2.5">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
-                        <row.icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
+                    <td
+                      className={cn(
+                        "border-border/40 p-5 font-medium text-muted-foreground transition-colors group-hover:bg-primary/[0.06]",
+                        !isLast && "border-b",
+                      )}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <span className="ring-1 ring-primary/15 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary shadow-sm transition-transform duration-300 group-hover:scale-110">
+                          <row.icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
+                        </span>
+                        {row.label}
                       </span>
-                      {row.label}
-                    </span>
-                  </td>
-                  {ordered.map((p) => {
-                    const value = row.value(p)
-                    return (
-                      <td
-                        key={p.id}
-                        className={cn(
-                          "border-l border-border/40 p-5 text-center font-medium text-foreground transition-colors group-hover:bg-primary/[0.08]",
-                          i < COMPARISON_ROWS.length - 1 && "border-b",
-                          p.tag && "bg-primary/[0.04]",
-                        )}
-                      >
-                        {value === "✓" ? (
-                          <Check className="mx-auto h-4 w-4 text-primary" strokeWidth={3} aria-hidden="true" />
-                        ) : value === "—" ? (
-                          <Minus className="mx-auto h-3.5 w-3.5 text-muted-foreground/35" aria-hidden="true" />
-                        ) : (
-                          value
-                        )}
-                      </td>
-                    )
-                  })}
-                </tr>
-              ))}
+                    </td>
+                    {ordered.map((p) => {
+                      const value = row.value(p)
+                      return (
+                        <td
+                          key={p.id}
+                          className={cn(
+                            "p-5 text-center font-medium text-foreground transition-colors group-hover:bg-primary/[0.08]",
+                            !isLast && "border-b",
+                            p.tag
+                              ? cn(
+                                  "border-x-2 border-primary/30 bg-primary/[0.045]",
+                                  isLast &&
+                                    "rounded-b-2xl border-b-2 shadow-[0_16px_36px_-22px_color-mix(in_oklch,var(--primary)_55%,transparent)]",
+                                )
+                              : "border-l border-border/40",
+                          )}
+                        >
+                          {value === "✓" ? (
+                            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary/12">
+                              <Check className="h-3.5 w-3.5 text-primary" strokeWidth={3} aria-hidden="true" />
+                            </span>
+                          ) : value === "—" ? (
+                            <Minus className="mx-auto h-3.5 w-3.5 text-muted-foreground/35" aria-hidden="true" />
+                          ) : (
+                            value
+                          )}
+                        </td>
+                      )
+                    })}
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
+        </div>
         </div>
       </ScrollReveal>
 
