@@ -214,14 +214,14 @@ export function SignupForm() {
             onClick={() => setCycle("yearly")}
             className={cn(
               "flex items-center gap-2 rounded-full px-4 py-1.5 transition",
-              cycle === "yearly" ? "bg-red-600 text-white" : "text-muted-foreground",
+              cycle === "yearly" ? "bg-rose-500 text-white shadow-xs" : "text-muted-foreground",
             )}
           >
             Yearly
             <span
               className={cn(
                 "rounded-full px-2 py-0.5 text-[10px]",
-                cycle === "yearly" ? "bg-white/20 text-white" : "bg-red-100 text-red-700",
+                cycle === "yearly" ? "bg-white/20 text-white" : "bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
               )}
             >
               Save 20%
@@ -232,7 +232,7 @@ export function SignupForm() {
 
       {/* Per-second billing callout */}
       <div className="mb-8 flex justify-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-800 dark:border-red-800/40 dark:bg-red-950/40 dark:text-red-200">
+        <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50/80 px-4 py-2 text-sm text-rose-800 dark:border-rose-800/40 dark:bg-rose-950/40 dark:text-rose-200">
           <span>⏱️</span>
           <span>
             <strong>Per-second billing</strong> — pay only for the seconds you use.
@@ -259,11 +259,11 @@ export function SignupForm() {
               }}
               className={cn(
                 "relative cursor-pointer transition focus:outline-none",
-                selected ? "border-red-600 ring-2 ring-red-600/30" : "hover:border-red-300",
+                selected ? "border-rose-500 ring-2 ring-rose-500/30" : "hover:border-rose-300",
               )}
             >
               {p.tag && (
-                <Badge className="absolute -top-3 left-4 bg-red-600 hover:bg-red-600">{p.tag}</Badge>
+                <Badge className="absolute -top-3 left-4 bg-rose-500 hover:bg-rose-500">{p.tag}</Badge>
               )}
               <CardHeader>
                 <CardTitle>{p.label}</CardTitle>
@@ -360,9 +360,9 @@ export function SignupForm() {
 
         {/* === RIGHT: order summary (sticky on desktop) ====================== */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <Card className="border-red-200/60 dark:border-red-800/40">
+          <Card className="border-rose-200/60 dark:border-rose-800/40">
             <CardHeader className="pb-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-red-600 dark:text-red-300">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400">
                 <Sparkles className="h-3.5 w-3.5" />
                 Order summary
               </div>

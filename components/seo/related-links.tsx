@@ -46,63 +46,37 @@ function FlipCard({
   const [flipped, setFlipped] = useState(false)
   const isDesktop = useIsDesktop()
   const number = String(index + 1).padStart(2, "0")
-  const accent = ACCENTS[index % ACCENTS.length]
 
   const frontIconBadge = (
     <span
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
-      style={{
-        background: `color-mix(in oklch, ${accent} 12%, transparent)`,
-        boxShadow: `0 6px 16px -4px color-mix(in oklch, ${accent} 45%, transparent)`,
-        color: accent,
-      }}
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-xs"
     >
       <ArrowUpRight className="h-4 w-4" aria-hidden />
     </span>
   )
 
-  // Back face — solid brand red, white icon (matches the pricing-page testimonial cards)
   const backIconBadge = (
     <span
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
-      style={{
-        background: "var(--primary)",
-        boxShadow: "0 6px 16px -4px color-mix(in oklch, var(--primary) 45%, transparent)",
-      }}
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md"
     >
       <ArrowUpRight className="h-4 w-4" aria-hidden />
     </span>
   )
 
-  // Mobile: no perspective/preserve-3d/backface-visibility at all — a plain
-  // flat card, since those 3D properties are what blur text on mobile browsers.
   if (!isDesktop) {
     return (
       <li>
         <Link
           href={link.href}
-          className="relative flex min-h-[92px] w-full flex-col gap-1 overflow-hidden rounded-2xl p-3 outline-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, color-mix(in oklch, var(--primary) 16%, white), color-mix(in oklch, var(--primary) 6%, white))",
-          }}
+          className="relative flex min-h-[92px] w-full flex-col gap-1 overflow-hidden rounded-2xl border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur-md outline-none"
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-xl font-bold leading-none text-primary/20">{number}</span>}
-            <span
-              className={cn("flex h-6 w-6 shrink-0 items-center justify-center rounded-md", !showNumber && "ml-auto")}
-              style={{
-                background: `color-mix(in oklch, ${accent} 12%, transparent)`,
-                boxShadow: `0 6px 16px -4px color-mix(in oklch, ${accent} 45%, transparent)`,
-                color: accent,
-              }}
-            >
-              <ArrowUpRight className="h-3 w-3" aria-hidden />
-            </span>
+            {showNumber && <span className="text-xl font-bold leading-none text-primary/30">{number}</span>}
+            <span className={cn(!showNumber && "ml-auto")}>{frontIconBadge}</span>
           </div>
           <div>
-            <p className="text-xs font-bold tracking-tight text-neutral-900">{link.title}</p>
-            <p className="mt-0.5 text-[10px] leading-snug text-neutral-500 line-clamp-2">{link.description}</p>
+            <p className="text-sm font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="mt-0.5 text-xs leading-snug text-muted-foreground line-clamp-2">{link.description}</p>
           </div>
         </Link>
       </li>
@@ -114,7 +88,7 @@ function FlipCard({
       <Link
         href={link.href}
         className={cn(
-          "relative block w-full outline-none transition-transform duration-700 will-change-transform",
+          "relative block w-full outline-none transition-all duration-500 will-change-transform",
           showNumber ? "h-56" : "h-[210px]",
         )}
         style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
@@ -123,33 +97,31 @@ function FlipCard({
         onFocus={() => setFlipped(true)}
         onBlur={() => setFlipped(false)}
       >
-        {/* Front face — red gradient, shown at rest (matches the homepage how-it-works cards) */}
+        {/* Front face — Glassmorphic card matching project theme */}
         <div
           className={cn(
-            "absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-2xl p-6",
-            showNumber ? "justify-between" : "justify-start gap-1",
+            "absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card/85 p-6 backdrop-blur-2xl shadow-lg transition-all",
+            showNumber ? "justify-between" : "justify-start gap-2",
           )}
           style={{
-            backgroundImage:
-              "linear-gradient(135deg, color-mix(in oklch, var(--primary) 16%, white), color-mix(in oklch, var(--primary) 6%, white))",
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
           }}
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-6xl font-bold leading-none text-primary/20">{number}</span>}
+            {showNumber && <span className="text-5xl font-bold font-serif leading-none text-primary/25">{number}</span>}
             <span className={cn(!showNumber && "ml-auto")}>{frontIconBadge}</span>
           </div>
           <div>
-            <p className="text-xl font-bold tracking-tight text-neutral-900">{link.title}</p>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-500">{link.description}</p>
+            <p className="text-lg font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
           </div>
         </div>
-        {/* Back face — white card, revealed on hover */}
+        {/* Back face — Brand red primary card on flip */}
         <div
           className={cn(
-            "step-card card-glow absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white p-6",
-            showNumber ? "justify-between" : "justify-start gap-1",
+            "absolute inset-0 flex h-full w-full flex-col overflow-hidden rounded-3xl border border-primary/40 bg-primary/10 p-6 backdrop-blur-2xl shadow-xl",
+            showNumber ? "justify-between" : "justify-start gap-2",
           )}
           style={{
             backfaceVisibility: "hidden",
@@ -158,12 +130,12 @@ function FlipCard({
           }}
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-6xl font-bold leading-none text-muted-foreground/25">{number}</span>}
+            {showNumber && <span className="text-5xl font-bold font-serif leading-none text-primary/40">{number}</span>}
             <span className={cn(!showNumber && "ml-auto")}>{backIconBadge}</span>
           </div>
           <div>
-            <p className="text-xl font-bold tracking-tight text-neutral-900">{link.title}</p>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-500">{link.description}</p>
+            <p className="text-lg font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
           </div>
         </div>
       </Link>
@@ -194,14 +166,14 @@ export function RelatedLinks({
     <section aria-labelledby="related-heading" className="mx-auto w-full max-w-6xl px-4 pb-24 md:px-6">
       <div className="mb-8 flex items-end justify-between gap-6">
         <div>
-          <h2 id="related-heading" className="text-balance text-2xl font-semibold tracking-tight md:text-3xl">
+          <h2 id="related-heading" className="text-balance text-2xl font-serif font-bold tracking-tight md:text-3xl">
             {heading}
           </h2>
-          <p className="mt-2 max-w-2xl text-pretty text-sm text-muted-foreground md:text-base">{description}</p>
+          <p className="mt-2 max-w-2xl text-pretty text-xs md:text-sm text-muted-foreground">{description}</p>
         </div>
       </div>
 
-      <ul className={cn("grid", variant === "flip" ? "gap-2 sm:gap-4 md:grid-cols-3" : "gap-4 md:grid-cols-2 lg:grid-cols-3")}>
+      <ul className={cn("grid", variant === "flip" ? "gap-4 md:grid-cols-3" : "gap-4 md:grid-cols-2 lg:grid-cols-3")}>
         {links.map((l, i) =>
           variant === "flip" ? (
             <FlipCard key={l.href} link={l} index={i} showNumber={showNumber} />
@@ -209,15 +181,23 @@ export function RelatedLinks({
             <li key={l.href}>
               <Link
                 href={l.href}
-                className="group flex h-full flex-col justify-between gap-4 rounded-xl border border-border/60 bg-card/30 p-5 transition-colors hover:border-primary/40 hover:bg-card/50"
+                className="group flex h-full flex-col justify-between gap-4 rounded-3xl border border-border/70 bg-card/85 p-6 backdrop-blur-2xl shadow-lg transition-all duration-300 hover:border-primary/40 hover:bg-card hover:shadow-xl hover:scale-[1.02]"
               >
                 <div>
-                  <p className="text-base font-medium tracking-tight group-hover:text-foreground">{l.title}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{l.description}</p>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="ai-pill-magenta text-[10px] font-bold">
+                      {l.href.toUpperCase()}
+                    </span>
+                    <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                      <ArrowUpRight className="size-4" />
+                    </span>
+                  </div>
+                  <p className="text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">{l.title}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{l.description}</p>
                 </div>
-                <span className="inline-flex items-center gap-1 text-xs text-primary">
-                  Read more
-                  <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-primary">
+                  Explore
+                  <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
                 </span>
               </Link>
             </li>

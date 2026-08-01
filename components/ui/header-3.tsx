@@ -36,6 +36,11 @@ import {
 	Newspaper,
 	Headphones,
 	Sparkles,
+	Stethoscope,
+	ShoppingBag,
+	DollarSign,
+	Wrench,
+	UtensilsCrossed,
 } from 'lucide-react';
 
 type LinkItem = {
@@ -61,161 +66,165 @@ export function Header() {
 		};
 	}, [open]);
 
+	const isFeaturesActive = pathname.startsWith("/features")
+	const isIndustriesActive = pathname.startsWith("/industries")
+	const isPricingActive = pathname === "/pricing"
+	const isCompanyActive = pathname.startsWith("/about") || pathname.startsWith("/contact") || pathname.startsWith("/team") || pathname.startsWith("/blog")
+	const isFaqActive = pathname === "/faq"
+
 	return (
-		<header
-			className={cn('sticky top-0 z-50 w-full transition-all duration-300 border-b border-transparent', {
-				'bg-background/85 supports-[backdrop-filter]:bg-background/65 border-border/40 backdrop-blur-xl shadow-md shadow-black/5 dark:shadow-black/20':
-					scrolled,
-			})}
-		>
-			<nav className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-				{/* Left: Logo with Hover Scale & Glow */}
-				<div className="flex items-center">
+		<header className="fixed top-3 inset-x-0 z-50 w-full px-4 sm:px-6 flex justify-center transition-all duration-300 pointer-events-none">
+			{/* Unified Floating Glossy Glassmorphism Pill Navbar */}
+			<nav
+				className={cn(
+					'pointer-events-auto mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 rounded-full border border-white/60 dark:border-white/15 bg-gradient-to-b from-white/75 via-white/50 to-white/30 dark:from-white/10 dark:via-white/[0.05] dark:to-white/[0.02] backdrop-blur-2xl backdrop-saturate-200 shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.85),0_12px_32px_-8px_rgba(0,0,0,0.12)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_-8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-primary/40 hover:shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.9),0_16px_40px_-6px_rgba(220,38,38,0.2)]',
+					scrolled && 'border-white/80 dark:border-white/20 bg-gradient-to-b from-white/85 via-white/65 to-white/45 dark:from-white/15 dark:to-white/[0.05] shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.95),0_16px_40px_-8px_rgba(0,0,0,0.18)]'
+				)}
+			>
+				{/* Left: Brand Logo */}
+				<div className="flex items-center justify-start md:flex-1">
 					<Link href="/" className="flex items-center gap-2 group transition-all duration-300 hover:scale-[1.04]" aria-label="9278.ai home">
-						<Logo height={36} priority className="transition-all duration-300 group-hover:brightness-110" />
+						<Logo height={34} priority className="transition-all duration-300 group-hover:brightness-110" />
 					</Link>
 				</div>
 
-				{/* Center: Center-aligned Navbar Tags with Ambient Red Hover Glow */}
-				<div className="hidden lg:flex items-center justify-center flex-1 mx-4">
-					<div className="rounded-full border border-border/60 bg-background/60 p-1.5 backdrop-blur-md shadow-xs transition-all duration-300 hover:border-primary/40 hover:bg-background/90 hover:shadow-[0_0_24px_-2px_rgba(243,90,90,0.22)] dark:hover:shadow-[0_0_28px_-2px_rgba(243,90,90,0.35)]">
-						<NavigationMenu>
-							<NavigationMenuList className="gap-1.5">
-								{/* Features Dropdown */}
-								<NavigationMenuItem>
-									<NavigationMenuTrigger className="bg-transparent text-base font-semibold rounded-full px-5 py-2.5 transition-all duration-200 hover:bg-accent hover:text-primary hover:scale-[1.04] active:scale-[0.98] data-[state=open]:bg-accent data-[state=open]:text-primary">
-										Features
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="bg-background/95 backdrop-blur-xl p-2 border-border/50 shadow-2xl rounded-2xl animate-in fade-in-0 zoom-in-95 duration-200">
-										<ul className="grid w-[680px] grid-cols-2 gap-3 p-3">
-											{productLinks.map((item, i) => (
+				{/* Center: Centered Navbar Navigation Tags */}
+				<div className="hidden md:flex items-center justify-center shrink-0">
+					<NavigationMenu>
+						<NavigationMenuList className="gap-1.5">
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className={cn(
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isFeaturesActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+								)}>
+									Features
+								</NavigationMenuTrigger>
+								<NavigationMenuContent className="p-1 border-0 shadow-none">
+									<ul className="grid w-[640px] grid-cols-2 gap-3 p-3">
+										{productLinks.map((item, i) => (
+											<li key={i}>
+												<ListItem {...item} />
+											</li>
+										))}
+									</ul>
+									<div className="p-3.5 border-t border-border/40 mt-1 bg-muted/40 rounded-b-xl transition-colors hover:bg-muted/60">
+										<p className="text-muted-foreground text-xs flex items-center justify-between">
+											<span className="flex items-center gap-1.5 font-medium">
+												<Sparkles className="size-4 text-primary animate-pulse" />
+												Ready to hear human-like AI in action?
+											</span>
+											<Link href="/get-started" className="text-primary font-semibold hover:underline flex items-center gap-1.5 group/demo transition-all text-xs">
+												Schedule a demo <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/demo:translate-x-1" />
+											</Link>
+										</p>
+									</div>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+
+							{/* Industries Dropdown */}
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className={cn(
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isIndustriesActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+								)}>
+									Industries
+								</NavigationMenuTrigger>
+								<NavigationMenuContent className="p-1 border-0 shadow-none">
+									<div className="grid w-[680px] grid-cols-2 gap-4 p-3">
+										<ul className="space-y-2">
+											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Core Industries</div>
+											{industryLinks.slice(0, 3).map((item, i) => (
+>>>>>>> f41f265 (feat: add unique 3D industry pages (Real Estate, E-Commerce, Finance & Banking, Home Services), soft rose light theme, centered navbar, and universal soft rose button styling)
 												<li key={i}>
 													<ListItem {...item} />
 												</li>
 											))}
 										</ul>
-										<div className="p-3.5 border-t border-border/40 mt-1 bg-muted/40 rounded-b-xl transition-colors hover:bg-muted/60">
-											<p className="text-muted-foreground text-xs flex items-center justify-between">
-												<span className="flex items-center gap-1.5 font-medium">
-													<Sparkles className="size-4 text-primary animate-pulse" />
-													Ready to hear human-like AI in action?
-												</span>
-												<Link href="/get-started" className="text-primary font-semibold hover:underline flex items-center gap-1.5 group/demo transition-all text-xs">
-													Schedule a demo <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/demo:translate-x-1" />
-												</Link>
-											</p>
-										</div>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
+										<ul className="space-y-2">
+											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">More Verticals</div>
+											{industryLinks.slice(3, 6).map((item, i) => (
+												<li key={i}>
+													<ListItem {...item} />
+												</li>
+											))}
+										</ul>
+									</div>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
 
-								{/* Industries Dropdown */}
-								<NavigationMenuItem>
-									<NavigationMenuTrigger className="bg-transparent text-base font-semibold rounded-full px-5 py-2.5 transition-all duration-200 hover:bg-accent hover:text-primary hover:scale-[1.04] active:scale-[0.98] data-[state=open]:bg-accent data-[state=open]:text-primary">
-										Industries
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="bg-background/95 backdrop-blur-xl p-2 border-border/50 shadow-2xl rounded-2xl animate-in fade-in-0 zoom-in-95 duration-200">
-										<div className="grid w-[660px] grid-cols-2 gap-3 p-3">
-											<ul className="space-y-2">
-												<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Solutions by Sector</div>
-												{industryLinks.map((item, i) => (
-													<li key={i}>
-														<ListItem {...item} />
-													</li>
-												))}
-											</ul>
-											<ul className="space-y-1.5 p-2.5 bg-muted/30 rounded-xl border border-border/30">
-												<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Key Use Cases</div>
-												{useCaseLinks.map((item, i) => (
-													<li key={i}>
-														<NavigationMenuLink asChild>
-															<Link
-																href={item.href}
-																className="flex p-2.5 hover:bg-accent/80 rounded-lg items-center gap-x-3 text-sm transition-all duration-200 hover:translate-x-0.5 group/uc"
-															>
-																<item.icon className="text-primary size-4.5 shrink-0 transition-transform duration-200 group-hover/uc:scale-110" />
-																<div className="flex flex-col">
-																	<span className="font-semibold text-xs group-hover/uc:text-primary transition-colors">{item.title}</span>
-																</div>
-															</Link>
-														</NavigationMenuLink>
-													</li>
-												))}
-											</ul>
-										</div>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
+							{/* Pricing */}
+							<NavigationMenuItem>
+								<NavigationMenuLink asChild>
+									<Link
+										href="/pricing"
+										className={cn(
+											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isPricingActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+										)}
+									>
+										Pricing
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
 
-								{/* Pricing */}
-								<NavigationMenuItem>
-									<NavigationMenuLink asChild>
-										<Link
-											href="/pricing"
-											className={cn(
-												"text-base font-semibold rounded-full px-5 py-2.5 transition-all duration-200 block hover:bg-accent hover:text-primary hover:scale-[1.04] active:scale-[0.98]",
-												pathname === "/pricing" && "bg-accent text-primary shadow-xs"
-											)}
-										>
-											Pricing
-										</Link>
-									</NavigationMenuLink>
-								</NavigationMenuItem>
+							{/* Company Dropdown */}
+							<NavigationMenuItem>
+								<NavigationMenuTrigger className={cn(
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isCompanyActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+								)}>
+									Company
+								</NavigationMenuTrigger>
+								<NavigationMenuContent className="p-1 border-0 shadow-none">
+									<div className="grid w-[640px] grid-cols-2 gap-3 p-3">
+										<ul className="space-y-2">
+											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">About 9278.ai</div>
+											{companyMainLinks.map((item, i) => (
+												<li key={i}>
+													<ListItem {...item} />
+												</li>
+											))}
+										</ul>
+										<ul className="space-y-1.5 p-2.5 bg-muted/30 rounded-xl border border-border/30">
+											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Legal & Support</div>
+											{companyLegalLinks.map((item, i) => (
+												<li key={i}>
+													<NavigationMenuLink asChild>
+														<Link
+															href={item.href}
+															className="flex p-2.5 hover:bg-accent/80 rounded-lg items-center gap-x-3 text-xs font-medium transition-all duration-200 hover:translate-x-0.5 group/leg"
+														>
+															<item.icon className="text-muted-foreground size-4.5 shrink-0 transition-all duration-200 group-hover/leg:text-primary group-hover/leg:scale-110" />
+															<span className="group-hover/leg:text-foreground text-xs font-medium transition-colors">{item.title}</span>
+														</Link>
+													</NavigationMenuLink>
+												</li>
+											))}
+										</ul>
+									</div>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
 
-								{/* Company Dropdown */}
-								<NavigationMenuItem>
-									<NavigationMenuTrigger className="bg-transparent text-base font-semibold rounded-full px-5 py-2.5 transition-all duration-200 hover:bg-accent hover:text-primary hover:scale-[1.04] active:scale-[0.98] data-[state=open]:bg-accent data-[state=open]:text-primary">
-										Company
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="bg-background/95 backdrop-blur-xl p-2 border-border/50 shadow-2xl rounded-2xl animate-in fade-in-0 zoom-in-95 duration-200">
-										<div className="grid w-[600px] grid-cols-2 gap-3 p-2">
-											<ul className="space-y-2">
-												<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">About 9278.ai</div>
-												{companyMainLinks.map((item, i) => (
-													<li key={i}>
-														<ListItem {...item} />
-													</li>
-												))}
-											</ul>
-											<ul className="space-y-1.5 p-2.5 bg-muted/30 rounded-xl border border-border/30">
-												<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Legal & Support</div>
-												{companyLegalLinks.map((item, i) => (
-													<li key={i}>
-														<NavigationMenuLink asChild>
-															<Link
-																href={item.href}
-																className="flex p-2.5 hover:bg-accent/80 rounded-lg items-center gap-x-3 text-xs font-medium transition-all duration-200 hover:translate-x-0.5 group/leg"
-															>
-																<item.icon className="text-muted-foreground size-4.5 shrink-0 transition-all duration-200 group-hover/leg:text-primary group-hover/leg:scale-110" />
-																<span className="group-hover/leg:text-foreground text-xs font-medium transition-colors">{item.title}</span>
-															</Link>
-														</NavigationMenuLink>
-													</li>
-												))}
-											</ul>
-										</div>
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-
-								{/* FAQ */}
-								<NavigationMenuItem>
-									<NavigationMenuLink asChild>
-										<Link
-											href="/faq"
-											className={cn(
-												"text-base font-semibold rounded-full px-5 py-2.5 transition-all duration-200 block hover:bg-accent hover:text-primary hover:scale-[1.04] active:scale-[0.98]",
-												pathname === "/faq" && "bg-accent text-primary shadow-xs"
-											)}
-										>
-											FAQ
-										</Link>
-									</NavigationMenuLink>
-								</NavigationMenuItem>
-							</NavigationMenuList>
-						</NavigationMenu>
-					</div>
+							{/* FAQ */}
+							<NavigationMenuItem>
+								<NavigationMenuLink asChild>
+									<Link
+										href="/faq"
+										className={cn(
+											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isFaqActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+										)}
+									>
+										FAQ
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					</NavigationMenu>
 				</div>
 
-				{/* Right: Actions with Pulsing Glow on CTA */}
-				<div className="hidden items-center gap-3 lg:flex">
+				{/* Right: Actions */}
+				<div className="hidden items-center justify-end gap-3 md:flex md:flex-1">
 					<Button variant="ghost" asChild className="h-9 rounded-full px-4 hover:bg-accent hover:text-primary transition-all duration-200 hover:scale-[1.03]">
 						<a href="https://voice.9278.ai/" target="_blank" rel="noopener noreferrer">
 							Sign In
@@ -296,14 +305,14 @@ function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
 			id="mobile-menu"
 			className={cn(
 				'bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur-xl',
-				'fixed top-18 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y border-border/40 lg:hidden animate-in fade-in-0 duration-200',
+				'fixed top-20 right-4 left-4 z-40 flex flex-col overflow-hidden border border-border/50 rounded-2xl shadow-2xl md:hidden animate-in fade-in-0 duration-200',
 			)}
 		>
 			<div
 				data-slot={open ? 'open' : 'closed'}
 				className={cn(
 					'data-[slot=open]:animate-in data-[slot=open]:zoom-in-97 ease-out',
-					'size-full p-4 overflow-y-auto',
+					'size-full p-4 max-h-[80vh] overflow-y-auto',
 					className,
 				)}
 				{...props}
@@ -387,22 +396,40 @@ const productLinks: LinkItem[] = [
 
 const industryLinks: LinkItem[] = [
 	{
-		title: 'Healthcare & Clinics',
-		href: '/industries/healthcare',
-		description: 'Patient scheduling & appointment reminders',
-		icon: Users,
-	},
-	{
 		title: 'Real Estate & Property',
 		href: '/industries/real-estate',
-		description: 'Instant lead qualification & property tours',
+		description: 'Instant lead qualification & site tour booking',
 		icon: Building2,
 	},
 	{
-		title: 'Dental Practices',
-		href: '/industries/dental',
-		description: 'Recall calls and automated patient intake',
-		icon: Star,
+		title: 'Healthcare & Dental Clinics',
+		href: '/industries/healthcare',
+		description: 'Patient scheduling, triage & appointment reminders',
+		icon: Stethoscope,
+	},
+	{
+		title: 'Retail & E-commerce',
+		href: '/industries/ecommerce',
+		description: 'Order tracking, returns & 24/7 shopper support',
+		icon: ShoppingBag,
+	},
+	{
+		title: 'Finance & Banking',
+		href: '/industries/finance',
+		description: 'Loan pre-screening, payment capture & collection calls',
+		icon: DollarSign,
+	},
+	{
+		title: 'Home Services',
+		href: '/industries/home-services',
+		description: 'After-hours dispatch & HVAC/Plumbing scheduling',
+		icon: Wrench,
+	},
+	{
+		title: 'Restaurants & Hospitality',
+		href: '/industries/restaurants',
+		description: 'Reservations, party confirmations & catering intake',
+		icon: UtensilsCrossed,
 	},
 ];
 

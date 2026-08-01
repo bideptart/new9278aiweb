@@ -9,6 +9,7 @@ import {
   GraduationCap,
   ShoppingBag,
   Dumbbell,
+  DollarSign,
   type LucideIcon,
 } from "lucide-react"
 
@@ -31,20 +32,21 @@ export const INDUSTRIES: Industry[] = [
     name: "Real estate",
     icon: Home,
     short:
-      "Qualify buyer & seller leads 24/7, book showings, and follow up instantly when listings get hits.",
+      "Qualify buyer intent 24/7, book site walkthroughs instantly, and automate WhatsApp floor plan dispatch across Housing.com, 99acres & MagicBricks leads.",
     pitch:
-      "Most leads die because no one picks up in the first five minutes. 9278.ai answers every inbound call instantly, qualifies buyers and sellers, and books showings directly on your calendar — so you walk into every conversation with context, not voicemail.",
+      "Over 60% of real estate portal leads die because sales teams miss late-night and weekend calls. 9278.ai answers every inbound call in under 3 seconds, qualifies buyer budget & home loan pre-approval, locks site walkthroughs directly onto your broker calendar, and dispatches HD floor plans & Google Maps pins via WhatsApp instantly.",
     jobs: [
-      "Answer Zillow, Redfin and website leads in under 3 seconds",
-      "Qualify budget, timeline, financing, and motivation",
-      "Book and reschedule showings on your team calendar",
-      "Send listing follow-ups by SMS and email",
-      "Hand warm buyers off to your top agent live on the call",
+      "Sub-3s Portal Intake: Instant call answer across Housing.com, 99acres, MagicBricks, and direct web forms 24/7/365",
+      "Sub-250ms Audio Qualification: Natural human conversations verifying target budget, loan pre-approval, and possession timeline",
+      "Broker Calendar Slot Locking: 2-Way Google & Outlook calendar sync booking 30-min walkthrough slots with auto-reminders",
+      "Instant WhatsApp PDF & Pin Relay: Dispatches floor plan PDFs, price breakdown sheets, and site location pins right after the call",
+      "Live Sales Director Warm Handoff: Transfers high-intent buyers (₹2 Cr+ budget or cash buyers) live to senior sales leads in <3s",
+      "Salesforce & HubSpot CRM Auto-Sync: Logs call transcripts, intent scores, buyer profiles, and audio recordings automatically",
     ],
     sampleLines: [
-      "Hi! I saw you just inquired about the colonial on Maple — are you working with an agent yet?",
-      "Quick question — are you pre-approved, or would you like me to introduce a lender?",
-      "I have Tuesday at 4 or Saturday at 11 open for a showing — which works better?",
+      "Hi Rahul! Thanks for enquiring about the 2BHK in Kothrud Heights — are you looking for self-use or investment?",
+      "Quick question — is your home loan pre-approved with a bank, or would you like an introduction to our lending partner?",
+      "I have Saturday at 11 AM or Sunday at 4 PM open for a site walkthrough — I've locked Saturday on our calendar and sent the WhatsApp pin!",
     ],
   },
   {
@@ -72,20 +74,22 @@ export const INDUSTRIES: Industry[] = [
     slug: "healthcare",
     name: "Healthcare clinics",
     icon: HeartPulse,
-    short: "Patient intake, prescription refills, and reminder calls with a calm, HIPAA-aware bedside tone.",
+    short: "Patient intake, appointment scheduling, prescription refills, and HIPAA-compliant triage calls with a calm bedside tone.",
     pitch:
-      "Health systems are drowning in repetitive phone work. 9278.ai automates intake, refill requests, post-visit follow-ups, and benefits questions — with a warm, paced bedside tone that elderly and ESL patients actually respond to.",
+      "Health systems and medical clinics are drowning in repetitive phone calls. 9278.ai automates patient intake, appointment booking, prescription refill routing, and post-discharge symptom tracking — with a warm, empathetic bedside tone that elderly and ESL patients respond to with confidence.",
     jobs: [
-      "New patient intake and demographic capture",
-      "Prescription refill requests routed to pharmacy",
-      "Post-discharge follow-up and symptom tracking",
-      "Appointment reminders with re-confirmation flow",
-      "Benefits and copay explanations",
+      "24/7 New patient intake, demographic capture & insurance verification",
+      "EHR-integrated appointment scheduling & automated confirmation calls",
+      "Prescription refill requests & direct pharmacy routing",
+      "HIPAA-compliant post-discharge triage & symptom score tracking",
+      "Insurance copay explanations & prior-authorization status updates",
+      "Instant warm transfer to on-call triage nurses for urgent symptoms",
     ],
     sampleLines: [
-      "Just checking in — on a scale of 0 to 10, how is your pain today compared to right after surgery?",
-      "Of course. I can request a refill for your lisinopril at the CVS on Main — does that still work for you?",
-      "Take a breath. I'm going to ask a few short questions, and then a nurse will call you back within ten minutes.",
+      "Hello Mr. Vance, this is your care coordinator following up after your procedure. On a scale of 0 to 10, how is your discomfort level today?",
+      "I've verified your benefits — your preventive visit is 100% covered with a $0 copay. Would Tuesday at 9:00 AM work for your checkup?",
+      "I can submit the refill request for your Lisinopril to your pharmacy right away. You'll get an SMS as soon as the doctor approves it.",
+      "I hear that you're feeling dizzy. Please take a moment to rest — I am transferring you directly to our on-call triage nurse right now.",
     ],
   },
   {
@@ -232,6 +236,26 @@ export const INDUSTRIES: Industry[] = [
       "Hey Sam — saw you missed the 6am class. Want me to grab you the 5pm spot tonight?",
       "Your trial wraps on Friday. I can lock in the unlimited plan at $149 if I do it before Sunday — interested?",
       "We can freeze your membership for up to 90 days at no cost. Want me to set that up?",
+    ],
+  },
+  {
+    slug: "finance",
+    name: "Finance & banking",
+    icon: DollarSign,
+    short: "Automate cross-border loan screening, global KYC verification, and AML risk sentinel calls across US, UK, EU & APAC markets.",
+    pitch:
+      "Global commercial banks, fintech lenders, and credit institutions handle massive volumes of cross-border inquiries. 9278.ai automates international borrower pre-screening, FICO & credit bureau checks, ACH payment reminders, and FATCA/KYC verification — with 100% GLBA, GDPR & PCI-DSS 4.0 compliance.",
+    jobs: [
+      "24/7 Global loan applicant pre-screening & FICO credit bureau intake",
+      "Automated ACH & SWIFT wire payment reminders & IVR collection",
+      "FATCA & Passport Video KYC verification follow-up calls",
+      "AML & suspicious transaction risk alerts with voice biometric OTP auth",
+      "Instant warm transfer to senior underwriters for high-net-worth ($1M+) applicants",
+    ],
+    sampleLines: [
+      "Hello Mr. Henderson, this is your wealth lending coordinator following up on your $1.5M mortgage pre-approval.",
+      "I've verified your global credit documentation. Your FICO score of 785 qualifies you for a 6.2% fixed rate.",
+      "Your monthly auto-pay of $2,450 is scheduled for the 5th. Would you like to confirm the ACH authorization now?",
     ],
   },
 ]

@@ -12,9 +12,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.205 0 0);
 
-  /* Acepeak brand red — lightened (between red-400 and red-500) for a
-     softer feel across every section; original was red-600 #DC2626 */
-  --primary: oklch(0.70 0.196 25.5);
+  /* Soft Rose / Light Red Brand Palette */
+  --primary: oklch(0.62 0.22 22);
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0); /* neutral-100 #F5F5F5 */
@@ -22,37 +21,37 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0); /* neutral-500 #737373 */
 
-  /* Restrained neutral hover accent (Acepeak keeps red for emphasis) */
+  /* Restrained neutral hover accent */
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
 
-  --destructive: oklch(0.70 0.196 25.5);
+  --destructive: oklch(0.62 0.22 22);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0); /* neutral-200 #E5E5E5 */
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.70 0.196 25.5);
+  --ring: oklch(0.62 0.22 22);
 
-  --chart-1: oklch(0.70 0.196 25.5); /* red-600 */
-  --chart-2: oklch(0.828 0.189 84.43); /* amber-400 */
-  --chart-3: oklch(0.69 0.19 27);  /* red-700 */
-  --chart-4: oklch(0.71 0.185 14);    /* rose */
-  --chart-5: oklch(0.446 0.043 257);   /* slate-600 */
+  --chart-1: oklch(0.62 0.22 22);
+  --chart-2: oklch(0.828 0.189 84.43);
+  --chart-3: oklch(0.55 0.20 25);
+  --chart-4: oklch(0.68 0.20 16);
+  --chart-5: oklch(0.446 0.043 257);
 
-  /* Brand-family extras — warm red→amber spectrum for decorative accents */
-  --ai-cyan: oklch(0.70 0.20 25.33); /* lightened red */
-  --ai-violet: oklch(0.69 0.19 27);/* lightened deep red */
-  --ai-magenta: oklch(0.71 0.185 14); /* lightened rose */
-  --ai-mint: oklch(0.828 0.189 84.43); /* amber-400 */
+  /* Brand-family extras — warm rose→amber spectrum for decorative accents */
+  --ai-cyan: oklch(0.65 0.21 22);
+  --ai-violet: oklch(0.55 0.20 25);
+  --ai-magenta: oklch(0.68 0.20 16);
+  --ai-mint: oklch(0.828 0.189 84.43);
 
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.205 0 0);
-  --sidebar-primary: oklch(0.70 0.196 25.5);
+  --sidebar-primary: oklch(0.62 0.22 22);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.70 0.196 25.5);
+  --sidebar-ring: oklch(0.62 0.22 22);
   --button-ripple-color: oklch(0.205 0 0 / 0.18);
 }
 
@@ -65,7 +64,7 @@
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
 
-  --primary: oklch(0.637 0.237 25.33); /* brighter red-500 for dark */
+  --primary: oklch(0.68 0.21 22); /* brighter soft rose for dark mode */
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.269 0 0);
@@ -76,11 +75,12 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
 
-  --destructive: oklch(0.637 0.237 25.33);
+  --destructive: oklch(0.68 0.21 22);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.637 0.237 25.33);
+  --ring: oklch(0.68 0.21 22);
+
 
   --chart-1: oklch(0.637 0.237 25.33);
   --chart-2: oklch(0.828 0.189 84.43);
@@ -343,15 +343,17 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
-    /* Light red wash across the whole page — sections stay transparent
-       and let this one background show through everywhere. */
+    @apply bg-background text-foreground font-sans;
+    /* Very faint warm brand tint — kept subtle so the canvas reads as clean white */
     background-image:
       radial-gradient(ellipse 80% 55% at 50% -10%, oklch(0.70 0.196 25.5 / 0.09), transparent 60%),
       radial-gradient(ellipse 50% 40% at 100% 25%, oklch(0.828 0.189 84.43 / 0.04), transparent 60%),
       radial-gradient(ellipse 50% 40% at 0% 70%, oklch(0.71 0.185 14 / 0.05), transparent 60%);
     background-repeat: no-repeat;
     background-attachment: fixed;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
   }
   .dark body {
     background-image:
@@ -731,32 +733,43 @@
     border: 1px solid oklch(0.704 0.191 22 / 0.3);
   }
 
-  /* Fancy gradient solid button background — Acepeak red */
+  /* Soft Rose Button Gradient */
+  /* Soft Light Rose Default Button */
   .btn-ai {
-    background: linear-gradient(135deg, oklch(0.70 0.196 25.5) 0%, oklch(0.69 0.19 27) 50%, oklch(0.71 0.185 14) 100%);
-    color: oklch(0.985 0 0);
-    box-shadow: none;
+    background: oklch(0.96 0.04 22);
+    color: oklch(0.55 0.22 22);
+    border: 1px solid oklch(0.82 0.12 22);
+    box-shadow: 0 2px 8px -2px oklch(0.62 0.22 22 / 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn-ai:hover {
-    filter: brightness(1.08);
-    box-shadow: none;
+    background: oklch(0.93 0.06 22);
+    color: oklch(0.52 0.24 22);
+    border-color: oklch(0.75 0.16 22);
+    box-shadow: 0 6px 20px -4px oklch(0.62 0.22 22 / 0.28);
+    transform: translateY(-1px);
   }
   .dark .btn-ai {
-    background: linear-gradient(135deg, oklch(0.637 0.237 25.33) 0%, oklch(0.704 0.191 22) 50%, oklch(0.72 0.2 13) 100%);
-    color: oklch(0.985 0 0);
-    box-shadow: none;
+    background: oklch(0.22 0.08 22);
+    color: oklch(0.82 0.16 22);
+    border: 1px solid oklch(0.38 0.14 22);
+    box-shadow: 0 2px 8px -2px oklch(0.65 0.21 22 / 0.25);
   }
   .dark .btn-ai:hover {
-    box-shadow: none;
+    background: oklch(0.26 0.10 22);
+    color: oklch(0.88 0.18 22);
+    border-color: oklch(0.48 0.16 22);
+    box-shadow: 0 6px 20px -4px oklch(0.65 0.21 22 / 0.38);
   }
 
-  /* Full-panel red gradient — same spectrum as .btn-ai, for CTA cards */
+  /* Full-panel soft rose gradient — for CTA cards */
   .bg-ai-gradient {
-    background: linear-gradient(135deg, oklch(0.70 0.196 25.5) 0%, oklch(0.69 0.19 27) 50%, oklch(0.71 0.185 14) 100%);
+    background: linear-gradient(135deg, oklch(0.62 0.22 22) 0%, oklch(0.65 0.21 20) 50%, oklch(0.68 0.20 16) 100%);
   }
   .dark .bg-ai-gradient {
-    background: linear-gradient(135deg, oklch(0.637 0.237 25.33) 0%, oklch(0.704 0.191 22) 50%, oklch(0.72 0.2 13) 100%);
+    background: linear-gradient(135deg, oklch(0.66 0.21 20) 0%, oklch(0.70 0.20 16) 50%, oklch(0.74 0.18 14) 100%);
   }
+
 
   /* Was sticky (pinned while its industry row scrolls past), but with ten
      rows stacked back to back, each card's native sticky reattachment
