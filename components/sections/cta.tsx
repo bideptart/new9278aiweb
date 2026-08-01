@@ -12,7 +12,7 @@ export function CTA() {
       <div className="relative mx-auto w-full max-w-7xl px-4 py-10 md:px-6 md:py-14">
         <ScrollReveal>
           <div
-            className="ring-gradient relative overflow-hidden rounded-[28px] border border-primary/35 px-6 py-6 shadow-[0_24px_60px_-20px_color-mix(in_oklch,var(--primary)_28%,transparent),0_8px_20px_-8px_color-mix(in_oklch,var(--primary)_16%,transparent)] md:px-8 md:py-8 [background-image:radial-gradient(circle_at_top_right,white,transparent_60%),linear-gradient(135deg,color-mix(in_oklch,var(--primary)_16%,white),color-mix(in_oklch,var(--primary)_6%,white))]"
+            className="ring-gradient relative overflow-hidden rounded-[28px] border border-primary/35 px-6 py-6 md:px-8 md:py-8 [background-image:radial-gradient(circle_at_top_right,white,transparent_60%),linear-gradient(135deg,color-mix(in_oklch,var(--primary)_16%,white),color-mix(in_oklch,var(--primary)_6%,white))]"
           >
             {/* Drifting glow */}
             <motion.div

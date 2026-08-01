@@ -390,8 +390,6 @@ export const HeroCallConsole = forwardRef<CallConsoleHandle>(function HeroCallCo
               style={{
                 backgroundImage:
                   "radial-gradient(circle at 34% 28%, color-mix(in oklch, var(--primary) 62%, white), var(--primary) 62%, color-mix(in oklch, var(--primary) 78%, black))",
-                boxShadow:
-                  "0 0 0 1px color-mix(in oklch, var(--primary) 30%, transparent), 0 16px 40px -12px color-mix(in oklch, var(--primary) 60%, transparent), inset 0 2px 6px oklch(1 0 0 / 0.45)",
               }}
             >
               {!reduced && !playing && (
@@ -407,7 +405,7 @@ export const HeroCallConsole = forwardRef<CallConsoleHandle>(function HeroCallCo
         </div>
 
         {/* Caption pinned to the stage, not the shrinking orb wrapper */}
-        <span className="pointer-events-none absolute bottom-4 left-1/2 w-max -translate-x-1/2 rounded-full border border-border/60 bg-card/85 px-3 py-1 text-[10px] font-medium text-muted-foreground shadow-sm backdrop-blur-md">
+        <span className="pointer-events-none absolute bottom-4 left-1/2 w-max -translate-x-1/2 rounded-full border border-border/60 bg-card/85 px-3 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur-md">
           {playing ? "Aria · speaking now" : "Tap to hear a real call"}
         </span>
 
@@ -418,7 +416,7 @@ export const HeroCallConsole = forwardRef<CallConsoleHandle>(function HeroCallCo
             key={chip.city}
             aria-hidden
             className={cn(
-              "absolute z-10 hidden max-w-[9.5rem] items-center gap-2 rounded-xl border border-border/60 bg-card/90 px-2.5 py-1.5 shadow-lg backdrop-blur-md sm:flex",
+              "absolute z-10 hidden max-w-[9.5rem] items-center gap-2 rounded-xl border border-border/60 bg-card/90 px-2.5 py-1.5 backdrop-blur-md sm:flex",
               chip.chip,
             )}
             animate={reduced ? undefined : { y: [0, i % 2 === 0 ? -6 : 6, 0] }}

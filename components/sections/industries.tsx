@@ -37,7 +37,7 @@ function WaveLines() {
 
 function CardFront({ industry, index }: { industry: Industry; index: number }) {
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border border-primary/35 bg-gradient-to-b from-white to-[oklch(0.968_0.022_20)] shadow-[0_24px_60px_-20px_color-mix(in_oklch,var(--primary)_28%,transparent),0_8px_20px_-8px_color-mix(in_oklch,var(--primary)_16%,transparent)] transition-shadow duration-500 [backface-visibility:hidden] group-hover:shadow-[0_30px_66px_-20px_color-mix(in_oklch,var(--primary)_36%,transparent),0_10px_24px_-8px_color-mix(in_oklch,var(--primary)_20%,transparent)]">
+    <div className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border border-primary/35 bg-gradient-to-b from-white to-[oklch(0.968_0.022_20)] transition-colors duration-500 [backface-visibility:hidden] group-hover:border-primary/55">
       <WaveLines />
 
       {/* Number */}
@@ -52,7 +52,7 @@ function CardFront({ industry, index }: { industry: Industry; index: number }) {
           alt={`${industry.name} illustration`}
           fill
           sizes="(max-width: 640px) 45vw, (max-width: 1280px) 18vw, 150px"
-          className="object-contain object-center transition-transform duration-500 group-hover:scale-105 [filter:drop-shadow(0_8px_14px_oklch(0.577_0.245_27.33_/_0.28))]"
+          className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -69,7 +69,7 @@ function CardFront({ industry, index }: { industry: Industry; index: number }) {
 function CardBack({ industry, cta }: { industry: Industry; cta: ReactNode }) {
   return (
     <div
-      className="absolute inset-0 flex flex-col justify-center overflow-hidden rounded-[22px] border border-primary/35 p-4 text-white shadow-[0_24px_60px_-20px_color-mix(in_oklch,var(--primary)_28%,transparent),0_8px_20px_-8px_color-mix(in_oklch,var(--primary)_16%,transparent)] [backface-visibility:hidden] [transform:rotateY(180deg)]"
+      className="absolute inset-0 flex flex-col justify-center overflow-hidden rounded-[22px] border border-primary/35 p-4 text-white [backface-visibility:hidden] [transform:rotateY(180deg)]"
       style={{
         // Exact red sampled from the real-estate house walls (#E45444)
         background: "linear-gradient(150deg, #EF6C5B 0%, #E45444 52%, #CE4C3D 100%)",

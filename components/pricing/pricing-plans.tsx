@@ -5,13 +5,28 @@
 // in the portal is reflected here automatically. Each card deep-links into
 // /get-started?plan=<id>&cycle=<cycle>, where checkout is completed.
 
+import type React from "react"
 import { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
-import { Check, ChevronLeft, ChevronRight, Loader2, TrendingUp, Clock, Rocket } from "lucide-react"
-import { animate } from "motion/react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import {
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Gauge,
+  Headphones,
+  Loader2,
+  Mic2,
+  Minus,
+  Quote,
+  ShieldCheck,
+  TrendingUp,
+  Clock,
+  Rocket,
+  Users,
+} from "lucide-react"
+import { animate, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react"
 import { Button } from "@/components/ui/button"
-import { StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
+import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
 import { cn } from "@/lib/utils"
 
 const PORTAL_BASE = "https://voice.9278.ai"
@@ -42,14 +57,15 @@ function perkMatching(perks: string[], pattern: RegExp) {
 
 const COMPARISON_ROWS: Array<{
   label: string
+  icon: typeof Clock
   value: (p: Plan) => string
 }> = [
-  { label: "Included minutes", value: (p) => `${p.min.toLocaleString("en-US")} min` },
-  { label: "Effective rate", value: (p) => `${usd(p.rate)}/min` },
-  { label: "AI voice agents", value: (p) => (p.agents >= 999 ? "Unlimited" : String(p.agents)) },
-  { label: "Voice stack", value: (p) => perkMatching(p.perks, /stack|premium/i) },
-  { label: "Support", value: (p) => perkMatching(p.perks, /support|success manager/i) },
-  { label: "SLA", value: (p) => (p.perks.some((perk) => /sla/i.test(perk)) ? "✓" : "—") },
+  { label: "Included minutes", icon: Clock, value: (p) => `${p.min.toLocaleString("en-US")} min` },
+  { label: "Effective rate", icon: Gauge, value: (p) => `${usd(p.rate)}/min` },
+  { label: "AI voice agents", icon: Users, value: (p) => (p.agents >= 999 ? "Unlimited" : String(p.agents)) },
+  { label: "Voice stack", icon: Mic2, value: (p) => perkMatching(p.perks, /stack|premium/i) },
+  { label: "Support", icon: Headphones, value: (p) => perkMatching(p.perks, /support|success manager/i) },
+  { label: "SLA", icon: ShieldCheck, value: (p) => (p.perks.some((perk) => /sla/i.test(perk)) ? "✓" : "—") },
 ]
 
 const TESTIMONIALS = [
@@ -372,112 +388,220 @@ export function PricingPlans() {
       </div>
 
       {/* Desktop: full comparison table */}
-      <div className="hidden overflow-x-auto rounded-2xl border border-border/60 md:block">
-        <table className="w-full min-w-[560px] border-separate border-spacing-0 text-left text-sm">
-          <thead>
-            <tr className="border-b border-border/60 bg-card/40">
-              <th className="p-4 font-medium text-muted-foreground">Feature</th>
-              {ordered.map((p) => (
-                <th
-                  key={p.id}
-                  className={cn(
-                    "border-l border-border/60 p-4 text-center font-semibold text-foreground",
-                    p.tag && "bg-primary/10",
-                  )}
-                >
-                  {p.label}
-                  {p.tag && <span className="ml-1.5 text-xs font-normal text-primary">{p.tag}</span>}
+      <ScrollReveal className="hidden overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_20px_50px_-35px_rgba(17,17,17,0.25)] md:block">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] border-separate border-spacing-0 text-left text-sm">
+            <thead>
+              <tr>
+                <th className="w-[26%] border-b border-border/60 bg-white p-5 align-bottom font-medium text-muted-foreground">
+                  Feature
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {COMPARISON_ROWS.map((row, i) => (
-              <tr
-                key={row.label}
-                className={cn("group border-b border-border/40 last:border-0", i % 2 === 1 && "bg-card/20")}
-              >
-                <td className="p-4 text-muted-foreground transition-colors group-hover:bg-primary/10">{row.label}</td>
                 {ordered.map((p) => (
-                  <td
+                  <th
                     key={p.id}
                     className={cn(
-                      "border-l border-border/40 p-4 text-center text-foreground transition-colors group-hover:bg-primary/15",
-                      p.tag && (i % 2 === 1 ? "bg-primary/10" : "bg-primary/5"),
+                      "relative border-b border-l border-border/60 p-5 text-center align-bottom",
+                      p.tag ? "bg-primary/[0.06]" : "bg-white",
                     )}
                   >
-                    {row.value(p)}
-                  </td>
+                    {p.tag && (
+                      <span
+                        aria-hidden
+                        className="absolute inset-x-0 top-0 h-[2.5px]"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(90deg, transparent, var(--primary), color-mix(in oklch, var(--primary) 60%, var(--ai-magenta)), transparent)",
+                        }}
+                      />
+                    )}
+                    <span className="text-base font-bold tracking-tight text-foreground">{p.label}</span>
+                    {p.tag && (
+                      <span className="mt-1.5 flex justify-center">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <motion.span
+                              className="absolute inline-flex h-full w-full rounded-full bg-white/80"
+                              animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+                              transition={{ duration: 1.6, repeat: Number.POSITIVE_INFINITY, ease: "easeOut" }}
+                            />
+                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+                          </span>
+                          {p.tag}
+                        </span>
+                      </span>
+                    )}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Testimonials with quantified results — flips on hover, same as the how-it-works cards */}
-      <div className="mt-8 grid gap-3 sm:mt-16 sm:gap-5 md:grid-cols-3">
-        {TESTIMONIALS.map((t) => {
-          const Icon = t.icon
-          return (
-            <div key={t.author} className="group relative h-full sm:[perspective:1200px]">
-              <div className="relative h-full min-h-[160px] transition-transform duration-700 ease-out sm:[transform-style:preserve-3d] sm:group-hover:[transform:rotateY(180deg)] sm:min-h-[220px]">
-                {/* FRONT — red gradient, shown at rest */}
-                <div
-                  className="absolute inset-0 flex h-full flex-col overflow-hidden rounded-2xl p-4 sm:[backface-visibility:hidden] sm:p-6"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(135deg, color-mix(in oklch, var(--primary) 16%, white), color-mix(in oklch, var(--primary) 6%, white))",
-                  }}
+            </thead>
+            <tbody>
+              {COMPARISON_ROWS.map((row, i) => (
+                <tr
+                  key={row.label}
+                  className={cn(
+                    "group transition-colors",
+                    i % 2 === 1 ? "bg-card/30" : "bg-white",
+                  )}
                 >
-                  <div className="relative flex items-start justify-between">
-                    <span className="text-xs font-semibold sm:text-sm" style={{ color: t.accent }}>
-                      {t.metric}
+                  <td
+                    className={cn(
+                      "border-border/40 p-5 font-medium text-muted-foreground transition-colors group-hover:bg-primary/[0.06]",
+                      i < COMPARISON_ROWS.length - 1 && "border-b",
+                    )}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                        <row.icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
+                      </span>
+                      {row.label}
                     </span>
-                    <span
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg sm:h-9 sm:w-9"
-                      style={{
-                        background: `color-mix(in oklch, ${t.accent} 12%, transparent)`,
-                        boxShadow: `0 6px 16px -4px color-mix(in oklch, ${t.accent} 45%, transparent)`,
-                        color: t.accent,
-                      }}
-                    >
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <p className="relative mt-2.5 text-xs leading-relaxed text-foreground sm:mt-4 sm:text-sm">&ldquo;{t.quote}&rdquo;</p>
-                  <p className="relative mt-2.5 text-[11px] text-muted-foreground sm:mt-4 sm:text-xs">
-                    {t.author} · {t.role}
-                  </p>
-                </div>
+                  </td>
+                  {ordered.map((p) => {
+                    const value = row.value(p)
+                    return (
+                      <td
+                        key={p.id}
+                        className={cn(
+                          "border-l border-border/40 p-5 text-center font-medium text-foreground transition-colors group-hover:bg-primary/[0.08]",
+                          i < COMPARISON_ROWS.length - 1 && "border-b",
+                          p.tag && "bg-primary/[0.04]",
+                        )}
+                      >
+                        {value === "✓" ? (
+                          <Check className="mx-auto h-4 w-4 text-primary" strokeWidth={3} aria-hidden="true" />
+                        ) : value === "—" ? (
+                          <Minus className="mx-auto h-3.5 w-3.5 text-muted-foreground/35" aria-hidden="true" />
+                        ) : (
+                          value
+                        )}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </ScrollReveal>
 
-                {/* BACK — white card, revealed on hover (desktop only; mobile shows front face only, no 3D transform) */}
-                <div className="step-card card-glow absolute inset-0 hidden h-full flex-col overflow-hidden rounded-2xl bg-white p-4 sm:flex sm:[backface-visibility:hidden] sm:[transform:rotateY(180deg)] sm:p-6">
-                  <span className="scan-line" aria-hidden />
-                  <div className="relative flex items-start justify-between">
-                    <span className="text-xs font-semibold sm:text-sm" style={{ color: t.accent }}>
-                      {t.metric}
-                    </span>
-                    <span
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-white sm:h-9 sm:w-9"
-                      style={{
-                        background: "var(--primary)",
-                        boxShadow: "0 6px 16px -4px color-mix(in oklch, var(--primary) 45%, transparent)",
-                      }}
-                    >
-                      <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <p className="relative mt-2.5 text-xs leading-relaxed text-foreground sm:mt-4 sm:text-sm">&ldquo;{t.quote}&rdquo;</p>
-                  <p className="relative mt-2.5 text-[11px] text-muted-foreground sm:mt-4 sm:text-xs">
-                    {t.author} · {t.role}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )
-        })}
+      {/* Testimonials with quantified results */}
+      <div className="mt-8 grid gap-5 sm:mt-16 md:grid-cols-3">
+        {TESTIMONIALS.map((t) => (
+          <TestimonialCard key={t.author} t={t} />
+        ))}
       </div>
+    </div>
+  )
+}
+
+/** Tilts toward the cursor in real 3D (rotateX/rotateY on a perspective
+    parent), spring-damped so it settles smoothly instead of snapping. */
+function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
+  const Icon = t.icon
+  const reduced = useReducedMotion()
+  const ref = useRef<HTMLDivElement | null>(null)
+  const rx = useMotionValue(0)
+  const ry = useMotionValue(0)
+  const springRx = useSpring(rx, { stiffness: 300, damping: 22, mass: 0.6 })
+  const springRy = useSpring(ry, { stiffness: 300, damping: 22, mass: 0.6 })
+
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (reduced) return
+    const el = ref.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const px = (e.clientX - r.left) / r.width - 0.5
+    const py = (e.clientY - r.top) / r.height - 0.5
+    ry.set(px * 16)
+    rx.set(-py * 16)
+  }
+
+  function onLeave() {
+    rx.set(0)
+    ry.set(0)
+  }
+
+  return (
+    <div className="group/tcard relative h-full" style={{ perspective: "1000px" }}>
+      {/* ambient glow — blooms on hover, tinted per testimonial */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-3 -z-10 rounded-[28px] opacity-0 blur-2xl transition-opacity duration-500 group-hover/tcard:opacity-100"
+        style={{ background: `color-mix(in oklch, ${t.accent} 20%, transparent)` }}
+      />
+
+      <motion.div
+        ref={ref}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        style={{ rotateX: springRx, rotateY: springRy, transformStyle: "preserve-3d" }}
+        whileHover={reduced ? undefined : { scale: 1.03 }}
+        transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        className="ring-gradient relative flex h-full flex-col overflow-hidden rounded-2xl bg-white p-6 shadow-[0_4px_20px_rgba(17,17,17,0.05)] transition-shadow duration-300 group-hover/tcard:shadow-[0_30px_60px_-25px_rgba(17,17,17,0.22)]"
+      >
+        {/* ambient wash */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(ellipse at 85% 0%, color-mix(in oklch, ${t.accent} 10%, transparent), transparent 60%)`,
+          }}
+        />
+
+        <div className="relative flex items-start justify-between" style={{ transform: "translateZ(28px)" }}>
+          <Quote className="h-7 w-7" style={{ color: `color-mix(in oklch, ${t.accent} 35%, transparent)` }} strokeWidth={2.5} aria-hidden="true" />
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover/tcard:rotate-6"
+            style={{
+              background: `color-mix(in oklch, ${t.accent} 12%, transparent)`,
+              boxShadow: `0 6px 16px -4px color-mix(in oklch, ${t.accent} 45%, transparent)`,
+              color: t.accent,
+            }}
+          >
+            <Icon className="h-4 w-4" aria-hidden="true" />
+          </span>
+        </div>
+
+        <span
+          className="relative mt-3 inline-flex w-fit items-center rounded-full px-2.5 py-1 text-xs font-bold"
+          style={{
+            background: `color-mix(in oklch, ${t.accent} 12%, transparent)`,
+            color: t.accent,
+            transform: "translateZ(20px)",
+          }}
+        >
+          {t.metric}
+        </span>
+
+        <p
+          className="relative mt-4 flex-1 text-pretty text-sm leading-relaxed text-foreground/85"
+          style={{ transform: "translateZ(14px)" }}
+        >
+          &ldquo;{t.quote}&rdquo;
+        </p>
+
+        <div
+          className="relative mt-5 flex items-center gap-3 border-t border-black/[0.06] pt-4"
+          style={{ transform: "translateZ(10px)" }}
+        >
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white ring-2 ring-white"
+            style={{
+              backgroundImage: `radial-gradient(circle at 35% 28%, color-mix(in oklch, ${t.accent} 60%, white), ${t.accent})`,
+            }}
+          >
+            {t.author
+              .split(" ")
+              .map((w) => w[0])
+              .slice(0, 2)
+              .join("")}
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-[13px] font-semibold text-foreground">{t.author}</p>
+            <p className="truncate text-[11px] text-muted-foreground">{t.role}</p>
+          </div>
+        </div>
+      </motion.div>
     </div>
   )
 }
@@ -499,65 +623,82 @@ function PlanCard({
   const animatedPrice = useAnimatedNumber(price)
 
   return (
-    <Card
+    <div
       className={cn(
-        "flex h-full flex-col gap-4 py-4 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-white/10",
+        "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white p-5 transition-all duration-300 hover:-translate-y-1",
         featured
-          ? "ring-2 ring-primary shadow-xl transform md:scale-[1.02] hover:scale-[1.04] dark:ring-primary/80 dark:shadow-primary/20"
-          : "hover:ring-2 hover:ring-primary hover:shadow-primary/20",
-        emphasize && "ring-2 ring-primary shadow-xl scale-[1.02]",
+          ? "border-primary/40 shadow-[0_25px_70px_-25px_color-mix(in_oklch,var(--primary)_38%,transparent)] md:scale-[1.02]"
+          : "border-black/[0.08] hover:border-primary/25 hover:shadow-[0_25px_60px_-30px_rgba(17,17,17,0.18)]",
+        emphasize && "border-primary/40 shadow-[0_25px_70px_-25px_color-mix(in_oklch,var(--primary)_38%,transparent)] scale-[1.02]",
       )}
     >
-      <CardHeader className="px-4 md:px-6">
-        <div className="flex items-start justify-between">
-          <CardTitle className="text-2xl font-bold">{p.label}</CardTitle>
-          {p.tag && (
-            <span className="whitespace-nowrap rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-              {p.tag}
-            </span>
-          )}
-        </div>
-        <CardDescription className="mt-1 text-sm">{p.sub}</CardDescription>
-        <div className="mt-2">
-          <p className="text-4xl font-extrabold text-foreground">
-            {usd(animatedPrice)}
-            <span className="ml-1 text-base font-normal text-muted-foreground">
-              /{cycle === "yearly" ? "yr" : "mo"}
-            </span>
-          </p>
-          {cycle === "yearly" && <p className="mt-1 text-xs text-muted-foreground">Save {usd(savings)} vs monthly</p>}
-        </div>
-      </CardHeader>
-      <CardContent className="flex flex-1 flex-col px-4 md:px-6">
-        <div className="mb-4 text-xs text-muted-foreground">
+      {/* ambient red wash on the featured card */}
+      {featured && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 50% 0%, color-mix(in oklch, var(--primary) 8%, transparent), transparent 65%)",
+          }}
+        />
+      )}
+
+      <div className="relative flex items-start justify-between gap-3">
+        <h3 className="text-lg font-bold tracking-tight text-foreground">{p.label}</h3>
+        {p.tag && (
+          <span className="whitespace-nowrap rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+            {p.tag}
+          </span>
+        )}
+      </div>
+      <p className="relative mt-1 text-xs text-muted-foreground">{p.sub}</p>
+
+      <div className="relative mt-3.5">
+        <p className="text-3xl font-extrabold leading-none tracking-tight text-foreground">
+          {usd(animatedPrice)}
+          <span className="ml-1 text-sm font-normal text-muted-foreground">/{cycle === "yearly" ? "yr" : "mo"}</span>
+        </p>
+        <p className="mt-1.5 text-[11px] text-muted-foreground">
+          {cycle === "yearly" ? `Save ${usd(savings)} vs monthly` : "Starting from"}
+        </p>
+        <p className="mt-0.5 text-[11px] text-muted-foreground/70">
           {p.min.toLocaleString("en-US")} min · {usd(p.rate)}/min ·{" "}
           {p.agents >= 999 ? "Unlimited" : `${p.agents} agents`}
-        </div>
-        <StaggerGroup className="mb-6 flex-1 list-none space-y-0">
-          {p.perks
-            .filter((perk) => !/phone number|concurrent call/i.test(perk))
-            .map((perk) => (
-              <StaggerItem key={perk}>
-                <div className="flex items-start space-x-3 py-1">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                  <span className="text-sm text-foreground">{perk}</span>
-                </div>
-              </StaggerItem>
-            ))}
-        </StaggerGroup>
-        <Button
-          asChild
-          size="lg"
-          className={cn(
-            "w-full rounded-full transition-all duration-200",
-            featured
-              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 dark:shadow-primary/40"
-              : "border border-input bg-muted text-foreground hover:border-primary hover:bg-primary hover:text-primary-foreground",
-          )}
-        >
-          <Link href={`/get-started?plan=${p.id}&cycle=${cycle}`}>{featured ? `Choose ${p.label}` : "Get started"}</Link>
-        </Button>
-      </CardContent>
-    </Card>
+        </p>
+      </div>
+
+      <StaggerGroup className="relative mt-4 flex-1 list-none space-y-2">
+        {p.perks
+          .filter((perk) => !/phone number|concurrent call/i.test(perk))
+          .map((perk) => (
+            <StaggerItem key={perk}>
+              <div className="flex items-start gap-2.5">
+                <span
+                  className={cn(
+                    "mt-1 h-[6px] w-[6px] shrink-0 rotate-45 border",
+                    featured ? "border-primary bg-primary/20" : "border-black/25",
+                  )}
+                  aria-hidden="true"
+                />
+                <span className="text-[13px] text-foreground/80">{perk}</span>
+              </div>
+            </StaggerItem>
+          ))}
+      </StaggerGroup>
+
+      <Button
+        asChild
+        size="default"
+        className={cn(
+          "relative mt-5 w-full rounded-full transition-all duration-200",
+          featured
+            ? "bg-primary text-white shadow-lg shadow-primary/30 hover:bg-primary/90"
+            : "border border-black/10 bg-muted text-foreground hover:border-primary/40 hover:bg-primary/5",
+        )}
+      >
+        <Link href={`/get-started?plan=${p.id}&cycle=${cycle}`}>{featured ? `Choose ${p.label}` : "Get started"}</Link>
+      </Button>
+    </div>
   )
 }

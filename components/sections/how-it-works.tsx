@@ -48,37 +48,34 @@ function MockWindow({
   return (
     <div
       className={cn(
-        "relative flex h-[188px] flex-col overflow-hidden rounded-xl border bg-white text-left transition-all duration-500",
+        "relative flex h-[204px] flex-col overflow-hidden rounded-xl border bg-white text-left transition-all duration-500",
         active ? "border-primary/25" : "border-black/[0.07]",
       )}
-      style={{
-        boxShadow: active
-          ? "0 22px 44px -20px color-mix(in oklch, var(--primary) 40%, transparent), 0 2px 6px -2px rgba(0,0,0,0.06)"
-          : "0 14px 30px -20px rgba(0,0,0,0.32)",
-      }}
     >
       {/* title bar */}
       <div
         className={cn(
-          "flex shrink-0 items-center gap-1.5 border-b px-2.5 py-1.5 transition-colors duration-500",
+          "grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1.5 border-b px-2.5 py-1.5 transition-colors duration-500",
           active ? "border-primary/12 bg-primary/[0.04]" : "border-black/[0.05] bg-black/[0.015]",
         )}
       >
+        <span aria-hidden />
         <span className="flex gap-[3px]">
-          <span className={cn("h-[5px] w-[5px] rounded-full transition-colors", active ? "bg-primary/60" : "bg-black/12")} />
-          <span className="h-[5px] w-[5px] rounded-full bg-black/12" />
-          <span className="h-[5px] w-[5px] rounded-full bg-black/12" />
+          <span className={cn("h-[5px] w-[5px] rounded-full transition-colors", active ? "bg-primary" : "bg-primary/60")} />
+          <span className="h-[5px] w-[5px] rounded-full bg-primary/35" />
+          <span className="h-[5px] w-[5px] rounded-full bg-primary/35" />
         </span>
-        <span className="truncate font-mono text-[8px] tracking-wide text-muted-foreground/70">{label}</span>
-        {active && (
-          <motion.span
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            className="ml-auto flex h-1 w-1 shrink-0 rounded-full bg-primary"
-            style={{ boxShadow: "0 0 6px 1px color-mix(in oklch, var(--primary) 70%, transparent)" }}
-          />
-        )}
+        <span className="flex items-center justify-end gap-1.5 overflow-hidden">
+          <span className="truncate font-mono text-[8px] tracking-wide text-muted-foreground/70">{label}</span>
+          {active && (
+            <motion.span
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="flex h-1 w-1 shrink-0 rounded-full bg-primary"
+            />
+          )}
+        </span>
       </div>
 
       <div className="relative min-h-0 flex-1 p-2.5">
@@ -132,7 +129,7 @@ function BuilderMock() {
               className={cn(
                 "rounded-full px-2 py-[3px] text-[9px] font-medium transition-all duration-300",
                 i === voice
-                  ? "bg-primary text-white shadow-[0_4px_10px_-4px_color-mix(in_oklch,var(--primary)_70%,transparent)]"
+                  ? "bg-primary text-white"
                   : "bg-black/[0.05] text-muted-foreground",
               )}
             >
@@ -357,75 +354,71 @@ function StepCard({
   }
 
   return (
-    <div className="flex h-full flex-col items-center md:items-start">
-      {/* Numbered node on the rail */}
-      <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-background ring-8 ring-background">
-        {active && (
+    <div className="group relative h-full">
+      {/* faint radial glow behind the card — only shows on hover */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-5 -z-10 rounded-[2rem] bg-primary/[0.12] opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+      />
+
+      {/* animated gradient border wrapper (speeds up on hover, see .uc-border) */}
+      <div className="uc-border h-full transition-transform duration-300 ease-out group-hover:scale-[1.02]">
+        <motion.div
+          ref={ref}
+          onMouseMove={onMove}
+          whileHover={{ y: -8 }}
+          transition={{ type: "spring", stiffness: 300, damping: 24 }}
+          className="relative flex h-full w-full flex-col overflow-hidden rounded-[calc(1.25rem-1.5px)] bg-white p-6 text-center shadow-[0_2px_16px_rgba(17,17,17,0.05)] transition-shadow duration-300 group-hover:shadow-[0_32px_70px_-24px_color-mix(in_oklch,var(--primary)_38%,transparent)] md:text-left"
+        >
+          {/* cursor spotlight */}
           <motion.span
             aria-hidden
-            className="absolute inset-0 rounded-full bg-primary/30"
-            initial={{ scale: 0.8, opacity: 0.7 }}
-            animate={{ scale: 1.7, opacity: 0 }}
-            transition={{ duration: 1.6, repeat: Number.POSITIVE_INFINITY, ease: "easeOut" }}
+            style={{ background: spotlight }}
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           />
-        )}
-        <motion.span
-          className="relative flex h-12 w-12 items-center justify-center rounded-full text-white"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, var(--primary), color-mix(in oklch, var(--primary) 70%, var(--ai-magenta)))",
-          }}
-          animate={{
-            scale: active ? 1.08 : 1,
-            boxShadow: active
-              ? "0 14px 30px -6px color-mix(in oklch, var(--primary) 70%, transparent)"
-              : "0 10px 24px -8px color-mix(in oklch, var(--primary) 45%, transparent)",
-          }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        >
-          <Icon className="h-5 w-5" aria-hidden="true" />
-        </motion.span>
-      </div>
-
-      {/* Card */}
-      <motion.div
-        ref={ref}
-        onMouseMove={onMove}
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="card-glow group relative mt-5 flex w-full flex-1 flex-col overflow-hidden rounded-2xl p-5 text-center md:text-left"
-      >
-        <motion.span
-          aria-hidden
-          style={{ background: spotlight }}
-          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        />
-        <span
-          aria-hidden
-          className={cn(
-            "pointer-events-none absolute -bottom-5 right-2 select-none font-serif text-7xl leading-none transition-colors duration-500",
-            active ? "text-primary/[0.12]" : "text-primary/[0.07]",
-          )}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-
-        <div className="relative mb-4">
-          <MockWindow label={step.window} active={active}>
-            <Mock />
-          </MockWindow>
-          {/* soft reflection under the window */}
+          {/* glassmorphism highlight sweep */}
           <span
             aria-hidden
-            className="pointer-events-none absolute -bottom-2 left-1/2 h-3 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/15 blur-md transition-opacity duration-500"
-            style={{ opacity: active ? 0.5 : 0.28 }}
+            className="pointer-events-none absolute inset-x-0 -top-1/2 h-full -translate-y-2 bg-gradient-to-b from-white/60 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
           />
-        </div>
+          {/* faint watermark number */}
+          <span
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute -bottom-5 right-2 select-none font-serif text-7xl leading-none transition-colors duration-500",
+              active ? "text-primary/[0.12]" : "text-primary/[0.07]",
+            )}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
 
-        <p className="relative font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{step.tag}</p>
-        <h3 className="relative mt-2 text-lg font-semibold tracking-tight">{step.title}</h3>
-        <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-      </motion.div>
+          {/* header — icon integrated inline instead of a floating circle */}
+          <div className="relative mb-4 flex items-center justify-center gap-2.5 md:justify-start">
+            <span
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 ease-out group-hover:rotate-6"
+              style={{ background: "#FFF5F5", borderColor: "#FFD6D6" }}
+            >
+              <Icon className="h-[18px] w-[18px] text-primary" aria-hidden="true" />
+            </span>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{step.tag}</p>
+          </div>
+
+          <div className="relative mb-4">
+            <MockWindow label={step.window} active={active}>
+              <Mock />
+            </MockWindow>
+            {/* soft reflection under the window */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -bottom-2 left-1/2 h-3 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/15 blur-md transition-opacity duration-500"
+              style={{ opacity: active ? 0.5 : 0.28 }}
+            />
+          </div>
+
+          <h3 className="relative text-lg font-semibold tracking-tight">{step.title}</h3>
+          <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+        </motion.div>
+      </div>
     </div>
   )
 }
@@ -491,7 +484,7 @@ export function HowItWorks() {
         transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-4 pb-14 pt-8 md:px-6 md:pb-20 md:pt-10">
+      <div className="relative mx-auto w-full max-w-[1700px] px-6 pb-14 pt-8 md:px-10 md:pb-20 md:pt-10">
         <ScrollReveal className="mx-auto max-w-2xl text-center">
           <span className="ai-pill-cyan">
             <span className="h-1 w-1 rounded-full bg-primary" />
@@ -507,26 +500,7 @@ export function HowItWorks() {
         </ScrollReveal>
 
         <div className="relative mt-16">
-          {/* Connecting rail — the pulse walks node to node in step with
-              whichever card is currently lit. */}
-          <div
-            aria-hidden
-            className="absolute left-[calc(100%/6)] right-[calc(100%/6)] top-6 hidden h-px bg-black/[0.07] md:block"
-          >
-            <motion.span
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary/40 to-primary"
-              animate={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
-              transition={{ type: "spring", stiffness: 90, damping: 20 }}
-            />
-            <motion.span
-              className="absolute -top-[3.5px] h-2 w-2 rounded-full bg-primary"
-              style={{ boxShadow: "0 0 14px 3px color-mix(in oklch, var(--primary) 60%, transparent)" }}
-              animate={{ left: `calc(${(activeStep / (steps.length - 1)) * 100}% - 4px)` }}
-              transition={{ type: "spring", stiffness: 90, damping: 20 }}
-            />
-          </div>
-
-          <StaggerGroup className="grid items-stretch gap-8 md:grid-cols-3 md:gap-6">
+          <StaggerGroup className="grid items-stretch gap-8 md:grid-cols-3 md:gap-10">
             {steps.map((step, i) => (
               <StaggerItem key={step.title} className="h-full">
                 <StepCard step={step} index={i} active={activeStep === i} />
@@ -556,7 +530,6 @@ export function HowItWorks() {
           <Link
             href="/get-started"
             className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:gap-3"
-            style={{ boxShadow: "0 16px 34px -12px color-mix(in oklch, var(--primary) 65%, transparent)" }}
           >
             Build your first agent
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />

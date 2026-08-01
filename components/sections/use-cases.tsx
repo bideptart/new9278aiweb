@@ -1,21 +1,105 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Headset, TrendingUp, Languages, PhoneIncoming, PhoneOutgoing, Globe2 } from "lucide-react"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import type React from "react"
+import { useEffect, useRef, useState } from "react"
+import { Headset, TrendingUp, Languages, CalendarCheck, PhoneIncoming, PhoneOutgoing, Globe2, Check } from "lucide-react"
+import {
+  AnimatePresence,
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "motion/react"
 import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
 import { cn } from "@/lib/utils"
 
 /* ==================================================================
-   Each use case gets a live scene instead of a corner watermark and
-   stray floating chips. Three deliberately different visuals — a
-   24-hour dial, a climbing outbound chart, and a language handover —
-   so the row doesn't read as one idea repeated three times.
+   Four use cases in one row, each an interactive 3D card:
 
-   The old "+38% conversion" chip is gone: it's a performance claim
-   with no source behind it, and promoting it into a headline visual
-   would have made that worse.
+   - the whole card tilts toward the cursor in real perspective (a
+     single, shallow tilt — early drafts stacked per-layer translateZ
+     on top of the rotation and that combination blurred text,
+     especially the Devanagari glyph in the multilingual card)
+   - a conic-gradient border runs slowly around each card and spins up
+     with a glow on hover (.uc-border in globals.css)
+   - a spotlight follows the cursor across the card face
+   - a diagonal shine sweeps across on hover
+
+   Every card still carries its own live scene — dial, chart, globe,
+   booking grid.
    ================================================================== */
+
+/* ---------- 3D tilt wrapper ----------------------------------------- */
+
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const reduced = useReducedMotion()
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  const nx = useMotionValue(0)
+  const ny = useMotionValue(0)
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+
+  const cfg = { stiffness: 200, damping: 22, mass: 0.5 }
+  const sx = useSpring(nx, cfg)
+  const sy = useSpring(ny, cfg)
+  // Kept shallow on purpose: text on a 3D-rotated plane is a known
+  // source of sub-pixel blur in Chromium. 6° reads as "tilting toward
+  // you" without ever softening the copy.
+  const rotateX = useTransform(sy, [-0.5, 0.5], [6, -6])
+  const rotateY = useTransform(sx, [-0.5, 0.5], [-6, 6])
+  const spotlight = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, color-mix(in oklch, var(--primary) 11%, transparent), transparent 72%)`
+
+  function onMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (reduced) return
+    const r = ref.current?.getBoundingClientRect()
+    if (!r) return
+    const x = e.clientX - r.left
+    const y = e.clientY - r.top
+    mx.set(x)
+    my.set(y)
+    nx.set(x / r.width - 0.5)
+    ny.set(y / r.height - 0.5)
+  }
+
+  function onLeave() {
+    nx.set(0)
+    ny.set(0)
+  }
+
+  return (
+    <div style={{ perspective: "1600px" }} className="h-full">
+      <motion.div
+        ref={ref}
+        onMouseMove={onMove}
+        onMouseLeave={onLeave}
+        whileHover={reduced ? undefined : { y: -10, scale: 1.015 }}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
+        transition={{ type: "spring", stiffness: 240, damping: 22 }}
+        className="uc-border group h-full [will-change:transform]"
+      >
+        <div
+          className="relative flex h-full flex-col overflow-hidden rounded-[calc(1.25rem-1.5px)] bg-white p-4"
+          style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+        >
+          {/* cursor spotlight */}
+          <motion.span
+            aria-hidden
+            style={{ background: spotlight }}
+            className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
+          {/* diagonal shine sweep on hover */}
+          <span aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <span className="uc-shine absolute -inset-y-1/2 left-[-60%] w-1/3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          </span>
+          <div className="relative flex h-full flex-col">{children}</div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
 
 /* ---------- 01 · the 24-hour dial ----------------------------------- */
 
@@ -260,7 +344,6 @@ function MultilingualScene() {
           style={{
             backgroundImage:
               "radial-gradient(circle at 35% 28%, color-mix(in oklch, var(--primary) 62%, white), var(--primary))",
-            boxShadow: "0 8px 20px -6px color-mix(in oklch, var(--primary) 60%, transparent)",
           }}
         >
           <Globe2 className="h-5 w-5" strokeWidth={2.25} aria-hidden="true" />
@@ -294,13 +377,107 @@ function MultilingualScene() {
             className={cn(
               "rounded-md px-1.5 py-[3px] font-mono text-[8.5px] font-bold transition-all duration-300",
               li === i
-                ? "bg-primary text-white shadow-[0_4px_10px_-4px_color-mix(in_oklch,var(--primary)_70%,transparent)]"
+                ? "bg-primary text-white"
                 : "bg-black/[0.05] text-muted-foreground/70",
             )}
           >
             {l.code}
           </span>
         ))}
+      </div>
+    </div>
+  )
+}
+
+/* ---------- 04 · the booking grid ----------------------------------- */
+
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+const SLOTS = ["09:00", "11:30", "14:00"]
+/** Which cells are already taken before the agent books anything. */
+const TAKEN = new Set(["0-1", "1-0", "2-2", "3-1", "4-0", "1-2"])
+/** The cells the agent books, in order, on loop. */
+const BOOKINGS = ["2-0", "0-2", "3-2", "4-1"]
+
+function BookingScene() {
+  const reduced = useReducedMotion()
+  const [step, setStep] = useState(reduced ? BOOKINGS.length : 0)
+
+  useEffect(() => {
+    if (reduced) return
+    const id = setInterval(() => setStep((s) => (s >= BOOKINGS.length ? 0 : s + 1)), 1300)
+    return () => clearInterval(id)
+  }, [reduced])
+
+  const justBooked = step > 0 ? BOOKINGS[step - 1] : null
+  const [bd, bs] = justBooked ? justBooked.split("-").map(Number) : [0, 0]
+
+  return (
+    <div className="relative flex h-[136px] flex-col justify-center gap-2">
+      <div className="flex items-center justify-between">
+        <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">This week</p>
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 ring-1 ring-primary/15">
+          <CalendarCheck className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
+          <span className="font-mono text-[8.5px] font-semibold uppercase tracking-wider text-primary">
+            {step} booked
+          </span>
+        </span>
+      </div>
+
+      {/* day columns × time rows */}
+      <div className="flex gap-1.5">
+        {DAYS.map((d, di) => (
+          <div key={d} className="flex min-w-0 flex-1 flex-col gap-1">
+            <span className="text-center text-[7.5px] font-medium uppercase tracking-wider text-muted-foreground/70">
+              {d}
+            </span>
+            {SLOTS.map((_, si) => {
+              const id = `${di}-${si}`
+              const taken = TAKEN.has(id)
+              const bookedIdx = BOOKINGS.indexOf(id)
+              const booked = bookedIdx > -1 && bookedIdx < step
+              const isNew = id === justBooked
+              return (
+                <motion.span
+                  key={id}
+                  animate={isNew ? { scale: [1, 1.18, 1] } : { scale: 1 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className={cn(
+                    "flex h-4 items-center justify-center rounded-[4px] transition-colors duration-500",
+                    booked
+                      ? "bg-primary"
+                      : taken
+                        ? "bg-foreground/15"
+                        : "bg-black/[0.045] ring-1 ring-black/[0.04]",
+                  )}
+                >
+                  {booked && <Check className="h-2 w-2 text-white" strokeWidth={4} aria-hidden="true" />}
+                </motion.span>
+              )
+            })}
+          </div>
+        ))}
+      </div>
+
+      {/* confirmation line */}
+      <div className="h-[24px] overflow-hidden rounded-lg bg-black/[0.03] ring-1 ring-black/[0.05]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            initial={{ y: 12, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -12, opacity: 0 }}
+            transition={{ duration: 0.26, ease: "easeOut" }}
+            className="flex h-full items-center gap-1.5 px-2.5"
+          >
+            <span className="h-1 w-1 shrink-0 rounded-full bg-primary" />
+            <span className="truncate text-[9.5px] text-foreground/70">
+              {justBooked ? `${DAYS[bd]} · ${SLOTS[bs]} confirmed` : "Checking availability…"}
+            </span>
+            <span className="ml-auto shrink-0 font-mono text-[8px] uppercase tracking-wide text-primary">
+              {justBooked ? "synced" : "live"}
+            </span>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
@@ -313,25 +490,29 @@ const items = [
     icon: Headset,
     tag: "Inbound",
     title: "24/7 virtual front desk",
-    description:
-      "An always-on receptionist that greets every caller, answers FAQs from your knowledge base, and escalates only when needed.",
+    description: "Greets every caller, answers from your knowledge base, escalates only when needed.",
     Scene: FrontDeskScene,
   },
   {
     icon: TrendingUp,
     tag: "Outbound",
     title: "Proactive growth",
-    description:
-      "Automate outbound lead generation, lead revival, and instant speed-to-lead callbacks — from one dashboard.",
+    description: "Lead generation, lead revival, and instant speed-to-lead callbacks — one dashboard.",
     Scene: GrowthScene,
   },
   {
     icon: Languages,
     tag: "Global",
     title: "Multilingual fluency",
-    description:
-      "Auto-detects the caller's language and switches mid-conversation for a true local feel — no extra setup required.",
+    description: "Detects the caller's language and switches mid-conversation. No extra setup.",
     Scene: MultilingualScene,
+  },
+  {
+    icon: CalendarCheck,
+    tag: "Scheduling",
+    title: "Books your calendar",
+    description: "Checks real availability, offers open slots, writes the booking straight back.",
+    Scene: BookingScene,
   },
 ]
 
@@ -365,29 +546,26 @@ export function UseCases() {
           </p>
         </ScrollReveal>
 
-        <StaggerGroup className="mt-12 grid items-stretch gap-6 md:grid-cols-3">
+        {/* one row of four 3D cards (stacks 1 → 2 → 4 as space allows) */}
+        <StaggerGroup className="mt-12 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, i) => {
             const Icon = item.icon
             const Scene = item.Scene
             return (
               <StaggerItem key={item.title} className="h-full">
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 280, damping: 22 }}
-                  className="usecase-card card-glow group relative flex h-full flex-col overflow-hidden rounded-2xl p-5 sm:p-6"
-                >
+                <TiltCard>
                   {/* header */}
-                  <div className="relative flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
-                      <Icon className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                      <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
                     </span>
-                    <span className="rounded-full border border-border/60 bg-white/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground backdrop-blur-sm">
+                    <span className="rounded-full border border-border/60 bg-white/70 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
                       {item.tag}
                     </span>
                   </div>
 
                   {/* live scene */}
-                  <div className="relative mt-5 overflow-hidden rounded-xl border border-black/[0.06] bg-white px-4 py-2 shadow-[0_14px_30px_-22px_rgba(0,0,0,0.4)] transition-shadow duration-500 group-hover:shadow-[0_20px_38px_-20px_color-mix(in_oklch,var(--primary)_38%,transparent)]">
+                  <div className="relative mt-4 overflow-hidden rounded-xl border border-black/[0.06] bg-white px-3 py-1.5 transition-colors duration-500 group-hover:border-primary/25">
                     <div
                       aria-hidden
                       className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_62%)]"
@@ -398,14 +576,16 @@ export function UseCases() {
                   </div>
 
                   {/* copy */}
-                  <p className="relative mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
-                    / 0{i + 1}
-                  </p>
-                  <h3 className="relative mt-2 text-lg font-semibold tracking-tight transition-colors group-hover:text-primary">
-                    {item.title}
-                  </h3>
-                  <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                </motion.div>
+                  <div className="mt-auto pt-4">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary">/ 0{i + 1}</p>
+                    <h3 className="mt-1.5 text-pretty text-[15px] font-semibold leading-tight tracking-tight transition-colors group-hover:text-primary">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 text-pretty text-[11.5px] leading-snug text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                </TiltCard>
               </StaggerItem>
             )
           })}
