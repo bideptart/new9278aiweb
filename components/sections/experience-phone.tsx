@@ -15,21 +15,19 @@
  */
 
 import type React from "react"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
-  Bot,
   Brain,
   CalendarCheck,
   CheckCircle2,
   Database,
   Gauge,
   Globe2,
-  Mic,
   PhoneCall,
+  Radar,
   Sparkles,
   TrendingUp,
   Volume2,
-  Waves,
   Zap,
 } from "lucide-react"
 import {
@@ -47,27 +45,6 @@ import { cn } from "@/lib/utils"
 /* ------------------------------------------------------------------ */
 /* shared primitives                                                    */
 /* ------------------------------------------------------------------ */
-
-function Equalizer({ bars = 26, tone = "primary" }: { bars?: number; tone?: "primary" | "white" }) {
-  const seeds = useMemo(
-    () => Array.from({ length: bars }, (_, i) => ({ d: (i % 7) * 0.11, s: 0.32 + ((i * 37) % 60) / 100 })),
-    [bars],
-  )
-  return (
-    <div className="flex h-full w-full items-center justify-between gap-[2px]">
-      {seeds.map((b, i) => (
-        <span
-          key={i}
-          className={cn(
-            "voice-bar w-full min-w-[2px] rounded-full",
-            tone === "white" ? "bg-white/85" : "bg-gradient-to-t from-primary/40 to-primary",
-          )}
-          style={{ height: `${b.s * 100}%`, animationDelay: `${b.d}s` }}
-        />
-      ))}
-    </div>
-  )
-}
 
 function LiveDot({ className }: { className?: string }) {
   return (
@@ -153,32 +130,32 @@ function FloatPanel({
 }
 
 /* ------------------------------------------------------------------ */
-/* card 1 — live call                                                   */
+/* card 1 — call radar (replaces the earlier "live call" avatar mock —   */
+/* that exact call-in-progress visual is already used twice elsewhere,  */
+/* in the hero phone. This one shows the fleet-wide view instead.)      */
 /* ------------------------------------------------------------------ */
 
-function LiveCallCard() {
+// Fixed polar positions (angle, distance-from-center) converted to
+// percentages up front — deterministic, so no server/client mismatch.
+const RADAR_BLIPS = [
+  { angle: 18, dist: 0.82, delay: 0 },
+  { angle: 95, dist: 0.5, delay: 0.5 },
+  { angle: 150, dist: 0.78, delay: 1 },
+  { angle: 205, dist: 0.42, delay: 1.5 },
+  { angle: 268, dist: 0.68, delay: 0.25 },
+  { angle: 330, dist: 0.88, delay: 0.9 },
+].map((b) => {
+  const rad = (b.angle * Math.PI) / 180
+  return {
+    left: `${50 + Math.cos(rad) * b.dist * 50}%`,
+    top: `${50 + Math.sin(rad) * b.dist * 50}%`,
+    delay: b.delay,
+  }
+})
+
+function RadarCard() {
   const reduced = useReducedMotion()
-  const [secs, setSecs] = useState(42)
-  const [state, setState] = useState<"listening" | "thinking" | "speaking">("listening")
-
-  useEffect(() => {
-    if (reduced) return
-    const id = setInterval(() => setSecs((s) => s + 1), 1000)
-    return () => clearInterval(id)
-  }, [reduced])
-
-  useEffect(() => {
-    const cycle: Array<typeof state> = ["listening", "thinking", "speaking"]
-    let i = 0
-    const id = setInterval(() => {
-      i = (i + 1) % cycle.length
-      setState(cycle[i])
-    }, 1600)
-    return () => clearInterval(id)
-  }, [])
-
-  const mm = String(Math.floor(secs / 60)).padStart(2, "0")
-  const ss = String(secs % 60).padStart(2, "0")
+  const calls = useCountUp(14)
 
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white px-4 pb-4 pt-3.5 backdrop-blur-2xl">
@@ -190,73 +167,60 @@ function LiveCallCard() {
 
       <motion.div {...row(0)} className="relative flex items-center justify-between">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.14em] text-primary">
-          <LiveDot /> Live call
+          <LiveDot /> Call radar
         </span>
-        <span className="font-mono text-[11px] text-neutral-500">
-          {mm}:{ss}
+        <span className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-emerald-500">
+          <Radar className="h-3 w-3" /> Scanning
         </span>
       </motion.div>
 
-      {/* customer + AI avatars facing off */}
-      <motion.div {...row(1)} className="relative mt-3 flex items-center justify-center gap-4">
-        <div className="flex flex-col items-center gap-1.5">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-600 ring-1 ring-neutral-200">
-            SM
-          </span>
-          <span className="text-[8.5px] uppercase tracking-[0.14em] text-neutral-400">Customer</span>
+      {/* radar face */}
+      <motion.div {...row(1)} className="relative mx-auto mt-3 h-[128px] w-[128px] shrink-0">
+        {[0, 22, 44].map((inset) => (
+          <span key={inset} className="absolute rounded-full border border-primary/15" style={{ inset }} />
+        ))}
+
+        <div className="absolute inset-0 overflow-hidden rounded-full">
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "conic-gradient(from 0deg, color-mix(in oklch, var(--primary) 50%, transparent), transparent 30%)",
+            }}
+            animate={reduced ? undefined : { rotate: 360 }}
+            transition={{ duration: 3.5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+          />
         </div>
 
-        <div className="relative h-14 w-14 shrink-0">
-          <motion.span
-            className="absolute inset-0 rounded-full bg-primary/45 blur-lg"
-            animate={reduced ? undefined : { scale: [1, 1.25, 1], opacity: [0.5, 0.9, 0.5] }}
-            transition={{ duration: 2.4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          />
+        {RADAR_BLIPS.map((b, i) => (
           <span
-            className="absolute inset-[10%] rounded-full"
-            style={{ backgroundImage: "radial-gradient(circle at 34% 28%, #fff, var(--primary) 65%)" }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Bot className="h-5 w-5 text-white" strokeWidth={2} />
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center gap-1.5">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/20">
-            <Sparkles className="h-4 w-4 text-primary" />
-          </span>
-          <span className="text-[8.5px] uppercase tracking-[0.14em] text-neutral-400">AI Agent</span>
-        </div>
-      </motion.div>
-
-      {/* status pill */}
-      <motion.div {...row(2)} className="relative mt-3 flex justify-center">
-        <AnimatePresence mode="wait">
-          <motion.span
-            key={state}
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.2 }}
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold text-primary"
+            key={i}
+            className="absolute h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
+            style={{ left: b.left, top: b.top }}
           >
-            {state === "listening" && <Mic className="h-3 w-3" />}
-            {state === "thinking" && <Brain className="h-3 w-3" />}
-            {state === "speaking" && <Volume2 className="h-3 w-3" />}
-            {state === "listening" ? "Listening…" : state === "thinking" ? "Thinking…" : "AI Speaking"}
-          </motion.span>
-        </AnimatePresence>
+            {!reduced && (
+              <motion.span
+                className="absolute inset-0 rounded-full bg-primary"
+                animate={{ scale: [1, 2.8], opacity: [0.6, 0] }}
+                transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY, delay: b.delay, ease: "easeOut" }}
+              />
+            )}
+          </span>
+        ))}
+
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="h-2 w-2 rounded-full bg-primary ring-[5px] ring-primary/15" />
+        </div>
       </motion.div>
 
-      {/* waveform */}
-      <motion.div {...row(3)} className="relative mt-3 h-14 flex-1">
-        <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-neutral-100" />
-        <Equalizer bars={34} tone="primary" />
+      <motion.div {...row(2)} className="relative mt-3 flex items-baseline justify-center gap-1.5">
+        <span className="font-mono text-[26px] font-bold leading-none tabular-nums text-neutral-900">{calls}</span>
+        <span className="text-[10.5px] text-neutral-400">live calls right now</span>
       </motion.div>
 
-      <motion.div {...row(4)} className="relative mt-2 flex items-center justify-between text-[9.5px] text-neutral-400">
+      <motion.div {...row(3)} className="relative mt-auto flex items-center justify-between text-[9.5px] text-neutral-400">
         <span className="inline-flex items-center gap-1">
-          <Waves className="h-2.5 w-2.5 text-primary" /> Human voice
+          <Globe2 className="h-2.5 w-2.5 text-primary" /> 60+ countries
         </span>
         <span className="font-mono tabular-nums">Sub-100ms</span>
       </motion.div>
@@ -668,7 +632,7 @@ export function ExperienceMockup() {
         nx.set(0)
         ny.set(0)
       }}
-      className="relative mx-auto flex min-h-[420px] w-full max-w-[460px] items-center justify-center py-6 xl:min-h-[500px]"
+      className="relative mx-auto flex min-h-[420px] w-full max-w-[500px] items-center justify-center py-6 xl:min-h-[540px]"
       style={{ perspective: "1600px" }}
     >
       <StageBackdrop />
@@ -694,9 +658,9 @@ export function ExperienceMockup() {
           mixing a Tailwind transform utility onto a Framer-controlled element
           silently drops one of the two. Only shrinks at xl+, where the full
           multi-panel cluster (vs. just the mobile single card) is shown. */}
-      <div className="origin-center xl:scale-75">
+      <div className="relative h-[420px] w-full max-w-[300px] origin-center xl:h-[620px] xl:w-[600px] xl:max-w-none xl:scale-[0.82]">
         <motion.div
-          className="relative h-[420px] w-full max-w-[300px] xl:h-[620px] xl:w-[600px] xl:max-w-none"
+          className="relative h-full w-full"
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         >
         <ConnectorLines />
@@ -713,7 +677,7 @@ export function ExperienceMockup() {
           px={sx}
           py={sy}
         >
-          <LiveCallCard />
+          <RadarCard />
         </FloatPanel>
 
         {/* live transcript — top-left */}

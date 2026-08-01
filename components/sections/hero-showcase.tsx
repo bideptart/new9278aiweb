@@ -468,13 +468,18 @@ const SLIDES: Slide[] = [
 /* floating status chips                                                */
 /* ------------------------------------------------------------------ */
 
+// This wrapper (`relative mx-auto w-full max-w-[440px] lg:max-w-[480px]`) sits
+// inside a wider grid column, so there's slack outside the card itself for
+// these to float in — offsets below are sized to clear the card almost
+// entirely (only a sliver behind it) using that slack, without reaching far
+// enough to hit the copy in the neighboring column.
 const CHIPS = [
-  { icon: Gauge, label: "Sub-300ms response", pos: "-left-4 top-[14%]", depth: 1.5, delay: 0 },
-  { icon: ShieldCheck, label: "Carrier-grade uptime", pos: "-right-5 top-[6%]", depth: 2.2, delay: 0.6 },
-  { icon: Languages, label: "Multilingual", pos: "-right-8 top-[46%]", depth: 1.1, delay: 1.2 },
-  { icon: Globe2, label: "60+ countries", pos: "-left-8 top-[62%]", depth: 2.6, delay: 0.3 },
-  { icon: CalendarCheck, label: "Calendar booking", pos: "-right-2 bottom-[8%]", depth: 1.8, delay: 0.9 },
-  { icon: Database, label: "CRM connected", pos: "-left-2 bottom-[4%]", depth: 1.3, delay: 1.5 },
+  { icon: Gauge, label: "Sub-300ms response", pos: "-left-10 top-[14%]", depth: 1.5, delay: 0 },
+  { icon: ShieldCheck, label: "Carrier-grade uptime", pos: "-right-12 top-[6%]", depth: 2.2, delay: 0.6 },
+  { icon: Languages, label: "Multilingual", pos: "-right-14 top-[46%]", depth: 1.1, delay: 1.2 },
+  { icon: Globe2, label: "60+ countries", pos: "-left-14 top-[62%]", depth: 2.6, delay: 0.3 },
+  { icon: CalendarCheck, label: "Calendar booking", pos: "-right-10 bottom-[8%]", depth: 1.8, delay: 0.9 },
+  { icon: Database, label: "CRM connected", pos: "-left-10 bottom-[4%]", depth: 1.3, delay: 1.5 },
 ]
 
 function FloatingChip({
@@ -494,7 +499,7 @@ function FloatingChip({
 
   return (
     <motion.div
-      className={`pointer-events-none absolute z-0 hidden xl:block ${chip.pos}`}
+      className={`pointer-events-none absolute z-20 hidden xl:block ${chip.pos}`}
       style={reduced ? undefined : { x, y }}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -617,8 +622,12 @@ export function HeroShowcase() {
             </span>
           </div>
 
-          {/* stage — fixed height so slide swaps never shift layout */}
-          <div className="relative h-[300px] px-4 py-3.5 sm:h-[320px]">
+          {/* stage — fixed height so slide swaps never shift layout.
+              `overflow-hidden` is load-bearing: without it, a slide whose
+              content runs slightly tall (e.g. CallSummary's CRM/slot pills)
+              bleeds past this box and gets half-buried under the progress
+              rail below instead of just being clipped cleanly. */}
+          <div className="relative h-[320px] overflow-hidden px-4 py-3.5 sm:h-[340px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={SLIDES[index].id}
