@@ -35,6 +35,8 @@ import { HomeServicesHero } from "@/components/industries/home-services-hero"
 import { HomeServicesDispatchMatrix } from "@/components/industries/home-services-dispatch-matrix"
 import { HomeServicesDispatchSimulator } from "@/components/industries/home-services-dispatch-simulator"
 import { HomeServicesIntegrations } from "@/components/industries/home-services-integrations"
+import { RestaurantHospitalityHero } from "@/components/industries/restaurant-hospitality-hero"
+import { HealthcareHero } from "@/components/industries/healthcare-hero"
 
 export function generateStaticParams() {
   return INDUSTRIES.map((i) => ({ slug: i.slug }))
@@ -97,6 +99,10 @@ export default async function IndustryPage({
         <FinanceHero />
       ) : industry.slug === "home-services" ? (
         <HomeServicesHero />
+      ) : industry.slug === "restaurants" ? (
+        <RestaurantHospitalityHero />
+      ) : industry.slug === "healthcare" || industry.slug === "dental" ? (
+        <HealthcareHero />
       ) : (
         <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
           {/* Ambient Lighting Background */}

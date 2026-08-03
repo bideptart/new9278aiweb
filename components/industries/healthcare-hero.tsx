@@ -4,31 +4,28 @@ import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
 import {
-  DollarSign,
-  ShieldCheck,
   ArrowRight,
-  Zap,
-  PhoneCall,
-  CheckCircle2,
-  CreditCard,
-  Building2,
-  Lock,
   Sparkles,
-  Activity,
-  Fingerprint,
-  Check,
-  Clock,
+  ShieldCheck,
+  HeartPulse,
+  Mic,
+  Calendar,
+  UserCheck,
+  CheckCircle2,
   Play,
   Pause,
+  Clock,
+  User,
+  Activity,
+  Zap,
   Volume2,
-  Mic,
-  Star,
-  Coins,
+  Check,
+  Stethoscope,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export function FinanceHero() {
+export function HealthcareHero() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [activeStage, setActiveStage] = useState(0)
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
@@ -37,32 +34,32 @@ export function FinanceHero() {
 
   const stages = [
     {
-      topBadge: { label: "Loan Application Approved", icon: Check },
-      leftBadge: { label: "Instant Credit Line for SAVE10 Account", icon: CreditCard },
-      rightBadge: { label: "Secured Transactions with multi-layer UPI", icon: ShieldCheck },
-      bottomBadge: { label: "+45% Approval Rate", icon: Sparkles },
-      dialogue: "“Welcome to Apex Banking! Your ₹15 Lakh home loan pre-approval is verified with an instant credit line!”",
+      topBadge: { label: "Insurance Pre-Authorization Verified", icon: ShieldCheck },
+      leftBadge: { label: "Patient Profile Tagged", icon: User },
+      rightBadge: { label: "₹5 Lakh Budget Approved", icon: CheckCircle2 },
+      bottomBadge: { label: "Treatment Completion Score 98/100", icon: Sparkles },
+      dialogue: "“Welcome to Sunrise Health! I&apos;ve pre-authorized your insurance coverage and verified Dr. Sharma&apos;s availability for Thursday at 9:00 AM.”",
     },
     {
-      topBadge: { label: "Biometric Voice Match 99.8%", icon: Fingerprint },
-      leftBadge: { label: "FATCA & PAN Portal Synced", icon: CheckCircle2 },
-      rightBadge: { label: "PCI-DSS 4.0 Vault Unlocked", icon: Lock },
-      bottomBadge: { label: "Sub-240ms Verification", icon: Zap },
-      dialogue: "“Voice biometric identity matched with 99.8% confidence. Your high-yield wealth account is now unlocked.”",
+      topBadge: { label: "HIPAA & DISHA Compliant", icon: ShieldCheck },
+      leftBadge: { label: "EHR System Synced", icon: Check },
+      rightBadge: { label: "Specialist Locked", icon: Calendar },
+      bottomBadge: { label: "No-Show Protection Active", icon: Clock },
+      dialogue: "“I have scheduled your dental implant consultation for Friday at 11:30 AM and dispatched pre-procedure instructions to your WhatsApp.”",
     },
     {
-      topBadge: { label: "24/7 SWIFT Wire Sentinel", icon: ShieldCheck },
-      leftBadge: { label: "Suspicious Wire Flagged", icon: Lock },
-      rightBadge: { label: "Voice OTP 2-Factor Passed", icon: CheckCircle2 },
-      bottomBadge: { label: "Zero Fraud Liability", icon: Sparkles },
-      dialogue: "“Security Alert: We detected a foreign wire attempt. I&apos;ve verified your identity via Voice OTP and secured your vault.”",
+      topBadge: { label: "Prescription Reminder Set", icon: Clock },
+      leftBadge: { label: "Lab Reports Uploaded", icon: Activity },
+      rightBadge: { label: "Follow-Up Visit Confirmed", icon: Calendar },
+      bottomBadge: { label: "24/7 Care Triage Ready", icon: HeartPulse },
+      dialogue: "“Checking in on your post-op recovery! Our AI clinical assistant is logging your symptom updates for the attending doctor.”",
     },
     {
-      topBadge: { label: "Pre-Approved ₹5 Lakh Credit", icon: Coins },
-      leftBadge: { label: "Zero Preclosure Penalty", icon: Check },
-      rightBadge: { label: "Instant Disbursal in 60s", icon: Zap },
-      bottomBadge: { label: "CIBIL Score 785+ Verified", icon: CheckCircle2 },
-      dialogue: "“You qualify for an instant pre-approved credit line upgrade of ₹5 Lakh at a 6.2% fixed interest rate!”",
+      topBadge: { label: "Sub-3s Voice Latency", icon: Zap },
+      leftBadge: { label: "24/7 On-Call Referral", icon: Stethoscope },
+      rightBadge: { label: "Instant Hospital Relay", icon: Activity },
+      bottomBadge: { label: "Emergency Triage Verified", icon: Sparkles },
+      dialogue: "“Emergency triage activated. Connecting your call to our on-call medical specialist and emergency team right now.”",
     },
   ]
 
@@ -175,42 +172,42 @@ export function FinanceHero() {
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-foreground font-normal">Finance & Banking</li>
+              <li className="text-foreground font-normal">Healthcare & Dental</li>
             </ol>
           </nav>
 
           <div className="flex flex-wrap items-center gap-3">
             <span className="ai-pill-magenta inline-flex items-center gap-2 text-[11px] font-normal tracking-wider shadow-xs">
               <Sparkles className="size-3.5 text-primary animate-pulse" />
-              <span>PCI-DSS 4.0 BANK-GRADE VOICE AI ENGINE</span>
+              <span>HIPAA & DISHA COMPLIANT CLINICAL VOICE AI</span>
             </span>
           </div>
 
           <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
-            Autonomous AI voice agents <br />
+            AI voice agents for <br />
             <span className="italic text-primary">
-              for banks & financial institutions.
+              healthcare & dental clinics.
             </span>
           </h1>
 
           <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg font-normal">
-            Automate voice biometric KYC verification, pre-approved loan underwriting, and 24/7 SWIFT wire fraud sentinel calls with sub-240ms latency and 99.8% identity precision.
+            Never miss an urgent patient intake call or appointment inquiry. 9278.ai picks up every call in under 3 seconds — verifies insurance pre-authorization, qualifies symptom urgency, books appointments directly into Practo & EHR systems, and dispatches SMS/WhatsApp pre-op instructions.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
-              <Fingerprint className="size-3.5 text-primary" />
-              Voice Biometric KYC
-            </span>
-
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
-              <Building2 className="size-3.5 text-primary" />
-              Core Banking Synced
-            </span>
-
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
               <ShieldCheck className="size-3.5 text-primary" />
-              PCI-DSS 4.0 Vault Shield
+              Insurance Pre-Auth
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <UserCheck className="size-3.5 text-primary" />
+              EHR & Practo Synced
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <HeartPulse className="size-3.5 text-primary" />
+              24/7 Clinical Triage
             </span>
           </div>
 
@@ -220,7 +217,7 @@ export function FinanceHero() {
               size="lg"
               className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
             >
-              <Link href="/get-started?industry=finance">
+              <Link href="/get-started?industry=healthcare">
                 Get Started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -238,7 +235,7 @@ export function FinanceHero() {
           </div>
         </div>
 
-        {/* Right Column: 3D FINANCE & BANKING BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
+        {/* Right Column: 3D HEALTHCARE & DENTAL BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
         <div className="lg:col-span-6 flex justify-center perspective-[1200px] pt-6 lg:pt-0">
           <div
             className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[520px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
@@ -250,7 +247,7 @@ export function FinanceHero() {
             {/* Ambient Red Glow Halo Base */}
             <div className="absolute bottom-10 size-72 md:size-80 rounded-full bg-gradient-to-tr from-primary/30 via-rose-500/20 to-primary/10 blur-2xl opacity-75" />
 
-            {/* 3D FINANCE & BANKING BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
+            {/* 3D HEALTHCARE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
             <div 
               className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(244,91,91,0.22)] cursor-pointer"
             >
@@ -290,77 +287,65 @@ export function FinanceHero() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D BANK VAULT & CORE MATRIX GRAPHIC */}
+              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D HOSPITAL GRAPHIC */}
               <div className="relative w-full h-[68%] flex flex-col items-center justify-center mt-2 [transform-style:preserve-3d]">
                 {/* 3D Glowing Pulsing Concentric Outer Ring Halos (translateZ: 30px) */}
                 <div className="absolute size-56 sm:size-64 rounded-full border-4 border-white/90 border-b-transparent shadow-[0_0_25px_rgba(255,255,255,0.8)] pointer-events-none -top-2 animate-pulse [transform:translateZ(30px)]" />
                 <div className="absolute size-52 sm:size-60 rounded-full border-2 border-dashed border-white/80 border-b-transparent pointer-events-none top-0 animate-spin [animation-duration:20s] [transform:translateZ(40px)]" />
 
-                {/* Floating 3D Orbiting Finance Badges */}
+                {/* Floating 3D Orbiting Medical Badges */}
                 <div className="absolute top-2 left-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3s] [transform:translateZ(55px)]">
-                  <Lock className="size-3.5" />
+                  <Stethoscope className="size-3.5" />
                 </div>
 
                 <div className="absolute top-4 right-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3.5s] [transform:translateZ(55px)]">
-                  <Star className="size-3.5 fill-primary text-primary" />
+                  <HeartPulse className="size-3.5" />
                 </div>
 
-                {/* Layered 3D Isometric Bank Vault, Currency Stacks & Core Database Graphic (Matching Uploaded Image - translateZ: 50px) */}
+                {/* Layered 3D Isometric Healthcare & Dental Hospital Graphic (translateZ: 50px) */}
                 <div className="relative z-10 flex flex-col items-center justify-center mt-4 [transform:translateZ(50px)]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-rose-400/20 blur-xl rounded-full" />
-                  <svg className="w-44 h-36 drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 220 170">
-                    {/* Isometric Floor Grid Base */}
-                    <polygon points="110,150 190,110 110,70 30,110" fill="#fecaca" opacity="0.6" />
+                  <svg className="w-40 h-32 drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 200 160">
+                    {/* Isometric Hospital Base Platform */}
+                    <polygon points="100,140 170,105 100,70 30,105" fill="#fecaca" opacity="0.6" />
 
-                    {/* Left 3D Bank Vault Door Building */}
-                    <polygon points="35,90 75,70 75,120 35,140" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
-                    <polygon points="75,70 105,85 105,135 75,120" fill="#fee2e2" stroke="#f45b5b" strokeWidth="2" />
-                    <polygon points="35,90 75,70 105,85 65,105" fill="#f45b5b" />
-                    {/* Vault Wheel Handle */}
-                    <circle cx="70" cy="105" r="10" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
-                    <circle cx="70" cy="105" r="4" fill="#f45b5b" />
-                    <path d="M 70,91 V 119 M 56,105 H 84" stroke="#f45b5b" strokeWidth="2" />
+                    {/* Left Clinical Wing (Suburban Clinic) */}
+                    <polygon points="35,95 75,75 75,110 35,130" fill="#ffffff" />
+                    <polygon points="75,75 95,85 95,120 75,110" fill="#fee2e2" />
+                    <polygon points="35,95 75,75 95,85 55,105" fill="#f45b5b" opacity="0.85" />
+                    {/* Dental Tooth Logo on Left Wing */}
+                    <path d="M 52,90 Q 55,83 58,90 Q 61,97 58,100 Q 55,96 52,90 Z" fill="#ffffff" />
 
-                    {/* Center Currency Cash Bundles (Stacked Rupee/Dollar Cash Notes) */}
-                    <g transform="translate(85, 100)">
-                      {/* Cash Note Layer 1 */}
-                      <polygon points="0,15 25,2 55,17 30,30" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="30,30 55,17 55,22 30,35" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      {/* Cash Note Layer 2 */}
-                      <polygon points="0,10 25,-3 55,12 30,25" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="30,25 55,12 55,17 30,30" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      {/* Currency Band Ribbon */}
-                      <rect x="22" y="5" width="8" height="20" fill="#f45b5b" />
-                    </g>
+                    {/* Central Hospital Main Tower */}
+                    <polygon points="75,55 125,30 125,85 75,110" fill="#ffffff" />
+                    <polygon points="125,30 155,45 155,100 125,85" fill="#fee2e2" />
+                    <polygon points="75,55 125,30 155,45 105,70" fill="#f45b5b" />
 
-                    {/* Right Bank Database Core Servers */}
-                    <g transform="translate(130, 65)">
-                      {/* Server Unit 1 */}
-                      <polygon points="0,20 30,5 55,17 25,32" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="25,32 55,17 55,27 25,42" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="0,20 25,32 25,42 0,30" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <circle cx="10" cy="27" r="1.5" fill="#ef4444" />
-                      <circle cx="16" cy="24" r="1.5" fill="#10b981" />
+                    {/* Red Cross Emblem Box on Top of Main Hospital Tower */}
+                    <rect x="95" y="22" width="16" height="16" rx="3" fill="#ef4444" />
+                    <path d="M 101,25 H 105 V 35 H 101 Z M 97,29 H 109 V 33 H 97 Z" fill="#ffffff" />
 
-                      {/* Server Unit 2 */}
-                      <polygon points="0,40 30,25 55,37 25,52" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="25,52 55,37 55,47 25,62" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="0,40 25,52 25,62 0,50" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <circle cx="10" cy="47" r="1.5" fill="#ef4444" />
-                      <circle cx="16" cy="44" r="1.5" fill="#10b981" />
+                    {/* Windows Grid on Main Hospital */}
+                    <rect x="85" y="65" width="8" height="8" rx="1" fill="#f45b5b" opacity="0.7" />
+                    <rect x="100" y="58" width="8" height="8" rx="1" fill="#f45b5b" opacity="0.7" />
+                    <rect x="85" y="80" width="8" height="8" rx="1" fill="#f45b5b" opacity="0.7" />
+                    <rect x="100" y="72" width="8" height="8" rx="1" fill="#f45b5b" opacity="0.7" />
 
-                      {/* Encrypted Circuit Connection Line */}
-                      <path d="M -15,50 C 0,55 10,65 25,65" stroke="#f45b5b" strokeWidth="2" fill="none" strokeDasharray="3 3" />
-                      <circle cx="25" cy="65" r="3" fill="#f45b5b" />
-                    </g>
+                    {/* Right Medical Wing (Caduceus Wing) */}
+                    <polygon points="115,75 155,95 155,130 115,110" fill="#ffffff" />
+                    <polygon points="155,95 175,85 175,120 155,130" fill="#fee2e2" />
+                    <polygon points="115,75 155,95 175,85 135,65" fill="#f45b5b" opacity="0.8" />
+
+                    {/* Caduceus Emblem on Right Wing */}
+                    <circle cx="140" cy="100" r="6" fill="#f45b5b" opacity="0.8" />
                   </svg>
                 </div>
               </div>
 
               {/* Typography Matching Uploaded Image */}
               <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
-                  FINANCE & BANKING
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
+                  HEALTHCARE
                 </h2>
               </div>
             </div>
@@ -377,10 +362,10 @@ export function FinanceHero() {
                     <Mic className="size-4 text-rose-600 dark:text-rose-300" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-normal text-foreground">Banking Voice Telemetry Stream</h3>
+                    <h3 className="text-xs font-normal text-foreground">Clinical Voice Telemetry Stream</h3>
                     <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 flex items-center gap-1">
                       <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
-                      CORE BANKING & SWIFT SYNCED
+                      LIVE DUAL-STREAM • HIPAA SYNCED
                     </p>
                   </div>
                 </div>
@@ -416,7 +401,7 @@ export function FinanceHero() {
 
               {/* 3D Stage Navigation Pills (Soft Light Rose - No Solid Red) */}
               <div className="mt-3 pt-2 border-t border-border/30 grid grid-cols-4 gap-1">
-                {["1. Sanction", "2. Voice KYC", "3. Wire Guard", "4. Credit Line"].map((stageLabel, idx) => (
+                {["1. Intake", "2. Booking", "3. Follow-up", "4. Triage"].map((stageLabel, idx) => (
                   <button
                     key={idx}
                     type="button"

@@ -210,7 +210,7 @@ function CapacityIllustration() {
         </div>
 
         {/* Central Glowing Phone Node */}
-        <div className="relative size-16 rounded-full bg-gradient-to-br from-primary via-primary to-rose-700 text-primary-foreground flex items-center justify-center shadow-[0_0_35px_rgba(220,38,38,0.5)] ring-8 ring-primary/20 transition-transform group-hover:scale-110">
+        <div className="relative size-16 rounded-full bg-gradient-to-br from-primary via-primary to-rose-700 text-primary-foreground flex items-center justify-center shadow-[0_0_35px_rgba(244,91,91,0.5)] ring-8 ring-primary/20 transition-transform group-hover:scale-110">
           <Phone className="size-7 animate-pulse" />
         </div>
       </div>

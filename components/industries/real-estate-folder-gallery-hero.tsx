@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
 import {
@@ -17,81 +17,211 @@ import {
   Pause,
   Clock,
   User,
-  PhoneCall,
   Activity,
   Zap,
   Volume2,
-  Radio,
-  Sliders,
   Check,
-  MapPin,
-  MessageSquare,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export function RealEstateFolderGalleryHero() {
-  const [isPlayingAudio, setIsPlayingAudio] = useState(true)
-  const [audioTimer, setAudioTimer] = useState(14)
+interface RealEstateFolderGalleryHeroProps {
+  industryName?: string
+  subtitle?: string
+  slug?: string
+}
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (isPlayingAudio) {
-      interval = setInterval(() => {
-        setAudioTimer((prev) => (prev >= 45 ? 0 : prev + 1))
-      }, 1000)
-    }
-    return () => clearInterval(interval)
-  }, [isPlayingAudio])
+const INDUSTRY_BADGE_MAP: Record<string, { title: string; subtitle: string }> = {
+  "real-estate": { title: "REAL ESTATE", subtitle: "PREMIUM PROPERTY" },
+  "ecommerce": { title: "E-COMMERCE", subtitle: "RETAIL & CART RECOVERY" },
+  "finance": { title: "FINANCIAL SERVICES", subtitle: "BANKING & ASSET VAULT" },
+  "home-services": { title: "HOME SERVICES", subtitle: "DISPATCH & FIELD WORK" },
+  "restaurants": { title: "RESTAURANTS", subtitle: "HOSPITALITY & DINING" },
+  "healthcare": { title: "HEALTHCARE", subtitle: "MEDICAL & PATIENT CARE" },
+  "dental": { title: "DENTAL & WELLNESS", subtitle: "CLINICAL & APPOINTMENTS" },
+  "logistics": { title: "LOGISTICS & FLEET", subtitle: "DISPATCH & FREIGHT" },
+  "automotive": { title: "AUTOMOTIVE", subtitle: "DEALERSHIP & SERVICE" },
+  "legal": { title: "LEGAL PRACTICE", subtitle: "CASE & CLIENT INTAKE" },
+  "education": { title: "EDUCATION", subtitle: "ADMISSIONS & ENROLLMENT" },
+}
 
-  const voiceLines = [
-    { speaker: "Agent", text: "“Hi! Thanks for calling Greenfield Realty. I saw you enquired about the 2BHK in Kothrud — are you working with an agent yet?”" },
-    { speaker: "Caller", text: "“Not yet. Is your home loan pre-approved or can I get a walkthrough this Saturday?”" },
-    { speaker: "Agent", text: "“I can lock in Saturday at 11:00 AM for your site visit and send the WhatsApp floor plan PDF right now!”" },
+export function RealEstateFolderGalleryHero({
+  industryName,
+  subtitle,
+  slug = "real-estate",
+}: RealEstateFolderGalleryHeroProps) {
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const [activeStage, setActiveStage] = useState(0)
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const heroRef = useRef<HTMLDivElement | null>(null)
+
+  // Resolve dynamic industry badge title and subtitle
+  const badgeInfo = INDUSTRY_BADGE_MAP[slug] || {
+    title: industryName?.toUpperCase() || "REAL ESTATE",
+    subtitle: subtitle?.toUpperCase() || "PREMIUM PROPERTY",
+  }
+
+  const badgeTitle = industryName ? industryName.toUpperCase() : badgeInfo.title
+  const badgeSubtitle = subtitle ? subtitle.toUpperCase() : badgeInfo.subtitle
+
+  const stages = [
+    {
+      topBadge: { label: "Loan Pre-Approval Verified", icon: ShieldCheck },
+      rightBadge: { label: "₹1.5 Cr Budget Approved", icon: CheckCircle2 },
+      leftBadge: { label: "Self-Use Lead Tagged", icon: User },
+      bottomBadge: { label: "High Intent Score 98/100", icon: Sparkles },
+      dialogue: "“I&apos;ve verified your pre-approved home loan status and matched your ₹1.5 Cr budget requirement!”",
+    },
+    {
+      topBadge: { label: "Sub-3s Answer Speed", icon: Zap },
+      rightBadge: { label: "Housing.com Lead Intake", icon: Home },
+      leftBadge: { label: "Hindi & English AI Host", icon: Mic },
+      bottomBadge: { label: "Buyer Qualification", icon: UserCheck },
+      dialogue: "“Hi Rahul! Thanks for enquiring on Housing.com about Kothrud Heights — are you looking for a 2BHK or 3BHK layout?”",
+    },
+    {
+      topBadge: { label: "Saturday 11 AM Locked", icon: Calendar },
+      rightBadge: { label: "Google Calendar Synced", icon: Check },
+      leftBadge: { label: "Broker Handoff Complete", icon: UserCheck },
+      bottomBadge: { label: "SMS Confirmation Sent", icon: Clock },
+      dialogue: "“I have locked Saturday at 11:00 AM for your VIP site walkthrough directly on our senior broker&apos;s calendar!”",
+    },
+    {
+      topBadge: { label: "WhatsApp Floor Plan Sent", icon: CheckCircle2 },
+      rightBadge: { label: "Google Maps Pin Relayed", icon: Building2 },
+      leftBadge: { label: "PDF Brochure Attached", icon: Volume2 },
+      bottomBadge: { label: "Sub-250ms Latency", icon: Activity },
+      dialogue: "“HD floor plans, pricing sheets & site location directions have been dispatched straight to your WhatsApp!”",
+    },
   ]
 
+  // Automatic 2.5-Second Time Lapse Shift Timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStage((prev) => (prev + 1) % stages.length)
+    }, 2500)
+
+    return () => clearInterval(timer)
+  }, [stages.length])
+
+  // CONTINUOUS 60FPS ALWAYS-WORKING 3D AUDIO SPECTRUM CANVAS
+  useEffect(() => {
+    let animationFrameId: number
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let step = 0
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const bars = 26
+      const barWidth = canvas.width / bars
+
+      const speed = isPlayingAudio ? 0.22 : 0.09
+      const maxAmp = isPlayingAudio ? canvas.height - 4 : (canvas.height - 10) * 0.65
+
+      ctx.shadowColor = "rgba(244, 91, 91, 0.45)"
+      ctx.shadowBlur = isPlayingAudio ? 12 : 5
+      ctx.shadowOffsetY = 2
+
+      const grad = ctx.createLinearGradient(0, canvas.height, 0, 0)
+      grad.addColorStop(0, "rgba(244, 91, 91, 0.3)")
+      grad.addColorStop(0.5, "rgba(244, 91, 91, 0.9)")
+      grad.addColorStop(1, "rgba(255, 140, 140, 1)")
+      ctx.fillStyle = grad
+
+      for (let i = 0; i < bars; i++) {
+        const wave = Math.sin(step * speed + i * 0.35) * 0.5 + 0.5
+        const height = Math.max(6, wave * maxAmp)
+
+        ctx.beginPath()
+        ctx.roundRect(i * barWidth + 2, (canvas.height - height) / 2, barWidth - 4, height, 4)
+        ctx.fill()
+      }
+
+      step++
+      animationFrameId = requestAnimationFrame(render)
+    }
+
+    render()
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [isPlayingAudio])
+
+  // Throttled mouse move tracker for lag-free 3D perspective tilt
+  const rafId = useRef<number | null>(null)
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroRef.current || rafId.current !== null) return
+    const clientX = e.clientX
+    const clientY = e.clientY
+    rafId.current = requestAnimationFrame(() => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect()
+        const x = ((clientX - rect.left) / rect.width) * 100
+        const y = ((clientY - rect.top) / rect.height) * 100
+        setMousePos({ x, y })
+      }
+      rafId.current = null
+    })
+  }, [])
+
+  // Smooth 3D tilt angles
+  const tiltX = (mousePos.y - 50) * -0.15
+  const tiltY = (mousePos.x - 50) * 0.15
+
+  const currentStage = stages[activeStage]
+  const TopIcon = currentStage.topBadge.icon
+  const RightIcon = currentStage.rightBadge.icon
+  const LeftIcon = currentStage.leftBadge.icon
+  const BottomIcon = currentStage.bottomBadge.icon
+
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden">
+    <section
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden border-b border-border/40"
+    >
       {/* Soft Ambient Light Glow & Subtle Red Blur Accent */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/10 to-primary/10 blur-3xl opacity-70"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-80"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Column: Headline & Value Prop */}
         <div className="lg:col-span-6 space-y-6">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400 shadow-xs">
-              <Sparkles className="size-3.5 text-rose-500 animate-pulse" />
+            <span className="ai-pill-magenta inline-flex items-center gap-2 text-[11px] font-normal tracking-wider mb-3 shadow-xs">
+              <Sparkles className="size-3.5 text-primary animate-pulse" />
               <span>NEXT-GEN REAL ESTATE VOICE ENGINE</span>
             </span>
           </div>
 
           <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
             Autonomous AI voice agents <br />
-            <span className="italic text-rose-600 dark:text-rose-400">
+            <span className="italic text-primary">
               for real estate developers.
             </span>
           </h1>
 
-          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg font-normal">
             Stop losing 60%+ of weekend portal inquiries. 9278.ai answers inbound calls in under 3 seconds across Housing.com, 99acres & MagicBricks, qualifies budget & loan pre-approval live, locks site walkthroughs on broker calendars, and dispatches WhatsApp floor plans instantly.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-1">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/60 dark:bg-rose-950/30 px-3.5 py-1.5 text-xs font-bold text-rose-700 dark:text-rose-300 backdrop-blur-md">
-              <Clock className="size-3.5 text-rose-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <Clock className="size-3.5 text-primary" />
               24/7 Portal Intake
             </span>
 
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/60 dark:bg-rose-950/30 px-3.5 py-1.5 text-xs font-bold text-rose-700 dark:text-rose-300 backdrop-blur-md">
-              <User className="size-3.5 text-rose-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <User className="size-3.5 text-primary" />
               Loan & Budget Qualify
             </span>
 
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/60 dark:bg-rose-950/30 px-3.5 py-1.5 text-xs font-bold text-rose-700 dark:text-rose-300 backdrop-blur-md">
-              <Calendar className="size-3.5 text-rose-500" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <Calendar className="size-3.5 text-primary" />
               Broker Calendar Sync
             </span>
           </div>
@@ -100,7 +230,7 @@ export function RealEstateFolderGalleryHero() {
             <Button
               asChild
               size="lg"
-              className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-bold"
+              className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
             >
               <Link href="/get-started?industry=real-estate">
                 Get Started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
@@ -110,209 +240,187 @@ export function RealEstateFolderGalleryHero() {
               asChild
               size="lg"
               variant="outline"
-              className="h-12 rounded-full border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-7 backdrop-blur-md hover:border-rose-300 dark:hover:border-rose-800 hover:bg-rose-50/40 dark:hover:bg-rose-950/20 transition-all font-semibold cursor-pointer"
+              className="h-12 rounded-full border-border/70 bg-card/50 px-7 backdrop-blur-md hover:border-primary/40 hover:bg-card/80 transition-all font-normal cursor-pointer"
             >
               <Link href="/pricing" className="flex items-center gap-2">
-                <Play className="size-3.5 fill-current text-rose-500" />
+                <Play className="size-3.5 fill-current text-primary" />
                 View Pricing
               </Link>
             </Button>
           </div>
         </div>
 
-        {/* Right Column: DEDICATED VOICE INTERACTION PANEL */}
-        <div className="lg:col-span-6 flex justify-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative mx-auto w-full max-w-[560px] aspect-square flex flex-col justify-between p-5 rounded-[2.5rem] border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl shadow-xl overflow-hidden group"
+        {/* Right Column: 3D DYNAMIC INDUSTRY PENTAGON BADGE MOCKUP */}
+        <div className="lg:col-span-6 flex justify-center perspective-[1200px] pt-6 lg:pt-0">
+          <div
+            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[520px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
+            style={{
+              transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+              transformStyle: "preserve-3d",
+            }}
           >
-            {/* Header: Dedicated Voice Interaction Status Bar */}
-            <div className="relative z-20 flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3">
-              <div className="flex items-center gap-2.5">
-                <div className="size-9 rounded-2xl bg-rose-500/15 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold shadow-xs">
-                  <Mic className="size-5 animate-pulse" />
-                </div>
-                <div>
-                  <h3 className="text-xs font-bold text-foreground">Real Estate Voice Interaction Engine</h3>
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground">
-                    <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span>Live Audio Stream • Indian Languages</span>
+            {/* 3D REAL ESTATE ARCH BADGE CARD SHAPE (MATCHING ALL OTHER 5 HERO IMAGES) */}
+            <div 
+              className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(244,91,91,0.22)] cursor-pointer"
+            >
+
+              {/* Automatic Shifting 3D Status Badges (Overlapping half inside, half outside the badge rim) */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.35 }}
+                  className="contents"
+                >
+                  {/* Top Roof Peak Badge (Half inside top peak, half outside) */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-40 rounded-full bg-card/95 border border-primary/30 px-3.5 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 whitespace-nowrap [transform:translateZ(65px)]">
+                    <TopIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.topBadge.label}</span>
                   </div>
+
+                  {/* Left Roof Edge Badge (Staggered top-20 to avoid overlap) */}
+                  <div className="absolute top-20 -left-4 sm:-left-8 max-w-[145px] sm:max-w-[175px] z-40 rounded-full bg-card/95 border border-primary/30 px-3 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 [transform:translateZ(65px)]">
+                    <LeftIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.leftBadge.label}</span>
+                  </div>
+
+                  {/* Right Roof Edge Badge (Staggered top-36 to avoid overlap) */}
+                  <div className="absolute top-36 -right-4 sm:-right-8 max-w-[145px] sm:max-w-[175px] z-40 rounded-full bg-card/95 border border-primary/30 px-3 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 [transform:translateZ(65px)]">
+                    <RightIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.rightBadge.label}</span>
+                  </div>
+
+                  {/* Bottom Wall Edge Badge (Half inside bottom wall, half outside) */}
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-40 rounded-full bg-card/95 border border-primary/30 px-3.5 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 whitespace-nowrap [transform:translateZ(65px)]">
+                    <BottomIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.bottomBadge.label}</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D REAL ESTATE SKYLINE GRAPHIC */}
+              <div className="relative w-full h-[65%] flex flex-col items-center justify-center mt-2 [transform-style:preserve-3d]">
+                {/* 3D Glowing Pulsing Concentric Outer Ring Halos (translateZ: 30px) */}
+                <div className="absolute size-56 sm:size-64 rounded-full border-4 border-white/90 border-b-transparent shadow-[0_0_25px_rgba(255,255,255,0.8)] pointer-events-none -top-2 animate-pulse [transform:translateZ(30px)]" />
+                <div className="absolute size-52 sm:size-60 rounded-full border-2 border-dashed border-white/80 border-b-transparent pointer-events-none top-0 animate-spin [animation-duration:20s] [transform:translateZ(40px)]" />
+
+                {/* Floating 3D Orbiting Real Estate Badges */}
+                <div className="absolute top-2 left-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3s] [transform:translateZ(55px)]">
+                  <Home className="size-3.5" />
+                </div>
+
+                <div className="absolute top-4 right-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3.5s] [transform:translateZ(55px)]">
+                  <Sparkles className="size-3.5" />
+                </div>
+
+                {/* Layered 3D Real Estate Skyline Vector Graphics (High-Rise Apartment & Villa Roofs - translateZ: 50px) */}
+                <div className="relative z-10 flex flex-col items-center justify-center mt-4 [transform:translateZ(50px)]">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-rose-400/20 blur-xl rounded-full" />
+                  <svg className="w-36 h-28 text-white fill-current drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 200 150">
+                    {/* High Rise Tower */}
+                    <rect x="75" y="30" width="50" height="90" rx="3" fill="#ffffff" />
+                    {/* Tower Windows */}
+                    <rect x="85" y="40" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+                    <rect x="105" y="40" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+                    <rect x="85" y="58" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+                    <rect x="105" y="58" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+                    <rect x="85" y="76" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+                    <rect x="105" y="76" width="10" height="10" fill="#f45b5b" opacity="0.6" />
+
+                    {/* Left Mid-Rise Building */}
+                    <polygon points="40,60 75,40 75,120 40,120" fill="#ffffff" opacity="0.9" />
+                    {/* Right Mid-Rise Building */}
+                    <polygon points="125,50 160,70 160,120 125,120" fill="#ffffff" opacity="0.9" />
+
+                    {/* Front Suburban Villa Roof 1 */}
+                    <polygon points="25,120 65,85 105,120" fill="#ffffff" stroke="#f45b5b" strokeWidth="3" />
+                    <rect x="55" y="98" width="12" height="12" fill="#f45b5b" rx="1" />
+
+                    {/* Front Suburban Villa Roof 2 */}
+                    <polygon points="95,120 135,75 175,120" fill="#ffffff" stroke="#f45b5b" strokeWidth="3" />
+                    <rect x="125" y="92" width="14" height="14" fill="#f45b5b" rx="1" />
+                  </svg>
                 </div>
               </div>
 
-              <span className="rounded-full bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3 py-1 text-[10px] font-mono font-bold">
-                Sub-250ms STT/TTS
-              </span>
+              {/* Dynamic Typography Matching Current Industry */}
+              <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
+                  {badgeTitle}
+                </h2>
+              </div>
             </div>
 
-            {/* Central Dedicated Voice AI Visualizer */}
-            <div className="relative z-20 my-3 flex flex-col items-center justify-center space-y-4">
-              {/* Central Glowing Soft Rose Microphone Node */}
-              <div className="relative flex items-center justify-center">
-                {/* Concentric Pulsing Aura Rings */}
-                <div className="absolute size-44 rounded-full border border-rose-200/60 dark:border-rose-900/40 bg-rose-500/5 animate-pulse" />
-                <div className="absolute size-32 rounded-full border border-dashed border-rose-300/60 dark:border-rose-800/60 animate-spin" style={{ animationDuration: "12s" }} />
+            {/* STYLISH 3D FLOATING GLASS VOICE TELEMETRY CONSOLE (LIGHT PASTEL ROSE - NO SOLID RED) */}
+            <div className="relative mt-6 w-full max-w-sm sm:max-w-md rounded-3xl border border-rose-200/60 dark:border-rose-900/50 bg-gradient-to-r from-card/95 via-rose-50/50 to-card/95 dark:from-card/95 dark:via-rose-950/30 dark:to-card/95 p-4 shadow-[0_15px_40px_rgba(244,91,91,0.12)] backdrop-blur-2xl [transform:translateZ(60px)] z-40 overflow-hidden">
+              {/* Glowing Top Edge Line */}
+              <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-rose-400/50 to-transparent" />
 
-                {/* Central Soft Rose Metallic Microphone Button */}
+              {/* Console Header Bar */}
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/40">
+                <div className="flex items-center gap-2.5">
+                  <div className="size-8 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-300 border border-rose-200/80 shadow-xs flex items-center justify-center animate-pulse">
+                    <Mic className="size-4 text-rose-600 dark:text-rose-300" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-normal text-foreground">AI Voice Telemetry Stream</h3>
+                    <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 flex items-center gap-1">
+                      <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
+                      LIVE DUAL-STREAM • 247MS
+                    </p>
+                  </div>
+                </div>
+
                 <button
                   type="button"
                   onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                  className="relative size-20 rounded-3xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border-2 border-rose-300 dark:border-rose-800 flex items-center justify-center shadow-md ring-4 ring-rose-500/10 hover:bg-rose-500/25 transition-all duration-300 hover:scale-105 cursor-pointer z-10"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/80 px-3.5 py-1 text-xs font-normal shadow-xs hover:bg-rose-100 hover:scale-105 transition-all cursor-pointer"
                 >
-                  <Mic className="size-9 animate-pulse" />
-                  <span className="absolute -bottom-1.5 -right-1.5 size-5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 flex items-center justify-center text-[9px] font-bold text-white">
-                    ✓
-                  </span>
+                  {isPlayingAudio ? <Pause className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" /> : <Play className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" />}
+                  <span>{isPlayingAudio ? "Pause" : "Play Script"}</span>
                 </button>
               </div>
 
-              {/* Dynamic Waveform Visualizer */}
-              <div className="w-full bg-white/95 dark:bg-slate-900/95 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-3 shadow-md backdrop-blur-xl space-y-2">
-                <div className="flex items-center justify-between px-1">
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400">
-                    <Activity className="size-3 text-rose-500 animate-pulse" />
-                    <span>REAL-TIME VOICE WAVEFORM</span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-muted-foreground">
-                    <span>Call Duration:</span>
-                    <span className="font-bold text-rose-600 dark:text-rose-400">00:{audioTimer < 10 ? `0${audioTimer}` : audioTimer}</span>
-                  </div>
-                </div>
-
-                {/* Animated Audio Equalizer Waveform Bars (Soft Rose Tint) */}
-                <div className="flex items-center justify-center gap-1 h-12 py-1 px-2 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
-                  {[18, 36, 24, 48, 30, 20, 42, 16, 38, 28, 44, 22, 34, 18, 40, 26, 32, 20].map((h, i) => (
-                    <span
-                      key={i}
-                      className={cn(
-                        "w-1.5 rounded-full bg-rose-400 dark:bg-rose-500 transition-all duration-300",
-                        isPlayingAudio ? "animate-pulse" : "opacity-40"
-                      )}
-                      style={{
-                        height: isPlayingAudio ? `${Math.max(8, (h * (i % 2 === 0 ? 1.15 : 0.85))).toFixed(0)}px` : "10px",
-                        animationDelay: `${i * 0.08}s`,
-                      }}
-                    />
-                  ))}
-                </div>
+              {/* 2D/3D Canvas Spectrum */}
+              <div className="h-10 w-full flex items-center justify-center my-1">
+                <canvas ref={canvasRef} width={300} height={40} className="w-full h-full drop-shadow-[0_2px_8px_rgba(244,91,91,0.3)]" />
               </div>
 
-              {/* Real Estate Voice Dialogue Output */}
-              <div className="w-full rounded-2xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/70 dark:bg-rose-950/20 p-3 shadow-sm backdrop-blur-xl">
-                <div className="flex items-center justify-between text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1 border-b border-rose-200/60 dark:border-rose-900/30 pb-1">
-                  <span>Voice AI Dialogue Stream</span>
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">Hindi / English Multi-lingual</span>
-                </div>
+              {/* Auto-Shifting Speech Dialogue Ribbon */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-2 pt-2 border-t border-border/30 text-xs text-foreground font-serif italic leading-relaxed min-h-[42px] flex items-center"
+                >
+                  {currentStage.dialogue.replace(/&apos;/g, "'")}
+                </motion.div>
+              </AnimatePresence>
 
-                <div className="space-y-1.5 pt-1 text-xs font-medium text-foreground italic leading-relaxed">
-                  <p className="text-rose-700 dark:text-rose-300 font-semibold">&ldquo;Pre-approval verified for $2.4M listing inquiry. Walkthrough scheduled for Thursday at 3 PM.&rdquo;</p>
-                </div>
+              {/* 3D Stage Navigation Pills (Soft Light Rose - No Solid Red) */}
+              <div className="mt-3 pt-2 border-t border-border/30 grid grid-cols-4 gap-1">
+                {["1. Intake", "2. Qualify", "3. Lock", "4. WhatsApp"].map((stageLabel, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveStage(idx)}
+                    className={cn(
+                      "text-[10px] font-normal py-1 px-1 rounded-lg border text-center transition-all cursor-pointer truncate",
+                      idx === activeStage
+                        ? "bg-rose-100 dark:bg-rose-900/70 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-700 font-semibold shadow-xs"
+                        : "bg-card/70 text-muted-foreground border-border/50 hover:bg-card"
+                    )}
+                  >
+                    {stageLabel}
+                  </button>
+                ))}
               </div>
             </div>
-
-            {/* Dedicated Voice Metrics Grid */}
-            <div className="relative z-20 grid grid-cols-3 gap-2 text-center text-xs">
-              <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-2">
-                <p className="text-[9px] font-bold text-muted-foreground uppercase">LATENCY</p>
-                <p className="text-xs font-bold text-rose-600 dark:text-rose-400 mt-0.5">&lt; 250ms</p>
-              </div>
-              <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-2">
-                <p className="text-[9px] font-bold text-muted-foreground uppercase">VOICE MODE</p>
-                <p className="text-xs font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">Native Audio</p>
-              </div>
-              <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 p-2">
-                <p className="text-[9px] font-bold text-muted-foreground uppercase">BARGE-IN</p>
-                <p className="text-xs font-bold text-blue-600 dark:text-blue-400 mt-0.5">Active Interrupt</p>
-              </div>
-            </div>
-
-            {/* Floating Micro-Cards */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              className="absolute left-3 top-14 z-30 pointer-events-none"
-            >
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md">
-                <span className="p-1 rounded-lg bg-emerald-500/10 text-emerald-500">
-                  <Home className="size-3.5 text-emerald-500" />
-                </span>
-                <span>New Lead</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 text-[10px] font-bold border border-emerald-500/30">
-                  <CheckCircle2 className="size-3 text-emerald-500" />
-                  Qualifying
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Top Right: AI Voice Agent Listening... */}
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 4.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
-              className="absolute right-3 top-14 z-30 pointer-events-none"
-            >
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md">
-                <span className="p-1 rounded-lg bg-rose-500/10 text-rose-500">
-                  <Mic className="size-3.5 text-rose-500" />
-                </span>
-                <span>AI Voice Agent</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 px-2 py-0.5 text-[10px] font-bold border border-rose-500/30">
-                  <span className="flex items-center gap-0.5">
-                    <span className="h-2 w-0.5 bg-rose-500 rounded-full animate-bounce [animation-delay:0.1s]" />
-                    <span className="h-3 w-0.5 bg-rose-500 rounded-full animate-bounce [animation-delay:0.3s]" />
-                    <span className="h-2 w-0.5 bg-rose-500 rounded-full animate-bounce [animation-delay:0.2s]" />
-                  </span>
-                  Listening...
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Left: Site Visit Booked */}
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
-              className="absolute left-3 bottom-14 z-30 pointer-events-none"
-            >
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md">
-                <span className="p-1 rounded-lg bg-blue-500/10 text-blue-500">
-                  <Calendar className="size-3.5 text-blue-500" />
-                </span>
-                <span>Site Visit</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-400 px-2 py-0.5 text-[10px] font-bold border border-blue-500/30">
-                  Booked
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Bottom Right: Buyer Qualified */}
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1.5 }}
-              className="absolute right-3 bottom-14 z-30 pointer-events-none"
-            >
-              <div className="inline-flex items-center gap-2 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 px-3 py-1.5 text-xs font-semibold text-foreground shadow-md backdrop-blur-md">
-                <span className="p-1 rounded-lg bg-amber-500/10 text-amber-500">
-                  <UserCheck className="size-3.5 text-amber-500" />
-                </span>
-                <span>Buyer</span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 px-2 py-0.5 text-[10px] font-bold border border-amber-500/30">
-                  Qualified
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Footer Status Bar */}
-            <div className="relative z-20 flex items-center justify-between border-t border-slate-200/80 dark:border-slate-800 pt-2 px-1 text-[10px] font-mono text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <CheckCircle2 className="size-3 text-emerald-500" />
-                Dual-Stream Voice AI Peering
-              </span>
-              <span className="font-bold text-rose-600 dark:text-rose-400">Sub-250ms Real-Time Latency</span>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

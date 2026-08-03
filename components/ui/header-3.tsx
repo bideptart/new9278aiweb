@@ -77,7 +77,7 @@ export function Header() {
 			{/* Unified Floating Glossy Glassmorphism Pill Navbar */}
 			<nav
 				className={cn(
-					'pointer-events-auto mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 rounded-full border border-white/60 dark:border-white/15 bg-gradient-to-b from-white/75 via-white/50 to-white/30 dark:from-white/10 dark:via-white/[0.05] dark:to-white/[0.02] backdrop-blur-2xl backdrop-saturate-200 shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.85),0_12px_32px_-8px_rgba(0,0,0,0.12)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_-8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-primary/40 hover:shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.9),0_16px_40px_-6px_rgba(220,38,38,0.2)]',
+					'pointer-events-auto mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6 rounded-full border border-white/60 dark:border-white/15 bg-gradient-to-b from-white/75 via-white/50 to-white/30 dark:from-white/10 dark:via-white/[0.05] dark:to-white/[0.02] backdrop-blur-2xl backdrop-saturate-200 shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.85),0_12px_32px_-8px_rgba(0,0,0,0.12)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15),0_12px_32px_-8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-primary/40 hover:shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.9),0_16px_40px_-6px_rgba(244,63,94,0.2)]',
 					scrolled && 'border-white/80 dark:border-white/20 bg-gradient-to-b from-white/85 via-white/65 to-white/45 dark:from-white/15 dark:to-white/[0.05] shadow-[inset_0_1.5px_1px_0_rgba(255,255,255,0.95),0_16px_40px_-8px_rgba(0,0,0,0.18)]'
 				)}
 			>
@@ -92,6 +92,7 @@ export function Header() {
 				<div className="hidden md:flex items-center justify-center shrink-0">
 					<NavigationMenu>
 						<NavigationMenuList className="gap-1.5">
+							{/* Features Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
 									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
@@ -134,7 +135,6 @@ export function Header() {
 										<ul className="space-y-2">
 											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Core Industries</div>
 											{industryLinks.slice(0, 3).map((item, i) => (
->>>>>>> f41f265 (feat: add unique 3D industry pages (Real Estate, E-Commerce, Finance & Banking, Home Services), soft rose light theme, centered navbar, and universal soft rose button styling)
 												<li key={i}>
 													<ListItem {...item} />
 												</li>

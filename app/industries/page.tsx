@@ -39,7 +39,7 @@ export default function IndustriesPage() {
       <section className="relative overflow-hidden border-b border-border/50">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(220,38,38,0.10),transparent_70%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(244,91,91,0.10),transparent_70%)]"
         />
         <div
           aria-hidden

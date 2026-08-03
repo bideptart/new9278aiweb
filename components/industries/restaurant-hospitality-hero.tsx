@@ -4,31 +4,32 @@ import { useState, useRef, useEffect, useCallback } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
 import {
-  DollarSign,
-  ShieldCheck,
+  UtensilsCrossed,
   ArrowRight,
+  ShieldCheck,
   Zap,
-  PhoneCall,
+  Volume2,
+  Calendar,
+  Users,
   CheckCircle2,
-  CreditCard,
-  Building2,
-  Lock,
   Sparkles,
+  PhoneCall,
   Activity,
-  Fingerprint,
-  Check,
-  Clock,
   Play,
   Pause,
-  Volume2,
+  Clock,
+  ChefHat,
+  Wine,
+  GlassWater,
+  Check,
   Mic,
   Star,
-  Coins,
+  Smartphone,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export function FinanceHero() {
+export function RestaurantHospitalityHero() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [activeStage, setActiveStage] = useState(0)
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
@@ -37,32 +38,32 @@ export function FinanceHero() {
 
   const stages = [
     {
-      topBadge: { label: "Loan Application Approved", icon: Check },
-      leftBadge: { label: "Instant Credit Line for SAVE10 Account", icon: CreditCard },
-      rightBadge: { label: "Secured Transactions with multi-layer UPI", icon: ShieldCheck },
-      bottomBadge: { label: "+45% Approval Rate", icon: Sparkles },
-      dialogue: "“Welcome to Apex Banking! Your ₹15 Lakh home loan pre-approval is verified with an instant credit line!”",
+      topBadge: { label: "Online Reservation Restored", icon: UtensilsCrossed },
+      leftBadge: { label: "Complimentary Welcome Drink", icon: GlassWater },
+      rightBadge: { label: "Express Guest Check-in", icon: Smartphone },
+      bottomBadge: { label: "+25% Guest Satisfaction Boost", icon: Sparkles },
+      dialogue: "“Welcome to Riviera Bistro! I&apos;ve reserved Table 04 on our outdoor patio for 4 guests tonight at 7:30 PM.”",
     },
     {
-      topBadge: { label: "Biometric Voice Match 99.8%", icon: Fingerprint },
-      leftBadge: { label: "FATCA & PAN Portal Synced", icon: CheckCircle2 },
-      rightBadge: { label: "PCI-DSS 4.0 Vault Unlocked", icon: Lock },
-      bottomBadge: { label: "Sub-240ms Verification", icon: Zap },
-      dialogue: "“Voice biometric identity matched with 99.8% confidence. Your high-yield wealth account is now unlocked.”",
+      topBadge: { label: "Chef's Tasting Counter Locked", icon: ChefHat },
+      leftBadge: { label: "Dietary Preferences Logged", icon: Check },
+      rightBadge: { label: "OpenTable & Resy Synced", icon: CheckCircle2 },
+      bottomBadge: { label: "Sub-250ms Audio AI", icon: Zap },
+      dialogue: "“Your Chef&apos;s Tasting Counter seats are confirmed for 8:15 PM! 5-course dietary preferences have been logged.”",
     },
     {
-      topBadge: { label: "24/7 SWIFT Wire Sentinel", icon: ShieldCheck },
-      leftBadge: { label: "Suspicious Wire Flagged", icon: Lock },
-      rightBadge: { label: "Voice OTP 2-Factor Passed", icon: CheckCircle2 },
-      bottomBadge: { label: "Zero Fraud Liability", icon: Sparkles },
-      dialogue: "“Security Alert: We detected a foreign wire attempt. I&apos;ve verified your identity via Voice OTP and secured your vault.”",
+      topBadge: { label: "VIP Suite Reserved", icon: Wine },
+      leftBadge: { label: "Sommelier Wine Pairing", icon: GlassWater },
+      rightBadge: { label: "Event Manager Warm Handoff", icon: Users },
+      bottomBadge: { label: "Zero Wait Time", icon: Sparkles },
+      dialogue: "“Your VIP Private Dining Suite booking for 14 guests is secured. Our sommelier wine pairing note has been dispatched.”",
     },
     {
-      topBadge: { label: "Pre-Approved ₹5 Lakh Credit", icon: Coins },
-      leftBadge: { label: "Zero Preclosure Penalty", icon: Check },
-      rightBadge: { label: "Instant Disbursal in 60s", icon: Zap },
-      bottomBadge: { label: "CIBIL Score 785+ Verified", icon: CheckCircle2 },
-      dialogue: "“You qualify for an instant pre-approved credit line upgrade of ₹5 Lakh at a 6.2% fixed interest rate!”",
+      topBadge: { label: "No-Show Protection Active", icon: ShieldCheck },
+      leftBadge: { label: "Deposit Pre-Authorized", icon: CheckCircle2 },
+      rightBadge: { label: "Instant SMS Confirmation", icon: Zap },
+      bottomBadge: { label: "24/7 Table Relay", icon: Clock },
+      dialogue: "“Table reservation reminder sent! Your deposit is pre-authorized and your table is held for 15 minutes past arrival.”",
     },
   ]
 
@@ -175,42 +176,42 @@ export function FinanceHero() {
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-foreground font-normal">Finance & Banking</li>
+              <li className="text-foreground font-normal">Restaurants & Hospitality</li>
             </ol>
           </nav>
 
           <div className="flex flex-wrap items-center gap-3">
             <span className="ai-pill-magenta inline-flex items-center gap-2 text-[11px] font-normal tracking-wider shadow-xs">
               <Sparkles className="size-3.5 text-primary animate-pulse" />
-              <span>PCI-DSS 4.0 BANK-GRADE VOICE AI ENGINE</span>
+              <span>OPENTABLE & RESY 2-WAY SYNCED VOICE AI</span>
             </span>
           </div>
 
           <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
-            Autonomous AI voice agents <br />
+            AI voice agents for <br />
             <span className="italic text-primary">
-              for banks & financial institutions.
+              restaurants & hospitality.
             </span>
           </h1>
 
           <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg font-normal">
-            Automate voice biometric KYC verification, pre-approved loan underwriting, and 24/7 SWIFT wire fraud sentinel calls with sub-240ms latency and 99.8% identity precision.
+            Never miss a table reservation during Friday dinner rush. 9278.ai answers inbound calls in under 3 seconds — books tables directly into OpenTable & Resy, logs dietary preferences, and handles VIP party requests.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
-              <Fingerprint className="size-3.5 text-primary" />
-              Voice Biometric KYC
+              <UtensilsCrossed className="size-3.5 text-primary" />
+              OpenTable & Resy Synced
             </span>
 
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
-              <Building2 className="size-3.5 text-primary" />
-              Core Banking Synced
+              <Wine className="size-3.5 text-primary" />
+              VIP Event Handoff
             </span>
 
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
               <ShieldCheck className="size-3.5 text-primary" />
-              PCI-DSS 4.0 Vault Shield
+              Zero No-Shows
             </span>
           </div>
 
@@ -220,7 +221,7 @@ export function FinanceHero() {
               size="lg"
               className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
             >
-              <Link href="/get-started?industry=finance">
+              <Link href="/get-started?industry=restaurants">
                 Get Started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -238,7 +239,7 @@ export function FinanceHero() {
           </div>
         </div>
 
-        {/* Right Column: 3D FINANCE & BANKING BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
+        {/* Right Column: 3D RESTAURANT & HOSPITALITY BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
         <div className="lg:col-span-6 flex justify-center perspective-[1200px] pt-6 lg:pt-0">
           <div
             className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[520px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
@@ -250,7 +251,7 @@ export function FinanceHero() {
             {/* Ambient Red Glow Halo Base */}
             <div className="absolute bottom-10 size-72 md:size-80 rounded-full bg-gradient-to-tr from-primary/30 via-rose-500/20 to-primary/10 blur-2xl opacity-75" />
 
-            {/* 3D FINANCE & BANKING BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
+            {/* 3D RESTAURANT & HOSPITALITY BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
             <div 
               className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(244,91,91,0.22)] cursor-pointer"
             >
@@ -290,77 +291,83 @@ export function FinanceHero() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D BANK VAULT & CORE MATRIX GRAPHIC */}
+              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D DINING ROOM & BAR GRAPHIC */}
               <div className="relative w-full h-[68%] flex flex-col items-center justify-center mt-2 [transform-style:preserve-3d]">
                 {/* 3D Glowing Pulsing Concentric Outer Ring Halos (translateZ: 30px) */}
                 <div className="absolute size-56 sm:size-64 rounded-full border-4 border-white/90 border-b-transparent shadow-[0_0_25px_rgba(255,255,255,0.8)] pointer-events-none -top-2 animate-pulse [transform:translateZ(30px)]" />
                 <div className="absolute size-52 sm:size-60 rounded-full border-2 border-dashed border-white/80 border-b-transparent pointer-events-none top-0 animate-spin [animation-duration:20s] [transform:translateZ(40px)]" />
 
-                {/* Floating 3D Orbiting Finance Badges */}
+                {/* Floating 3D Orbiting Dining Badges */}
                 <div className="absolute top-2 left-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3s] [transform:translateZ(55px)]">
-                  <Lock className="size-3.5" />
+                  <UtensilsCrossed className="size-3.5" />
                 </div>
 
                 <div className="absolute top-4 right-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3.5s] [transform:translateZ(55px)]">
                   <Star className="size-3.5 fill-primary text-primary" />
                 </div>
 
-                {/* Layered 3D Isometric Bank Vault, Currency Stacks & Core Database Graphic (Matching Uploaded Image - translateZ: 50px) */}
+                {/* Layered 3D Isometric Dining Room & Cocktail Bar Graphic (Matching Uploaded Image - translateZ: 50px) */}
                 <div className="relative z-10 flex flex-col items-center justify-center mt-4 [transform:translateZ(50px)]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-rose-400/20 blur-xl rounded-full" />
                   <svg className="w-44 h-36 drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 220 170">
-                    {/* Isometric Floor Grid Base */}
-                    <polygon points="110,150 190,110 110,70 30,110" fill="#fecaca" opacity="0.6" />
+                    {/* Isometric Dining Floor Base */}
+                    <polygon points="110,150 185,112 110,75 35,112" fill="#fecaca" opacity="0.6" />
 
-                    {/* Left 3D Bank Vault Door Building */}
-                    <polygon points="35,90 75,70 75,120 35,140" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
-                    <polygon points="75,70 105,85 105,135 75,120" fill="#fee2e2" stroke="#f45b5b" strokeWidth="2" />
-                    <polygon points="35,90 75,70 105,85 65,105" fill="#f45b5b" />
-                    {/* Vault Wheel Handle */}
-                    <circle cx="70" cy="105" r="10" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
-                    <circle cx="70" cy="105" r="4" fill="#f45b5b" />
-                    <path d="M 70,91 V 119 M 56,105 H 84" stroke="#f45b5b" strokeWidth="2" />
+                    {/* Left Dining Tables Suite */}
+                    <g transform="translate(35, 75)">
+                      {/* Dining Table 1 */}
+                      <polygon points="0,20 25,7 50,20 25,33" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="0,20 25,33 25,48 0,35" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="25,33 50,20 50,35 25,48" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      {/* Plates Set */}
+                      <circle cx="15" cy="18" r="3" fill="#f45b5b" opacity="0.8" />
+                      <circle cx="35" cy="18" r="3" fill="#f45b5b" opacity="0.8" />
+                      {/* Chair Left */}
+                      <polygon points="-8,10 0,5 0,25 -8,30" fill="#f45b5b" opacity="0.85" />
+                      {/* Chair Right */}
+                      <polygon points="50,20 58,15 58,35 50,40" fill="#f45b5b" opacity="0.85" />
 
-                    {/* Center Currency Cash Bundles (Stacked Rupee/Dollar Cash Notes) */}
-                    <g transform="translate(85, 100)">
-                      {/* Cash Note Layer 1 */}
-                      <polygon points="0,15 25,2 55,17 30,30" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="30,30 55,17 55,22 30,35" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      {/* Cash Note Layer 2 */}
-                      <polygon points="0,10 25,-3 55,12 30,25" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="30,25 55,12 55,17 30,30" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      {/* Currency Band Ribbon */}
-                      <rect x="22" y="5" width="8" height="20" fill="#f45b5b" />
+                      {/* Dining Table 2 (Front Table) */}
+                      <g transform="translate(25, 25)">
+                        <polygon points="0,20 25,7 50,20 25,33" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                        <polygon points="0,20 25,33 25,48 0,35" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                        <polygon points="25,33 50,20 50,35 25,48" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                        <circle cx="25" cy="20" r="4" fill="#ef4444" />
+                        <polygon points="50,20 58,15 58,35 50,40" fill="#f45b5b" opacity="0.85" />
+                      </g>
                     </g>
 
-                    {/* Right Bank Database Core Servers */}
-                    <g transform="translate(130, 65)">
-                      {/* Server Unit 1 */}
-                      <polygon points="0,20 30,5 55,17 25,32" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="25,32 55,17 55,27 25,42" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="0,20 25,32 25,42 0,30" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <circle cx="10" cy="27" r="1.5" fill="#ef4444" />
-                      <circle cx="16" cy="24" r="1.5" fill="#10b981" />
+                    {/* Right Cocktail Bar Counter & Cloche Bell Unit */}
+                    <g transform="translate(115, 45)">
+                      {/* Bar Counter Back Shelf */}
+                      <polygon points="0,35 30,20 55,32 25,47" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="0,35 25,47 25,95 0,83" fill="#f45b5b" opacity="0.9" />
+                      <polygon points="25,47 55,32 55,80 25,95" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                      {/* Wine Bottles Shelf */}
+                      <rect x="5" y="48" width="5" height="12" fill="#ffffff" />
+                      <rect x="12" y="45" width="5" height="15" fill="#ffffff" />
+                      <rect x="19" y="48" width="5" height="12" fill="#ffffff" />
 
-                      {/* Server Unit 2 */}
-                      <polygon points="0,40 30,25 55,37 25,52" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="25,52 55,37 55,47 25,62" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
-                      <polygon points="0,40 25,52 25,62 0,50" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
-                      <circle cx="10" cy="47" r="1.5" fill="#ef4444" />
-                      <circle cx="16" cy="44" r="1.5" fill="#10b981" />
+                      {/* Front Bar Counter Bar Stools */}
+                      <circle cx="10" cy="72" r="4" fill="#f45b5b" />
+                      <circle cx="25" cy="80" r="4" fill="#f45b5b" />
+                      <circle cx="40" cy="88" r="4" fill="#f45b5b" />
 
-                      {/* Encrypted Circuit Connection Line */}
-                      <path d="M -15,50 C 0,55 10,65 25,65" stroke="#f45b5b" strokeWidth="2" fill="none" strokeDasharray="3 3" />
-                      <circle cx="25" cy="65" r="3" fill="#f45b5b" />
+                      {/* Cloche Dome Cover Bell on Table */}
+                      <g transform="translate(35, 70)">
+                        <path d="M 0,10 A 10,10 0 0 1 20,10 Z" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                        <circle cx="10" cy="0" r="2" fill="#ef4444" />
+                      </g>
                     </g>
                   </svg>
                 </div>
               </div>
 
-              {/* Typography Matching Uploaded Image */}
+              {/* Two-Line Typography Matching Uploaded Image */}
               <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
-                  FINANCE & BANKING
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs text-center leading-tight">
+                  RESTAURANT &<br />
+                  HOSPITALITY
                 </h2>
               </div>
             </div>
@@ -377,10 +384,10 @@ export function FinanceHero() {
                     <Mic className="size-4 text-rose-600 dark:text-rose-300" />
                   </div>
                   <div>
-                    <h3 className="text-xs font-normal text-foreground">Banking Voice Telemetry Stream</h3>
+                    <h3 className="text-xs font-normal text-foreground">Restaurant Telemetry Stream</h3>
                     <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 flex items-center gap-1">
                       <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
-                      CORE BANKING & SWIFT SYNCED
+                      OPENTABLE & RESY SYNCED
                     </p>
                   </div>
                 </div>
@@ -416,7 +423,7 @@ export function FinanceHero() {
 
               {/* 3D Stage Navigation Pills (Soft Light Rose - No Solid Red) */}
               <div className="mt-3 pt-2 border-t border-border/30 grid grid-cols-4 gap-1">
-                {["1. Sanction", "2. Voice KYC", "3. Wire Guard", "4. Credit Line"].map((stageLabel, idx) => (
+                {["1. Patio Table", "2. Chef Counter", "3. VIP Suite", "4. Table Relay"].map((stageLabel, idx) => (
                   <button
                     key={idx}
                     type="button"

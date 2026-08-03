@@ -1,314 +1,443 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "motion/react"
 import {
   Wrench,
   ShieldCheck,
   ArrowRight,
-  Bot,
   Zap,
   PhoneCall,
   CheckCircle2,
   MapPin,
   Clock,
-  Navigation,
   Flame,
   Droplets,
   Activity,
-  ChevronRight,
   UserCheck,
   Truck,
   Sparkles,
-  Radio,
-  Cpu,
   Home,
+  Check,
+  Play,
+  Pause,
+  Volume2,
+  Mic,
+  Key,
+  RefreshCw,
+  Power,
+  Sofa,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export function HomeServicesHero() {
-  const [activeNode, setActiveNode] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
+  const [activeStage, setActiveStage] = useState(0)
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const heroRef = useRef<HTMLDivElement | null>(null)
 
-  // 3D Tilt Mouse Controls
-  const [rotateX, setRotateX] = useState(0)
-  const [rotateY, setRotateY] = useState(0)
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    const mouseX = e.clientX - centerX
-    const mouseY = e.clientY - centerY
-
-    setRotateX(-mouseY / 15)
-    setRotateY(mouseX / 15)
-  }
-
-  const handleMouseLeave = () => {
-    setRotateX(0)
-    setRotateY(0)
-  }
-
-  const serviceNodes = [
+  const stages = [
     {
-      id: "hvac-dispatch",
-      trade: "HVAC Emergency",
-      badge: "Priority 1 Alert",
-      issue: "No AC in 95°F Heat",
-      tech: "Tech Mike R.",
-      eta: "12 Mins Out",
-      distance: "2.4 Miles",
-      action: "Tech Dispatched + GPS SMS Sent",
-      software: "ServiceTitan Synced",
-      icon: Flame,
+      topBadge: { label: "Smart Home Presets Restored", icon: Power },
+      leftBadge: { label: "Premium Furnishings Code SAVE20", icon: Sofa },
+      rightBadge: { label: "1-Click Appliance Installation", icon: Wrench },
+      bottomBadge: { label: "+45% Efficiency Boost", icon: Sparkles },
+      dialogue: "“Hi Vikram! Calling from HomePro Services — your kitchen appliance installation is locked for tomorrow at 10 AM!”",
     },
     {
-      id: "plumbing-dispatch",
-      trade: "Plumbing Hydro Leak",
-      badge: "Surge Priority",
-      issue: "Pipe Burst in Basement",
-      tech: "Tech Alex K.",
-      eta: "18 Mins Out",
-      distance: "3.8 Miles",
-      action: "Main Shutoff Video Guide Sent",
-      software: "Housecall Pro Synced",
-      icon: Droplets,
+      topBadge: { label: "Emergency HVAC Dispatch", icon: Flame },
+      leftBadge: { label: "Tech 12 Mins Away", icon: Truck },
+      rightBadge: { label: "ServiceTitan API Synced", icon: CheckCircle2 },
+      bottomBadge: { label: "Sub-3s Response Time", icon: Zap },
+      dialogue: "“Emergency AC dispatch confirmed! Technician Mike is 2.4 miles out with an ETA of 12 minutes.”",
     },
     {
-      id: "electrical-dispatch",
-      trade: "Electrical Panel",
-      badge: "Scheduled Upgrade",
-      issue: "200A EV Charger Install",
-      tech: "Tech Dave M.",
-      eta: "Friday 9 AM",
-      distance: "Estimate Ready",
-      action: "Permit & Arrival Window Locked",
-      software: "Jobber Synced",
-      icon: Zap,
+      topBadge: { label: "Hydro Leak Shutoff Guide", icon: Droplets },
+      leftBadge: { label: "Housecall Pro Synced", icon: Check },
+      rightBadge: { label: "Basement Pipe Repair", icon: Wrench },
+      bottomBadge: { label: "Surge Priority Active", icon: ShieldCheck },
+      dialogue: "“Hydro leak alert logged. Main water shutoff video instructions have been sent straight to your WhatsApp!”",
+    },
+    {
+      topBadge: { label: "200A Electrical Upgrade", icon: Zap },
+      leftBadge: { label: "EV Charger Permit Ready", icon: CheckCircle2 },
+      rightBadge: { label: "Jobber Calendar Synced", icon: Clock },
+      bottomBadge: { label: "Arrival Window Locked", icon: Sparkles },
+      dialogue: "“Your 200A electrical panel upgrade and EV charger installation window is locked for Friday at 9:00 AM!”",
     },
   ]
 
-  // Auto-rotate 3D Hex Nodes every 3.2 seconds
+  // Automatic 2.5-Second Time Lapse Shift Timer
   useEffect(() => {
-    let timer: NodeJS.Timeout
-    if (isPlaying) {
-      timer = setInterval(() => {
-        setActiveNode((prev) => (prev + 1) % serviceNodes.length)
-      }, 3200)
-    }
-    return () => clearInterval(timer)
-  }, [isPlaying, serviceNodes.length])
+    const timer = setInterval(() => {
+      setActiveStage((prev) => (prev + 1) % stages.length)
+    }, 2500)
 
-  const curN = serviceNodes[activeNode]
-  const CurIcon = curN.icon
+    return () => clearInterval(timer)
+  }, [stages.length])
+
+  // CONTINUOUS 60FPS ALWAYS-WORKING 3D AUDIO SPECTRUM CANVAS
+  useEffect(() => {
+    let animationFrameId: number
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let step = 0
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const bars = 26
+      const barWidth = canvas.width / bars
+
+      const speed = isPlayingAudio ? 0.22 : 0.09
+      const maxAmp = isPlayingAudio ? canvas.height - 4 : (canvas.height - 10) * 0.65
+
+      ctx.shadowColor = "rgba(244, 91, 91, 0.45)"
+      ctx.shadowBlur = isPlayingAudio ? 12 : 5
+      ctx.shadowOffsetY = 2
+
+      const grad = ctx.createLinearGradient(0, canvas.height, 0, 0)
+      grad.addColorStop(0, "rgba(244, 91, 91, 0.3)")
+      grad.addColorStop(0.5, "rgba(244, 91, 91, 0.9)")
+      grad.addColorStop(1, "rgba(255, 140, 140, 1)")
+      ctx.fillStyle = grad
+
+      for (let i = 0; i < bars; i++) {
+        const wave = Math.sin(step * speed + i * 0.35) * 0.5 + 0.5
+        const height = Math.max(6, wave * maxAmp)
+
+        ctx.beginPath()
+        ctx.roundRect(i * barWidth + 2, (canvas.height - height) / 2, barWidth - 4, height, 4)
+        ctx.fill()
+      }
+
+      step++
+      animationFrameId = requestAnimationFrame(render)
+    }
+
+    render()
+    return () => cancelAnimationFrame(animationFrameId)
+  }, [isPlayingAudio])
+
+  // Throttled mouse move tracker for lag-free 3D perspective tilt
+  const rafId = useRef<number | null>(null)
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!heroRef.current || rafId.current !== null) return
+    const clientX = e.clientX
+    const clientY = e.clientY
+    rafId.current = requestAnimationFrame(() => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect()
+        const x = ((clientX - rect.left) / rect.width) * 100
+        const y = ((clientY - rect.top) / rect.height) * 100
+        setMousePos({ x, y })
+      }
+      rafId.current = null
+    })
+  }, [])
+
+  // Smooth 3D tilt angles
+  const tiltX = (mousePos.y - 50) * -0.15
+  const tiltY = (mousePos.x - 50) * 0.15
+
+  const currentStage = stages[activeStage]
+  const TopIcon = currentStage.topBadge.icon
+  const LeftIcon = currentStage.leftBadge.icon
+  const RightIcon = currentStage.rightBadge.icon
+  const BottomIcon = currentStage.bottomBadge.icon
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
-      {/* Soft Rose Background Ambient Glow */}
+    <section
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden border-b border-border/40"
+    >
+      {/* Soft Ambient Light Glow & Subtle Red Blur Accent */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/4 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/12 via-amber-500/8 to-transparent blur-3xl opacity-70"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-80"
       />
 
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Headline & Value Prop */}
-          <div className="lg:col-span-6 space-y-6">
-            <nav aria-label="Breadcrumb" className="mb-2">
-              <ol className="flex items-center gap-2 text-xs text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li>
-                  <Link href="/industries" className="hover:text-foreground transition-colors">
-                    Industries
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li className="text-foreground font-medium">Home Services</li>
-              </ol>
-            </nav>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-rose-500 opacity-75" />
-                  <span className="relative inline-flex size-2 rounded-full bg-rose-500" />
-                </span>
-                <Wrench className="size-3.5 text-rose-500" />
-                <span className="font-bold">24/7 FIELD SERVICE DISPATCH ENGINE</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-3 py-1 text-xs font-mono font-medium text-muted-foreground backdrop-blur-md">
-                <ShieldCheck className="size-3.5 text-rose-500" />
-                Sub-250ms Emergency Intake
-              </span>
-            </div>
-
-            <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
-              AI voice agents for <span className="italic text-rose-600 dark:text-rose-400">home service pros.</span>
-            </h1>
-
-            <p className="max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Capture after-hours HVAC, plumbing, and electrical emergencies on 24/7 AI voice calls. Connect ServiceTitan, Housecall Pro & Jobber to dispatch tech ETA tracking in 3 minutes.
-            </p>
-
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Button asChild size="lg" className="group btn-ai h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
-                <Link href="/get-started?industry=home-services">
-                  Get started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* Left Column: Headline & Value Prop */}
+        <div className="lg:col-span-6 space-y-6">
+          <nav aria-label="Breadcrumb" className="mb-2">
+            <ol className="flex items-center gap-2 text-xs text-muted-foreground font-normal">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  Home
                 </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-full border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 px-8 backdrop-blur-md hover:border-rose-300 dark:hover:border-rose-800 hover:bg-rose-50/40 dark:hover:bg-rose-950/20 transition-all font-semibold cursor-pointer"
-              >
-                <Link href="/pricing">View pricing</Link>
-              </Button>
-            </div>
+              </li>
+              <li aria-hidden>/</li>
+              <li>
+                <Link href="/industries" className="hover:text-foreground transition-colors">
+                  Industries
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li className="text-foreground font-normal">Home & Living Services</li>
+            </ol>
+          </nav>
 
-            {/* Metrics Bar */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/60 dark:border-slate-800/60">
-              <div>
-                <p className="text-2xl md:text-3xl font-bold font-serif text-rose-600 dark:text-rose-400 tracking-tight">0 missed</p>
-                <p className="text-xs text-muted-foreground font-medium mt-0.5">After-Hours Calls</p>
-              </div>
-              <div>
-                <p className="text-2xl md:text-3xl font-bold font-serif text-rose-600 dark:text-rose-400 tracking-tight">&lt; 250ms</p>
-                <p className="text-xs text-muted-foreground font-medium mt-0.5">Voice AI Latency</p>
-              </div>
-              <div>
-                <p className="text-2xl md:text-3xl font-bold font-serif text-rose-600 dark:text-rose-400 tracking-tight">+42%</p>
-                <p className="text-xs text-muted-foreground font-medium mt-0.5">Emergency Job Bookings</p>
-              </div>
-            </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="ai-pill-magenta inline-flex items-center gap-2 text-[11px] font-normal tracking-wider shadow-xs">
+              <Sparkles className="size-3.5 text-primary animate-pulse" />
+              <span>SERVICETITAN & HOUSECALL PRO DISPATCH ENGINE</span>
+            </span>
           </div>
 
-          {/* Right Column: BRAND-NEW UNIQUE CIRCULAR 3D HEXAGON COMMAND MATRIX (0 Box Cards!) */}
-          <div className="lg:col-span-6 flex items-center justify-center pt-6 lg:pt-0 [perspective:1000px]">
-            <div
-              ref={cardRef}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-                transformStyle: "preserve-3d",
-              }}
-              className="relative size-[340px] md:size-[390px] flex items-center justify-center transition-transform duration-200 ease-out"
+          <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
+            Autonomous AI voice agents <br />
+            <span className="italic text-primary">
+              for home & living services.
+            </span>
+          </h1>
+
+          <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg font-normal">
+            Dispatch technicians 24/7 without dispatcher burnout. 9278.ai answers inbound calls in under 3 seconds — diagnoses HVAC, plumbing & electrical emergencies, dispatches nearest technicians, and syncs live into ServiceTitan, Housecall Pro & Jobber.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <Wrench className="size-3.5 text-primary" />
+              1-Click Installation
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <Truck className="size-3.5 text-primary" />
+              Live Technician Dispatch
+            </span>
+
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3.5 py-1.5 text-xs font-normal text-muted-foreground backdrop-blur-md">
+              <ShieldCheck className="size-3.5 text-primary" />
+              ServiceTitan & Jobber Synced
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 pt-3">
+            <Button
+              asChild
+              size="lg"
+              className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
             >
-              {/* 360-Degree Rotating Background Radar Line */}
-              <div className="absolute inset-0 rounded-full border border-rose-200/60 dark:border-rose-900/40 bg-gradient-to-br from-rose-500/5 via-amber-500/5 to-transparent shadow-inner backdrop-blur-3xl" />
+              <Link href="/get-started?industry=home-services">
+                Get Started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 rounded-full border-border/70 bg-card/50 px-7 backdrop-blur-md hover:border-primary/40 hover:bg-card/80 transition-all font-normal cursor-pointer"
+            >
+              <Link href="/pricing" className="flex items-center gap-2">
+                <Play className="size-3.5 fill-current text-primary" />
+                View Pricing
+              </Link>
+            </Button>
+          </div>
+        </div>
 
-              {/* Pulsing Concentric Radar Rings */}
-              <div className="absolute size-[260px] rounded-full border border-rose-300/30 dark:border-rose-800/30 animate-ping opacity-25" />
-              <div className="absolute size-[180px] rounded-full border border-rose-400/20 dark:border-rose-700/20" />
+        {/* Right Column: 3D HOME & LIVING BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
+        <div className="lg:col-span-6 flex justify-center perspective-[1200px] pt-6 lg:pt-0">
+          <div
+            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[520px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
+            style={{
+              transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Ambient Red Glow Halo Base */}
+            <div className="absolute bottom-10 size-72 md:size-80 rounded-full bg-gradient-to-tr from-primary/30 via-rose-500/20 to-primary/10 blur-2xl opacity-75" />
 
-              {/* CENTER 3D DISPATCH COMMAND HOUSE HUB */}
-              <div
-                className="z-20 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border-2 border-rose-300 dark:border-rose-700 shadow-2xl text-center space-y-1.5 backdrop-blur-xl size-[155px] md:size-[170px] flex flex-col items-center justify-center relative overflow-hidden"
-                style={{
-                  transform: "translateZ(45px)",
-                  clipPath: "polygon(50% 0%, 100% 24%, 100% 100%, 0% 100%, 0% 24%)",
-                }}
-              >
-                {/* Pitched Roof Top Accent Line */}
-                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-rose-500 via-amber-500 to-rose-500" />
-
-                <div className="size-9 mt-3 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shadow-xs">
-                  <Home className="size-4.5 text-rose-500 animate-pulse" />
-                </div>
-
-                <p className="text-xs font-serif font-bold text-foreground leading-none">9278 Home AI</p>
-
-                {/* Working Equalizer Sound Bars */}
-                <div className="flex items-center gap-1 h-3 pt-0.5">
-                  {[40, 90, 60, 100, 70, 45].map((h, i) => (
-                    <span
-                      key={i}
-                      className="w-0.5 rounded-full bg-rose-500 animate-pulse"
-                      style={{
-                        height: `${h}%`,
-                        animationDelay: `${i * 0.15}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-
-                <span className="text-[9px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                  Sub-250ms Live
-                </span>
-              </div>
-
-              {/* 3 ORBITING FLOATING HEXAGON NODES (Arranged in 120-degree orbital positions around center) */}
-              {serviceNodes.map((nd, idx) => {
-                const isSelected = activeNode === idx
-                // 120-deg Orbital Positions
-                const angles = [270, 30, 150] // Top, Bottom-Right, Bottom-Left
-                const angleRad = (angles[idx] * Math.PI) / 180
-                const radius = 135 // Orbital Distance in PX
-                const x = Math.cos(angleRad) * radius
-                const y = Math.sin(angleRad) * radius
-
-                const IconComp = nd.icon
-
-                return (
-                  <button
-                    key={nd.id}
-                    type="button"
-                    onClick={() => {
-                      setActiveNode(idx)
-                      setIsPlaying(false)
-                    }}
-                    style={{
-                      transform: `translate3d(${x}px, ${y}px, ${isSelected ? 40 : 20}px)`,
-                    }}
-                    className={cn(
-                      "absolute z-30 p-3 rounded-2xl transition-all duration-300 text-left space-y-1 cursor-pointer border shadow-lg backdrop-blur-xl max-w-[130px] md:max-w-[145px]",
-                      isSelected
-                        ? "bg-white dark:bg-slate-900 border-rose-300 dark:border-rose-700 shadow-xl scale-110 ring-2 ring-rose-400/20"
-                        : "bg-white/80 dark:bg-slate-900/80 border-slate-200/80 dark:border-slate-800 text-muted-foreground hover:border-rose-200 hover:bg-rose-50/40"
-                    )}
-                  >
-                    <div className="flex items-center justify-between">
-                      <IconComp className={cn("size-3.5", isSelected ? "text-rose-500" : "text-slate-400")} />
-                      <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300")} />
-                    </div>
-                    <p className="text-[11px] font-bold text-foreground truncate">{nd.trade}</p>
-                    <p className="text-[9px] font-mono font-bold text-rose-600 dark:text-rose-400">{nd.eta}</p>
-                  </button>
-                )
-              })}
-
-              {/* Bottom Active Telemetry HUD Strip */}
+            {/* 3D HOME & LIVING BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
+            <div 
+              className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(244,91,91,0.22)] cursor-pointer"
+            >
+              {/* Automatic Shifting 3D Status Badges (Overlapping half inside, half outside the badge rim) */}
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={curN.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-full max-w-[320px] p-2.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-rose-200 dark:border-rose-900/50 shadow-xl text-center space-y-0.5 backdrop-blur-xl"
-                  style={{ transform: "translate3d(-50%, 0, 35px)" }}
+                  key={activeStage}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.35 }}
+                  className="contents"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono">
-                    <span className="font-bold text-foreground">{curN.tech} ({curN.distance})</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">{curN.software}</span>
+                  {/* Top Center Badge (Half inside top edge, half outside) */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-40 rounded-full bg-card/95 border border-primary/30 px-3.5 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 whitespace-nowrap [transform:translateZ(65px)]">
+                    <TopIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.topBadge.label}</span>
                   </div>
-                  <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 font-semibold truncate">
-                    {curN.action}
-                  </p>
+
+                  {/* Left Side Badge (Staggered top-20 to avoid overlap) */}
+                  <div className="absolute top-20 -left-4 sm:-left-8 max-w-[145px] sm:max-w-[175px] z-40 rounded-full bg-card/95 border border-primary/30 px-3 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 [transform:translateZ(65px)]">
+                    <LeftIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.leftBadge.label}</span>
+                  </div>
+
+                  {/* Right Side Badge (Staggered top-36 to avoid overlap) */}
+                  <div className="absolute top-36 -right-4 sm:-right-8 max-w-[145px] sm:max-w-[175px] z-40 rounded-full bg-card/95 border border-primary/30 px-3 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 [transform:translateZ(65px)]">
+                    <RightIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.rightBadge.label}</span>
+                  </div>
+
+                  {/* Bottom Edge Badge (Half inside bottom edge, half outside) */}
+                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-40 rounded-full bg-card/95 border border-primary/30 px-3.5 py-1 text-[11px] font-normal text-foreground shadow-lg backdrop-blur-md flex items-center gap-1.5 whitespace-nowrap [transform:translateZ(65px)]">
+                    <BottomIcon className="size-3.5 text-primary shrink-0" />
+                    <span className="truncate">{currentStage.bottomBadge.label}</span>
+                  </div>
                 </motion.div>
               </AnimatePresence>
 
+              {/* 3D GLOWING CONCENTRIC ARCH RING & LAYERED 3D HOME & LIVING INTERIOR GRAPHIC */}
+              <div className="relative w-full h-[68%] flex flex-col items-center justify-center mt-2 [transform-style:preserve-3d]">
+                {/* 3D Glowing Pulsing Concentric Outer Ring Halos (translateZ: 30px) */}
+                <div className="absolute size-56 sm:size-64 rounded-full border-4 border-white/90 border-b-transparent shadow-[0_0_25px_rgba(255,255,255,0.8)] pointer-events-none -top-2 animate-pulse [transform:translateZ(30px)]" />
+                <div className="absolute size-52 sm:size-60 rounded-full border-2 border-dashed border-white/80 border-b-transparent pointer-events-none top-0 animate-spin [animation-duration:20s] [transform:translateZ(40px)]" />
+
+                {/* Floating 3D Orbiting Home Badges */}
+                <div className="absolute top-2 left-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3s] [transform:translateZ(55px)]">
+                  <Key className="size-3.5" />
+                </div>
+
+                <div className="absolute top-4 right-6 z-20 size-7 rounded-xl bg-card/90 border border-primary/30 shadow-md backdrop-blur-md flex items-center justify-center text-primary animate-bounce [animation-duration:3.5s] [transform:translateZ(55px)]">
+                  <RefreshCw className="size-3.5 text-primary" />
+                </div>
+
+                {/* Layered 3D Isometric Home & Kitchen Interior Graphic (Matching Uploaded Image - translateZ: 50px) */}
+                <div className="relative z-10 flex flex-col items-center justify-center mt-4 [transform:translateZ(50px)]">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-rose-400/20 blur-xl rounded-full" />
+                  <svg className="w-44 h-36 drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 220 170">
+                    {/* Isometric Living Room Floor Rug */}
+                    <polygon points="110,150 185,112 110,75 35,112" fill="#fecaca" opacity="0.6" />
+
+                    {/* Living Room Section (Sofa & Coffee Table) */}
+                    <g transform="translate(35, 80)">
+                      {/* Sofa Seat & Back */}
+                      <polygon points="0,20 30,5 50,15 20,30" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="0,20 20,30 20,38 0,28" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="30,5 50,15 50,23 30,13" fill="#f45b5b" opacity="0.8" />
+                      {/* Cushions */}
+                      <rect x="8" y="10" width="10" height="8" rx="2" fill="#ef4444" />
+                      <rect x="22" y="16" width="10" height="8" rx="2" fill="#ef4444" />
+                      {/* Coffee Table */}
+                      <polygon points="25,32 45,22 60,30 40,40" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                    </g>
+
+                    {/* Kitchen Appliances Section (Refrigerator, Oven Stove & Countertop) */}
+                    <g transform="translate(115, 45)">
+                      {/* Refrigerator Tower */}
+                      <polygon points="0,35 25,20 40,28 15,43" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="0,35 15,43 15,90 0,82" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <polygon points="15,43 40,28 40,75 15,90" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                      {/* Fridge Door Handle Lines */}
+                      <line x1="12" y1="50" x2="12" y2="62" stroke="#f45b5b" strokeWidth="2" />
+                      <line x1="12" y1="68" x2="12" y2="82" stroke="#f45b5b" strokeWidth="2" />
+
+                      {/* Microwave Stove & Oven Unit */}
+                      <g transform="translate(28, 25)">
+                        <polygon points="0,25 25,10 50,22 25,37" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                        <polygon points="0,25 25,37 25,62 0,50" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                        <polygon points="25,37 50,22 50,47 25,62" fill="#fee2e2" stroke="#f45b5b" strokeWidth="1.5" />
+                        {/* Stove Burner Rings */}
+                        <circle cx="15" cy="22" r="3" fill="#f45b5b" opacity="0.8" />
+                        <circle cx="32" cy="18" r="3" fill="#f45b5b" opacity="0.8" />
+                        {/* Oven Glass Door */}
+                        <rect x="5" y="32" width="15" height="12" rx="1" fill="#f45b5b" opacity="0.7" />
+                      </g>
+                    </g>
+
+                    {/* Wall-Mounted Smart Home Thermostat Hub */}
+                    <g transform="translate(145, 25)">
+                      <rect x="0" y="0" width="18" height="18" rx="4" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
+                      <circle cx="9" cy="9" r="5" fill="#f45b5b" opacity="0.8" />
+                      {/* WiFi Waves */}
+                      <path d="M -5,-5 A 10,10 0 0 1 5,-5" stroke="#f45b5b" strokeWidth="1.5" fill="none" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              {/* Typography Matching Uploaded Image */}
+              <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
+                  HOME SERVICES
+                </h2>
+              </div>
+            </div>
+
+            {/* STYLISH 3D FLOATING GLASS VOICE TELEMETRY CONSOLE (LIGHT PASTEL ROSE - NO SOLID RED) */}
+            <div className="relative mt-6 w-full max-w-sm sm:max-w-md rounded-3xl border border-rose-200/60 dark:border-rose-900/50 bg-gradient-to-r from-card/95 via-rose-50/50 to-card/95 dark:from-card/95 dark:via-rose-950/30 dark:to-card/95 p-4 shadow-[0_15px_40px_rgba(244,91,91,0.12)] backdrop-blur-2xl [transform:translateZ(60px)] z-40 overflow-hidden">
+              {/* Glowing Top Edge Line */}
+              <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-rose-400/50 to-transparent" />
+
+              {/* Console Header Bar */}
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/40">
+                <div className="flex items-center gap-2.5">
+                  <div className="size-8 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-300 border border-rose-200/80 shadow-xs flex items-center justify-center animate-pulse">
+                    <Mic className="size-4 text-rose-600 dark:text-rose-300" />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-normal text-foreground">Dispatch Telemetry Stream</h3>
+                    <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 flex items-center gap-1">
+                      <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
+                      SERVICETITAN & HOUSECALL PRO
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsPlayingAudio(!isPlayingAudio)}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/80 px-3.5 py-1 text-xs font-normal shadow-xs hover:bg-rose-100 hover:scale-105 transition-all cursor-pointer"
+                >
+                  {isPlayingAudio ? <Pause className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" /> : <Play className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" />}
+                  <span>{isPlayingAudio ? "Pause" : "Play Script"}</span>
+                </button>
+              </div>
+
+              {/* 2D/3D Canvas Spectrum */}
+              <div className="h-10 w-full flex items-center justify-center my-1">
+                <canvas ref={canvasRef} width={300} height={40} className="w-full h-full drop-shadow-[0_2px_8px_rgba(244,91,91,0.3)]" />
+              </div>
+
+              {/* Auto-Shifting Speech Dialogue Ribbon */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-2 pt-2 border-t border-border/30 text-xs text-foreground font-serif italic leading-relaxed min-h-[42px] flex items-center"
+                >
+                  {currentStage.dialogue.replace(/&apos;/g, "'")}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* 3D Stage Navigation Pills (Soft Light Rose - No Solid Red) */}
+              <div className="mt-3 pt-2 border-t border-border/30 grid grid-cols-4 gap-1">
+                {["1. Appliance", "2. HVAC", "3. Plumbing", "4. Electrical"].map((stageLabel, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveStage(idx)}
+                    className={cn(
+                      "text-[10px] font-normal py-1 px-1 rounded-lg border text-center transition-all cursor-pointer truncate",
+                      idx === activeStage
+                        ? "bg-rose-100 dark:bg-rose-900/70 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-700 font-semibold shadow-xs"
+                        : "bg-card/70 text-muted-foreground border-border/50 hover:bg-card"
+                    )}
+                  >
+                    {stageLabel}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
