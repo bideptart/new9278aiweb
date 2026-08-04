@@ -225,6 +225,7 @@ export function SiteChatbot() {
   const [hydrated, setHydrated] = useState(false)
   const [sendPulse, setSendPulse] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [composerFill, setComposerFill] = useState(0)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -298,7 +299,11 @@ export function SiteChatbot() {
     const el = textareaRef.current
     if (!el) return
     el.style.height = "auto"
-    el.style.height = `${Math.min(el.scrollHeight, 120)}px`
+    const next = Math.min(el.scrollHeight, 120)
+    el.style.height = `${next}px`
+    // how close the composer is to its 120px cap — drives the thin
+    // progress line along the top edge of the input.
+    setComposerFill(Math.min(1, el.scrollHeight / 120))
   }
 
   function streamInto(msgId: string, fullText: string, followUps: string[]) {
@@ -331,6 +336,7 @@ export function SiteChatbot() {
     const askedTexts = messages.filter((m) => m.role === "user").map((m) => m.text)
     setMessages((m) => [...m, { id: uid(), role: "user", text: q }])
     setInput("")
+    setComposerFill(0)
     if (textareaRef.current) textareaRef.current.style.height = "auto"
     setTyping(true)
 
@@ -977,10 +983,25 @@ export function SiteChatbot() {
               <div className={cn("mx-auto flex w-full items-end gap-2", expanded && "sm:max-w-2xl")}>
                 <div
                   className={cn(
-                    "flex flex-1 items-end gap-1 rounded-2xl border px-2 py-1 transition-colors focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15",
+                    "relative flex flex-1 items-end gap-1 overflow-hidden rounded-2xl border px-2 py-1 transition-colors focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15",
                     dark ? "border-white/10 bg-white/[0.04]" : "border-black/[0.08] bg-black/[0.02]",
                   )}
                 >
+                  {/* fill progress — how close the composer is to its max height */}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "pointer-events-none absolute inset-x-0 top-0 h-[2px] overflow-hidden",
+                      dark ? "bg-white/[0.06]" : "bg-black/[0.05]",
+                    )}
+                  >
+                    <motion.span
+                      className="block h-full origin-left bg-primary"
+                      animate={{ scaleX: composerFill }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      style={{ width: "100%" }}
+                    />
+                  </span>
                   <textarea
                     ref={textareaRef}
                     value={input}
@@ -993,6 +1014,7 @@ export function SiteChatbot() {
                     placeholder={listening ? "Listening…" : "Ask anything — or type / for commands"}
                     className={cn(
                       "max-h-[120px] flex-1 resize-none bg-transparent px-2 py-1.5 text-[12.5px] leading-relaxed focus:outline-none",
+                      "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
                       dark ? "text-white placeholder:text-white/35" : "text-foreground placeholder:text-muted-foreground/70",
                     )}
                     aria-label="Ask the 9278.ai assistant a question"

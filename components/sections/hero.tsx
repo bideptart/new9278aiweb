@@ -25,7 +25,15 @@ import {
   Star,
   Waves,
 } from "lucide-react"
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react"
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react"
 
 import { cn } from "@/lib/utils"
 import { HeroBackground } from "@/components/sections/hero-background"
@@ -92,6 +100,20 @@ export function Hero() {
   const [playing, setPlaying] = useState(false)
   const [endingIndex, setEndingIndex] = useState(0)
 
+  // Scroll-linked parallax: as the hero scrolls away, copy and showcase
+  // drift at different speeds — pure transform, spring-smoothed.
+  const { scrollY } = useScroll()
+  const copyDrift = useSpring(useTransform(scrollY, [0, 700], [0, 46]), {
+    stiffness: 120,
+    damping: 26,
+    mass: 0.4,
+  })
+  const showcaseDrift = useSpring(useTransform(scrollY, [0, 700], [0, 88]), {
+    stiffness: 120,
+    damping: 26,
+    mass: 0.4,
+  })
+
   useEffect(() => {
     if (reduced) return
     const id = setInterval(() => setEndingIndex((i) => (i + 1) % ROTATING_ENDINGS.length), ROTATE_MS)
@@ -116,9 +138,12 @@ export function Hero() {
     <section className="relative isolate flex min-h-[calc(100svh-4.5rem)] items-center overflow-hidden bg-white">
       <HeroBackground />
 
-      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-14">
+      {/* pt-* clears the fixed floating pill navbar (h-16 + top-3 ≈ 88px)
+          on every breakpoint — without this, the badge chip and headline
+          render underneath the navbar instead of below it. */}
+      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-4 pb-12 pt-28 sm:px-6 sm:pt-32 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-36">
         {/* ─────────────── LEFT ─────────────── */}
-        <div className="lg:col-span-6 xl:col-span-6">
+        <motion.div style={reduced ? undefined : { y: copyDrift }} className="lg:col-span-6 xl:col-span-6">
           {/* badge */}
           <motion.div {...reveal(0)}>
             <span className="glass ring-gradient group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full px-3.5 py-1.5 text-[11px] font-medium">
@@ -263,16 +288,17 @@ export function Hero() {
               </ul>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* ─────────────── RIGHT ─────────────── */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.93, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="lg:col-span-6 xl:col-span-6"
-        >
-          <HeroShowcase />
+        <motion.div style={reduced ? undefined : { y: showcaseDrift }} className="lg:col-span-6 xl:col-span-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.93, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <HeroShowcase />
+          </motion.div>
         </motion.div>
       </div>
 

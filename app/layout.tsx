@@ -7,6 +7,7 @@ import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/jsonld"
 import { PageviewTracker } from "@/components/analytics/pageview-tracker"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteChatbot } from "@/components/chat/site-chatbot"
+import { ScrollProgress } from "@/components/animation/scroll-progress"
 
 // Acepeak typography: Inter for body/UI, Instrument Serif for display headings
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
@@ -102,6 +103,7 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <PageviewTracker />
           </Suspense>
+          <ScrollProgress />
           {children}
           <SiteChatbot />
         </ThemeProvider>

@@ -1,8 +1,16 @@
 "use client"
 
 import type React from "react"
-import { motion, type Variants } from "motion/react"
+import { motion, useReducedMotion, type Variants } from "motion/react"
 import { cn } from "@/lib/utils"
+
+/* ==================================================================
+   Shared scroll-entrance system. One easing, one recipe — every
+   section on the page inherits the same "soft focus" reveal:
+   rise + fade + blur-to-sharp, on a long expo-out curve.
+   ================================================================== */
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 type ScrollRevealProps = {
   children: React.ReactNode
@@ -11,29 +19,36 @@ type ScrollRevealProps = {
   y?: number
 }
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.98, filter: "blur(6px)" },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i },
-  }),
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: EASE },
+  },
 }
 
-export function ScrollReveal({ children, className, delay = 0, y = 24 }: ScrollRevealProps) {
+export function ScrollReveal({ children, className, delay = 0, y = 28 }: ScrollRevealProps) {
+  const reduced = useReducedMotion()
+
+  if (reduced) return <div className={cn(className)}>{children}</div>
+
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
-      custom={delay}
       variants={{
-        hidden: { opacity: 0, y },
-        visible: (i: number) => ({
+        hidden: { opacity: 0, y, scale: 0.98, filter: "blur(6px)" },
+        visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i },
-        }),
+          scale: 1,
+          filter: "blur(0px)",
+          transition: { duration: 0.8, ease: EASE, delay },
+        },
       }}
       className={cn(className)}
     >
@@ -49,7 +64,11 @@ type StaggerProps = {
   stagger?: number
 }
 
-export function StaggerGroup({ children, className, stagger = 0.08 }: StaggerProps) {
+export function StaggerGroup({ children, className, stagger = 0.09 }: StaggerProps) {
+  const reduced = useReducedMotion()
+
+  if (reduced) return <div className={cn(className)}>{children}</div>
+
   return (
     <motion.div
       initial="hidden"
@@ -58,7 +77,7 @@ export function StaggerGroup({ children, className, stagger = 0.08 }: StaggerPro
       variants={{
         hidden: {},
         visible: {
-          transition: { staggerChildren: stagger, delayChildren: 0.05 },
+          transition: { staggerChildren: stagger, delayChildren: 0.08 },
         },
       }}
       className={cn(className)}
@@ -70,7 +89,7 @@ export function StaggerGroup({ children, className, stagger = 0.08 }: StaggerPro
 
 export function StaggerItem({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <motion.div variants={variants} className={cn(className)}>
+    <motion.div variants={itemVariants} className={cn(className)}>
       {children}
     </motion.div>
   )
