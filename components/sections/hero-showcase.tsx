@@ -646,35 +646,40 @@ export function HeroShowcase() {
       className="relative mx-auto w-full max-w-[440px] lg:max-w-[480px]"
       style={{ perspective: 1400 }}
     >
-      {/* dual halo */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-[3rem] bg-primary/[0.16] blur-[90px]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-[45%] w-[45%] rounded-full bg-[var(--ai-magenta)]/[0.12] blur-[80px]"
-      />
-
-      {/* stacked deck behind the console — cheap depth */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -rotate-3 scale-[0.97] rounded-[26px] border border-black/[0.05] bg-white/50 shadow-sm"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 rotate-2 scale-[0.985] rounded-[26px] border border-black/[0.05] bg-white/70 shadow-sm"
-      />
-
+      {/* organic color blobs instead of stacked rectangle "ghost cards" —
+          soft, edgeless depth rather than more boxes behind the box */}
       <motion.div
-        className="uc-border relative z-10 overflow-hidden rounded-[26px] p-1.5 shadow-[0_30px_80px_-40px_color-mix(in_oklch,var(--primary)_45%,transparent)] [transform-style:preserve-3d] [will-change:transform]"
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-10 top-1/2 h-[70%] w-[70%] -translate-y-1/2 rounded-full bg-primary/[0.18] blur-[70px]"
+        animate={reduced ? undefined : { scale: [1, 1.12, 1], x: [0, 12, 0] }}
+        transition={{ duration: 9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-8 top-0 h-[55%] w-[55%] rounded-full bg-[var(--ai-magenta)]/[0.16] blur-[70px]"
+        animate={reduced ? undefined : { scale: [1, 1.15, 1], y: [0, -10, 0] }}
+        transition={{ duration: 11, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-8 left-1/3 h-[40%] w-[40%] rounded-full bg-primary/[0.12] blur-[60px]"
+        animate={reduced ? undefined : { scale: [1, 1.2, 1] }}
+        transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
+      />
+
+      {/* the console itself — a single clean surface (no stacked bezel/frame
+          boxes), edges softened with a hairline gradient ring instead of a
+          thick device bezel, so it reads as one floating panel rather than
+          "a box inside a box." */}
+      <motion.div
+        className="ring-gradient relative z-10 overflow-hidden rounded-[28px] bg-white shadow-[0_30px_80px_-35px_color-mix(in_oklch,var(--primary)_40%,transparent)] [transform-style:preserve-3d] [will-change:transform]"
         style={reduced ? undefined : { rotateX, rotateY }}
         animate={reduced ? undefined : { y: [0, -10, 0] }}
         transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       >
         <div className="scan-line" />
 
-        <div className="relative overflow-hidden rounded-[20px] border border-black/[0.05] bg-white">
+        <div className="relative overflow-hidden rounded-[28px]">
           {/* persistent agent bar — the voice identity that carries every slide */}
           <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white px-3.5 py-2.5">
             <VoiceOrb />
