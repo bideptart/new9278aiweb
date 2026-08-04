@@ -6,17 +6,11 @@ import {
   Globe2,
   PhoneForwarded,
   ShieldCheck,
-  Phone,
   PhoneIncoming,
   PhoneOutgoing,
-  CreditCard,
-  ArrowLeftRight,
-  AudioLines,
-  UserRound,
-  Link2,
-  Lock,
-  MessagesSquare,
-  BarChart3,
+  Check,
+  Wifi,
+  Gauge,
   ChevronDown,
 } from "lucide-react"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
@@ -37,468 +31,184 @@ function useIsDesktop() {
   return isDesktop
 }
 
-/* ------------------------------------------------------------------
-   01 · Bring your own number
-   ------------------------------------------------------------------
-   Soft-3D "clay" illustration: a flattened isometric podium carrying
-   the account tile, ringed by orbiting capability tiles on dashed
-   leaders, with three fact chips along the bottom.
+/* ==================================================================
+   Full redesign — the old clay/podium illustrations (orbiting tiles,
+   dashed leader lines, flattened 3D slabs) are gone. Each mockup now
+   sits inside the same plain "window chrome" used elsewhere on the
+   site (agent-builder, knowledge-index, etc.) so this section reads
+   as a real product screen instead of a decorative graphic.
+   ================================================================== */
 
-   The 3D read comes from gradients + `rotate(45deg) scaleY(0.56)` on
-   stacked slabs — no images, no WebGL, nothing to download. Every
-   moving part is transform-only and stops under reduced motion.
-   ------------------------------------------------------------------ */
-
-/** Warm pink backdrop + breathing centre glow, shared by all three cards. */
-function ClayCanvas({ reduced }: { reduced: boolean }) {
+function MockWindow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 70% 60% at 50% 42%, color-mix(in oklch, var(--primary) 7%, white), color-mix(in oklch, var(--primary) 3%, white) 70%, white 100%)",
-        }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.13] blur-[80px]"
-        animate={reduced ? undefined : { scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-      />
-    </>
-  )
-}
-
-/** A floating clay tile with a caption underneath. */
-function LabeledTile({
-  icon: Icon,
-  label,
-  pos,
-  delay,
-  size = 46,
-}: {
-  icon: typeof Phone
-  label: string
-  pos: string
-  delay: number
-  size?: number
-}) {
-  const reduced = useReducedMotion()
-  return (
-    <div className={cn("absolute z-20 flex w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5", pos)}>
-      <motion.span
-        className="flex items-center justify-center rounded-full"
-        style={{
-          width: size,
-          height: size,
-          backgroundImage:
-            "linear-gradient(150deg, #fff 0%, #fff 45%, color-mix(in oklch, var(--primary) 10%, white) 100%)",
-          boxShadow:
-            "0 10px 20px -8px color-mix(in oklch, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255,255,255,0.9)",
-        }}
-        animate={reduced ? undefined : { y: [0, -6, 0] }}
-        transition={{ duration: 5.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay }}
-      >
-        <Icon
-          className="text-primary"
-          style={{ width: size * 0.42, height: size * 0.42 }}
-          strokeWidth={2.2}
-          aria-hidden="true"
-        />
-      </motion.span>
-      <span className="text-center text-[9px] font-medium leading-tight text-muted-foreground">{label}</span>
-    </div>
-  )
-}
-
-/** Orbiting capability tile. `pos` places it, `delay` staggers the float. */
-function OrbitTile({
-  icon: Icon,
-  pos,
-  delay,
-  size = 46,
-}: {
-  icon: typeof Phone
-  pos: string
-  delay: number
-  size?: number
-}) {
-  const reduced = useReducedMotion()
-  // Centring lives on a plain wrapper; Motion owns `transform` on the inner
-  // element, so the two never fight over the same property.
-  return (
-    <div className={cn("absolute z-20 -translate-x-1/2 -translate-y-1/2", pos)}>
-      <motion.span
-        className="flex items-center justify-center rounded-[30%]"
-        style={{
-          width: size,
-          height: size,
-          backgroundImage:
-            "linear-gradient(150deg, #fff 0%, #fff 45%, color-mix(in oklch, var(--primary) 9%, white) 100%)",
-          boxShadow:
-            "0 10px 20px -8px color-mix(in oklch, var(--primary) 30%, transparent), inset 0 1px 0 rgba(255,255,255,0.9)",
-        }}
-        animate={reduced ? undefined : { y: [0, -7, 0] }}
-        transition={{ duration: 5.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay }}
-      >
-        <Icon
-          className="text-primary"
-          style={{ width: size * 0.42, height: size * 0.42 }}
-          strokeWidth={2.2}
-          aria-hidden="true"
-        />
-      </motion.span>
-    </div>
-  )
-}
-
-/** One flattened slab of the podium. */
-function Slab({
-  w,
-  y,
-  from,
-  to,
-  z,
-}: {
-  w: number
-  y: number
-  from: string
-  to: string
-  z: number
-}) {
-  return (
-    <span
-      className="absolute left-1/2 top-1/2 rounded-[26%]"
-      style={{
-        width: w,
-        height: w,
-        zIndex: z,
-        transform: `translate(-50%, -50%) translateY(${y}px) rotate(45deg) scaleY(0.56)`,
-        backgroundImage: `linear-gradient(145deg, ${from}, ${to})`,
-      }}
-    />
-  )
-}
-
-function CarrierPhoneMockup() {
-  const reduced = useReducedMotion()
-
-  return (
-    <div className="relative flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl">
-      <ClayCanvas reduced={!!reduced} />
-
-      {/* dashed orbit rings — circles flattened into ellipses */}
-      {[
-        { w: "84%", s: 0.4, o: "border-primary/25", dur: 38 },
-        { w: "58%", s: 0.42, o: "border-primary/20", dur: 26 },
-      ].map((ring, i) => (
-        <motion.span
-          key={i}
+    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-black/[0.07] bg-white">
+      <div className="grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1.5 border-b border-black/[0.05] bg-black/[0.015] px-3 py-2">
+        <span className="flex gap-[3px]">
+          <span className="h-[6px] w-[6px] rounded-full bg-primary/60" />
+          <span className="h-[6px] w-[6px] rounded-full bg-primary/35" />
+          <span className="h-[6px] w-[6px] rounded-full bg-primary/35" />
+        </span>
+        <span aria-hidden />
+        <span className="flex justify-end">
+          <span className="truncate font-mono text-[9px] tracking-wide text-muted-foreground/70">{label}</span>
+        </span>
+      </div>
+      <div className="relative min-h-0 flex-1 p-4 sm:p-5">
+        <div
           aria-hidden
-          className={cn(
-            "pointer-events-none absolute left-1/2 top-[46%] aspect-square rounded-full border border-dashed",
-            ring.o,
-          )}
-          style={{ width: ring.w }}
-          initial={{ rotate: 0 }}
-          animate={reduced ? undefined : { rotate: i % 2 ? -360 : 360 }}
-          transition={{ duration: ring.dur, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-          // scaleY flattens the circle; the translate keeps it centred.
-          transformTemplate={({ rotate }) =>
-            `translate(-50%, -50%) scaleY(${ring.s}) rotate(${rotate ?? "0deg"})`
-          }
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,color-mix(in_oklch,var(--primary)_6%,transparent),transparent_62%)]"
         />
-      ))}
-
-      {/* dashed leaders from the podium out to each tile */}
-      <svg className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
-        {[
-          { x2: "52%", y2: "20%" },
-          { x2: "21%", y2: "33%" },
-          { x2: "80%", y2: "34%" },
-          { x2: "25%", y2: "63%" },
-          { x2: "78%", y2: "62%" },
-        ].map((l, i) => (
-          <line
-            key={i}
-            x1="50%"
-            y1="46%"
-            {...l}
-            stroke="url(#connGrad)"
-            strokeWidth="1"
-            strokeDasharray="3 5"
-            className={reduced ? undefined : "conn-flow"}
-            style={{ animationDelay: `${i * 0.35}s` }}
-          />
-        ))}
-        <defs>
-          <linearGradient id="connGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="var(--primary)" stopOpacity="0.12" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      {/* ── podium ── */}
-      <div className="absolute left-1/2 top-[46%] z-10 h-[150px] w-[150px] -translate-x-1/2 -translate-y-1/2">
-        <motion.div
-          className="relative h-full w-full"
-          animate={reduced ? undefined : { y: [0, -6, 0] }}
-          transition={{ duration: 6.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        >
-          {/* contact shadow on the floor */}
-          <span
-            aria-hidden
-            className="absolute left-1/2 top-1/2 h-[52px] w-[130px] rounded-[50%] bg-primary/20 blur-xl"
-            style={{ transform: "translate(-50%, 18px)" }}
-          />
-          <Slab w={132} y={26} from="color-mix(in oklch, var(--primary) 42%, white)" to="color-mix(in oklch, var(--primary) 22%, white)" z={1} />
-          <Slab w={132} y={16} from="color-mix(in oklch, var(--primary) 20%, white)" to="color-mix(in oklch, var(--primary) 10%, white)" z={2} />
-          <Slab w={124} y={4} from="#ffffff" to="color-mix(in oklch, var(--primary) 8%, white)" z={3} />
-
-          {/* the account tile, floating just above the podium */}
-          <span
-            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
-            style={{ marginTop: -14 }}
-          >
-            <motion.span
-              className="flex h-[62px] w-[62px] items-center justify-center rounded-[30%]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(150deg, #fff 0%, #fff 40%, color-mix(in oklch, var(--primary) 12%, white) 100%)",
-                boxShadow:
-                  "0 16px 26px -12px color-mix(in oklch, var(--primary) 45%, transparent), inset 0 1px 0 rgba(255,255,255,0.95)",
-              }}
-              animate={reduced ? undefined : { scale: [1, 1.04, 1] }}
-              transition={{ duration: 3.4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            >
-              <UserRound className="h-6 w-6 text-primary" strokeWidth={2.1} aria-hidden="true" />
-            </motion.span>
-          </span>
-        </motion.div>
-      </div>
-
-      {/* ── orbiting capability tiles ── */}
-      <OrbitTile icon={ShieldCheck} pos="left-[52%] top-[20%]" delay={0} size={44} />
-      <OrbitTile icon={CreditCard} pos="left-[21%] top-[33%]" delay={0.9} size={46} />
-      <OrbitTile icon={Globe2} pos="left-[80%] top-[34%]" delay={1.8} size={46} />
-      <OrbitTile icon={Phone} pos="left-[25%] top-[63%]" delay={2.7} size={44} />
-      <OrbitTile icon={AudioLines} pos="left-[78%] top-[62%]" delay={3.6} size={44} />
-
-      {/* ── bottom fact chips ── */}
-      <div className="relative z-30 mt-auto grid grid-cols-3 gap-2 p-4">
-        {[
-          { icon: ShieldCheck, title: "No porting", sub: "Keep everything as is." },
-          { icon: Link2, title: "Works on what", sub: "you already use." },
-          { icon: Globe2, title: "Global coverage", sub: "60+ countries" },
-        ].map((c) => (
-          <div
-            key={c.title}
-            className="flex items-start gap-2 rounded-xl bg-white/85 px-2.5 py-2 ring-1 ring-black/[0.05] backdrop-blur-sm"
-          >
-            <c.icon className="mt-[1px] h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2.25} aria-hidden="true" />
-            <span className="min-w-0 leading-tight">
-              <span className="block text-[9.5px] font-semibold leading-tight text-foreground">{c.title}</span>
-              <span className="block text-[8.5px] leading-tight text-muted-foreground">{c.sub}</span>
-            </span>
-          </div>
-        ))}
+        <div className="relative h-full">{children}</div>
       </div>
     </div>
   )
 }
 
-/* ------------------------------------------------------------------
-   02 · Inbound and outbound — two lanes, one agent
-   ------------------------------------------------------------------ */
+/* ---------- 01 · bring your own number ------------------------------ */
 
-function InboundOutboundDashboardMockup() {
+function CarrierNumberMockup() {
   const reduced = useReducedMotion()
+  const checks = ["No porting required", "Instant activation", "Keep your billing"]
 
   return (
-    <div className="relative flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl">
-      <ClayCanvas reduced={!!reduced} />
-
-      {/* dashed leaders: in → hub → out, then hub down to the three outputs */}
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        {[
-          "M19,29 Q33,29 41,37",
-          "M81,29 Q67,29 59,37",
-          "M50,56 L50,63 Q50,68 44,68 L23,68 Q20,68 20,71",
-          "M50,56 L50,71",
-          "M50,56 L50,63 Q50,68 56,68 L77,68 Q80,68 80,71",
-        ].map((d, i) => (
-          <path
-            key={d}
-            d={d}
-            fill="none"
-            stroke="var(--primary)"
-            strokeOpacity="0.38"
-            strokeWidth="1"
-            strokeDasharray="3 5"
-            vectorEffect="non-scaling-stroke"
-            className={reduced ? undefined : "conn-flow"}
-            style={{ animationDelay: `${i * 0.3}s` }}
-          />
-        ))}
-      </svg>
-
-      {/* direction tiles */}
-      <LabeledTile icon={PhoneIncoming} label="Inbound" pos="left-[19%] top-[29%]" delay={0} size={46} />
-      <LabeledTile icon={PhoneOutgoing} label="Outbound" pos="left-[81%] top-[29%]" delay={1.1} size={46} />
-
-      {/* ── hub podium ── */}
-      <div className="absolute left-1/2 top-[44%] z-10 h-[140px] w-[140px] -translate-x-1/2 -translate-y-1/2">
-        <motion.div
-          className="relative h-full w-full"
-          animate={reduced ? undefined : { y: [0, -6, 0] }}
-          transition={{ duration: 6.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        >
-          <span
-            aria-hidden
-            className="absolute left-1/2 top-1/2 h-[48px] w-[122px] rounded-[50%] bg-primary/20 blur-xl"
-            style={{ transform: "translate(-50%, 16px)" }}
-          />
-          <Slab w={124} y={24} from="color-mix(in oklch, var(--primary) 42%, white)" to="color-mix(in oklch, var(--primary) 22%, white)" z={1} />
-          <Slab w={124} y={14} from="color-mix(in oklch, var(--primary) 20%, white)" to="color-mix(in oklch, var(--primary) 10%, white)" z={2} />
-          <Slab w={116} y={3} from="#ffffff" to="color-mix(in oklch, var(--primary) 8%, white)" z={3} />
-
-          <span className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2" style={{ marginTop: -16 }}>
+    <MockWindow label="carrier-connect">
+      <div className="flex h-full flex-col gap-4">
+        <div className="flex items-center gap-2.5 rounded-xl bg-black/[0.03] px-3 py-2.5 ring-1 ring-black/[0.05]">
+          <PhoneForwarded className="h-4 w-4 shrink-0 text-primary" strokeWidth={2.25} aria-hidden="true" />
+          <span className="font-mono text-[13px] font-medium text-foreground/80">+1 (415) 555-0142</span>
+          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-[3px] text-[10px] font-bold uppercase tracking-wider text-primary">
             <motion.span
-              className="flex h-[64px] w-[64px] items-center justify-center rounded-full"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 34% 28%, color-mix(in oklch, var(--primary) 55%, white), var(--primary))",
-                boxShadow:
-                  "0 16px 28px -12px color-mix(in oklch, var(--primary) 55%, transparent), inset 0 1px 0 rgba(255,255,255,0.5)",
-              }}
-              animate={reduced ? undefined : { scale: [1, 1.05, 1] }}
-              transition={{ duration: 3.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            >
-              <ArrowLeftRight className="h-6 w-6 text-white" strokeWidth={2.4} aria-hidden="true" />
-            </motion.span>
+              className="h-1.5 w-1.5 rounded-full bg-primary"
+              animate={reduced ? undefined : { opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            />
+            Connected
           </span>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* hub caption */}
-      <div className="absolute left-1/2 top-[58%] z-20 -translate-x-1/2 text-center">
-        <p className="text-[10px] font-semibold leading-tight text-primary">One agent</p>
-        <p className="text-[9px] leading-tight text-muted-foreground">one number</p>
-      </div>
+        <div className="flex flex-1 flex-col justify-center gap-2.5">
+          {checks.map((c, i) => (
+            <motion.div
+              key={c}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12, duration: 0.4 }}
+              className="flex items-center gap-2.5"
+            >
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
+              </span>
+              <span className="text-[13px] text-foreground/75">{c}</span>
+            </motion.div>
+          ))}
+        </div>
 
-      {/* what the hub drives */}
-      <LabeledTile icon={AudioLines} label="Live call handling" pos="left-[20%] top-[78%]" delay={0.5} size={44} />
-      <LabeledTile icon={MessagesSquare} label="Smart routing" pos="left-[50%] top-[78%]" delay={1.6} size={44} />
-      <LabeledTile icon={BarChart3} label="Real-time analytics" pos="left-[80%] top-[78%]" delay={2.7} size={44} />
-    </div>
+        <div className="flex items-center gap-2 border-t border-black/[0.06] pt-3 text-[10.5px] text-muted-foreground">
+          <ShieldCheck className="h-3 w-3 text-primary" strokeWidth={2.25} aria-hidden="true" />
+          Works with the carrier you already use — nothing to migrate.
+        </div>
+      </div>
+    </MockWindow>
   )
 }
 
-/* ------------------------------------------------------------------
-   03 · Carrier-grade voice — the call path
-   ------------------------------------------------------------------ */
+/* ---------- 02 · inbound and outbound -------------------------------- */
+
+function InboundOutboundMockup() {
+  const reduced = useReducedMotion()
+  const [inbound, setInbound] = useState(842)
+  const [outbound, setOutbound] = useState(316)
+
+  useEffect(() => {
+    if (reduced) return
+    const id = setInterval(() => {
+      setInbound((v) => v + 1)
+      if (Math.random() > 0.5) setOutbound((v) => v + 1)
+    }, 1400)
+    return () => clearInterval(id)
+  }, [reduced])
+
+  return (
+    <MockWindow label="call-routing">
+      <div className="flex h-full flex-col justify-center gap-3">
+        <div className="flex items-center gap-3 rounded-xl bg-black/[0.03] p-3 ring-1 ring-black/[0.05]">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <PhoneIncoming className="h-4 w-4" strokeWidth={2.25} aria-hidden="true" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[12px] font-semibold text-foreground/85">Inbound</p>
+            <p className="text-[10.5px] text-muted-foreground">Answered automatically, 24/7</p>
+          </div>
+          <span className="shrink-0 font-mono text-lg font-bold tabular-nums text-primary">{inbound}</span>
+        </div>
+
+        <div className="flex items-center gap-3 rounded-xl bg-black/[0.03] p-3 ring-1 ring-black/[0.05]">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <PhoneOutgoing className="h-4 w-4" strokeWidth={2.25} aria-hidden="true" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[12px] font-semibold text-foreground/85">Outbound</p>
+            <p className="text-[10.5px] text-muted-foreground">Campaigns and follow-ups</p>
+          </div>
+          <span className="shrink-0 font-mono text-lg font-bold tabular-nums text-primary">{outbound}</span>
+        </div>
+
+        <div className="mt-1 flex items-center justify-center gap-1.5 text-[10.5px] font-medium text-muted-foreground">
+          <span className="h-1 w-1 rounded-full bg-primary" />
+          One agent, one number, both directions
+        </div>
+      </div>
+    </MockWindow>
+  )
+}
+
+/* ---------- 03 · carrier-grade voice --------------------------------- */
+
+const REGIONS = ["US", "UK", "IN", "AU", "DE", "BR", "AE", "SG"]
 
 function CarrierGradeVoiceMockup() {
-  const reduced = useReducedMotion()
-
   return (
-    <div className="relative flex h-full min-h-[420px] w-full flex-col overflow-hidden rounded-3xl">
-      <ClayCanvas reduced={!!reduced} />
-
-      {/* dashed orbit around the globe */}
-      <motion.span
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[47%] aspect-square w-[76%] rounded-full border border-dashed border-primary/25"
-        initial={{ rotate: 0 }}
-        animate={reduced ? undefined : { rotate: 360 }}
-        transition={{ duration: 44, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        transformTemplate={({ rotate }) => `translate(-50%, -50%) scaleY(0.38) rotate(${rotate ?? "0deg"})`}
-      />
-
-      {/* ── globe on a tiered podium ── */}
-      <div className="absolute left-1/2 top-[47%] z-10 h-[170px] w-[170px] -translate-x-1/2 -translate-y-1/2">
-        <motion.div
-          className="relative h-full w-full"
-          animate={reduced ? undefined : { y: [0, -6, 0] }}
-          transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-        >
-          <span
-            aria-hidden
-            className="absolute left-1/2 top-1/2 h-[46px] w-[140px] rounded-[50%] bg-primary/20 blur-xl"
-            style={{ transform: "translate(-50%, 44px)" }}
-          />
-
-          {/* concentric discs */}
-          {[
-            { w: 150, y: 52, from: "color-mix(in oklch, var(--primary) 38%, white)", to: "color-mix(in oklch, var(--primary) 20%, white)" },
-            { w: 124, y: 44, from: "color-mix(in oklch, var(--primary) 22%, white)", to: "color-mix(in oklch, var(--primary) 12%, white)" },
-            { w: 100, y: 36, from: "#ffffff", to: "color-mix(in oklch, var(--primary) 9%, white)" },
-          ].map((d) => (
+    <MockWindow label="network-status">
+      <div className="flex h-full flex-col justify-center gap-4">
+        <div className="flex flex-wrap gap-1.5">
+          {REGIONS.map((r) => (
             <span
-              key={d.w}
-              aria-hidden
-              className="absolute left-1/2 top-1/2 rounded-full"
-              style={{
-                width: d.w,
-                height: d.w,
-                transform: `translate(-50%, -50%) translateY(${d.y}px) scaleY(0.3)`,
-                backgroundImage: `linear-gradient(145deg, ${d.from}, ${d.to})`,
-              }}
-            />
+              key={r}
+              className="inline-flex items-center gap-1 rounded-lg bg-black/[0.03] px-2 py-1 text-[10.5px] font-semibold text-foreground/70 ring-1 ring-black/[0.05]"
+            >
+              <span className="h-1 w-1 rounded-full bg-primary" />
+              {r}
+            </span>
           ))}
-
-          {/* the sphere */}
-          <span
-            className="absolute left-1/2 top-1/2 h-[104px] w-[104px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full"
-            style={{
-              marginTop: -12,
-              backgroundImage:
-                "radial-gradient(circle at 32% 26%, #fff 0%, color-mix(in oklch, var(--primary) 14%, white) 45%, color-mix(in oklch, var(--primary) 42%, white) 100%)",
-              boxShadow:
-                "0 18px 30px -14px color-mix(in oklch, var(--primary) 55%, transparent), inset -6px -8px 18px color-mix(in oklch, var(--primary) 22%, transparent)",
-            }}
-          >
-            {/* dotted landmass, drifting to suggest rotation */}
-            <motion.span
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                backgroundImage:
-                  "radial-gradient(color-mix(in oklch, var(--primary) 60%, transparent) 1px, transparent 1px)",
-                backgroundSize: "6px 6px",
-                maskImage: "radial-gradient(circle at 42% 40%, #000 55%, transparent 78%)",
-                WebkitMaskImage: "radial-gradient(circle at 42% 40%, #000 55%, transparent 78%)",
-              }}
-              animate={reduced ? undefined : { backgroundPositionX: ["0px", "48px"] }}
-              transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-            />
-            {/* latitude hairlines */}
-            {[30, 50, 70].map((t) => (
-              <span
-                key={t}
-                aria-hidden
-                className="absolute left-0 w-full border-t border-white/40"
-                style={{ top: `${t}%` }}
-              />
-            ))}
+          <span className="inline-flex items-center rounded-lg bg-primary/10 px-2 py-1 text-[10.5px] font-semibold text-primary">
+            +52 more
           </span>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* four guarantees, one per corner */}
-      <LabeledTile icon={ShieldCheck} label="Carrier verified" pos="left-[17%] top-[24%]" delay={0} size={46} />
-      <LabeledTile icon={AudioLines} label="Crystal clear voice" pos="left-[83%] top-[24%]" delay={1} size={46} />
-      <LabeledTile icon={Lock} label="Secure by default" pos="left-[17%] top-[76%]" delay={2} size={46} />
-      <LabeledTile icon={Globe2} label="Global scale reliability" pos="left-[83%] top-[76%]" delay={3} size={46} />
-    </div>
+        <div className="grid grid-cols-3 divide-x divide-black/[0.06] rounded-xl bg-black/[0.03] ring-1 ring-black/[0.05]">
+          <div className="flex flex-col items-center gap-1 px-2 py-3">
+            <Globe2 className="h-3.5 w-3.5 text-primary" strokeWidth={2.25} aria-hidden="true" />
+            <span className="font-mono text-[13px] font-bold text-foreground">60+</span>
+            <span className="text-center text-[9px] leading-tight text-muted-foreground">countries</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 px-2 py-3">
+            <Gauge className="h-3.5 w-3.5 text-primary" strokeWidth={2.25} aria-hidden="true" />
+            <span className="font-mono text-[13px] font-bold text-foreground">&lt;150ms</span>
+            <span className="text-center text-[9px] leading-tight text-muted-foreground">latency</span>
+          </div>
+          <div className="flex flex-col items-center gap-1 px-2 py-3">
+            <Wifi className="h-3.5 w-3.5 text-primary" strokeWidth={2.25} aria-hidden="true" />
+            <span className="font-mono text-[13px] font-bold text-foreground">99.99%</span>
+            <span className="text-center text-[9px] leading-tight text-muted-foreground">uptime</span>
+          </div>
+        </div>
+
+        <p className="text-center text-[10.5px] text-muted-foreground">
+          Your provider's network carries the call — we handle the brain.
+        </p>
+      </div>
+    </MockWindow>
   )
 }
 
@@ -526,9 +236,9 @@ const items = [
 ]
 
 function MockupFor({ index }: { index: number }) {
-  if (index === 1) return <InboundOutboundDashboardMockup />
+  if (index === 1) return <InboundOutboundMockup />
   if (index === 2) return <CarrierGradeVoiceMockup />
-  return <CarrierPhoneMockup />
+  return <CarrierNumberMockup />
 }
 
 export function Connectivity() {
@@ -623,10 +333,7 @@ export function Connectivity() {
                           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                           className="overflow-hidden lg:hidden"
                         >
-                          <div
-                            className="ring-gradient card-glow relative mt-3 overflow-hidden rounded-3xl"
-                            style={{ height: 430 }}
-                          >
+                          <div className="relative mt-3 overflow-hidden rounded-2xl" style={{ height: 300 }}>
                             <MockupFor index={i} />
                           </div>
                         </motion.div>
@@ -640,15 +347,19 @@ export function Connectivity() {
 
           {/* RIGHT: swaps with whichever item is hovered — desktop/tablet only */}
           <ScrollReveal className="hidden lg:col-span-6 lg:block">
-            <div className="ring-gradient card-glow relative min-h-[460px] overflow-hidden rounded-3xl sm:aspect-[4/3] sm:min-h-0">
+            <div className="relative min-h-[340px] overflow-hidden">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-primary/[0.08] blur-3xl"
+              />
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
+                  className="min-h-[340px]"
                 >
                   <MockupFor index={active} />
                 </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Star, TrendingUp, Clock, PhoneCall, BadgeCheck, Building2, Quote } from "lucide-react"
+import { TrendingUp, Clock, PhoneCall, Rocket, ShieldCheck, BadgeCheck, Building2 } from "lucide-react"
 import { motion, useReducedMotion } from "motion/react"
 import { ScrollReveal } from "@/components/animation/scroll-reveal"
 import { cn } from "@/lib/utils"
@@ -33,6 +33,7 @@ const metrics = [
 const testimonials = [
   {
     metric: "Saved 60 hrs / week",
+    metricIcon: Clock,
     industry: "Real estate",
     quote:
       "Aria handles every inbound after-hours call now. We replaced an offshore answering service inside two weeks and our reply time dropped from 14 minutes to under one.",
@@ -43,6 +44,7 @@ const testimonials = [
   },
   {
     metric: "+38% conversion",
+    metricIcon: TrendingUp,
     industry: "Solar",
     quote:
       "The agent handles objections better than half my SDRs. Real interruptions, real follow-up questions — the prospects don't realize they're talking to AI until we tell them.",
@@ -53,6 +55,7 @@ const testimonials = [
   },
   {
     metric: "99.4% deflection",
+    metricIcon: ShieldCheck,
     industry: "Logistics",
     quote:
       "We pointed our business number at 9278 and within a day it was triaging, scheduling, and updating our CRM on its own. The remaining 0.6% are the calls humans should handle anyway.",
@@ -63,6 +66,7 @@ const testimonials = [
   },
   {
     metric: "Live in 4 days",
+    metricIcon: Rocket,
     industry: "Dental",
     quote:
       "I was quoted 6 months by an enterprise vendor. We had a working voice agent in production by day four — connected to our calendar, CRM, and existing phone number — at an order of magnitude less.",
@@ -132,97 +136,81 @@ function readSeconds(quote: string) {
  */
 function CallCard({ t }: { t: (typeof testimonials)[number] }) {
   const secs = readSeconds(t.quote)
+  const MetricIcon = t.metricIcon
 
   return (
     <div className="group/card relative shrink-0 py-4">
       {/* soft ambient glow — blooms on hover */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-4 -z-10 rounded-[28px] bg-primary/[0.14] opacity-0 blur-2xl transition-opacity duration-500 group-hover/card:opacity-100"
+        className="pointer-events-none absolute inset-4 -z-10 rounded-[24px] bg-primary/[0.14] opacity-0 blur-2xl transition-opacity duration-500 group-hover/card:opacity-100"
       />
-      <figure className="testimonial-card ring-gradient group relative flex h-full w-[290px] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_2px_14px_rgba(17,17,17,0.05)] transition-shadow duration-300 hover:shadow-[0_28px_60px_-20px_color-mix(in_oklch,var(--primary)_32%,transparent)] sm:w-[368px]">
-        {/* ambient wash */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse at 85% 0%, color-mix(in oklch, var(--primary) 9%, transparent), transparent 58%)",
-          }}
-        />
-        {/* top accent line */}
+      <figure className="testimonial-card group relative flex h-full w-[290px] max-w-[calc(100vw-2.5rem)] flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white pl-1 shadow-[0_2px_14px_rgba(17,17,17,0.05)] transition-shadow duration-300 hover:shadow-[0_28px_60px_-20px_color-mix(in_oklch,var(--primary)_32%,transparent)] sm:w-[368px]">
+        {/* left accent bar instead of a top gradient line */}
         <span
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[2.5px]"
+          className="absolute inset-y-0 left-0 w-1"
           style={{
             backgroundImage:
-              "linear-gradient(90deg, transparent, var(--primary), color-mix(in oklch, var(--primary) 60%, var(--ai-magenta)), transparent)",
+              "linear-gradient(180deg, var(--primary), color-mix(in oklch, var(--primary) 55%, var(--ai-magenta)))",
           }}
-        />
-        {/* glass highlight sweep */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 -top-1/2 h-full -translate-y-2 bg-gradient-to-b from-white/60 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
         />
 
-        {/* ── header ─────────────────────────────────────────────── */}
-        <div className="relative flex items-center gap-3 px-5 pt-5">
-          <span className="relative flex h-11 w-11 shrink-0 items-center justify-center">
+        <div className="relative flex flex-1 flex-col p-5 pl-6">
+          {/* ── metric + icon row, up top ────────────────────────── */}
+          <div className="flex items-center gap-3">
             <span
-              aria-hidden
-              className="absolute inset-0 rounded-full bg-primary/30 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100"
-            />
-            <span
-              className="relative flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold text-white ring-2 ring-white"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 35% 28%, color-mix(in oklch, var(--primary) 62%, white), var(--primary))",
+                  "linear-gradient(150deg, var(--primary), color-mix(in oklch, var(--primary) 60%, var(--ai-magenta)))",
+                boxShadow: "0 10px 20px -10px color-mix(in oklch, var(--primary) 55%, transparent)",
               }}
             >
-              {t.initial}
+              <MetricIcon className="h-4.5 w-4.5" strokeWidth={2.25} aria-hidden="true" />
             </span>
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="flex items-center gap-1.5 truncate text-[13px] font-semibold tracking-tight">
-              {t.author}
-              <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
-            </p>
-            <p className="truncate text-[11px] text-muted-foreground">
-              {t.role} · {t.company}
-            </p>
+            <div className="min-w-0">
+              <p className="truncate text-[13.5px] font-bold tracking-tight text-foreground">{t.metric}</p>
+              <p className="flex items-center gap-1 text-[10.5px] text-muted-foreground">
+                <Building2 className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden="true" />
+                {t.industry}
+              </p>
+            </div>
+            <span className="ml-auto shrink-0 self-start font-mono text-[9.5px] tabular-nums text-muted-foreground/45">
+              {secs}s read
+            </span>
           </div>
-          <span className="flex shrink-0 items-center gap-0.5 text-amber-400">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-3 w-3 fill-current" aria-hidden="true" />
-            ))}
-          </span>
-        </div>
 
-        {/* ── the quote, as the centerpiece ────────────────────────── */}
-        <div className="relative mt-4 flex-1 px-5">
-          <Quote
-            aria-hidden
-            className="h-6 w-6 text-primary/25 transition-colors duration-500 group-hover:text-primary/50"
-            strokeWidth={2.5}
-          />
-          <blockquote className="mt-1.5 text-pretty font-serif text-[15px] leading-relaxed tracking-tight text-foreground/85">
-            {t.quote}
+          {/* ── the quote ─────────────────────────────────────────── */}
+          <blockquote className="mt-4 flex-1 text-pretty font-serif text-[15px] italic leading-relaxed tracking-tight text-foreground/85">
+            “{t.quote}”
           </blockquote>
-        </div>
 
-        {/* ── outcome footer ─────────────────────────────────────── */}
-        <div className="relative mt-5 flex items-center gap-2 border-t border-black/[0.06] px-5 py-3.5">
-          <span className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 ring-1 ring-primary/20">
-            <TrendingUp className="h-3 w-3 shrink-0 text-primary" strokeWidth={2.75} aria-hidden="true" />
-            <span className="truncate text-[10px] font-bold uppercase tracking-wider text-primary">{t.metric}</span>
-          </span>
-          <span className="inline-flex shrink-0 items-center gap-1 text-[10px] text-muted-foreground/60">
-            <Building2 className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden="true" />
-            {t.industry}
-          </span>
-          <span className="ml-auto shrink-0 font-mono text-[9.5px] tabular-nums text-muted-foreground/50">
-            {secs}s read
-          </span>
+          {/* ── author, avatar with an overlapping verified badge ──── */}
+          <div className="mt-5 flex items-center gap-3 border-t border-black/[0.06] pt-4">
+            <span className="relative flex h-9 w-9 shrink-0 items-center justify-center">
+              <span
+                className="flex h-9 w-9 items-center justify-center rounded-full text-[12px] font-bold text-white ring-2 ring-white"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 35% 28%, color-mix(in oklch, var(--primary) 62%, white), var(--primary))",
+                }}
+              >
+                {t.initial}
+              </span>
+              <BadgeCheck
+                className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-white text-primary"
+                strokeWidth={2.5}
+                aria-hidden="true"
+              />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-[12.5px] font-semibold tracking-tight">{t.author}</p>
+              <p className="truncate text-[10.5px] text-muted-foreground">
+                {t.role} · {t.company}
+              </p>
+            </div>
+          </div>
         </div>
       </figure>
     </div>

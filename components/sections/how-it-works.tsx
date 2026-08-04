@@ -15,7 +15,7 @@ import {
   AudioLines,
   ArrowRight,
 } from "lucide-react"
-import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useReducedMotion } from "motion/react"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
 import { cn } from "@/lib/utils"
 
@@ -328,7 +328,7 @@ function LaunchMock() {
   )
 }
 
-/* ---------- step card (cursor spotlight) ---------------------------- */
+/* ---------- step card ------------------------------------------------ */
 
 function StepCard({
   step,
@@ -339,86 +339,64 @@ function StepCard({
   index: number
   active: boolean
 }) {
-  const Icon = step.icon
   const Mock = step.Mock
-  const ref = useRef<HTMLDivElement | null>(null)
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${mx}px ${my}px, color-mix(in oklch, var(--primary) 9%, transparent), transparent 70%)`
-
-  function onMove(e: React.MouseEvent<HTMLDivElement>) {
-    const r = ref.current?.getBoundingClientRect()
-    if (!r) return
-    mx.set(e.clientX - r.left)
-    my.set(e.clientY - r.top)
-  }
+  const Icon = step.icon
 
   return (
-    <div className="group relative h-full">
-      {/* faint radial glow behind the card — only shows on hover */}
+    <div
+      className={cn(
+        "group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-white p-6 transition-all duration-500",
+        active ? "border-primary/25 shadow-[0_24px_60px_-30px_color-mix(in_oklch,var(--primary)_45%,transparent)]" : "border-black/[0.07] shadow-sm",
+      )}
+    >
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-5 -z-10 rounded-[2rem] bg-primary/[0.12] opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
+        className={cn(
+          "pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full blur-2xl transition-opacity duration-500",
+          active ? "bg-primary/[0.12] opacity-100" : "opacity-0",
+        )}
       />
 
-      {/* animated gradient border wrapper (speeds up on hover, see .uc-border) */}
-      <div className="uc-border h-full transition-transform duration-300 ease-out group-hover:scale-[1.02]">
-        <motion.div
-          ref={ref}
-          onMouseMove={onMove}
-          whileHover={{ y: -8 }}
-          transition={{ type: "spring", stiffness: 300, damping: 24 }}
-          className="relative flex h-full w-full flex-col overflow-hidden rounded-[calc(1.25rem-1.5px)] bg-white p-6 text-center shadow-[0_2px_16px_rgba(17,17,17,0.05)] transition-shadow duration-300 group-hover:shadow-[0_32px_70px_-24px_color-mix(in_oklch,var(--primary)_38%,transparent)] md:text-left"
+      <div className="flex items-center gap-3">
+        <span
+          className={cn(
+            "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors duration-500",
+            active ? "bg-primary text-white" : "bg-primary/10 text-primary",
+          )}
         >
-          {/* cursor spotlight */}
-          <motion.span
-            aria-hidden
-            style={{ background: spotlight }}
-            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
-          {/* glassmorphism highlight sweep */}
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 -top-1/2 h-full -translate-y-2 bg-gradient-to-b from-white/60 to-transparent opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
-          />
-          {/* faint watermark number */}
-          <span
-            aria-hidden
-            className={cn(
-              "pointer-events-none absolute -bottom-5 right-2 select-none font-serif text-7xl leading-none transition-colors duration-500",
-              active ? "text-primary/[0.12]" : "text-primary/[0.07]",
-            )}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-
-          {/* header — icon integrated inline instead of a floating circle */}
-          <div className="relative mb-4 flex items-center justify-center gap-2.5 md:justify-start">
-            <span
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 ease-out group-hover:rotate-6"
-              style={{ background: "#FFF5F5", borderColor: "#FFD6D6" }}
-            >
-              <Icon className="h-[18px] w-[18px] text-primary" aria-hidden="true" />
-            </span>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{step.tag}</p>
-          </div>
-
-          <div className="relative mb-4">
-            <MockWindow label={step.window} active={active}>
-              <Mock />
-            </MockWindow>
-            {/* soft reflection under the window */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -bottom-2 left-1/2 h-3 w-[78%] -translate-x-1/2 rounded-[50%] bg-black/15 blur-md transition-opacity duration-500"
-              style={{ opacity: active ? 0.5 : 0.28 }}
-            />
-          </div>
-
-          <h3 className="relative text-lg font-semibold tracking-tight">{step.title}</h3>
-          <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-        </motion.div>
+          <Icon className="h-4.5 w-4.5" strokeWidth={2.25} />
+        </span>
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{step.tag}</p>
+          <h3 className="text-lg font-semibold tracking-tight">{step.title}</h3>
+        </div>
       </div>
+
+      <p className="mt-4 text-[14.5px] leading-relaxed text-muted-foreground">{step.description}</p>
+
+      <ul className="mt-4 flex flex-col gap-2">
+        {step.highlights.map((h) => (
+          <li key={h} className="flex items-start gap-2 text-[13px] text-foreground/80">
+            <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Check className="h-2.5 w-2.5" strokeWidth={3} />
+            </span>
+            {h}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-5">
+        <MockWindow label={step.window} active={active}>
+          <Mock />
+        </MockWindow>
+      </div>
+
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-3 -top-3 font-serif text-6xl font-normal text-black/[0.04]"
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
     </div>
   )
 }
@@ -432,6 +410,7 @@ const steps = [
     window: "agent-builder",
     title: "Design your agent",
     description: "Pick a voice, write the prompt, set guardrails. Describe the agent in plain English and ship it.",
+    highlights: ["Pick from 60+ natural voices", "Write guardrails in plain English", "Test live in the playground"],
     Mock: BuilderMock,
   },
   {
@@ -441,6 +420,7 @@ const steps = [
     title: "Connect your knowledge",
     description:
       "Point the agent at your knowledge base, FAQs, or product docs. It answers from your source of truth.",
+    highlights: ["Upload PDFs, docs, or a URL", "Auto-indexed in seconds", "Every answer is source-cited"],
     Mock: KnowledgeMock,
   },
   {
@@ -449,6 +429,7 @@ const steps = [
     window: "live-traffic",
     title: "Launch & scale",
     description: "Plug in your phone number, route calls, and go live. Scale from one call to thousands.",
+    highlights: ["Bring your own carrier number", "No infra to provision", "Scale to thousands of calls"],
     Mock: LaunchMock,
   },
 ]
@@ -499,35 +480,13 @@ export function HowItWorks() {
           </p>
         </ScrollReveal>
 
-        <div className="relative mt-16">
-          <StaggerGroup className="grid items-stretch gap-8 lg:grid-cols-3 lg:gap-10">
-            {steps.map((step, i) => (
-              <StaggerItem key={step.title} className="h-full">
-                <StepCard step={step} index={i} active={activeStep === i} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-
-          {/* step dots — tiny progress affordance under the row */}
-          <ScrollReveal className="mt-8 flex items-center justify-center gap-2" delay={0.2}>
-            {steps.map((s, i) => (
-              <button
-                key={s.title}
-                type="button"
-                onClick={() => setActiveStep(i)}
-                aria-label={`Show ${s.title}`}
-                className="flex h-10 items-center px-1.5"
-              >
-                <span
-                  className={cn(
-                    "h-1.5 rounded-full transition-all duration-300",
-                    activeStep === i ? "w-7 bg-primary" : "w-1.5 bg-black/15 hover:bg-black/25",
-                  )}
-                />
-              </button>
-            ))}
-          </ScrollReveal>
-        </div>
+        <StaggerGroup className="mt-16 grid gap-5 md:grid-cols-3">
+          {steps.map((step, i) => (
+            <StaggerItem key={step.title}>
+              <StepCard step={step} index={i} active={activeStep === i} />
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
 
         {/* closing CTA */}
         <ScrollReveal className="mt-12 flex flex-col items-center gap-3 text-center">
