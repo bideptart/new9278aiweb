@@ -91,7 +91,7 @@ export function RealEstateCallSimulator() {
       {/* Soft Glowing Ambient Red Mesh Wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/25 via-rose-500/15 to-primary/10 blur-3xl opacity-80"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/25 via-rose-500/15 to-primary/10 blur-3xl opacity-20"
       />
 
       {/* Section Header */}

@@ -306,7 +306,7 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
         {/* Soft Light Rose Ambient Glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-20 -top-20 -z-10 size-96 rounded-full bg-gradient-to-tr from-rose-500/10 via-rose-300/5 to-transparent blur-3xl opacity-60"
+          className="pointer-events-none absolute -right-20 -top-20 -z-10 size-96 rounded-full bg-gradient-to-tr from-rose-500/10 via-rose-300/5 to-transparent blur-3xl opacity-20"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">

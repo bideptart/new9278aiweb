@@ -136,7 +136,7 @@ export function FinanceCoreIntegrations() {
       {/* Soft Rose Background Ambient Lighting */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/8 to-transparent blur-3xl opacity-60"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/8 to-transparent blur-3xl opacity-20"
       />
 
       <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-10">

@@ -108,7 +108,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
       {/* Ambient Radial Blur Wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-gradient-to-tr from-primary/30 via-rose-500/20 to-amber-500/10 blur-3xl opacity-80"
+        className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-gradient-to-tr from-primary/30 via-rose-500/20 to-amber-500/10 blur-3xl opacity-20"
       />
 
       {/* Floating 3D Geometric Badge (Top Left) */}

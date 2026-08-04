@@ -20,9 +20,8 @@ import { IndustryLiveMetricsSection } from "@/components/industries/industry-liv
 import { IndustryRolloutPhases } from "@/components/industries/industry-rollout-phases"
 import { OtherIndustriesGrid } from "@/components/industries/other-industries-grid"
 import { RealEstateFolderGalleryHero } from "@/components/industries/real-estate-folder-gallery-hero"
-import { RealEstatePlatformFeatures } from "@/components/industries/real-estate-platform-features"
+import { RealEstatePipelineTunnel3D } from "@/components/industries/real-estate-pipeline-tunnel-3d"
 import { RealEstateCallSimulator } from "@/components/industries/real-estate-call-simulator"
-import { RealEstateAdvancedCapabilities } from "@/components/industries/real-estate-advanced-capabilities"
 import { EcommerceHero } from "@/components/industries/ecommerce-hero"
 import { EcommerceConversionEngine } from "@/components/industries/ecommerce-conversion-engine"
 import { EcommerceCartRecoverySuite } from "@/components/industries/ecommerce-cart-recovery-suite"
@@ -36,6 +35,9 @@ import { HomeServicesDispatchMatrix } from "@/components/industries/home-service
 import { HomeServicesDispatchSimulator } from "@/components/industries/home-services-dispatch-simulator"
 import { HomeServicesIntegrations } from "@/components/industries/home-services-integrations"
 import { RestaurantHospitalityHero } from "@/components/industries/restaurant-hospitality-hero"
+import { Restaurant3DFloorPlan } from "@/components/industries/restaurant-3d-floor-plan"
+import { RestaurantScenarioCarousel3D } from "@/components/industries/restaurant-scenario-carousel-3d"
+import { RestaurantReceiptPrinter } from "@/components/industries/restaurant-receipt-printer"
 import { HealthcareHero } from "@/components/industries/healthcare-hero"
 
 export function generateStaticParams() {
@@ -186,13 +188,15 @@ export default async function IndustryPage({
 
       {/* Real Estate / E-Commerce / Finance / Home Services Interactive Feature Showcase */}
       {industry.slug === "real-estate" ? (
-        <RealEstatePlatformFeatures />
+        <RealEstatePipelineTunnel3D />
       ) : industry.slug === "ecommerce" ? (
         <EcommerceConversionEngine />
       ) : industry.slug === "finance" ? (
         <FinanceVaultMatrix />
       ) : industry.slug === "home-services" ? (
         <HomeServicesDispatchMatrix />
+      ) : industry.slug === "restaurants" ? (
+        <Restaurant3DFloorPlan />
       ) : (
         <IndustryInteractiveShowcase industryName={industry.name} />
       )}
@@ -206,6 +210,8 @@ export default async function IndustryPage({
         <FinanceSettlementHub />
       ) : industry.slug === "home-services" ? (
         <HomeServicesDispatchSimulator />
+      ) : industry.slug === "restaurants" ? (
+        <RestaurantScenarioCarousel3D />
       ) : (
         <IndustryPlaybooksPreview industryName={industry.name} slug={industry.slug} />
       )}
@@ -222,16 +228,14 @@ export default async function IndustryPage({
         <FinanceCoreIntegrations />
       ) : industry.slug === "home-services" ? (
         <HomeServicesIntegrations />
+      ) : industry.slug === "restaurants" ? (
+        <RestaurantReceiptPrinter />
       ) : industry.slug !== "real-estate" ? (
         <IndustryRolloutPhases industryName={industry.name} slug={industry.slug} />
       ) : null}
 
-      {/* Enterprise Real Estate AI Engine / Other Industries We Power Grid */}
-      {industry.slug === "real-estate" ? (
-        <RealEstateAdvancedCapabilities />
-      ) : (
-        <OtherIndustriesGrid currentSlug={industry.slug} />
-      )}
+      {/* Other Industries We Power / Explore Vertical Playbooks Grid */}
+      <OtherIndustriesGrid currentSlug={industry.slug} />
 
       <SiteFooter />
     </main>

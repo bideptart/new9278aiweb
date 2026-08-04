@@ -90,7 +90,7 @@ export function RealEstateMouseTrailHero() {
       {/* Ambient Red Blur Wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-amber-500/10 blur-3xl opacity-80"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-amber-500/10 blur-3xl opacity-20"
       />
 
       {/* 21st.dev Image Mouse Trail Container Layer */}

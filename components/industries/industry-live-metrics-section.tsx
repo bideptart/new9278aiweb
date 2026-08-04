@@ -125,7 +125,7 @@ export function IndustryLiveMetricsSection({ industryName = "Real Estate" }: Pro
       {/* Ambient Red Blur Wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-70"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-20"
       />
 
       {/* Hardware-Accelerated Smooth GPU Live Marquee Container */}

@@ -140,7 +140,7 @@ export function EcommerceOrderDispatchMatrix() {
       {/* Light Ambient Glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/5 to-transparent blur-3xl opacity-60"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/5 to-transparent blur-3xl opacity-20"
       />
 
       {/* Section Header */}

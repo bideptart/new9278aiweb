@@ -19,20 +19,32 @@ import {
   Check,
   Clock,
   Play,
-  Pause,
   Volume2,
-  Mic,
   Star,
   Coins,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { TypewriterText } from "@/components/animation/typewriter-text"
+import { HeroStatCube3D, type StatCubeFace } from "@/components/industries/hero-stat-cube-3d"
+
+const HEADLINE_PHRASES = [
+  "for banks & financial institutions.",
+  "for loan pre-approvals.",
+  "for fraud & wire verification.",
+  "for wealth account services.",
+]
+
+const HERO_STAT_FACES: StatCubeFace[] = [
+  { icon: Fingerprint, value: "99.8%", label: "Voice Biometric Match", caption: "Callers verified instantly by voiceprint — no PINs, no passwords." },
+  { icon: Lock, value: "PCI-DSS 4.0", label: "Vault Grade Security", caption: "Every transaction encrypted end-to-end with multi-layer fraud checks." },
+  { icon: Coins, value: "60s", label: "Instant Credit Disbursal", caption: "Pre-approved credit lines confirmed and disbursed inside a single call." },
+  { icon: Zap, value: "240ms", label: "Verification Speed", caption: "Sub-240ms voice authentication keeps banking calls fast and frictionless." },
+]
 
 export function FinanceHero() {
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false)
   const [activeStage, setActiveStage] = useState(0)
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const heroRef = useRef<HTMLDivElement | null>(null)
 
   const stages = [
@@ -75,50 +87,6 @@ export function FinanceHero() {
     return () => clearInterval(timer)
   }, [stages.length])
 
-  // CONTINUOUS 60FPS ALWAYS-WORKING 3D AUDIO SPECTRUM CANVAS
-  useEffect(() => {
-    let animationFrameId: number
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let step = 0
-    const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      const bars = 26
-      const barWidth = canvas.width / bars
-
-      const speed = isPlayingAudio ? 0.22 : 0.09
-      const maxAmp = isPlayingAudio ? canvas.height - 4 : (canvas.height - 10) * 0.65
-
-      ctx.shadowColor = "rgba(251, 164, 164, 0.35)"
-      ctx.shadowBlur = isPlayingAudio ? 12 : 5
-      ctx.shadowOffsetY = 2
-
-      const grad = ctx.createLinearGradient(0, canvas.height, 0, 0)
-      grad.addColorStop(0, "rgba(251, 164, 164, 0.25)")
-      grad.addColorStop(0.5, "rgba(244, 164, 164, 0.7)")
-      grad.addColorStop(1, "rgba(252, 191, 191, 1)")
-      ctx.fillStyle = grad
-
-      for (let i = 0; i < bars; i++) {
-        const wave = Math.sin(step * speed + i * 0.35) * 0.5 + 0.5
-        const height = Math.max(6, wave * maxAmp)
-
-        ctx.beginPath()
-        ctx.roundRect(i * barWidth + 2, (canvas.height - height) / 2, barWidth - 4, height, 4)
-        ctx.fill()
-      }
-
-      step++
-      animationFrameId = requestAnimationFrame(render)
-    }
-
-    render()
-    return () => cancelAnimationFrame(animationFrameId)
-  }, [isPlayingAudio])
-
   // Throttled mouse move tracker for lag-free 3D perspective tilt
   const rafId = useRef<number | null>(null)
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -150,12 +118,12 @@ export function FinanceHero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden border-b border-border/40 bg-white dark:bg-gray-950"
+      className="relative w-full max-w-7xl mx-auto px-4 pt-14 pb-8 md:px-6 md:pt-16 md:pb-12 overflow-hidden border-b border-border/40 bg-white dark:bg-gray-950"
     >
       {/* Soft Ambient Light Glow & Subtle Red Blur Accent */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-80"
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[750px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-primary/20 via-rose-500/10 to-transparent blur-3xl opacity-20"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -188,9 +156,7 @@ export function FinanceHero() {
 
           <h1 className="text-balance text-4xl font-serif font-normal leading-[1.06] tracking-tight md:text-6xl text-foreground">
             Autonomous AI voice agents <br />
-            <span className="italic text-primary">
-              for banks & financial institutions.
-            </span>
+            <TypewriterText phrases={HEADLINE_PHRASES} className="italic text-primary" />
           </h1>
 
           <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg font-normal">
@@ -241,7 +207,7 @@ export function FinanceHero() {
         {/* Right Column: 3D FINANCE & BANKING BADGE MOCKUP (EXACT MATCH TO UPLOADED IMAGE) */}
         <div className="lg:col-span-6 flex justify-center perspective-[1200px] pt-6 lg:pt-0">
           <div
-            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[520px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
+            className="relative w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[400px] flex flex-col items-center justify-center transition-transform duration-200 ease-out transform-gpu"
             style={{
               transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
               transformStyle: "preserve-3d",
@@ -252,7 +218,7 @@ export function FinanceHero() {
 
             {/* 3D FINANCE & BANKING BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
             <div 
-              className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(251,164,164,0.18)] cursor-pointer"
+              className="relative w-[260px] sm:w-[290px] md:w-[310px] h-[320px] sm:h-[350px] rounded-[40px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-5 sm:p-6 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(251,164,164,0.18)] cursor-pointer"
             >
               {/* Automatic Shifting 3D Status Badges (Overlapping half inside, half outside the badge rim) */}
               <AnimatePresence mode="wait">
@@ -359,80 +325,17 @@ export function FinanceHero() {
 
               {/* Typography Matching Uploaded Image */}
               <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-300 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
+                <h2 className="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-rose-300 dark:text-rose-400 uppercase font-sans drop-shadow-xs text-center leading-tight">
                   FINANCE & BANKING
                 </h2>
               </div>
             </div>
 
-            {/* STYLISH 3D FLOATING GLASS VOICE TELEMETRY CONSOLE (LIGHT PASTEL ROSE - NO SOLID RED) */}
-            <div className="relative mt-6 w-full max-w-sm sm:max-w-md rounded-3xl border border-rose-200/60 dark:border-rose-900/50 bg-gradient-to-r from-card/95 via-rose-50/50 to-card/95 dark:from-card/95 dark:via-rose-950/30 dark:to-card/95 p-4 shadow-[0_15px_40px_rgba(251,164,164,0.10)] backdrop-blur-2xl [transform:translateZ(60px)] z-40 overflow-hidden">
-              {/* Glowing Top Edge Line */}
-              <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-rose-400/50 to-transparent" />
-
-              {/* Console Header Bar */}
-              <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/40">
-                <div className="flex items-center gap-2.5">
-                  <div className="size-8 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-400 dark:text-rose-300 border border-rose-200/80 shadow-xs flex items-center justify-center animate-pulse">
-                    <Mic className="size-4 text-rose-400 dark:text-rose-300" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-normal text-foreground">Banking Voice Telemetry Stream</h3>
-                    <p className="text-[9px] font-mono text-rose-400 dark:text-rose-400 flex items-center gap-1">
-                      <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
-                      CORE BANKING & SWIFT SYNCED
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-400 dark:text-rose-300 border border-rose-200/80 px-3.5 py-1 text-xs font-normal shadow-xs hover:bg-rose-100 hover:scale-105 transition-all cursor-pointer"
-                >
-                  {isPlayingAudio ? <Pause className="size-3 fill-rose-600 text-rose-400 dark:fill-rose-300 dark:text-rose-300" /> : <Play className="size-3 fill-rose-600 text-rose-400 dark:fill-rose-300 dark:text-rose-300" />}
-                  <span>{isPlayingAudio ? "Pause" : "Play Script"}</span>
-                </button>
-              </div>
-
-              {/* 2D/3D Canvas Spectrum */}
-              <div className="h-10 w-full flex items-center justify-center my-1">
-                <canvas ref={canvasRef} width={300} height={40} className="w-full h-full drop-shadow-[0_2px_8px_rgba(251,164,164,0.25)]" />
-              </div>
-
-              {/* Auto-Shifting Speech Dialogue Ribbon */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeStage}
-                  initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-2 pt-2 border-t border-border/30 text-xs text-foreground font-serif italic leading-relaxed min-h-[42px] flex items-center"
-                >
-                  {currentStage.dialogue.replace(/&apos;/g, "'")}
-                </motion.div>
-              </AnimatePresence>
-
-              {/* 3D Stage Navigation Pills (Soft Light Rose - No Solid Red) */}
-              <div className="mt-3 pt-2 border-t border-border/30 grid grid-cols-4 gap-1">
-                {["1. Sanction", "2. Voice KYC", "3. Wire Guard", "4. Credit Line"].map((stageLabel, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveStage(idx)}
-                    className={cn(
-                      "text-[10px] font-normal py-1 px-1 rounded-lg border text-center transition-all cursor-pointer truncate",
-                      idx === activeStage
-                        ? "bg-rose-100 dark:bg-rose-900/70 text-rose-400 dark:text-rose-200 border-rose-300 dark:border-rose-700 font-semibold shadow-xs"
-                        : "bg-card/70 text-muted-foreground border-border/50 hover:bg-card"
-                    )}
-                  >
-                    {stageLabel}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <HeroStatCube3D
+              title="Banking Voice Metrics Cube"
+              liveTag="CORE BANKING & SWIFT SYNCED"
+              faces={HERO_STAT_FACES}
+            />
           </div>
         </div>
       </div>
