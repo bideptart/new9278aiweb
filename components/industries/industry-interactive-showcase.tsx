@@ -289,12 +289,12 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
     <section className="relative mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-24 border-t border-slate-200/60 dark:border-slate-800/60">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
-          <Sparkles className="size-3.5 text-rose-500 animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
+          <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           THE HUMAN-KIND EXPERIENCE
         </span>
         <h2 className="text-3xl font-serif font-semibold tracking-tight md:text-5xl text-foreground">
-          Conversations indistinguishable from <span className="italic text-rose-600 dark:text-rose-400">your best agent.</span>
+          Conversations indistinguishable from <span className="italic text-rose-400 dark:text-rose-400">your best agent.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
           9278.ai runs on a single audio-native engine so your callers hear pauses, emotion, and timing that feel right.
@@ -339,10 +339,10 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
               >
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="rounded-full bg-rose-500/15 px-2.5 py-0.5 text-xs font-mono font-bold text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
+                    <span className="rounded-full bg-rose-500/15 px-2.5 py-0.5 text-xs font-mono font-bold text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
                       {current.step}
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+                    <span className="text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">
                       {current.tag}
                     </span>
                   </div>
@@ -356,7 +356,7 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
                 <ul className="space-y-2.5 pt-2">
                   {current.points.map((pt, i) => (
                     <li key={i} className="flex items-center gap-2.5 text-xs md:text-sm font-medium">
-                      <Check className="size-4 text-rose-600 dark:text-rose-400 shrink-0 stroke-[3]" />
+                      <Check className="size-4 text-rose-400 dark:text-rose-400 shrink-0 stroke-[3]" />
                       <span>{pt}</span>
                     </li>
                   ))}
@@ -386,14 +386,14 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
                   className="size-10 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-foreground flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xs cursor-pointer"
                   aria-label="Previous feature"
                 >
-                  <ChevronLeft className="size-5 text-rose-600 dark:text-rose-400" />
+                  <ChevronLeft className="size-5 text-rose-400 dark:text-rose-400" />
                 </button>
                 <button
                   onClick={() => setActiveSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))}
                   className="size-10 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-foreground flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-xs cursor-pointer"
                   aria-label="Next feature"
                 >
-                  <ChevronRight className="size-5 text-rose-600 dark:text-rose-400" />
+                  <ChevronRight className="size-5 text-rose-400 dark:text-rose-400" />
                 </button>
               </div>
             </div>

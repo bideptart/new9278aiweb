@@ -91,13 +91,13 @@ export function RealEstateAdvancedCapabilities() {
 
       {/* Section Header */}
       <div className="mb-16 text-center max-w-3xl mx-auto">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50 backdrop-blur-md">
-          <Sparkles className="size-3.5 text-rose-500 animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50 backdrop-blur-md">
+          <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           ENTERPRISE REAL ESTATE AI ENGINE
         </span>
         <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground leading-tight">
           Advanced Real Estate AI Capabilities <br className="hidden sm:inline" />
-          <span className="italic text-rose-600 dark:text-rose-400">
+          <span className="italic text-rose-400 dark:text-rose-400">
             Interactive live qualification matrix.
           </span>
         </h2>
@@ -116,12 +116,12 @@ export function RealEstateAdvancedCapabilities() {
         >
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div className="relative size-14 rounded-2xl bg-rose-500/15 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 flex items-center justify-center shadow-xs">
+              <div className="relative size-14 rounded-2xl bg-rose-500/15 border border-rose-200 dark:border-rose-800 text-rose-400 dark:text-rose-400 flex items-center justify-center shadow-xs">
                 <Clock className="size-7 animate-pulse" />
                 <span className="absolute -top-1 -right-1 size-3.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900" />
               </div>
 
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3.5 py-1 text-xs font-mono font-bold shadow-xs">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3.5 py-1 text-xs font-mono font-bold shadow-xs">
                 <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
                 24/7/365 INBOUND AGENT
               </span>
@@ -138,7 +138,7 @@ export function RealEstateAdvancedCapabilities() {
 
             {/* Live WhatsApp Dispatch Glass Ribbon */}
             <div className="p-4.5 rounded-2xl border border-rose-200 dark:border-rose-900/40 bg-rose-50/60 dark:bg-rose-950/20 shadow-sm backdrop-blur-xl space-y-2 relative overflow-hidden group-hover:border-rose-300 dark:group-hover:border-rose-800 transition-colors">
-              <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400">
+              <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
                 <span className="flex items-center gap-1.5">
                   <Smartphone className="size-3.5 text-emerald-500 animate-bounce" />
                   WHATSAPP AUTOMATION RELAY
@@ -154,13 +154,13 @@ export function RealEstateAdvancedCapabilities() {
 
             {/* Soft Rose Pill Badges */}
             <div className="flex flex-wrap gap-2 pt-2">
-              <span className="rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
+              <span className="rounded-full bg-rose-500/10 text-rose-400 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
                 ✓ 24/7 Availability
               </span>
-              <span className="rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
+              <span className="rounded-full bg-rose-500/10 text-rose-400 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
                 ✓ WhatsApp PDF Relay
               </span>
-              <span className="rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
+              <span className="rounded-full bg-rose-500/10 text-rose-400 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-3 py-1 text-xs font-bold font-mono shadow-xs">
                 ✓ Google Maps Pins
               </span>
             </div>
@@ -169,7 +169,7 @@ export function RealEstateAdvancedCapabilities() {
           <div className="mt-8 pt-4 border-t border-slate-200/80 dark:border-slate-800">
             <Link
               href="/get-started?industry=real-estate"
-              className="inline-flex items-center gap-2 text-sm font-bold text-rose-600 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
+              className="inline-flex items-center gap-2 text-sm font-bold text-rose-400 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
             >
               Deploy 24/7 Inbound Agent <ArrowRight className="size-4" />
             </Link>
@@ -184,11 +184,11 @@ export function RealEstateAdvancedCapabilities() {
         >
           <div className="space-y-5">
             <div className="flex items-center justify-between">
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+              <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
                 <UserCheck className="size-6" />
               </div>
-              <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
-                <Activity className="size-3 animate-pulse text-rose-500" /> LIVE SCORING ENGINE
+              <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                <Activity className="size-3 animate-pulse text-rose-300" /> LIVE SCORING ENGINE
               </span>
             </div>
 
@@ -214,7 +214,7 @@ export function RealEstateAdvancedCapabilities() {
                   className={cn(
                     "flex-1 py-1.5 text-[10px] font-mono font-bold rounded-lg transition-all duration-200 cursor-pointer text-center border",
                     activeProfileIdx === idx
-                      ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-xs"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-xs"
                       : "text-muted-foreground border-transparent hover:text-foreground"
                   )}
                 >
@@ -235,10 +235,10 @@ export function RealEstateAdvancedCapabilities() {
               >
                 <div className="flex items-center justify-between text-xs font-bold border-b border-rose-200/60 dark:border-rose-900/30 pb-2">
                   <span className="text-foreground flex items-center gap-1.5">
-                    <Award className="size-3.5 text-rose-500" />
+                    <Award className="size-3.5 text-rose-300" />
                     {curProfile.name}
                   </span>
-                  <span className="text-rose-600 dark:text-rose-400 font-mono text-[11px] bg-rose-500/10 border border-rose-200 dark:border-rose-800/40 px-2 py-0.5 rounded-full">
+                  <span className="text-rose-400 dark:text-rose-400 font-mono text-[11px] bg-rose-500/10 border border-rose-200 dark:border-rose-800/40 px-2 py-0.5 rounded-full">
                     {curProfile.tag} • {curProfile.budget}
                   </span>
                 </div>
@@ -247,7 +247,7 @@ export function RealEstateAdvancedCapabilities() {
                 <div>
                   <div className="flex justify-between text-[10px] font-mono font-bold mb-1.5">
                     <span className="text-muted-foreground">HOME LOAN PRE-APPROVAL</span>
-                    <span className="text-rose-600 dark:text-rose-400 font-bold">{curProfile.loanLabel}</span>
+                    <span className="text-rose-400 dark:text-rose-400 font-bold">{curProfile.loanLabel}</span>
                   </div>
                   <div className="h-2.5 w-full bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden p-0.5">
                     <motion.div
@@ -279,7 +279,7 @@ export function RealEstateAdvancedCapabilities() {
                 <div>
                   <div className="flex justify-between text-[10px] font-mono font-bold mb-1.5">
                     <span className="text-muted-foreground">BUYER INTENT SCORE</span>
-                    <span className="text-rose-600 dark:text-rose-400 font-bold">{curProfile.scoreLabel}</span>
+                    <span className="text-rose-400 dark:text-rose-400 font-bold">{curProfile.scoreLabel}</span>
                   </div>
                   <div className="h-2.5 w-full bg-slate-200/80 dark:bg-slate-800 rounded-full overflow-hidden p-0.5">
                     <motion.div
@@ -297,7 +297,7 @@ export function RealEstateAdvancedCapabilities() {
           <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800">
             <Link
               href="/get-started?industry=real-estate"
-              className="inline-flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
+              className="inline-flex items-center gap-2 text-xs font-bold text-rose-400 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
             >
               Learn qualification criteria <ArrowRight className="size-3.5" />
             </Link>
@@ -311,7 +311,7 @@ export function RealEstateAdvancedCapabilities() {
           className="md:col-span-4 group rounded-[2.5rem] border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 shadow-md hover:border-rose-300 dark:hover:border-rose-800 transition-all duration-300 flex flex-col justify-between transform-gpu"
         >
           <div className="space-y-4">
-            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
               <Calendar className="size-6" />
             </div>
 
@@ -327,7 +327,7 @@ export function RealEstateAdvancedCapabilities() {
           <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800">
             <Link
               href="/get-started?industry=real-estate"
-              className="inline-flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
+              className="inline-flex items-center gap-2 text-xs font-bold text-rose-400 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
             >
               Read calendar specs <ArrowRight className="size-3.5" />
             </Link>
@@ -341,7 +341,7 @@ export function RealEstateAdvancedCapabilities() {
           className="md:col-span-4 group rounded-[2.5rem] border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 shadow-md hover:border-rose-300 dark:hover:border-rose-800 transition-all duration-300 flex flex-col justify-between transform-gpu"
         >
           <div className="space-y-4">
-            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
               <PhoneForwarded className="size-6" />
             </div>
 
@@ -357,7 +357,7 @@ export function RealEstateAdvancedCapabilities() {
           <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800">
             <Link
               href="/get-started?industry=real-estate"
-              className="inline-flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
+              className="inline-flex items-center gap-2 text-xs font-bold text-rose-400 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
             >
               Read handoff specs <ArrowRight className="size-3.5" />
             </Link>
@@ -371,7 +371,7 @@ export function RealEstateAdvancedCapabilities() {
           className="md:col-span-4 group rounded-[2.5rem] border border-rose-200/80 dark:border-rose-900/40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 shadow-md hover:border-rose-300 dark:hover:border-rose-800 transition-all duration-300 flex flex-col justify-between transform-gpu"
         >
           <div className="space-y-4">
-            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+            <div className="flex size-12 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
               <DollarSign className="size-6" />
             </div>
 
@@ -379,7 +379,7 @@ export function RealEstateAdvancedCapabilities() {
               <p className="text-3xl font-serif font-bold text-foreground tracking-tight">
                 ₹10 <span className="text-xs text-muted-foreground font-sans font-normal">/ min</span>
               </p>
-              <p className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 uppercase mt-0.5">TRANSPARENT BILLING</p>
+              <p className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 uppercase mt-0.5">TRANSPARENT BILLING</p>
             </div>
 
             <p className="text-muted-foreground text-xs leading-relaxed font-medium">
@@ -390,7 +390,7 @@ export function RealEstateAdvancedCapabilities() {
           <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-xs font-bold text-rose-600 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
+              className="inline-flex items-center gap-2 text-xs font-bold text-rose-400 dark:text-rose-400 hover:underline group-hover:translate-x-1 transition-transform"
             >
               View pricing plans <ArrowRight className="size-3.5" />
             </Link>
@@ -400,7 +400,7 @@ export function RealEstateAdvancedCapabilities() {
 
       {/* Bottom CTA Banner */}
       <div className="mt-16 text-center">
-        <Button asChild size="lg" className="btn-ai h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
+        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
           <Link href="/get-started?industry=real-estate">
             Deploy Real Estate Engine <ArrowRight className="ml-2 size-4" />
           </Link>

@@ -113,12 +113,12 @@ export function HomeServicesDispatchSimulator() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
-            <Radio className="size-3.5 text-rose-500 animate-pulse" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+            <Radio className="size-3.5 text-rose-300 animate-pulse" />
             <span>3D FIELD SERVICE DISPATCH COMMAND SPHERE</span>
           </span>
           <h2 className="text-balance text-3xl font-serif font-normal leading-tight md:text-5xl text-foreground">
-            Live emergency voice <span className="italic text-rose-600 dark:text-rose-400">dispatch simulator.</span>
+            Live emergency voice <span className="italic text-rose-400 dark:text-rose-400">dispatch simulator.</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
             Click any trade node below to inspect real-time emergency voice intake, ServiceTitan calendar locking, and live technician GPS tracking.
@@ -150,20 +150,20 @@ export function HomeServicesDispatchSimulator() {
                   <div className={cn(
                     "size-9 rounded-2xl flex items-center justify-center shrink-0 border transition-all",
                     isSelected
-                      ? "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-300 dark:border-rose-800"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-400 border-rose-300 dark:border-rose-800"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700"
                   )}>
                     <Icon className="size-4" />
                   </div>
 
-                  <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+                  <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     {dp.tag}
                   </span>
                 </div>
 
                 <div>
                   <h3 className="text-sm font-bold text-foreground">{dp.trade}</h3>
-                  <p className="text-[11px] font-mono text-rose-600 dark:text-rose-400 font-extrabold mt-0.5">{dp.eta}</p>
+                  <p className="text-[11px] font-mono text-rose-400 dark:text-rose-400 font-extrabold mt-0.5">{dp.eta}</p>
                 </div>
               </button>
             )
@@ -191,11 +191,11 @@ export function HomeServicesDispatchSimulator() {
               {/* Header inside Inspector */}
               <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-200/60 dark:border-slate-800" style={{ transform: "translateZ(30px)" }}>
                 <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shadow-xs">
+                  <div className="size-10 rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shadow-xs">
                     <TradeIcon className="size-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
+                    <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
                       {curD.tag}
                     </span>
                     <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mt-0.5">
@@ -217,7 +217,7 @@ export function HomeServicesDispatchSimulator() {
 
               {/* Spoken AI Dispatch Quote Capsule */}
               <div className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-2" style={{ transform: "translateZ(40px)" }}>
-                <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400">
+                <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
                   <span>9278 Voice AI Dispatcher</span>
                   {/* 6-Bar Equalizer */}
                   <div className="flex items-center gap-1 h-3">
@@ -231,8 +231,8 @@ export function HomeServicesDispatchSimulator() {
 
               {/* GPS & Tech Telemetry Footer */}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-200/60 dark:border-slate-800 text-xs font-mono" style={{ transform: "translateZ(25px)" }}>
-                <span className="flex items-center gap-1.5 text-rose-600 dark:text-rose-400 font-bold">
-                  <MapPin className="size-3.5 text-rose-500" />
+                <span className="flex items-center gap-1.5 text-rose-400 dark:text-rose-400 font-bold">
+                  <MapPin className="size-3.5 text-rose-300" />
                   {curD.tech} ({curD.distance})
                 </span>
 

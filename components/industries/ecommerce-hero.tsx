@@ -91,14 +91,14 @@ export function EcommerceHero() {
       const speed = isPlayingAudio ? 0.22 : 0.09
       const maxAmp = isPlayingAudio ? canvas.height - 4 : (canvas.height - 10) * 0.65
 
-      ctx.shadowColor = "rgba(244, 91, 91, 0.45)"
+      ctx.shadowColor = "rgba(251, 164, 164, 0.35)"
       ctx.shadowBlur = isPlayingAudio ? 12 : 5
       ctx.shadowOffsetY = 2
 
       const grad = ctx.createLinearGradient(0, canvas.height, 0, 0)
-      grad.addColorStop(0, "rgba(244, 91, 91, 0.3)")
-      grad.addColorStop(0.5, "rgba(244, 91, 91, 0.9)")
-      grad.addColorStop(1, "rgba(255, 140, 140, 1)")
+      grad.addColorStop(0, "rgba(251, 164, 164, 0.25)")
+      grad.addColorStop(0.5, "rgba(244, 164, 164, 0.7)")
+      grad.addColorStop(1, "rgba(252, 191, 191, 1)")
       ctx.fillStyle = grad
 
       for (let i = 0; i < bars; i++) {
@@ -149,7 +149,7 @@ export function EcommerceHero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden border-b border-border/40"
+      className="relative w-full max-w-7xl mx-auto px-4 pt-24 pb-16 md:px-6 md:pt-32 md:pb-24 overflow-hidden border-b border-border/40 bg-white dark:bg-gray-950"
     >
       {/* Soft Ambient Light Glow & Subtle Red Blur Accent */}
       <div
@@ -217,7 +217,7 @@ export function EcommerceHero() {
             <Button
               asChild
               size="lg"
-              className="group btn-ai h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
+              className="group btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md transition-all cursor-pointer font-normal"
             >
               <Link href="/get-started?industry=ecommerce">
                 Get Started <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
@@ -251,7 +251,7 @@ export function EcommerceHero() {
 
             {/* 3D RETAIL & E-COMMERCE BADGE CARD SHAPE (ROUNDED ARCH CARD MATCHING UPLOADED IMAGE) */}
             <div 
-              className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(244,91,91,0.22)] cursor-pointer"
+              className="relative w-[310px] sm:w-[350px] md:w-[370px] h-[390px] sm:h-[430px] rounded-[44px] bg-gradient-to-b from-white via-[#fff5f5] to-[#fee2e2] text-primary shadow-[0_20px_50px_rgba(244,91,91,0.15)] backdrop-blur-2xl flex flex-col items-center justify-between p-6 sm:p-8 text-center select-none [transform:translateZ(20px)] border-4 border-white overflow-visible transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_30px_70px_rgba(251,164,164,0.18)] cursor-pointer"
             >
               {/* Automatic Shifting 3D Status Badges (Overlapping half inside, half outside the badge rim) */}
               <AnimatePresence mode="wait">
@@ -307,45 +307,45 @@ export function EcommerceHero() {
                 {/* Layered 3D Isometric Retail Store & Fulfillment Center Graphic (Matching Uploaded Image - translateZ: 50px) */}
                 <div className="relative z-10 flex flex-col items-center justify-center mt-4 [transform:translateZ(50px)]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-rose-400/20 blur-xl rounded-full" />
-                  <svg className="w-44 h-36 drop-shadow-[0_15px_30px_rgba(244,91,91,0.4)] relative z-10" viewBox="0 0 220 170">
+                  <svg className="w-44 h-36 drop-shadow-[0_15px_30px_rgba(251,164,164,0.3)] relative z-10" viewBox="0 0 220 170">
                     {/* Ground Platform */}
                     <polygon points="110,150 190,110 110,70 30,110" fill="#fecaca" opacity="0.6" />
 
                     {/* Left Retail Storefront Building */}
                     <polygon points="35,100 75,80 75,120 35,140" fill="#ffffff" />
                     <polygon points="75,80 100,92 100,132 75,120" fill="#fee2e2" />
-                    <polygon points="35,100 75,80 100,92 60,112" fill="#f45b5b" opacity="0.9" />
+                    <polygon points="35,100 75,80 100,92 60,112" fill="#f9b4b4" opacity="0.9" />
                     {/* Store Awning Stripes */}
                     <polygon points="35,100 45,95 55,100 45,105" fill="#ffffff" />
                     <polygon points="55,100 65,95 75,100 65,105" fill="#ffffff" />
                     {/* Store Door & Windows */}
-                    <rect x="50" y="108" width="10" height="18" fill="#f45b5b" opacity="0.7" rx="1" />
-                    <rect x="65" y="105" width="8" height="10" fill="#f45b5b" opacity="0.7" rx="1" />
+                    <rect x="50" y="108" width="10" height="18" fill="#f9b4b4" opacity="0.7" rx="1" />
+                    <rect x="65" y="105" width="8" height="10" fill="#f9b4b4" opacity="0.7" rx="1" />
 
                     {/* Center Shopping Cart with Gift Box on Conveyor Path */}
                     <path d="M 75,115 C 90,125 110,125 125,115" stroke="#ffffff" strokeWidth="4" fill="none" strokeDasharray="3 3" />
                     <g transform="translate(90, 80)">
-                      <rect x="5" y="5" width="22" height="16" rx="3" fill="#ffffff" stroke="#f45b5b" strokeWidth="2" />
-                      <circle cx="10" cy="24" r="3" fill="#f45b5b" />
-                      <circle cx="22" cy="24" r="3" fill="#f45b5b" />
+                      <rect x="5" y="5" width="22" height="16" rx="3" fill="#ffffff" stroke="#f9b4b4" strokeWidth="2" />
+                      <circle cx="10" cy="24" r="3" fill="#f9b4b4" />
+                      <circle cx="22" cy="24" r="3" fill="#f9b4b4" />
                       {/* Gift Box Inside Cart */}
-                      <rect x="9" y="-2" width="14" height="10" rx="2" fill="#ef4444" />
+                      <rect x="9" y="-2" width="14" height="10" rx="2" fill="#fca5a5" />
                       <path d="M 16,-2 V 8 M 9,3 H 23" stroke="#ffffff" strokeWidth="1.5" />
                     </g>
 
                     {/* Right E-Commerce Fulfillment Warehouse */}
                     <polygon points="125,75 175,50 175,105 125,130" fill="#ffffff" />
                     <polygon points="175,50 200,65 200,120 175,105" fill="#fee2e2" />
-                    <polygon points="125,75 175,50 200,65 150,90" fill="#f45b5b" />
+                    <polygon points="125,75 175,50 200,65 150,90" fill="#f9b4b4" />
                     {/* Warehouse Arch Door */}
-                    <path d="M 140,100 A 12,12 0 0 1 164,100 V 122 H 140 Z" fill="#f45b5b" opacity="0.8" />
+                    <path d="M 140,100 A 12,12 0 0 1 164,100 V 122 H 140 Z" fill="#f9b4b4" opacity="0.8" />
 
                     {/* Delivery Trucks (Fulfillment Dispatch) */}
                     <g transform="translate(155, 105)">
-                      <rect x="0" y="0" width="20" height="14" rx="2" fill="#ffffff" stroke="#f45b5b" strokeWidth="1.5" />
+                      <rect x="0" y="0" width="20" height="14" rx="2" fill="#ffffff" stroke="#f9b4b4" strokeWidth="1.5" />
                       <rect x="18" y="4" width="8" height="10" rx="1" fill="#fee2e2" />
-                      <circle cx="5" cy="15" r="2.5" fill="#f45b5b" />
-                      <circle cx="18" cy="15" r="2.5" fill="#f45b5b" />
+                      <circle cx="5" cy="15" r="2.5" fill="#f9b4b4" />
+                      <circle cx="18" cy="15" r="2.5" fill="#f9b4b4" />
                     </g>
                   </svg>
                 </div>
@@ -353,26 +353,26 @@ export function EcommerceHero() {
 
               {/* Typography Matching Uploaded Image */}
               <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-500 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-wider text-rose-300 dark:text-rose-400 uppercase font-sans drop-shadow-xs truncate max-w-full">
                   RETAIL & E-COMMERCE
                 </h2>
               </div>
             </div>
 
             {/* STYLISH 3D FLOATING GLASS VOICE TELEMETRY CONSOLE (LIGHT PASTEL ROSE - NO SOLID RED) */}
-            <div className="relative mt-6 w-full max-w-sm sm:max-w-md rounded-3xl border border-rose-200/60 dark:border-rose-900/50 bg-gradient-to-r from-card/95 via-rose-50/50 to-card/95 dark:from-card/95 dark:via-rose-950/30 dark:to-card/95 p-4 shadow-[0_15px_40px_rgba(244,91,91,0.12)] backdrop-blur-2xl [transform:translateZ(60px)] z-40 overflow-hidden">
+            <div className="relative mt-6 w-full max-w-sm sm:max-w-md rounded-3xl border border-rose-200/60 dark:border-rose-900/50 bg-gradient-to-r from-card/95 via-rose-50/50 to-card/95 dark:from-card/95 dark:via-rose-950/30 dark:to-card/95 p-4 shadow-[0_15px_40px_rgba(251,164,164,0.10)] backdrop-blur-2xl [transform:translateZ(60px)] z-40 overflow-hidden">
               {/* Glowing Top Edge Line */}
               <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-rose-400/50 to-transparent" />
 
               {/* Console Header Bar */}
               <div className="flex items-center justify-between mb-3 pb-2 border-b border-border/40">
                 <div className="flex items-center gap-2.5">
-                  <div className="size-8 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-300 border border-rose-200/80 shadow-xs flex items-center justify-center animate-pulse">
-                    <Mic className="size-4 text-rose-600 dark:text-rose-300" />
+                  <div className="size-8 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-400 dark:text-rose-300 border border-rose-200/80 shadow-xs flex items-center justify-center animate-pulse">
+                    <Mic className="size-4 text-rose-400 dark:text-rose-300" />
                   </div>
                   <div>
                     <h3 className="text-xs font-normal text-foreground">Retail Voice Telemetry Stream</h3>
-                    <p className="text-[9px] font-mono text-rose-600 dark:text-rose-400 flex items-center gap-1">
+                    <p className="text-[9px] font-mono text-rose-400 dark:text-rose-400 flex items-center gap-1">
                       <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
                       SHOPIFY & SHIPROCKET SYNCED
                     </p>
@@ -382,16 +382,16 @@ export function EcommerceHero() {
                 <button
                   type="button"
                   onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/80 px-3.5 py-1 text-xs font-normal shadow-xs hover:bg-rose-100 hover:scale-105 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/60 text-rose-400 dark:text-rose-300 border border-rose-200/80 px-3.5 py-1 text-xs font-normal shadow-xs hover:bg-rose-100 hover:scale-105 transition-all cursor-pointer"
                 >
-                  {isPlayingAudio ? <Pause className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" /> : <Play className="size-3 fill-rose-600 text-rose-600 dark:fill-rose-300 dark:text-rose-300" />}
+                  {isPlayingAudio ? <Pause className="size-3 fill-rose-600 text-rose-400 dark:fill-rose-300 dark:text-rose-300" /> : <Play className="size-3 fill-rose-600 text-rose-400 dark:fill-rose-300 dark:text-rose-300" />}
                   <span>{isPlayingAudio ? "Pause" : "Play Script"}</span>
                 </button>
               </div>
 
               {/* 2D/3D Canvas Spectrum */}
               <div className="h-10 w-full flex items-center justify-center my-1">
-                <canvas ref={canvasRef} width={300} height={40} className="w-full h-full drop-shadow-[0_2px_8px_rgba(244,91,91,0.3)]" />
+                <canvas ref={canvasRef} width={300} height={40} className="w-full h-full drop-shadow-[0_2px_8px_rgba(251,164,164,0.25)]" />
               </div>
 
               {/* Auto-Shifting Speech Dialogue Ribbon */}
@@ -418,7 +418,7 @@ export function EcommerceHero() {
                     className={cn(
                       "text-[10px] font-normal py-1 px-1 rounded-lg border text-center transition-all cursor-pointer truncate",
                       idx === activeStage
-                        ? "bg-rose-100 dark:bg-rose-900/70 text-rose-800 dark:text-rose-200 border-rose-300 dark:border-rose-700 font-semibold shadow-xs"
+                        ? "bg-rose-100 dark:bg-rose-900/70 text-rose-400 dark:text-rose-200 border-rose-300 dark:border-rose-700 font-semibold shadow-xs"
                         : "bg-card/70 text-muted-foreground border-border/50 hover:bg-card"
                     )}
                   >

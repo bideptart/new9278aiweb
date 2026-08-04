@@ -148,7 +148,7 @@ export function RealEstateMouseTrailHero() {
 
         {/* Action CTAs */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <Button asChild size="lg" className="group btn-ai h-13 rounded-full px-8 shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all text-sm font-bold">
+          <Button asChild size="lg" className="group btn-ai !text-rose-400 dark:!text-rose-300 h-13 rounded-full px-8 shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all text-sm font-bold">
             <Link href="/get-started?industry=real-estate">
               Launch a real estate agent <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Link>

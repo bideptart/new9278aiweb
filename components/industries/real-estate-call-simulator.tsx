@@ -96,13 +96,13 @@ export function RealEstateCallSimulator() {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50 backdrop-blur-md">
-          <Sparkles className="size-3.5 text-rose-500 animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50 backdrop-blur-md">
+          <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           LIVE REAL ESTATE CALL SIMULATOR
         </span>
         <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           3 Real Estate Call Scenarios <br className="hidden sm:inline" />
-          <span className="italic text-rose-600 dark:text-rose-400">
+          <span className="italic text-rose-400 dark:text-rose-400">
             Seamlessly transitioning live.
           </span>
         </h2>
@@ -126,11 +126,11 @@ export function RealEstateCallSimulator() {
               className={cn(
                 "relative overflow-hidden rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-xs border",
                 isSelected
-                  ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm scale-105"
-                  : "bg-white/80 dark:bg-slate-900/80 text-muted-foreground border-slate-200/80 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-600 dark:hover:text-rose-400"
+                  ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm scale-105"
+                  : "bg-white/80 dark:bg-slate-900/80 text-muted-foreground border-slate-200/80 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-400 dark:hover:text-rose-400"
               )}
             >
-              <PhoneCall className={cn("size-3.5", isSelected ? "text-rose-600 dark:text-rose-400" : "text-muted-foreground")} />
+              <PhoneCall className={cn("size-3.5", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")} />
               <span>{sc.title}</span>
 
               {/* Hardware Accelerated Progress Line Bar */}
@@ -166,10 +166,10 @@ export function RealEstateCallSimulator() {
               <div className="absolute size-48 rounded-full border border-rose-200/60 dark:border-rose-900/40 bg-rose-500/5 animate-pulse" />
               <div className="absolute size-36 rounded-full border border-dashed border-rose-300/60 dark:border-rose-800/60 animate-spin" style={{ animationDuration: "14s" }} />
 
-              <div className="relative size-20 rounded-full bg-rose-500/15 border-2 border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 flex items-center justify-center ring-4 ring-rose-500/10 z-10 shadow-md">
+              <div className="relative size-20 rounded-full bg-rose-500/15 border-2 border-rose-300 dark:border-rose-800 text-rose-400 dark:text-rose-400 flex items-center justify-center ring-4 ring-rose-500/10 z-10 shadow-md">
                 {(() => {
                   const NodeIcon = currentSc.nodeIcon
-                  return <NodeIcon className="size-8 animate-pulse text-rose-600 dark:text-rose-400" />
+                  return <NodeIcon className="size-8 animate-pulse text-rose-400 dark:text-rose-400" />
                 })()}
                 <span className="absolute -bottom-1 -right-1 size-4 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900 flex items-center justify-center text-[10px] font-bold text-white">
                   ✓
@@ -178,8 +178,8 @@ export function RealEstateCallSimulator() {
 
               {/* Dynamic Audio Equalizer Ribbon */}
               <div className="mt-5 flex items-center gap-1.5 px-6 py-2 rounded-full bg-white/95 dark:bg-slate-900/95 border border-slate-200/80 dark:border-slate-800 shadow-md backdrop-blur-xl">
-                <span className="text-xs font-mono font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1">
-                  <Activity className="size-3.5 text-rose-500 animate-pulse" />
+                <span className="text-xs font-mono font-bold text-rose-400 dark:text-rose-400 flex items-center gap-1">
+                  <Activity className="size-3.5 text-rose-300 animate-pulse" />
                   00:{timer < 10 ? `0${timer}` : timer}
                 </span>
                 <div className="flex items-center gap-1 px-2 h-6">
@@ -191,14 +191,14 @@ export function RealEstateCallSimulator() {
                     />
                   ))}
                 </div>
-                <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400">Sub-250ms Audio</span>
+                <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">Sub-250ms Audio</span>
               </div>
             </div>
 
             {/* Floating Soft Rose Property Badge */}
             <div className="text-center">
-              <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-4 py-1.5 text-xs font-bold text-rose-700 dark:text-rose-300 shadow-xs backdrop-blur-md">
-                <Building2 className="size-3.5 text-rose-500" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-4 py-1.5 text-xs font-bold text-rose-400 dark:text-rose-300 shadow-xs backdrop-blur-md">
+                <Building2 className="size-3.5 text-rose-300" />
                 <span>{currentSc.prop} ({currentSc.badge})</span>
               </span>
             </div>
@@ -207,11 +207,11 @@ export function RealEstateCallSimulator() {
             <div className="space-y-4">
               {/* Agent Speech Capsule */}
               <div className="flex items-start gap-3 max-w-2xl mr-auto">
-                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
+                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
                   <Bot className="size-4" />
                 </div>
                 <div className="rounded-3xl rounded-tl-sm bg-rose-50/80 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 p-4 shadow-sm backdrop-blur-xl text-xs font-medium leading-relaxed text-foreground">
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 mb-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 mb-1">
                     <span>9278 AI VOICE AGENT</span>
                     <span>00:04</span>
                   </div>
@@ -234,11 +234,11 @@ export function RealEstateCallSimulator() {
 
               {/* Agent Final Action Capsule */}
               <div className="flex items-start gap-3 max-w-2xl mr-auto">
-                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
+                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
                   <Bot className="size-4" />
                 </div>
                 <div className="rounded-3xl rounded-tl-sm bg-rose-50/90 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-800/60 p-4 shadow-md backdrop-blur-xl text-xs font-medium leading-relaxed text-foreground">
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 mb-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 mb-1">
                     <span>9278 AI VOICE AGENT</span>
                     <span>00:28</span>
                   </div>
@@ -246,8 +246,8 @@ export function RealEstateCallSimulator() {
 
                   <div className="flex flex-wrap items-center gap-2 pt-3 mt-2 border-t border-rose-200/60 dark:border-rose-900/30">
                     {currentSc.pills.map((pill, i) => (
-                      <span key={i} className="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-2.5 py-0.5 text-[10px] font-bold font-mono">
-                        <Check className="size-3 text-rose-600 dark:text-rose-400 stroke-[3]" />
+                      <span key={i} className="inline-flex items-center gap-1 rounded-full bg-rose-500/10 text-rose-400 dark:text-rose-300 border border-rose-200 dark:border-rose-800/40 px-2.5 py-0.5 text-[10px] font-bold font-mono">
+                        <Check className="size-3 text-rose-400 dark:text-rose-400 stroke-[3]" />
                         {pill}
                       </span>
                     ))}
@@ -261,7 +261,7 @@ export function RealEstateCallSimulator() {
 
       {/* Bottom CTA */}
       <div className="mt-16 text-center">
-        <Button asChild size="lg" className="btn-ai h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
+        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
           <Link href="/get-started?industry=real-estate">
             Deploy Real Estate AI Agent <ArrowRight className="ml-2 size-4" />
           </Link>

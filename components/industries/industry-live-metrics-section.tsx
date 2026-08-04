@@ -117,7 +117,7 @@ export function IndustryLiveMetricsSection({ industryName = "Real Estate" }: Pro
   ]
 
   const metricsList = isRealEstate ? realEstateMetrics : defaultMetrics
-  // Duplicate metrics array 4 times for smooth continuous infinite horizontal scrolling from right to left
+  // Duplicate metrics array 4 times for smooth continuous infinite horizontal scrolling from left to right
   const duplicatedMetrics = [...metricsList, ...metricsList, ...metricsList, ...metricsList]
 
   return (
@@ -136,7 +136,7 @@ export function IndustryLiveMetricsSection({ industryName = "Real Estate" }: Pro
           WebkitMaskImage: "linear-gradient(to right, transparent, black 4%, black 96%, transparent)",
         }}
       >
-        <div className="animate-live-marquee gap-6 py-2 px-4">
+        <div className="marquee-reverse flex w-max items-stretch gap-6 py-2 px-4">
           {duplicatedMetrics.map((m, idx) => {
             const Icon = m.icon
             return (

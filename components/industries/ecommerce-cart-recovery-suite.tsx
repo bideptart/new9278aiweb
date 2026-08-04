@@ -127,12 +127,12 @@ export function EcommerceCartRecoverySuite() {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
-        <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
-          <Gift className="size-3.5 text-rose-500 animate-bounce" />
+        <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+          <Gift className="size-3.5 text-rose-300 animate-bounce" />
           <span>AUTOMATED CART RECOVERY & VOICE SALES ENGINE</span>
         </span>
         <h2 className="mt-4 text-balance text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground leading-[1.1]">
-          Turn high-intent cart abandoners into <span className="italic text-rose-600 dark:text-rose-400">instant paid orders.</span>
+          Turn high-intent cart abandoners into <span className="italic text-rose-400 dark:text-rose-400">instant paid orders.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
           Our AI Voice Concierge dials shoppers minutes after they abandon their cart, answers fit questions, offers customized promo codes, and texts 1-click checkout links.
@@ -163,8 +163,8 @@ export function EcommerceCartRecoverySuite() {
                   className={cn(
                     "w-full text-left pl-12 pr-4 py-3.5 rounded-2xl transition-all duration-300 relative cursor-pointer font-medium flex flex-col gap-1",
                     isSelected
-                      ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 font-bold scale-[1.01]"
-                      : "text-muted-foreground hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50/40 dark:hover:bg-rose-950/20"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 font-bold scale-[1.01]"
+                      : "text-muted-foreground hover:text-rose-400 dark:hover:text-rose-400 hover:bg-rose-50/40 dark:hover:bg-rose-950/20"
                   )}
                 >
                   {/* Step Node Dot */}
@@ -179,7 +179,7 @@ export function EcommerceCartRecoverySuite() {
 
                   <div className="flex items-center justify-between w-full">
                     <span className="text-xs font-bold truncate">{sc.title}</span>
-                    <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 shrink-0">{sc.cartValue}</span>
+                    <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 shrink-0">{sc.cartValue}</span>
                   </div>
 
                   <p className="text-[11px] text-muted-foreground font-normal line-clamp-1">
@@ -195,7 +195,7 @@ export function EcommerceCartRecoverySuite() {
         <div className="lg:col-span-7 space-y-6">
           {/* Header Info Tag */}
           <div className="flex items-center justify-between">
-            <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-3.5 py-1 text-xs font-mono font-bold text-rose-600 dark:text-rose-400 shadow-xs">
+            <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 px-3.5 py-1 text-xs font-mono font-bold text-rose-400 dark:text-rose-400 shadow-xs">
               <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
               <span>LIVE CALL PREVIEW · {cur.shopper}</span>
             </span>
@@ -217,18 +217,18 @@ export function EcommerceCartRecoverySuite() {
             >
               {/* Cart Snapshot Pill */}
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 text-xs font-medium shadow-xs">
-                <ShoppingBag className="size-4 text-rose-500 shrink-0" />
+                <ShoppingBag className="size-4 text-rose-300 shrink-0" />
                 <span className="text-foreground font-semibold">{cur.cartItems}</span>
-                <span className="font-mono font-bold text-rose-600 dark:text-rose-400">({cur.cartValue})</span>
+                <span className="font-mono font-bold text-rose-400 dark:text-rose-400">({cur.cartValue})</span>
               </div>
 
               {/* Agent Bubble (Floating) */}
               <div className="flex items-start gap-3 max-w-[92%]">
-                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                <div className="size-9 rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs mt-0.5">
                   <Bot className="size-4.5" />
                 </div>
                 <div className="p-4 rounded-2xl rounded-tl-xs bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 text-xs md:text-sm text-foreground font-medium leading-relaxed shadow-xs">
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 mb-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 mb-1">
                     <span>9278 Voice AI Concierge</span>
                     <span className="text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md">Sub-240ms</span>
                   </div>
@@ -265,7 +265,7 @@ export function EcommerceCartRecoverySuite() {
             {cur.stats.map((st, i) => (
               <div key={i} className="text-center p-3 rounded-2xl bg-rose-50/50 dark:bg-rose-950/10 border border-rose-200/60 dark:border-rose-900/30">
                 <p className="text-[10px] font-mono text-muted-foreground uppercase">{st.label}</p>
-                <p className="text-lg md:text-xl font-serif font-bold text-rose-600 dark:text-rose-400 mt-0.5">{st.value}</p>
+                <p className="text-lg md:text-xl font-serif font-bold text-rose-400 dark:text-rose-400 mt-0.5">{st.value}</p>
               </div>
             ))}
           </div>
@@ -274,7 +274,7 @@ export function EcommerceCartRecoverySuite() {
 
       {/* CTA Button */}
       <div className="mt-14 text-center">
-        <Button asChild size="lg" className="btn-ai h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
+        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
           <Link href="/get-started?industry=ecommerce">
             Deploy E-Commerce Voice Agent <ArrowRight className="ml-2 size-4" />
           </Link>

@@ -221,7 +221,7 @@ export function SignupForm() {
             <span
               className={cn(
                 "rounded-full px-2 py-0.5 text-[10px]",
-                cycle === "yearly" ? "bg-white/20 text-white" : "bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300",
+                cycle === "yearly" ? "bg-white/20 text-white" : "bg-rose-100 text-rose-400 dark:bg-rose-950/40 dark:text-rose-300",
               )}
             >
               Save 20%
@@ -232,7 +232,7 @@ export function SignupForm() {
 
       {/* Per-second billing callout */}
       <div className="mb-8 flex justify-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50/80 px-4 py-2 text-sm text-rose-800 dark:border-rose-800/40 dark:bg-rose-950/40 dark:text-rose-200">
+        <div className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-rose-50/80 px-4 py-2 text-sm text-rose-400 dark:border-rose-800/40 dark:bg-rose-950/40 dark:text-rose-200">
           <span>⏱️</span>
           <span>
             <strong>Per-second billing</strong> — pay only for the seconds you use.
@@ -362,7 +362,7 @@ export function SignupForm() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <Card className="border-rose-200/60 dark:border-rose-800/40">
             <CardHeader className="pb-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-400 dark:text-rose-400">
                 <Sparkles className="h-3.5 w-3.5" />
                 Order summary
               </div>

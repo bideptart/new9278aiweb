@@ -63,7 +63,7 @@ export default function IndustriesPage() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="group btn-ai h-12 rounded-full px-7">
+                <Button asChild size="lg" className="group btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-7">
                   <Link href="/get-started">
                     Get started <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
                   </Link>

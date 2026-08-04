@@ -88,12 +88,12 @@ export function HomeServicesIntegrations() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
-            <Globe className="size-3.5 text-rose-500" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+            <Globe className="size-3.5 text-rose-300" />
             <span>CONTINUOUS 3D INTEGRATION CONVEYOR</span>
           </span>
           <h2 className="text-balance text-3xl font-serif font-normal leading-tight md:text-5xl text-foreground">
-            Contractor software <span className="italic text-rose-600 dark:text-rose-400">integration conveyor.</span>
+            Contractor software <span className="italic text-rose-400 dark:text-rose-400">integration conveyor.</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
             Hover or tap any field service software badge in the conveyor ribbon below to inspect 2-way REST API latency and calendar sync.
@@ -123,14 +123,14 @@ export function HomeServicesIntegrations() {
                     <div className={cn(
                       "size-10 rounded-2xl flex items-center justify-center shrink-0 border transition-colors duration-300",
                       isHovered
-                        ? "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-300 dark:border-rose-800"
+                        ? "bg-rose-500/15 text-rose-400 dark:text-rose-400 border-rose-300 dark:border-rose-800"
                         : "bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700"
                     )}>
                       <Icon className="size-5" />
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
+                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
                         {ig.category}
                       </span>
                       <h3 className="text-base md:text-lg font-serif font-bold text-foreground mt-0.5">{ig.name}</h3>
@@ -141,7 +141,7 @@ export function HomeServicesIntegrations() {
                     <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                       ⚡ {ig.speed}
                     </span>
-                    <span className="text-xs font-mono font-bold text-rose-600 dark:text-rose-400 bg-rose-500/15 px-3 py-1 rounded-full border border-rose-200 dark:border-rose-900/50">
+                    <span className="text-xs font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/15 px-3 py-1 rounded-full border border-rose-200 dark:border-rose-900/50">
                       {ig.status}
                     </span>
                   </div>
@@ -165,7 +165,7 @@ export function HomeServicesIntegrations() {
                     <div className="flex flex-wrap gap-2">
                       {ig.bullets.map((b, i) => (
                         <span key={i} className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-foreground bg-white/90 dark:bg-slate-900/90 px-3 py-1 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-2xs">
-                          <CheckCircle2 className="size-3 text-rose-500 shrink-0" />
+                          <CheckCircle2 className="size-3 text-rose-300 shrink-0" />
                           {b}
                         </span>
                       ))}

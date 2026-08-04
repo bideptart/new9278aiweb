@@ -148,7 +148,7 @@ export function IndustryRow({ slug, index, reverse }: { slug: string; index: num
           <div className="mt-8 flex flex-wrap gap-2 lg:flex-nowrap">
             <Link
               href={`/get-started?industry=${industry.slug}`}
-              className="btn-ai inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium transition-all"
+              className="btn-ai !text-rose-400 dark:!text-rose-300 inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium transition-all"
             >
               Launch a {industry.name.toLowerCase()} agent
             </Link>

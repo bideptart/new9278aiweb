@@ -95,8 +95,8 @@ export function Header() {
 							{/* Features Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isFeaturesActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isFeaturesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Features
 								</NavigationMenuTrigger>
@@ -125,8 +125,8 @@ export function Header() {
 							{/* Industries Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isIndustriesActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isIndustriesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Industries
 								</NavigationMenuTrigger>
@@ -158,8 +158,8 @@ export function Header() {
 									<Link
 										href="/pricing"
 										className={cn(
-											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
-											isPricingActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isPricingActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
 										)}
 									>
 										Pricing
@@ -170,8 +170,8 @@ export function Header() {
 							{/* Company Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-600 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isCompanyActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isCompanyActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Company
 								</NavigationMenuTrigger>
@@ -211,8 +211,8 @@ export function Header() {
 									<Link
 										href="/faq"
 										className={cn(
-											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-600 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
-											isFaqActive && "bg-rose-500/15 text-rose-600 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isFaqActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
 										)}
 									>
 										FAQ

@@ -120,12 +120,12 @@ export function HomeServicesDispatchMatrix() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
-            <Layers className="size-3.5 text-rose-500" />
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+            <Layers className="size-3.5 text-rose-300" />
             <span>3D EMERGENCY DISPATCH TRIAGE PYRAMID</span>
           </span>
           <h2 className="text-balance text-3xl font-serif font-normal leading-tight md:text-5xl text-foreground">
-            3-Tier emergency <span className="italic text-rose-600 dark:text-rose-400">triage command stack.</span>
+            3-Tier emergency <span className="italic text-rose-400 dark:text-rose-400">triage command stack.</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
             Click any level of the 3D triage pyramid below to inspect emergency intake speed, video SMS leak guides, and ServiceTitan calendar locking.
@@ -164,14 +164,14 @@ export function HomeServicesDispatchMatrix() {
                     <div className={cn(
                       "size-9 rounded-2xl flex items-center justify-center shrink-0 border transition-all",
                       isSelected
-                        ? "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-300 dark:border-rose-800"
+                        ? "bg-rose-500/15 text-rose-400 dark:text-rose-400 border-rose-300 dark:border-rose-800"
                         : "bg-slate-100 dark:bg-slate-800 text-slate-400 border-slate-200 dark:border-slate-700"
                     )}>
                       <IconComp className="size-4" />
                     </div>
 
                     <div>
-                      <span className="text-[9px] font-mono font-bold text-rose-600 dark:text-rose-400 block">{tr.level}</span>
+                      <span className="text-[9px] font-mono font-bold text-rose-400 dark:text-rose-400 block">{tr.level}</span>
                       <p className="text-xs font-bold text-foreground truncate">{tr.title}</p>
                     </div>
                   </div>
@@ -203,11 +203,11 @@ export function HomeServicesDispatchMatrix() {
                 {/* Header inside HUD */}
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200/60 dark:border-slate-800" style={{ transform: "translateZ(30px)" }}>
                   <div className="flex items-center gap-2">
-                    <TierIcon className="size-5 text-rose-500" />
+                    <TierIcon className="size-5 text-rose-300" />
                     <span className="text-xs font-serif font-bold text-foreground">{curTier.title}</span>
                   </div>
 
-                  <span className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+                  <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     {curTier.tag}
                   </span>
                 </div>
@@ -222,14 +222,14 @@ export function HomeServicesDispatchMatrix() {
                   {curTier.metrics.map((m, i) => (
                     <div key={i} className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs text-center">
                       <p className="text-[9px] font-mono text-muted-foreground">{m.label}</p>
-                      <p className="text-xs font-mono font-extrabold text-rose-600 dark:text-rose-400 mt-0.5">{m.val}</p>
+                      <p className="text-xs font-mono font-extrabold text-rose-400 dark:text-rose-400 mt-0.5">{m.val}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* Live Voice Dialogue Capsule */}
                 <div className="p-3.5 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/40 shadow-xs space-y-1.5" style={{ transform: "translateZ(40px)" }}>
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
                     <span>9278 Voice AI Dispatcher</span>
                     {/* 6-Bar Sound Spectrum */}
                     <div className="flex items-center gap-1 h-3">

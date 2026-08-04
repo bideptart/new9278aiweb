@@ -160,8 +160,8 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 px-2.5 py-0.5 text-[10px] font-semibold border border-rose-200 dark:border-rose-900/40">
-              <ShieldCheck className="size-3 text-rose-500" />
+            <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 px-2.5 py-0.5 text-[10px] font-semibold border border-rose-200 dark:border-rose-900/40">
+              <ShieldCheck className="size-3 text-rose-300" />
               HIPAA Certified
             </span>
           </div>
@@ -174,7 +174,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
             <div>
               <div className="flex items-center justify-between px-2 mb-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">PLAYBOOKS</span>
-                <span className="text-[9px] font-mono text-rose-600 dark:text-rose-400 font-bold">0{activePlaybook + 1}/0{playbooks.length}</span>
+                <span className="text-[9px] font-mono text-rose-400 dark:text-rose-400 font-bold">0{activePlaybook + 1}/0{playbooks.length}</span>
               </div>
 
               <div className="space-y-1">
@@ -190,7 +190,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                       className={cn(
                         "w-full text-left px-2.5 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between border cursor-pointer",
                         isActive
-                          ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 font-bold border-rose-300 dark:border-rose-800 shadow-xs scale-[1.02]"
+                          ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 font-bold border-rose-300 dark:border-rose-800 shadow-xs scale-[1.02]"
                           : "border-transparent text-muted-foreground hover:bg-rose-50/40 dark:hover:bg-rose-950/20 hover:text-foreground"
                       )}
                     >
@@ -231,7 +231,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                   <h4 className="text-xs font-bold text-foreground">{current.name}</h4>
                   <p className="text-[10px] text-muted-foreground">{current.status}</p>
                 </div>
-                <span className="rounded-full bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-2 py-0.5 text-[9px] font-bold">
+                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-2 py-0.5 text-[9px] font-bold">
                   {current.badge}
                 </span>
               </div>
@@ -246,7 +246,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                   transition={{ duration: 0.2 }}
                   className="rounded-2xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/70 dark:bg-rose-950/20 p-3.5 space-y-2 shadow-xs"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-bold text-rose-600 dark:text-rose-400">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-rose-400 dark:text-rose-400">
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 className="size-3.5" />
                       Agent Response · Sub-250ms

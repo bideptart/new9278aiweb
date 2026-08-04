@@ -383,7 +383,7 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
             <div className="pt-2">
               <Link
                 href={activeCategory.link}
-                className="btn-ai inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-normal shadow-sm transition-transform hover:scale-[1.02]"
+                className="btn-ai !text-rose-400 dark:!text-rose-300 inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-normal shadow-sm transition-transform hover:scale-[1.02]"
               >
                 <span>Explore Full {activeCategory.name} Playbook</span>
                 <ArrowRight className="size-4" />

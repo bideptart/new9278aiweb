@@ -247,8 +247,8 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                     className={cn(
                       "w-full text-left p-4 rounded-2xl transition-all duration-300 flex items-center justify-between font-medium cursor-pointer border",
                       isActive
-                        ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm font-bold scale-[1.01]"
-                        : "bg-white/80 dark:bg-slate-900/80 text-muted-foreground border-slate-200/80 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-600 dark:hover:text-rose-400"
+                        ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm font-bold scale-[1.01]"
+                        : "bg-white/80 dark:bg-slate-900/80 text-muted-foreground border-slate-200/80 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-400 dark:hover:text-rose-400"
                     )}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -256,7 +256,7 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                         className={cn(
                           "flex size-7 shrink-0 items-center justify-center rounded-xl text-xs font-mono font-bold transition-colors border",
                           isActive
-                            ? "bg-rose-500/20 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-800"
+                            ? "bg-rose-500/20 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800"
                             : "bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-200 dark:border-slate-700"
                         )}
                       >
@@ -288,7 +288,7 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="rounded-full bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3 py-1 text-[11px] font-mono font-bold shadow-xs">
+                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3 py-1 text-[11px] font-mono font-bold shadow-xs">
                   {current.badge}
                 </span>
 
@@ -315,11 +315,11 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
               >
                 {/* Agent Bubble (Soft Rose Tint) */}
                 <div className="flex items-start gap-3 max-w-[90%]">
-                  <div className="flex size-9 shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 shadow-xs mt-0.5">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 shadow-xs mt-0.5">
                     <Bot className="size-4.5" />
                   </div>
                   <div className="rounded-2xl rounded-tl-xs bg-rose-50/80 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 p-4 text-xs md:text-sm text-foreground font-medium shadow-xs">
-                    <div className="flex items-center justify-between text-[10px] font-bold text-rose-600 dark:text-rose-400 mb-1">
+                    <div className="flex items-center justify-between text-[10px] font-bold text-rose-400 dark:text-rose-400 mb-1">
                       <span>Agent · AI Voice Assistant</span>
                       <span className="font-mono text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md">{current.latency}</span>
                     </div>
@@ -348,14 +348,14 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
             <div className="flex items-center gap-3.5">
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 shadow-xs transition-transform hover:scale-105 cursor-pointer"
+                className="flex size-10 shrink-0 items-center justify-center rounded-2xl bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 shadow-xs transition-transform hover:scale-105 cursor-pointer"
                 aria-label="Simulate voice audio"
               >
                 {isPlaying ? <Pause className="size-4 fill-current" /> : <Play className="size-4 fill-current ml-0.5" />}
               </button>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Spoken AI Output</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">Spoken AI Output</span>
                   <span className="size-1 rounded-full bg-slate-300 dark:bg-slate-700" />
                   <span className="text-[10px] font-mono text-muted-foreground">Natural Human Pacing</span>
                 </div>

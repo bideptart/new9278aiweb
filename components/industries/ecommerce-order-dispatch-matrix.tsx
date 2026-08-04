@@ -37,7 +37,7 @@ export function EcommerceOrderDispatchMatrix() {
       title: "COD Verification & Fraud Guard",
       tag: "RTO REDUCTION ENGINE",
       badge: "45% RTO REDUCTION",
-      badgeColor: "bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900/40",
+      badgeColor: "bg-rose-50 text-rose-400 border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900/40",
       description:
         "Automatically calls COD buyers 5 seconds after checkout to confirm order details, address accuracy, and delivery intent before dispatching inventory.",
       orderNo: "Shopify #SHP-8921",
@@ -145,12 +145,12 @@ export function EcommerceOrderDispatchMatrix() {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 shadow-xs">
-          <ShoppingBag className="size-3.5 text-rose-500 animate-pulse" />
+        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs">
+          <ShoppingBag className="size-3.5 text-rose-300 animate-pulse" />
           <span>SHOPIFY & LOGISTICS VOICE DISPATCH MATRIX</span>
         </span>
         <h2 className="mt-4 text-balance text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground leading-[1.1]">
-          Automated order verification, tracking & <span className="italic text-rose-600 dark:text-rose-400">RTO defense hub.</span>
+          Automated order verification, tracking & <span className="italic text-rose-400 dark:text-rose-400">RTO defense hub.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
           Power your e-commerce store with 24/7 AI voice dispatchers that verify COD orders, track packages, handle returns, and convert buyers to prepaid.
@@ -172,19 +172,19 @@ export function EcommerceOrderDispatchMatrix() {
               className={cn(
                 "p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-3 relative overflow-hidden backdrop-blur-md",
                 isSelected
-                  ? "border-rose-300 dark:border-rose-700 bg-rose-50/90 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 shadow-md scale-[1.02]"
+                  ? "border-rose-300 dark:border-rose-700 bg-rose-50/90 dark:bg-rose-950/40 text-rose-400 dark:text-rose-300 shadow-md scale-[1.02]"
                   : "border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-muted-foreground hover:text-foreground hover:bg-rose-50/40 dark:hover:bg-rose-950/20 hover:border-rose-200 dark:hover:border-rose-900/40"
               )}
             >
               <div className="flex items-center justify-between">
-                <span className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isSelected ? "text-rose-600 dark:text-rose-400" : "text-muted-foreground")}>
+                <span className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")}>
                   MODULE 0{idx + 1}
                 </span>
                 <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300 dark:bg-slate-700")} />
               </div>
 
               <div>
-                <p className={cn("text-xs md:text-sm font-bold leading-tight", isSelected ? "text-rose-900 dark:text-rose-100" : "text-foreground")}>
+                <p className={cn("text-xs md:text-sm font-bold leading-tight", isSelected ? "text-rose-400 dark:text-rose-100" : "text-foreground")}>
                   {mod.title}
                 </p>
               </div>
@@ -231,7 +231,7 @@ export function EcommerceOrderDispatchMatrix() {
                 {curModule.stats.map((st, i) => (
                   <div key={i} className="p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 backdrop-blur-md shadow-xs">
                     <p className="text-[10px] font-mono text-muted-foreground uppercase">{st.label}</p>
-                    <p className="text-base font-bold text-rose-600 dark:text-rose-400 mt-1">{st.value}</p>
+                    <p className="text-base font-bold text-rose-400 dark:text-rose-400 mt-1">{st.value}</p>
                   </div>
                 ))}
               </div>
@@ -252,7 +252,7 @@ export function EcommerceOrderDispatchMatrix() {
                   <button
                     type="button"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="p-1.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900/40 hover:bg-rose-100 transition-colors cursor-pointer"
+                    className="p-1.5 rounded-full bg-rose-50 text-rose-400 border border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900/40 hover:bg-rose-100 transition-colors cursor-pointer"
                     title={isPlaying ? "Pause Auto-Cycle" : "Play Auto-Cycle"}
                   >
                     {isPlaying ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
@@ -262,7 +262,7 @@ export function EcommerceOrderDispatchMatrix() {
                 {/* Order Details Chip */}
                 <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-mono font-bold text-rose-600 dark:text-rose-400">{curModule.orderNo}</p>
+                    <p className="font-mono font-bold text-rose-400 dark:text-rose-400">{curModule.orderNo}</p>
                     <p className="text-[11px] text-muted-foreground font-medium">{curModule.customer}</p>
                   </div>
                   <div className="text-right">
@@ -274,11 +274,11 @@ export function EcommerceOrderDispatchMatrix() {
                 <div className="space-y-3 pt-1">
                   {/* Agent Bubble */}
                   <div className="flex items-start gap-2.5 max-w-[92%]">
-                    <div className="size-7 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
+                    <div className="size-7 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
                       <Bot className="size-4" />
                     </div>
                     <div className="p-3 rounded-2xl rounded-tl-xs bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 text-xs text-foreground font-medium leading-relaxed">
-                      <p className="text-[10px] font-mono font-bold text-rose-600 dark:text-rose-400 mb-0.5">9278 Voice AI Agent</p>
+                      <p className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 mb-0.5">9278 Voice AI Agent</p>
                       {curModule.voiceCall.agent}
                     </div>
                   </div>
@@ -311,7 +311,7 @@ export function EcommerceOrderDispatchMatrix() {
 
       {/* CTA Button */}
       <div className="mt-12 text-center">
-        <Button asChild size="lg" className="btn-ai h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
+        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
           <Link href="/get-started?industry=ecommerce">
             Deploy E-Commerce Voice Agent <ArrowRight className="ml-2 size-4" />
           </Link>

@@ -156,7 +156,7 @@ export default async function IndustryPage({
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <Button asChild size="lg" className="group btn-ai h-12 rounded-full px-7 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all">
+                  <Button asChild size="lg" className="group btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-7 shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all">
                     <Link href={`/get-started?industry=${industry.slug}`}>
                       Get started <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-1" aria-hidden />
                     </Link>
