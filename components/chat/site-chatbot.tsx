@@ -30,6 +30,7 @@ import {
   Mic,
   Minimize2,
   Moon,
+  MoreVertical,
   Plus,
   Send,
   Sparkles,
@@ -223,6 +224,7 @@ export function SiteChatbot() {
   const [showTeaser, setShowTeaser] = useState(false)
   const [hydrated, setHydrated] = useState(false)
   const [sendPulse, setSendPulse] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -280,6 +282,7 @@ export function SiteChatbot() {
       const id = setTimeout(() => textareaRef.current?.focus(), 250)
       return () => clearTimeout(id)
     }
+    setMenuOpen(false)
   }, [open])
 
   useEffect(
@@ -629,41 +632,107 @@ export function SiteChatbot() {
               )}
             </span>
 
-            {/* header — brand logo front and centre */}
+            {/* header — brand name front and centre */}
             <div className={cn("relative flex items-center gap-3 border-b px-4 py-3", surface, hairline)}>
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[radial-gradient(80%_100%_at_20%_0%,color-mix(in_oklch,var(--primary)_8%,transparent),transparent_70%)]"
               />
-              <span className="relative flex items-center gap-2.5">
-                <Logo height={26} src={dark ? "/logo-white.png" : "/logo.png"} />
-                <span className={cn("h-5 w-px", dark ? "bg-white/15" : "bg-black/10")} />
-                <span className="min-w-0">
-                  <span className={cn("block text-[12px] font-semibold leading-tight", dark ? "text-white" : "text-foreground")}>
-                    Assistant
+              <span className="relative flex min-w-0 items-center gap-2.5">
+                <span className="relative shrink-0">
+                  <Logo height={24} src={dark ? "/logo-white.png" : "/logo.png"} />
+                  <span className="absolute -right-0.5 -top-0.5 flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
+                    <span className={cn("relative inline-flex h-2 w-2 rounded-full border bg-emerald-500", dark ? "border-[#17171b]" : "border-white")} />
                   </span>
-                  <span className={cn("inline-flex items-center gap-1.5 text-[9.5px]", dark ? "text-white/50" : "text-muted-foreground")}>
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    </span>
+                </span>
+                <span className={cn("h-6 w-px shrink-0", dark ? "bg-white/15" : "bg-black/10")} />
+                <span className="min-w-0">
+                  <span className="text-aurora block truncate text-[13px] font-bold leading-tight tracking-tight">
+                    9278.ai Assistant
+                  </span>
+                  <span className={cn("block truncate text-[9.5px]", dark ? "text-white/45" : "text-muted-foreground")}>
                     Online · answers instantly
                   </span>
                 </span>
               </span>
 
-              <div className="relative ml-auto flex shrink-0 items-center gap-1">
+              {/* desktop — every action inline */}
+              <div className="relative ml-auto hidden shrink-0 items-center gap-1 sm:flex">
                 <ActionButton onClick={() => setDark((d) => !d)} label={dark ? "Light mode" : "Dark mode"} dark={dark}>
                   {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 </ActionButton>
                 <ActionButton onClick={newChat} label="New chat" dark={dark}>
                   <Plus className="h-4 w-4" />
                 </ActionButton>
-                <span className="hidden sm:block">
-                  <ActionButton onClick={() => setExpanded((e) => !e)} label={expanded ? "Shrink" : "Expand"} dark={dark}>
-                    {expanded ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
+                <ActionButton onClick={() => setExpanded((e) => !e)} label={expanded ? "Shrink" : "Expand"} dark={dark}>
+                  {expanded ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
+                </ActionButton>
+                <ActionButton onClick={() => setOpen(false)} label="Close" dark={dark}>
+                  <X className="h-4 w-4" />
+                </ActionButton>
+              </div>
+
+              {/* mobile — a compact dropdown holds the extra actions, Close stays one tap away */}
+              <div className="relative ml-auto flex shrink-0 items-center gap-1 sm:hidden">
+                <div className="relative">
+                  <ActionButton onClick={() => setMenuOpen((v) => !v)} label="More options" dark={dark}>
+                    <MoreVertical className="h-4 w-4" />
                   </ActionButton>
-                </span>
+                  <AnimatePresence>
+                    {menuOpen && (
+                      <>
+                        <button
+                          aria-hidden
+                          tabIndex={-1}
+                          onClick={() => setMenuOpen(false)}
+                          className="fixed inset-0 z-[1] cursor-default"
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                          transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                          className={cn(
+                            "absolute right-0 top-[calc(100%+8px)] z-[2] w-48 overflow-hidden rounded-2xl border p-1.5 shadow-[0_20px_50px_-20px_rgba(17,17,17,0.4)]",
+                            surface,
+                            hairline,
+                          )}
+                        >
+                          {[
+                            {
+                              icon: dark ? Sun : Moon,
+                              label: dark ? "Light mode" : "Dark mode",
+                              onClick: () => setDark((d) => !d),
+                            },
+                            { icon: Plus, label: "New chat", onClick: newChat },
+                            {
+                              icon: expanded ? Minimize2 : Maximize2,
+                              label: expanded ? "Shrink" : "Expand",
+                              onClick: () => setExpanded((e) => !e),
+                            },
+                          ].map((item) => (
+                            <button
+                              key={item.label}
+                              type="button"
+                              onClick={() => {
+                                item.onClick()
+                                setMenuOpen(false)
+                              }}
+                              className={cn(
+                                "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-left text-[12px] font-medium transition-colors",
+                                dark ? "text-white/85 hover:bg-white/[0.06]" : "text-foreground hover:bg-black/[0.05]",
+                              )}
+                            >
+                              <item.icon className="h-4 w-4 text-primary" />
+                              {item.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
                 <ActionButton onClick={() => setOpen(false)} label="Close" dark={dark}>
                   <X className="h-4 w-4" />
                 </ActionButton>

@@ -15,6 +15,7 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
+import { motion, AnimatePresence } from 'motion/react';
 import {
 	LucideIcon,
 	CodeIcon,
@@ -41,6 +42,7 @@ import {
 	DollarSign,
 	Wrench,
 	UtensilsCrossed,
+	ChevronDown,
 } from 'lucide-react';
 
 type LinkItem = {
@@ -50,27 +52,116 @@ type LinkItem = {
 	description?: string;
 };
 
+/** One collapsible section in the mobile drawer — tap the header row to
+    expand/collapse instead of the old flat "everything at once" list. */
+function MobileAccordionSection({
+	id,
+	title,
+	icon: Icon,
+	count,
+	active,
+	openId,
+	setOpenId,
+	children,
+}: {
+	id: string;
+	title: string;
+	icon: LucideIcon;
+	count: number;
+	active?: boolean;
+	openId: string | null;
+	setOpenId: (id: string | null) => void;
+	children: React.ReactNode;
+}) {
+	const isOpen = openId === id;
+	return (
+		<div className={cn('border-b border-border/40 transition-colors last:border-b-0', isOpen && 'bg-rose-500/[0.04]')}>
+			<button
+				type="button"
+				onClick={() => setOpenId(isOpen ? null : id)}
+				aria-expanded={isOpen}
+				className="flex w-full items-center gap-2.5 rounded-xl px-2 py-3 text-left transition-colors active:bg-accent/60"
+			>
+				<span
+					className={cn(
+						'flex size-8 shrink-0 items-center justify-center rounded-lg border border-border/60 bg-background/80 transition-all duration-300',
+						isOpen && 'border-rose-200 bg-rose-500/15 text-rose-400 dark:border-rose-900/50',
+					)}
+				>
+					<Icon className="size-4" />
+				</span>
+				<span className="flex flex-1 items-center gap-2 min-w-0">
+					<span
+						className={cn(
+							'text-[13px] font-semibold text-foreground transition-colors',
+							(isOpen || active) && 'text-rose-400',
+						)}
+					>
+						{title}
+					</span>
+					{active && !isOpen && <span className="size-1.5 shrink-0 rounded-full bg-rose-400" />}
+					<span className="ml-auto shrink-0 rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+						{count}
+					</span>
+				</span>
+				<ChevronDown
+					className={cn(
+						'size-4 shrink-0 text-muted-foreground/70 transition-transform duration-300',
+						isOpen && 'rotate-180 text-rose-400',
+					)}
+				/>
+			</button>
+			<AnimatePresence initial={false}>
+				{isOpen && (
+					<motion.div
+						initial={{ height: 0, opacity: 0 }}
+						animate={{ height: 'auto', opacity: 1 }}
+						exit={{ height: 0, opacity: 0 }}
+						transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+						className="overflow-hidden"
+					>
+						<motion.div
+							initial={{ y: -6 }}
+							animate={{ y: 0 }}
+							transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+							className="flex flex-col gap-y-2 px-1 pb-3.5 pt-1"
+						>
+							{children}
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</div>
+	);
+}
+
 export function Header() {
 	const [open, setOpen] = React.useState(false);
+	const [mobileSection, setMobileSection] = React.useState<string | null>(null);
 	const scrolled = useScroll(10);
 	const pathname = usePathname();
-
-	React.useEffect(() => {
-		if (open) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
-		return () => {
-			document.body.style.overflow = '';
-		};
-	}, [open]);
 
 	const isFeaturesActive = pathname.startsWith("/features")
 	const isIndustriesActive = pathname.startsWith("/industries")
 	const isPricingActive = pathname === "/pricing"
 	const isCompanyActive = pathname.startsWith("/about") || pathname.startsWith("/contact") || pathname.startsWith("/team") || pathname.startsWith("/blog")
 	const isFaqActive = pathname === "/faq"
+
+	React.useEffect(() => {
+		if (open) {
+			document.body.style.overflow = 'hidden';
+			// open straight to whichever section matches the current page,
+			// so a visitor browsing /industries/dental doesn't land on a
+			// fully collapsed menu with no idea where they are
+			setMobileSection(isFeaturesActive ? 'features' : isIndustriesActive ? 'industries' : isCompanyActive ? 'company' : null);
+		} else {
+			document.body.style.overflow = '';
+			setMobileSection(null);
+		}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [open, isFeaturesActive, isIndustriesActive, isCompanyActive]);
 
 	return (
 		<header className="fixed top-3 inset-x-0 z-50 w-full px-4 sm:px-6 flex justify-center transition-all duration-300 pointer-events-none">
@@ -252,27 +343,77 @@ export function Header() {
 				</Button>
 			</nav>
 
-			{/* Mobile Drawer */}
+			{/* Mobile Drawer — Features/Industries/Company are collapsible
+			    accordions now instead of one long flat list, so the menu opens
+			    short and the visitor picks a section to expand. */}
 			<MobileMenu open={open} className="flex flex-col justify-between gap-4 overflow-y-auto">
 				<NavigationMenu className="max-w-full w-full">
-					<div className="flex w-full flex-col gap-y-2">
-						<span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-2 pt-2">Features</span>
-						{productLinks.map((link) => (
-							<ListItem key={link.title} {...link} />
-						))}
+					<div className="flex w-full flex-col">
+						<MobileAccordionSection
+							id="features"
+							title="Features"
+							icon={Sparkles}
+							count={productLinks.length}
+							active={isFeaturesActive}
+							openId={mobileSection}
+							setOpenId={setMobileSection}
+						>
+							{productLinks.map((link) => (
+								<ListItem key={link.title} {...link} />
+							))}
+						</MobileAccordionSection>
 
-						<span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-2 pt-4">Industries</span>
-						{industryLinks.map((link) => (
-							<ListItem key={link.title} {...link} />
-						))}
+						<MobileAccordionSection
+							id="industries"
+							title="Industries"
+							icon={Building2}
+							count={industryLinks.length}
+							active={isIndustriesActive}
+							openId={mobileSection}
+							setOpenId={setMobileSection}
+						>
+							{industryLinks.map((link) => (
+								<ListItem key={link.title} {...link} />
+							))}
+						</MobileAccordionSection>
 
-						<span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-2 pt-4">Company</span>
-						{companyMainLinks.map((link) => (
-							<ListItem key={link.title} {...link} />
-						))}
-						{companyLegalLinks.map((link) => (
-							<ListItem key={link.title} {...link} />
-						))}
+						<MobileAccordionSection
+							id="company"
+							title="Company"
+							icon={Users}
+							count={companyMainLinks.length + companyLegalLinks.length}
+							active={isCompanyActive}
+							openId={mobileSection}
+							setOpenId={setMobileSection}
+						>
+							{companyMainLinks.map((link) => (
+								<ListItem key={link.title} {...link} />
+							))}
+							{companyLegalLinks.map((link) => (
+								<ListItem key={link.title} {...link} />
+							))}
+						</MobileAccordionSection>
+
+						<div className="flex items-center gap-2 px-2 pt-3">
+							<Link
+								href="/pricing"
+								className={cn(
+									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-semibold transition-colors hover:bg-accent',
+									isPricingActive && 'border-rose-200 bg-rose-500/15 text-rose-400 dark:border-rose-900/50',
+								)}
+							>
+								Pricing
+							</Link>
+							<Link
+								href="/faq"
+								className={cn(
+									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-semibold transition-colors hover:bg-accent',
+									isFaqActive && 'border-rose-200 bg-rose-500/15 text-rose-400 dark:border-rose-900/50',
+								)}
+							>
+								FAQ
+							</Link>
+						</div>
 					</div>
 				</NavigationMenu>
 
