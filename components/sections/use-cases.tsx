@@ -131,10 +131,10 @@ function FrontDeskScene() {
           return (
             <line
               key={i}
-              x1={C + Math.cos(a) * r1}
-              y1={C + Math.sin(a) * r1}
-              x2={C + Math.cos(a) * R}
-              y2={C + Math.sin(a) * R}
+              x1={(C + Math.cos(a) * r1).toFixed(3)}
+              y1={(C + Math.sin(a) * r1).toFixed(3)}
+              x2={(C + Math.cos(a) * R).toFixed(3)}
+              y2={(C + Math.sin(a) * R).toFixed(3)}
               stroke="currentColor"
               className={major ? "text-primary/35" : "text-foreground/12"}
               strokeWidth={major ? 1.6 : 1}
@@ -153,8 +153,8 @@ function FrontDeskScene() {
           return (
             <circle
               key={h}
-              cx={C + Math.cos(a) * R}
-              cy={C + Math.sin(a) * R}
+              cx={(C + Math.cos(a) * R).toFixed(3)}
+              cy={(C + Math.sin(a) * R).toFixed(3)}
               r={on ? 3.2 : 2}
               fill="var(--primary)"
               opacity={on ? 1 : 0.22}

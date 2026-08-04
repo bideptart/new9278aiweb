@@ -6,6 +6,7 @@ import { SITE } from "@/lib/seo"
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/jsonld"
 import { PageviewTracker } from "@/components/analytics/pageview-tracker"
 import { ThemeProvider } from "@/components/theme-provider"
+import { SiteChatbot } from "@/components/chat/site-chatbot"
 
 // Acepeak typography: Inter for body/UI, Instrument Serif for display headings
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
@@ -102,6 +103,7 @@ export default function RootLayout({
             <PageviewTracker />
           </Suspense>
           {children}
+          <SiteChatbot />
         </ThemeProvider>
       </body>
     </html>

@@ -147,8 +147,8 @@ const RADAR_BLIPS = [
 ].map((b) => {
   const rad = (b.angle * Math.PI) / 180
   return {
-    left: `${50 + Math.cos(rad) * b.dist * 50}%`,
-    top: `${50 + Math.sin(rad) * b.dist * 50}%`,
+    left: `${(50 + Math.cos(rad) * b.dist * 50).toFixed(3)}%`,
+    top: `${(50 + Math.sin(rad) * b.dist * 50).toFixed(3)}%`,
     delay: b.delay,
   }
 })
