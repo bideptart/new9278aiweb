@@ -7,8 +7,10 @@
  * composer (Enter to send / Shift+Enter newline), slash commands ("/" opens
  * a quick-action menu), a rich welcome screen with quick-start tiles, a
  * manual light/dark toggle (defaults to light — never forces dark), copy +
- * read-aloud actions, contextual follow-ups, voice input via the Web Speech
- * API, clickable links/emails, and a voice-waveform typing indicator.
+ * read-aloud + thumbs up/down actions, contextual follow-ups, voice input
+ * via the Web Speech API, clickable links/emails, a voice-waveform typing
+ * indicator, a conversation that survives page navigation/refresh
+ * (localStorage), and a one-time proactive teaser bubble for new visitors.
  *
  * Answers come from `lib/chatbot-knowledge.ts` (product FAQ + full feature
  * catalogue + every industry + support/dashboard intents). No API key, no
@@ -32,6 +34,8 @@ import {
   Send,
   Sparkles,
   Sun,
+  ThumbsDown,
+  ThumbsUp,
   Volume2,
   VolumeX,
   X,
@@ -51,6 +55,22 @@ type Message = {
   text: string
   streaming?: boolean
   followUps?: string[]
+}
+
+const STORAGE_KEY = "9278ai-chat-history"
+const TEASER_DISMISSED_KEY = "9278ai-teaser-dismissed"
+
+function loadStoredMessages(): Message[] {
+  if (typeof window === "undefined") return []
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as Message[]
+    // never resurrect a mid-stream message — just show the finished text
+    return parsed.map((m) => ({ ...m, streaming: false }))
+  } catch {
+    return []
+  }
 }
 
 const FALLBACK =
@@ -199,6 +219,9 @@ export function SiteChatbot() {
   const [speakingId, setSpeakingId] = useState<string | null>(null)
   const [listening, setListening] = useState(false)
   const [micSupported, setMicSupported] = useState(false)
+  const [feedback, setFeedback] = useState<Record<string, "up" | "down">>({})
+  const [showTeaser, setShowTeaser] = useState(false)
+  const [hydrated, setHydrated] = useState(false)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -211,6 +234,39 @@ export function SiteChatbot() {
     const SR = (window as any).SpeechRecognition ?? (window as any).webkitSpeechRecognition
     setMicSupported(!!SR)
   }, [])
+
+  /* restore the conversation from a previous visit/page, once, on mount */
+  useEffect(() => {
+    const stored = loadStoredMessages()
+    if (stored.length > 0) setMessages(stored)
+    setHydrated(true)
+  }, [])
+
+  /* persist every change so navigating to another page (or refreshing)
+     doesn't lose the conversation */
+  useEffect(() => {
+    if (!hydrated || typeof window === "undefined") return
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+    } catch {
+      /* storage full or blocked — conversation just won't persist, fine */
+    }
+  }, [messages, hydrated])
+
+  /* proactive teaser bubble — pops up once, a few seconds in, but only for
+     a fresh visitor who hasn't opened the chat or dismissed it before */
+  useEffect(() => {
+    if (!hydrated) return
+    const dismissed = window.localStorage.getItem(TEASER_DISMISSED_KEY)
+    if (dismissed || open || messages.length > 0) return
+    const id = setTimeout(() => setShowTeaser(true), 4500)
+    return () => clearTimeout(id)
+  }, [hydrated, open, messages.length])
+
+  function dismissTeaser() {
+    setShowTeaser(false)
+    window.localStorage.setItem(TEASER_DISMISSED_KEY, "1")
+  }
 
   useEffect(() => {
     if (!scrollRef.current) return
@@ -323,6 +379,12 @@ export function SiteChatbot() {
     setSpeakingId(null)
     setMessages([])
     setTyping(false)
+    setFeedback({})
+    window.localStorage.removeItem(STORAGE_KEY)
+  }
+
+  function rateFeedback(id: string, value: "up" | "down") {
+    setFeedback((f) => ({ ...f, [id]: value }))
   }
 
   const copyMessage = useCallback((id: string, text: string) => {
@@ -387,35 +449,115 @@ export function SiteChatbot() {
 
   return (
     <>
-      {/* ── launcher — voice-orb, not a generic chat bubble ─────────── */}
+      {/* ── proactive teaser bubble — invites a fresh visitor to start ── */}
+      <AnimatePresence>
+        {showTeaser && !open && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 6 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-[92px] right-4 z-[69] flex max-w-[220px] items-start gap-2 rounded-2xl rounded-br-sm border border-black/[0.06] bg-white px-3.5 py-3 text-left shadow-[0_18px_44px_-18px_rgba(17,17,17,0.35)] sm:bottom-24 sm:right-6"
+          >
+            <button
+              type="button"
+              onClick={() => {
+                dismissTeaser()
+                setOpen(true)
+              }}
+              className="text-left text-[12px] leading-snug text-foreground"
+            >
+              <span className="mb-1 block font-semibold">👋 Need help?</span>
+              Ask me anything about 9278.ai — pricing, features, or getting started.
+            </button>
+            <button
+              type="button"
+              onClick={dismissTeaser}
+              aria-label="Dismiss"
+              className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-muted-foreground/60 transition-colors hover:bg-black/[0.06] hover:text-foreground"
+            >
+              <X className="h-3 w-3" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── launcher — a real voice orb: solid, glowing, unmistakable ── */}
       <motion.button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => {
+          setOpen((o) => !o)
+          if (showTeaser) dismissTeaser()
+        }}
         aria-label={open ? "Close AI assistant" : "Open AI assistant"}
         aria-expanded={open}
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.95 }}
-        className="group fixed bottom-5 right-5 z-[70] flex h-14 w-14 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 sm:bottom-6 sm:right-6"
+        whileHover={{ scale: 1.07, y: -2 }}
+        whileTap={{ scale: 0.94 }}
+        className="group fixed bottom-5 right-5 z-[70] flex h-16 w-16 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 sm:bottom-6 sm:right-6"
       >
-        <motion.span
-          aria-hidden
-          className="absolute inset-0 rounded-full border-[1.5px] border-dashed border-primary/50"
-          animate={reduced ? undefined : { rotate: 360 }}
-          transition={{ duration: 16, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        {!reduced && !open && (
+        {/* soft outer bloom — the thing that makes it pop off any background.
+            Deliberately not tied to the (lightened) --primary token: a
+            launcher button needs full brand saturation to read at a glance,
+            even though the rest of the site now uses a softer red. */}
+        {!reduced && (
           <motion.span
             aria-hidden
-            className="absolute inset-0 rounded-full bg-primary/25 blur-md"
-            animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0.15, 0.5] }}
-            transition={{ duration: 2.6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            className="absolute inset-[-7px] rounded-full bg-[radial-gradient(circle,rgba(220,38,38,0.5),transparent_70%)] blur-lg"
+            animate={{ scale: [1, 1.22, 1], opacity: open ? 0.3 : [0.55, 0.9, 0.55] }}
+            transition={{ duration: 2.8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
           />
         )}
-        <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-primary via-primary/85 to-[var(--ai-magenta)] shadow-[0_14px_34px_-10px_var(--primary)]">
-          <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-white/15" />
+
+        {/* slow rotating conic ring in full brand saturation */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-full transition-transform duration-300 group-hover:scale-[1.04]"
+          style={{ background: "conic-gradient(from 0deg, #f43f5e 0deg, #dc2626 120deg, #f97316 200deg, #f43f5e 360deg)" }}
+          animate={reduced ? undefined : { rotate: 360 }}
+          transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+        />
+
+        {/* LED indicator ring — small lights chasing around the rim, like a
+            hardware status ring, each one blinking in sequence */}
+        {!reduced &&
+          !open &&
+          Array.from({ length: 8 }).map((_, i) => {
+            const angle = (i / 8) * 360
+            const rad = (angle * Math.PI) / 180
+            const r = 30 // px from center, just outside the orb face
+            return (
+              <motion.span
+                key={i}
+                aria-hidden
+                className="absolute left-1/2 top-1/2 h-[5px] w-[5px] rounded-full bg-white"
+                style={{
+                  x: (Math.cos(rad) * r).toFixed(2),
+                  y: (Math.sin(rad) * r).toFixed(2),
+                  marginLeft: -2.5,
+                  marginTop: -2.5,
+                  boxShadow: "0 0 6px 1px rgba(255,255,255,0.9)",
+                }}
+                animate={{ opacity: [0.15, 1, 0.15], scale: [0.7, 1.15, 0.7] }}
+                transition={{
+                  duration: 1.6,
+                  delay: i * 0.15,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+              />
+            )
+          })}
+
+        {/* solid orb face — vivid, high-contrast, sits just inside the ring */}
+        <span
+          className="absolute inset-[3px] flex items-center justify-center overflow-hidden rounded-full shadow-[0_16px_38px_-8px_rgba(220,38,38,0.65)]"
+          style={{ background: "linear-gradient(135deg, #ef4444, #dc2626 55%, #be123c)" }}
+        >
+          <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/20 to-transparent" />
+
           <AnimatePresence mode="wait" initial={false}>
             {open ? (
               <motion.span
@@ -424,41 +566,31 @@ export function SiteChatbot() {
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}
                 exit={{ opacity: 0, rotate: 45, scale: 0.6 }}
                 transition={{ duration: 0.18 }}
+                className="relative"
               >
-                <X className="h-5 w-5 text-white" />
+                <X className="h-6 w-6 text-white" strokeWidth={2.5} />
               </motion.span>
             ) : (
+              // logo seal — a crisp white badge so the mark reads clearly
+              // against the saturated orb, instead of fighting it for contrast
               <motion.span
-                key="bars"
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
+                key="logo"
+                initial={{ opacity: 0, scale: 0.6, rotate: -8 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 exit={{ opacity: 0, scale: 0.6 }}
-                transition={{ duration: 0.18 }}
-                className="flex items-end gap-[3px]"
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white px-1 shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
               >
-                {[10, 18, 13, 20, 9].map((h, i) => (
-                  <motion.span
-                    key={i}
-                    className="w-[3px] rounded-full bg-white"
-                    style={{ height: h }}
-                    animate={reduced ? undefined : { scaleY: [1, 0.45, 1] }}
-                    transition={{
-                      duration: 1 + (i % 3) * 0.25,
-                      delay: i * 0.12,
-                      repeat: Number.POSITIVE_INFINITY,
-                      ease: "easeInOut",
-                    }}
-                  />
-                ))}
+                <Logo height={12} src="/logo.png" />
               </motion.span>
             )}
           </AnimatePresence>
         </span>
 
         {hasNewBadge && !open && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5">
+          <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-500" />
+            <span className="relative inline-flex h-4 w-4 items-center justify-center rounded-full border-[2.5px] border-white bg-emerald-500 shadow-sm" />
           </span>
         )}
       </motion.button>
@@ -667,6 +799,28 @@ export function SiteChatbot() {
                             <Volume2 className="h-3.5 w-3.5" />
                           )}
                         </ActionButton>
+
+                        <span className={cn("mx-0.5 h-4 w-px", dark ? "bg-white/10" : "bg-black/[0.07]")} />
+
+                        <ActionButton onClick={() => rateFeedback(m.id, "up")} label="Good answer" dark={dark}>
+                          <ThumbsUp
+                            className={cn("h-3.5 w-3.5", feedback[m.id] === "up" && "fill-emerald-500 text-emerald-500")}
+                          />
+                        </ActionButton>
+                        <ActionButton onClick={() => rateFeedback(m.id, "down")} label="Poor answer" dark={dark}>
+                          <ThumbsDown
+                            className={cn("h-3.5 w-3.5", feedback[m.id] === "down" && "fill-red-500 text-red-500")}
+                          />
+                        </ActionButton>
+                        {feedback[m.id] && (
+                          <motion.span
+                            initial={{ opacity: 0, x: -4 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className={cn("text-[10px]", dark ? "text-white/40" : "text-muted-foreground/70")}
+                          >
+                            Thanks for the feedback!
+                          </motion.span>
+                        )}
                       </div>
                     )}
 
