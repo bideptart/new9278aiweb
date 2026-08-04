@@ -2,25 +2,30 @@
 
 import Link from "next/link"
 import {
-  AudioLines,
-  Hand,
   PhoneCall,
   Languages,
-  Wrench,
   Repeat,
   ShieldCheck,
-  Activity,
   Webhook,
-  Mic,
   CalendarClock,
   Network,
   ArrowRight,
+  ArrowUpRight,
   Zap,
+  Search,
+  Bell,
+  ShieldAlert,
+  PhoneForwarded,
+  FileText,
+  Waypoints,
+  Headphones,
+  type LucideIcon,
 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animation/scroll-reveal"
+import { FeaturesLivePreview } from "@/components/sections/features-live-preview"
 
 const trustPills = [
   { icon: Zap, label: "Sub-300ms latency" },
@@ -32,145 +37,154 @@ const trustPills = [
 
 const floatingIcons = [
   {
-    Icon: AudioLines,
+    Icon: PhoneCall,
     top: "4%",
     left: "-4%",
     duration: 4.5,
     delay: 0,
-    title: "Real-time audio",
-    description: "Sub-300ms WebRTC voice, no delay.",
+    title: "AI Receptionist",
+    description: "Greets every caller in real time.",
     tooltip: "bottom",
   },
   {
-    Icon: ShieldCheck,
-    top: "10%",
-    left: "50%",
-    duration: 4.8,
-    delay: 0.3,
-    title: "SOC 2-aligned",
-    description: "Encrypted, compliant by default.",
-    tooltip: "bottom",
-  },
-  {
-    Icon: PhoneCall,
+    Icon: CalendarClock,
     top: "6%",
     left: "104%",
     duration: 5,
     delay: 0.6,
-    title: "Carrier-grade telephony",
-    description: "Inbound & outbound calls over SIP.",
+    title: "Appointment Setter",
+    description: "Books and confirms on the call.",
     tooltip: "bottom",
   },
   {
-    Icon: Webhook,
+    Icon: Headphones,
     top: "102%",
     left: "-2%",
     duration: 4.2,
     delay: 1.1,
-    title: "Webhooks & APIs",
-    description: "Pipe call events into your stack.",
+    title: "Answering Services",
+    description: "Unlimited concurrent coverage.",
     tooltip: "top",
   },
   {
-    Icon: Activity,
+    Icon: PhoneForwarded,
     top: "100%",
     left: "102%",
     duration: 5.4,
     delay: 1.6,
-    title: "Live observability",
-    description: "Transcripts, sentiment, analytics.",
+    title: "Call Transfer",
+    description: "Warm hand-off with full context.",
     tooltip: "top",
   },
 ] as const
 
-const features = [
+const features: {
+  icon: LucideIcon
+  title: string
+  description: string
+  tag: (typeof featureCategories)[number]
+  href: string
+  accent: string
+}[] = [
   {
-    icon: AudioLines,
-    title: "Sub-300ms latency",
-    description:
-      "Real-time WebRTC audio with a globally distributed media network. Conversations feel instant, never delayed.",
-    tag: "Voice",
-  },
-  {
-    icon: Hand,
-    title: "Natural turn-taking",
-    description:
-      "Smart endpointing, barge-in, and interruption handling let your agent listen, pause, and respond like a person.",
-    tag: "Voice",
-  },
-  {
-    icon: PhoneCall,
-    title: "Carrier-grade telephony",
-    description:
-      "Inbound and outbound PSTN calling over SIP. Connect your existing carrier and route calls intelligently across 60+ countries.",
-    tag: "Telephony",
+    icon: Zap,
+    title: "Sub-300ms greeting",
+    description: "Callers hear a warm, human greeting before the first ring finishes.",
+    tag: "Receptionist",
+    href: "/features/ai-voice-receptionist",
+    accent: "var(--ai-cyan)",
   },
   {
     icon: Languages,
-    title: "Multilingual voices",
-    description:
-      "Speak naturally in dozens of languages and accents. Auto-detect the caller's language and switch mid-call when they do.",
-    tag: "Voice",
+    title: "60+ languages, auto-detected",
+    description: "No menu, no delay — the agent matches the caller's language mid-call.",
+    tag: "Receptionist",
+    href: "/features/ai-voice-receptionist",
+    accent: "var(--ai-cyan)",
   },
   {
-    icon: Wrench,
-    title: "Tools & function calling",
-    description:
-      "Look up CRMs, book calendars, take payments, query inventory — your agent uses the same APIs your team does.",
-    tag: "Integrations",
-  },
-  {
-    icon: Repeat,
-    title: "Live transfer & handoff",
-    description:
-      "Warm-transfer to a human, swap between specialist agents, and pass full context — no repeating the customer.",
-    tag: "Telephony",
-  },
-  {
-    icon: Mic,
-    title: "Background noise removal",
-    description:
-      "AI-powered noise and echo cancellation so callers from a busy street, café, or car still come through cleanly.",
-    tag: "Voice",
-  },
-  {
-    icon: Activity,
-    title: "Live transcripts & analytics",
-    description:
-      "Every call streamed to text with speaker labels, sentiment, intents, and conversion events — searchable from day one.",
-    tag: "Operations",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Recording, redaction & compliance",
-    description:
-      "Configurable PII redaction, encrypted storage, retention controls, and SOC 2-aligned infrastructure out of the box.",
-    tag: "Operations",
+    icon: Search,
+    title: "Instant FAQ lookup",
+    description: "Hours, pricing, and policy questions answered straight from your knowledge base.",
+    tag: "Receptionist",
+    href: "/features/ai-voice-receptionist",
+    accent: "var(--ai-cyan)",
   },
   {
     icon: CalendarClock,
-    title: "Scheduling & calendars",
-    description:
-      "Native Google, Outlook, and Calendly integrations. Book, reschedule, and confirm — all over voice.",
-    tag: "Integrations",
+    title: "Two-way calendar sync",
+    description: "Google Calendar and Outlook stay in lockstep — no double-books, no stale slots.",
+    tag: "Appointment",
+    href: "/features/appointment-setter",
+    accent: "var(--ai-mint)",
   },
   {
-    icon: Webhook,
-    title: "Webhooks & APIs",
-    description:
-      "Trigger workflows on call start, transcript chunks, tool calls, or completion. Pipe data into your stack in real time.",
-    tag: "Integrations",
+    icon: Repeat,
+    title: "Smart slot negotiation",
+    description: "When a time's taken, the agent offers the nearest alternative in the same breath.",
+    tag: "Appointment",
+    href: "/features/appointment-setter",
+    accent: "var(--ai-mint)",
+  },
+  {
+    icon: Bell,
+    title: "Automated SMS reminders",
+    description: "24-hour and 1-hour reminders cut no-shows by 35%, no human required.",
+    tag: "Appointment",
+    href: "/features/appointment-setter",
+    accent: "var(--ai-mint)",
   },
   {
     icon: Network,
-    title: "Massive concurrency",
-    description:
-      "Scale from one call to thousands in parallel without provisioning servers. Burst capacity is built-in.",
-    tag: "Operations",
+    title: "Unlimited concurrency",
+    description: "The hundredth caller gets the same instant pickup as the first.",
+    tag: "Answering",
+    href: "/features/answering-services",
+    accent: "var(--ai-violet)",
+  },
+  {
+    icon: ShieldAlert,
+    title: "Custom emergency escalation",
+    description: "Define what counts as urgent — it escalates to a human in under 15 seconds.",
+    tag: "Answering",
+    href: "/features/answering-services",
+    accent: "var(--ai-violet)",
+  },
+  {
+    icon: Webhook,
+    title: "Instant CRM logging",
+    description: "Every summary lands in HubSpot, Salesforce, or Zendesk the moment the call ends.",
+    tag: "Answering",
+    href: "/features/answering-services",
+    accent: "var(--ai-violet)",
+  },
+  {
+    icon: PhoneForwarded,
+    title: "Warm & cold transfer modes",
+    description: "Brief a human live, or hand off with a written summary — your call, every time.",
+    tag: "Transfer",
+    href: "/features/call-transfer",
+    accent: "var(--ai-magenta)",
+  },
+  {
+    icon: FileText,
+    title: "Pre-transfer AI summary",
+    description: "Caller identity, reason, and sentiment are on screen before the agent says hello.",
+    tag: "Transfer",
+    href: "/features/call-transfer",
+    accent: "var(--ai-magenta)",
+  },
+  {
+    icon: Waypoints,
+    title: "3-tier fallback routing",
+    description: "Agent A → Agent B → voicemail, queue, or callback — never a dead end.",
+    tag: "Transfer",
+    href: "/features/call-transfer",
+    accent: "var(--ai-magenta)",
   },
 ]
 
-const featureCategories = ["All", "Voice", "Telephony", "Integrations", "Operations"] as const
+const featureCategories = ["All", "Receptionist", "Appointment", "Answering", "Transfer"] as const
 
 export function Features() {
   const [activeIcon, setActiveIcon] = useState(0)
@@ -179,10 +193,10 @@ export function Features() {
   const [isMobile, setIsMobile] = useState(false)
 
   // Auto-rotation is a desktop-only flourish — on mobile it just fights the user's thumb.
-  // The "All" pill is hidden on mobile, so default to "Voice" there instead of an empty list.
+  // The "All" pill is hidden on mobile, so default to "Receptionist" there instead of an empty list.
   useEffect(() => {
     const mql = window.matchMedia("(max-width: 767px)")
-    if (mql.matches) setActiveCategory((cur) => (cur === "All" ? "Voice" : cur))
+    if (mql.matches) setActiveCategory((cur) => (cur === "All" ? "Receptionist" : cur))
     setIsMobile(mql.matches)
     const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches)
     mql.addEventListener("change", onChange)
@@ -229,11 +243,11 @@ export function Features() {
               Features
             </span>
             <h1 className="mt-6 text-balance text-4xl font-serif font-normal leading-[1.05] tracking-tight md:text-6xl">
-              Everything you need to ship a{" "}
-              <span className="text-primary">real-world voice agent.</span>
+              Four calls. <span className="text-primary">One agent, built in.</span>
             </h1>
             <p className="mt-6 text-pretty leading-relaxed text-muted-foreground md:text-lg">
-              Real-time audio, telephony, integrations, and observability — production-ready, all in one platform.
+              Greet the caller, book the appointment, cover the after-hours overflow, and hand off to a human with
+              full context — every dedicated flow ships production-ready, on one platform.
             </p>
 
             <div className="mt-8 flex flex-nowrap items-center gap-2 sm:gap-3">
@@ -277,14 +291,14 @@ export function Features() {
             </StaggerGroup>
           </ScrollReveal>
 
-          {/* Live call mockup — phone and dashboard side by side, no overlap */}
+          {/* Live preview — cycles through the four dedicated feature pages */}
           <ScrollReveal delay={0.1} className="lg:col-span-6">
             <div className="relative mx-auto h-[300px] w-full max-w-[500px] sm:h-[380px]">
-              {/* Floating feature icons — related to the subheading copy, drifting slowly */}
+              {/* Floating feature icons — one per dedicated feature page, drifting slowly */}
               {floatingIcons.map(({ Icon, top, left, duration, delay, title, description }, i) => (
                 <motion.span
                   key={i}
-                  className="absolute z-20 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/20 bg-card text-primary shadow-sm md:flex"
+                  className="absolute z-20 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/20 bg-card text-primary md:flex"
                   style={{ top, left }}
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay }}
@@ -299,7 +313,7 @@ export function Features() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 6, scale: 0.96 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-30 w-32 -translate-x-1/2 rounded-lg border border-border/60 bg-popover/95 p-2 text-left shadow-xl backdrop-blur-md"
+                        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-30 w-32 -translate-x-1/2 rounded-lg border border-border/60 bg-popover/95 p-2 text-left backdrop-blur-md"
                       >
                         <p className="text-[10px] font-semibold text-foreground">{title}</p>
                         <p className="mt-0.5 text-[9px] leading-snug text-muted-foreground">{description}</p>
@@ -309,97 +323,8 @@ export function Features() {
                 </motion.span>
               ))}
 
-              {/* Phone + dashboard cards */}
-              <div className="absolute inset-0 flex items-center justify-center gap-2 px-2 sm:gap-5 sm:px-0">
-              {/* Phone card */}
-              <div className="w-[130px] shrink-0 overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-2xl sm:w-[210px] sm:rounded-[32px]">
-                <div className="flex items-center justify-between px-3 pt-3 text-[9px] text-black/40 sm:px-5 sm:pt-5 sm:text-xs">
-                  <span>9:41</span>
-                  <span className="h-1 w-5 rounded-full bg-black/10 sm:h-1.5 sm:w-8" />
-                </div>
-                <div className="flex flex-col items-center gap-1.5 px-3 py-4 text-center sm:gap-3 sm:px-5 sm:py-8">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary sm:h-14 sm:w-14 sm:text-base">
-                    SC
-                  </span>
-                  <p className="text-xs font-medium text-black sm:text-base">Sarah Chen</p>
-                  <p className="text-[9px] text-black/40 sm:text-xs">00:18</p>
-                  <div className="mt-1 flex h-5 items-center gap-[2px] sm:mt-2 sm:h-8 sm:gap-[3px]">
-                    {Array.from({ length: 12 }).map((_, i) => {
-                      const heights = [30, 60, 40, 85, 50, 70, 35, 90]
-                      return (
-                        <span
-                          key={i}
-                          className="voice-bar w-[2px] rounded-full bg-primary/70 sm:w-[3px]"
-                          style={{
-                            height: `${heights[i % heights.length]}%`,
-                            animationDelay: `${(i * 90) % 900}ms`,
-                          }}
-                        />
-                      )
-                    })}
-                  </div>
-                  <span className="mt-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_20px_-6px_oklch(0.577_0.245_27.33/0.7)] sm:mt-4 sm:h-12 sm:w-12">
-                    <Mic className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
-                  </span>
-                </div>
-              </div>
-
-              {/* Browser / dashboard card */}
-              <div className="w-[175px] shrink-0 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl sm:w-[260px] md:w-[280px]">
-                <div className="flex items-center gap-1.5 border-b border-black/10 px-3 py-2.5">
-                  <span className="h-2 w-2 rounded-full bg-black/10" />
-                  <span className="h-2 w-2 rounded-full bg-black/10" />
-                  <span className="h-2 w-2 rounded-full bg-black/10" />
-                  <span className="ml-1 truncate font-mono text-[9px] text-black/40">app.9278.ai/agent</span>
-                  <span className="ml-auto inline-flex items-center gap-1 text-[9px] font-medium text-emerald-600">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
-                    Live
-                  </span>
-                </div>
-
-                <div className="space-y-3 p-3.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/20 text-xs font-semibold text-primary">
-                      SC
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs font-medium text-black">Sarah Chen</p>
-                      <p className="truncate text-[10px] text-black/40">+1 (312) 555-0188</p>
-                    </div>
-                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[9px] font-medium text-primary">
-                      <Mic className="h-2.5 w-2.5" aria-hidden="true" />
-                      Handling
-                    </span>
-                  </div>
-
-                  <div className="rounded-lg border border-black/10 bg-black/[0.03] p-2.5">
-                    <p className="font-mono text-[8px] uppercase tracking-[0.18em] text-black/30">Live transcript</p>
-                    <div className="mt-1.5 flex h-6 items-center gap-[2.5px]">
-                      {Array.from({ length: 18 }).map((_, i) => {
-                        const heights = [20, 40, 65, 30, 80, 50, 90, 45, 35, 70]
-                        return (
-                          <span
-                            key={i}
-                            className="voice-bar w-[2px] rounded-full bg-primary/70"
-                            style={{
-                              height: `${heights[i % heights.length]}%`,
-                              animationDelay: `${(i * 70) % 900}ms`,
-                            }}
-                          />
-                        )
-                      })}
-                    </div>
-                    <p className="mt-1.5 text-[10px] leading-relaxed text-black/70">
-                      "Calling about a product demo for next week — about 15 people on our team…"
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-1 rounded-lg border border-black/10 bg-black/[0.03] px-2.5 py-2 text-[9px]">
-                    <span className="text-black/40">Route → Sales Team</span>
-                    <span className="inline-flex items-center gap-1 text-emerald-600">CRM synced ✓</span>
-                  </div>
-                </div>
-              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <FeaturesLivePreview />
               </div>
             </div>
           </ScrollReveal>
@@ -415,11 +340,11 @@ export function Features() {
               Capabilities
             </span>
             <h2 className="mt-3 text-balance text-4xl font-serif font-normal leading-[1.1] tracking-tight md:text-5xl">
-              Every piece of the stack,{" "}
-              <span className="text-primary">built in.</span>
+              Every flow, <span className="text-primary">built in.</span>
             </h2>
             <p className="mt-3 text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              Voice, telephony, integrations, and observability — the twelve building blocks behind every production-ready agent.
+              Three capabilities each for the AI Receptionist, Appointment Setter, Answering Services, and Call
+              Transfer — tap any card to see it running on its own dedicated page.
             </p>
           </ScrollReveal>
 
@@ -453,17 +378,21 @@ export function Features() {
 
               // Mobile: truly filter the list (no dimmed, still-occupying-space items), no animation.
               // The "All" pill is hidden on mobile, so "All" shows nothing instead of everything —
-              // only a picked category (Voice/Telephony/Integrations/Operations) renders its list.
+              // only a picked category (Receptionist/Appointment/Answering/Transfer) renders its list.
               if (isMobile) {
                 if (activeCategory === "All" || !isMatch) return null
                 return (
-                  <div key={f.title} className="flex w-full flex-row items-start gap-3">
-                    <Icon className="mt-1 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
-                    <div className="flex flex-col gap-0.5">
-                      <p className="text-sm font-medium tracking-tight">{f.title}</p>
+                  <Link key={f.title} href={f.href} className="group flex w-full flex-row items-start gap-3">
+                    <Icon className="mt-1 h-3.5 w-3.5 shrink-0" style={{ color: f.accent }} aria-hidden="true" />
+                    <div className="flex flex-1 flex-col gap-0.5">
+                      <p className="text-sm font-medium tracking-tight group-hover:text-primary">{f.title}</p>
                       <p className="text-xs leading-relaxed text-muted-foreground">{f.description}</p>
                     </div>
-                  </div>
+                    <ArrowUpRight
+                      className="mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                      aria-hidden="true"
+                    />
+                  </Link>
                 )
               }
 
@@ -473,13 +402,18 @@ export function Features() {
                   key={f.title}
                   animate={{ opacity: isMatch ? 1 : 0.25 }}
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex w-full flex-row items-start gap-3"
                 >
-                  <Icon className="mt-1 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
-                  <div className="flex flex-col gap-0.5">
-                    <p className="text-sm font-medium tracking-tight">{f.title}</p>
-                    <p className="text-xs leading-relaxed text-muted-foreground">{f.description}</p>
-                  </div>
+                  <Link href={f.href} className="group flex w-full flex-row items-start gap-3">
+                    <Icon className="mt-1 h-3.5 w-3.5 shrink-0" style={{ color: f.accent }} aria-hidden="true" />
+                    <div className="flex flex-1 flex-col gap-0.5">
+                      <p className="text-sm font-medium tracking-tight group-hover:text-primary">{f.title}</p>
+                      <p className="text-xs leading-relaxed text-muted-foreground">{f.description}</p>
+                    </div>
+                    <ArrowUpRight
+                      className="mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground/50 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+                  </Link>
                 </motion.div>
               )
             })}
