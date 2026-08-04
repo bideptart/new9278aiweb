@@ -222,6 +222,7 @@ export function SiteChatbot() {
   const [feedback, setFeedback] = useState<Record<string, "up" | "down">>({})
   const [showTeaser, setShowTeaser] = useState(false)
   const [hydrated, setHydrated] = useState(false)
+  const [sendPulse, setSendPulse] = useState(0)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -353,6 +354,7 @@ export function SiteChatbot() {
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
+    setSendPulse((n) => n + 1)
     if (slashOpen && slashMatches.length > 0) {
       respond(slashMatches[0].q)
       return
@@ -953,14 +955,69 @@ export function SiteChatbot() {
                     </button>
                   )}
                 </div>
-                <button
+                <motion.button
                   type="submit"
                   disabled={!input.trim()}
                   aria-label="Send"
-                  className="btn-ai flex h-10 w-10 shrink-0 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-40"
+                  whileHover={input.trim() ? { scale: 1.08 } : undefined}
+                  whileTap={input.trim() ? { scale: 0.88 } : undefined}
+                  className="group/send relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4 text-white" />
-                </button>
+                  {/* glow bloom — only alive once there's something to send */}
+                  {input.trim() && !reduced && (
+                    <motion.span
+                      aria-hidden
+                      className="absolute inset-[-4px] rounded-full bg-[radial-gradient(circle,rgba(220,38,38,0.55),transparent_70%)] blur-md"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.85, 0.5] }}
+                      transition={{ duration: 1.8, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                    />
+                  )}
+
+                  {/* rotating brand ring — spins up fast on hover, like the launcher */}
+                  {input.trim() && (
+                    <motion.span
+                      aria-hidden
+                      className="absolute inset-0 rounded-full transition-transform duration-300 group-hover/send:scale-[1.06]"
+                      style={{ background: "conic-gradient(from 0deg, #f43f5e 0deg, #dc2626 120deg, #f97316 200deg, #f43f5e 360deg)" }}
+                      animate={reduced ? undefined : { rotate: 360 }}
+                      transition={{ duration: 3.2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                    />
+                  )}
+
+                  {/* solid face */}
+                  <span
+                    className={cn(
+                      "absolute inset-[2.5px] flex items-center justify-center overflow-hidden rounded-full transition-colors duration-300",
+                      !input.trim() && (dark ? "bg-white/[0.06]" : "bg-black/[0.05]"),
+                    )}
+                    style={
+                      input.trim()
+                        ? { background: "linear-gradient(135deg, #ef4444, #dc2626 55%, #be123c)" }
+                        : undefined
+                    }
+                  >
+                    {input.trim() && (
+                      <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent" />
+                    )}
+
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.span
+                        key={sendPulse}
+                        initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                        exit={{ x: 10, y: -10, opacity: 0, scale: 0.6 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="relative"
+                      >
+                        <Send
+                          className={cn(
+                            "h-4 w-4 -translate-x-px translate-y-px",
+                            input.trim() ? "text-white" : dark ? "text-white/25" : "text-muted-foreground/40",
+                          )}
+                        />
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                </motion.button>
               </div>
             </form>
 
