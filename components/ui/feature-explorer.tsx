@@ -107,7 +107,7 @@ function IntakePreview() {
           key={item}
           initial={{ opacity: 0, x: -6 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, delay: i * 0.12 }}
+          transition={{ duration: 0.05, delay: i * 0.02 }}
           className="flex items-center gap-2 rounded-lg border border-border/40 bg-background/60 px-3 py-2 text-xs text-foreground"
         >
           <Check className="size-3.5 shrink-0 text-emerald-500" aria-hidden="true" />
@@ -157,7 +157,7 @@ const features = [
   },
 ]
 
-const AUTOPLAY_MS = 5000
+const AUTOPLAY_MS = 500
 
 export function FeatureExplorer() {
   const reduced = useReducedMotion()

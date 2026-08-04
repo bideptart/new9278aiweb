@@ -284,7 +284,7 @@ export function Features() {
               {floatingIcons.map(({ Icon, top, left, duration, delay, title, description }, i) => (
                 <motion.span
                   key={i}
-                  className="absolute z-20 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/20 bg-card text-primary md:flex"
+                  className="absolute z-20 hidden h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/20 bg-card text-primary shadow-sm md:flex"
                   style={{ top, left }}
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay }}
@@ -299,7 +299,7 @@ export function Features() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 6, scale: 0.96 }}
                         transition={{ duration: 0.25, ease: "easeOut" }}
-                        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-30 w-32 -translate-x-1/2 rounded-lg border border-border/60 bg-popover/95 p-2 text-left backdrop-blur-md"
+                        className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-30 w-32 -translate-x-1/2 rounded-lg border border-border/60 bg-popover/95 p-2 text-left shadow-xl backdrop-blur-md"
                       >
                         <p className="text-[10px] font-semibold text-foreground">{title}</p>
                         <p className="mt-0.5 text-[9px] leading-snug text-muted-foreground">{description}</p>
@@ -312,7 +312,7 @@ export function Features() {
               {/* Phone + dashboard cards */}
               <div className="absolute inset-0 flex items-center justify-center gap-2 px-2 sm:gap-5 sm:px-0">
               {/* Phone card */}
-              <div className="w-[130px] shrink-0 overflow-hidden rounded-[20px] border border-black/10 bg-white sm:w-[210px] sm:rounded-[32px]">
+              <div className="w-[130px] shrink-0 overflow-hidden rounded-[20px] border border-black/10 bg-white shadow-2xl sm:w-[210px] sm:rounded-[32px]">
                 <div className="flex items-center justify-between px-3 pt-3 text-[9px] text-black/40 sm:px-5 sm:pt-5 sm:text-xs">
                   <span>9:41</span>
                   <span className="h-1 w-5 rounded-full bg-black/10 sm:h-1.5 sm:w-8" />
@@ -338,14 +338,14 @@ export function Features() {
                       )
                     })}
                   </div>
-                  <span className="mt-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground sm:mt-4 sm:h-12 sm:w-12">
+                  <span className="mt-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_20px_-6px_oklch(0.577_0.245_27.33/0.7)] sm:mt-4 sm:h-12 sm:w-12">
                     <Mic className="h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
                   </span>
                 </div>
               </div>
 
               {/* Browser / dashboard card */}
-              <div className="w-[175px] shrink-0 overflow-hidden rounded-2xl border border-black/10 bg-white sm:w-[260px] md:w-[280px]">
+              <div className="w-[175px] shrink-0 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl sm:w-[260px] md:w-[280px]">
                 <div className="flex items-center gap-1.5 border-b border-black/10 px-3 py-2.5">
                   <span className="h-2 w-2 rounded-full bg-black/10" />
                   <span className="h-2 w-2 rounded-full bg-black/10" />
