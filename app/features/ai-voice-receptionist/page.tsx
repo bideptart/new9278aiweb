@@ -42,7 +42,7 @@ export default function AiReceptionistPage() {
         serviceType="AI voice agent"
       />
 
-      {/* Hero — centered "Active Voice Wave" */}
+      {/* Hero — text left, live-demo mockup right */}
       <section className="relative overflow-hidden border-b border-border/50">
         <div
           aria-hidden
@@ -54,39 +54,41 @@ export default function AiReceptionistPage() {
         />
         <AmbientGlow />
 
-        <div className="mx-auto w-full max-w-4xl px-4 py-16 text-center md:px-6 md:py-24">
-          <ScrollReveal>
-            <span className="ai-pill-cyan">
-              <Sparkles className="size-3.5" aria-hidden />
-              AI Receptionist
-            </span>
-            <h1 className="mx-auto mt-6 max-w-3xl text-balance font-serif text-[10.5vw] font-normal leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.6rem]">
-              Every call greeted, understood, and routed —{" "}
-              <span className="text-aurora text-aurora-flow italic">in real time.</span>
-            </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-              An always-on AI receptionist that answers the phone like your best front-desk hire: a natural greeting,
-              instant intent recognition, sub-second FAQ answers, and a clean hand-off to the right person — 24 hours
-              a day, every day.
-            </p>
+        <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-24">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+            <ScrollReveal>
+              <span className="ai-pill-cyan">
+                <Sparkles className="size-3.5" aria-hidden />
+                AI Receptionist
+              </span>
+              <h1 className="mt-6 text-balance font-serif text-[10.5vw] font-normal leading-[0.98] tracking-[-0.02em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.6rem]">
+                Every call greeted, understood, and routed —{" "}
+                <span className="text-aurora text-aurora-flow italic">in real time.</span>
+              </h1>
+              <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+                An always-on AI receptionist that answers the phone like your best front-desk hire: a natural greeting,
+                instant intent recognition, sub-second FAQ answers, and a clean hand-off to the right person — 24 hours
+                a day, every day.
+              </p>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link href="/get-started">
-                  Get started <ArrowRight className="ml-1 size-4" aria-hidden />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/pricing">View pricing</Link>
-              </Button>
-            </div>
-          </ScrollReveal>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Link href="/get-started">
+                    Get started <ArrowRight className="ml-1 size-4" aria-hidden />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/pricing">View pricing</Link>
+                </Button>
+              </div>
+            </ScrollReveal>
 
-          <ScrollReveal delay={0.1} className="mx-auto mt-14 max-w-xl">
-            <HeroVoiceAura />
-          </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <HeroVoiceAura />
+            </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={0.16} className="mx-auto mt-6 max-w-2xl">
+          <ScrollReveal delay={0.16} className="mx-auto mt-14 max-w-2xl">
             <PipelineFlow />
           </ScrollReveal>
         </div>
