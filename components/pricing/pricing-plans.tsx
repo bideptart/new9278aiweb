@@ -370,7 +370,7 @@ export function PricingPlans() {
             className="overflow-hidden rounded-2xl border border-primary/40"
           >
             <div className={cn("flex items-center justify-between px-4 py-3", p.tag ? "bg-primary/10" : "bg-card/40")}>
-              <span className="font-semibold text-foreground">{p.label}</span>
+              <span className="font-normal text-foreground">{p.label}</span>
               {p.tag && <span className="text-xs font-medium text-primary">{p.tag}</span>}
             </div>
             <dl>
@@ -428,10 +428,10 @@ export function PricingPlans() {
                         }}
                       />
                     )}
-                    <span className="text-base font-bold tracking-tight text-foreground">{p.label}</span>
+                    <span className="text-base font-normal tracking-tight text-foreground">{p.label}</span>
                     {p.tag && (
                       <span className="mt-1.5 flex justify-center">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white shadow-[0_4px_14px_-4px_var(--primary)]">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-normal uppercase tracking-wider text-white shadow-[0_4px_14px_-4px_var(--primary)]">
                           <span className="relative flex h-1.5 w-1.5">
                             <motion.span
                               className="absolute inline-flex h-full w-full rounded-full bg-white/80"
@@ -590,7 +590,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
         </div>
 
         <span
-          className="relative mt-3 inline-flex w-fit items-center rounded-full px-2.5 py-1 text-xs font-bold"
+          className="relative mt-3 inline-flex w-fit items-center rounded-full px-2.5 py-1 text-xs font-normal"
           style={{
             background: `color-mix(in oklch, ${t.accent} 12%, transparent)`,
             color: t.accent,
@@ -630,7 +630,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
               />
             </svg>
             <span
-              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold text-white ring-2 ring-white"
+              className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-normal text-white ring-2 ring-white"
               style={{
                 backgroundImage: `radial-gradient(circle at 35% 28%, color-mix(in oklch, ${t.accent} 60%, white), ${t.accent})`,
               }}
@@ -653,7 +653,7 @@ function TestimonialCard({ t }: { t: (typeof TESTIMONIALS)[number] }) {
             </motion.span>
           </div>
           <div className="min-w-0">
-            <p className="truncate text-[13px] font-semibold text-foreground">{t.author}</p>
+            <p className="truncate text-[13px] font-normal text-foreground">{t.author}</p>
             <p className="truncate text-[11px] text-muted-foreground">{t.role}</p>
           </div>
         </div>
@@ -701,9 +701,9 @@ function PlanCard({
       )}
 
       <div className="relative flex items-start justify-between gap-3">
-        <h3 className="text-lg font-bold tracking-tight text-foreground">{p.label}</h3>
+        <h3 className="text-lg font-normal tracking-tight text-foreground">{p.label}</h3>
         {p.tag && (
-          <span className="whitespace-nowrap rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+          <span className="whitespace-nowrap rounded-full bg-primary px-2.5 py-0.5 text-[9px] font-normal uppercase tracking-wider text-white">
             {p.tag}
           </span>
         )}
@@ -711,7 +711,7 @@ function PlanCard({
       <p className="relative mt-1 text-xs text-muted-foreground">{p.sub}</p>
 
       <div className="relative mt-3.5">
-        <p className="text-3xl font-extrabold leading-none tracking-tight text-foreground">
+        <p className="text-3xl font-normal leading-none tracking-tight text-foreground">
           {usd(animatedPrice)}
           <span className="ml-1 text-sm font-normal text-muted-foreground">/{cycle === "yearly" ? "yr" : "mo"}</span>
         </p>

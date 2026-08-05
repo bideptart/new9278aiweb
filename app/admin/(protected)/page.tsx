@@ -12,7 +12,7 @@ export default async function AdminOverviewPage() {
   return (
     <div className="mx-auto max-w-6xl">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Overview</h1>
+        <h1 className="text-2xl font-normal tracking-tight">Overview</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Real-time revenue, MRR and account health for 9278.ai.
         </p>
@@ -33,7 +33,7 @@ export default async function AdminOverviewPage() {
       <section className="mt-10 rounded-lg border border-border/60 bg-card/40 p-6">
         <div className="flex items-end justify-between">
           <div>
-            <h2 className="text-lg font-semibold tracking-tight">Revenue · last 30 days</h2>
+            <h2 className="text-lg font-normal tracking-tight">Revenue · last 30 days</h2>
             <p className="text-sm text-muted-foreground">Sum of paid charges per day, in USD.</p>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default async function AdminOverviewPage() {
       </section>
 
       <section className="mt-8 rounded-lg border border-border/60 bg-card/40 p-6">
-        <h2 className="text-lg font-semibold tracking-tight">Plan distribution</h2>
+        <h2 className="text-lg font-normal tracking-tight">Plan distribution</h2>
         <p className="text-sm text-muted-foreground">Active customers grouped by their most recent plan.</p>
         {data.planDistribution.length === 0 ? (
           <p className="mt-6 text-sm text-muted-foreground">No paying customers yet.</p>
@@ -52,7 +52,7 @@ export default async function AdminOverviewPage() {
             {data.planDistribution.map((row) => (
               <div key={row.plan_id} className="rounded-md border border-border/60 bg-background/40 p-4">
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">{planLabel(row.plan_id)}</p>
-                <p className="mt-2 text-2xl font-semibold tracking-tight">{row.count}</p>
+                <p className="mt-2 text-2xl font-normal tracking-tight">{row.count}</p>
                 <p className="text-xs text-muted-foreground">customers</p>
               </div>
             ))}
@@ -80,7 +80,7 @@ function Stat({
         <Icon className="h-4 w-4" aria-hidden />
         <p className="text-xs uppercase tracking-wider">{label}</p>
       </div>
-      <p className="mt-3 text-2xl font-semibold tracking-tight">{value}</p>
+      <p className="mt-3 text-2xl font-normal tracking-tight">{value}</p>
       <p className="mt-1 text-xs text-muted-foreground">{sub}</p>
     </div>
   )

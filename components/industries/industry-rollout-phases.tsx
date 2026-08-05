@@ -75,26 +75,26 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
           {/* Left Column: Text & Dynamic Stats */}
           <div className="lg:col-span-6 space-y-6">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs border border-rose-200 dark:border-rose-900/50">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs border border-rose-200 dark:border-rose-900/50">
                 PHASE 01
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-2.5 py-0.5 text-xs font-mono font-semibold text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-2.5 py-0.5 text-xs font-mono font-normal text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40">
                 <Globe className="size-3 text-rose-300" />
                 Live Multilingual AI
               </span>
             </div>
 
-            <h2 className="text-3xl font-serif font-bold tracking-tight md:text-5xl text-foreground">
+            <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
               How {industryName.toLowerCase()} teams <span className="italic text-rose-400 dark:text-rose-400">roll out 9278.io</span>
             </h2>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
               Most {industryName.toLowerCase()} customers start by{" "}
-              <Link href="/get-started" className="text-rose-400 dark:text-rose-400 font-semibold underline-offset-4 hover:underline">
+              <Link href="/get-started" className="text-rose-400 dark:text-rose-400 font-normal underline-offset-4 hover:underline">
                 spinning up a Starter agent
               </Link>{" "}
               with a single phone number, then upgrade to{" "}
-              <Link href="/pricing" className="text-rose-400 dark:text-rose-400 font-semibold underline-offset-4 hover:underline">
+              <Link href="/pricing" className="text-rose-400 dark:text-rose-400 font-normal underline-offset-4 hover:underline">
                 Growth or Scale
               </Link>{" "}
               once the inbound playbooks prove out.
@@ -106,15 +106,15 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
             <div className="w-full max-w-md rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 shadow-xl space-y-5 transition-all duration-300 hover:border-rose-300 dark:hover:border-rose-800">
               <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+                  <div className="flex size-10 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-500 shadow-xs">
                     <Globe className="size-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-foreground">Multilingual Native Voice Engine</h4>
+                    <h4 className="text-sm font-normal text-foreground">Multilingual Native Voice Engine</h4>
                     <p className="text-xs text-muted-foreground font-mono">Indian & Global Dialects</p>
                   </div>
                 </div>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <Zap className="size-3 text-emerald-500 animate-pulse" />
                   Active
                 </span>
@@ -122,7 +122,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
 
               {/* Language Chips Grid */}
               <div className="space-y-2">
-                <p className="text-[11px] font-mono font-bold text-muted-foreground uppercase tracking-wider">
+                <p className="text-[11px] font-mono font-normal text-muted-foreground uppercase tracking-wider">
                   Select Language Stream:
                 </p>
                 <div className="grid grid-cols-4 gap-1.5">
@@ -133,9 +133,9 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
                         key={idx}
                         onClick={() => setSelectedLang(idx)}
                         className={cn(
-                          "py-2 px-1 rounded-xl text-xs font-bold transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer border",
+                          "py-2 px-1 rounded-xl text-xs font-normal transition-all duration-200 flex flex-col items-center gap-1 cursor-pointer border",
                           isSelected
-                            ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-xs scale-102"
+                            ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-500 shadow-xs scale-102"
                             : "bg-slate-50 dark:bg-slate-800/80 text-muted-foreground border-slate-200/80 dark:border-slate-700 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-400 dark:hover:text-rose-400"
                         )}
                       >
@@ -156,7 +156,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
                     transition={{ duration: 0.2 }}
                     className="rounded-xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/70 dark:bg-rose-950/20 p-3 text-xs space-y-1.5 mt-2"
                   >
-                    <div className="flex items-center justify-between text-[10px] font-bold text-rose-400 dark:text-rose-400">
+                    <div className="flex items-center justify-between text-[10px] font-normal text-rose-400 dark:text-rose-400">
                       <span className="flex items-center gap-1">
                         <Volume2 className="size-3.5 text-rose-300" />
                         Live Voice Audio · {currentLang.name}
@@ -171,7 +171,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
               </div>
 
               {/* Launch Action CTA Button */}
-              <Button asChild size="lg" className="w-full btn-ai !text-rose-400 dark:!text-rose-300 h-11 rounded-2xl shadow-md text-xs font-bold cursor-pointer">
+              <Button asChild size="lg" className="w-full btn-ai !text-rose-400 dark:!text-rose-300 h-11 rounded-2xl shadow-md text-xs font-normal cursor-pointer">
                 <Link href={`/get-started?industry=${slug}`}>
                   Launch {industryName} agent <ArrowRight className="ml-1.5 size-4" />
                 </Link>
@@ -187,15 +187,15 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
             <div className="w-full max-w-md rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl p-6 shadow-xl space-y-4 transition-all duration-300 hover:border-rose-300 dark:hover:border-rose-800">
               <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-800 shadow-xs">
+                  <div className="flex size-10 items-center justify-center rounded-2xl bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-500 shadow-xs">
                     <Lock className="size-5" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-foreground">Compliance & Privacy Standards</h4>
+                    <h4 className="text-sm font-normal text-foreground">Compliance & Privacy Standards</h4>
                     <p className="text-xs text-muted-foreground font-mono">Healthcare & Enterprise Certified</p>
                   </div>
                 </div>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <ShieldCheck className="size-3.5 text-emerald-500" />
                   Audited
                 </span>
@@ -212,7 +212,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
                       className={cn(
                         "w-full text-left p-3 rounded-2xl border transition-all duration-200 flex items-center justify-between cursor-pointer",
                         isSelected
-                          ? "bg-rose-500/10 border-rose-300 dark:border-rose-800 text-foreground shadow-xs font-bold"
+                          ? "bg-rose-500/10 border-rose-300 dark:border-rose-500 text-foreground shadow-xs font-normal"
                           : "border-slate-200/80 dark:border-slate-800 text-muted-foreground hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-foreground"
                       )}
                     >
@@ -220,7 +220,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
                         <Check className={cn("size-4 shrink-0", isSelected ? "text-rose-400 dark:text-rose-400 stroke-[3]" : "text-muted-foreground/40")} />
                         <span className="text-xs truncate font-medium">{item.title}</span>
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      <span className="text-[10px] font-mono font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                         {item.status}
                       </span>
                     </button>
@@ -230,7 +230,7 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
 
               {/* Detailed Compliance Context Box */}
               <div className="rounded-2xl border border-rose-200/60 dark:border-rose-900/30 bg-rose-50/50 dark:bg-rose-950/20 p-4 text-xs space-y-1">
-                <p className="font-bold text-rose-400 dark:text-rose-400 text-[11px] uppercase tracking-wider">
+                <p className="font-normal text-rose-400 dark:text-rose-400 text-[11px] uppercase tracking-wider">
                   {complianceItems[selectedCompliance].title}
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
@@ -243,35 +243,35 @@ export function IndustryRolloutPhases({ industryName, slug }: Props) {
           {/* Right Column: Compliance Content */}
           <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs border border-rose-200 dark:border-rose-900/50">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs border border-rose-200 dark:border-rose-900/50">
                 PHASE 02
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-mono font-semibold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                 <ShieldCheck className="size-3 text-emerald-500" />
                 Explore & Compare
               </span>
             </div>
 
-            <h2 className="text-3xl font-serif font-bold tracking-tight md:text-5xl text-foreground">
+            <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
               Explore more. <span className="italic text-rose-400 dark:text-rose-400">Compare with confidence.</span>
             </h2>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
               Curious about voice credit, phone numbers, or HIPAA compliance? The{" "}
-              <Link href="/faq" className="text-rose-400 dark:text-rose-400 font-semibold underline-offset-4 hover:underline">
+              <Link href="/faq" className="text-rose-400 dark:text-rose-400 font-normal underline-offset-4 hover:underline">
                 FAQ answers the questions
               </Link>{" "}
               ops teams ask most — and you can browse{" "}
-              <Link href="/industries" className="text-rose-400 dark:text-rose-400 font-semibold underline-offset-4 hover:underline">
+              <Link href="/industries" className="text-rose-400 dark:text-rose-400 font-normal underline-offset-4 hover:underline">
                 every other industry
               </Link>{" "}
               we support to compare playbooks.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
-              <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-7 shadow-lg shadow-primary/25 font-bold cursor-pointer">
+              <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-7 shadow-lg shadow-primary/25 font-normal cursor-pointer">
                 <Link href={`/get-started?industry=${slug}`}>
-                  Launch a real estate agent <ArrowRight className="ml-1.5 size-4" />
+                  Launch {industryName.toLowerCase()} agent <ArrowRight className="ml-1.5 size-4" />
                 </Link>
               </Button>
               <Button

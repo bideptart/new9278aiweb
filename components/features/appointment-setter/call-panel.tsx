@@ -54,11 +54,11 @@ export function CallPanel({ step, reduced }: { step: Step; reduced: boolean }) {
 
       {/* Caller card */}
       <div className="relative mt-6 flex items-center gap-3">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary ring-1 ring-primary/20">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-normal text-primary ring-1 ring-primary/20">
           JM
         </div>
         <div className="min-w-0">
-          <p className="truncate text-sm font-semibold text-foreground">Jordan Miller</p>
+          <p className="truncate text-sm font-normal text-foreground">Jordan Miller</p>
           <p className="truncate text-xs text-muted-foreground">Calling about a Thursday appointment</p>
         </div>
       </div>
@@ -81,7 +81,7 @@ export function CallPanel({ step, reduced }: { step: Step; reduced: boolean }) {
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="text-pretty text-sm leading-relaxed text-foreground"
             >
-              <span className={cn("font-semibold", isAgent ? "text-primary" : "text-foreground")}>
+              <span className={cn("font-normal", isAgent ? "text-primary" : "text-foreground")}>
                 {isAgent ? "Aria" : "Jordan"}:
               </span>{" "}
               {step.line}

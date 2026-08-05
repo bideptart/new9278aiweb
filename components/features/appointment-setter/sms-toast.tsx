@@ -52,7 +52,7 @@ function ToastBody() {
           <MessageSquareText className="h-2.5 w-2.5" aria-hidden />
           SMS confirmation
         </p>
-        <p className="mt-0.5 truncate text-xs font-semibold text-foreground">Appointment booked for 3:00 PM!</p>
+        <p className="mt-0.5 truncate text-xs font-normal text-foreground">Appointment booked for 3:00 PM!</p>
       </div>
     </>
   )

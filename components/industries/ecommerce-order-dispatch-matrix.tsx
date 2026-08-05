@@ -145,7 +145,7 @@ export function EcommerceOrderDispatchMatrix() {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs">
+        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs">
           <ShoppingBag className="size-3.5 text-rose-300 animate-pulse" />
           <span>SHOPIFY & LOGISTICS VOICE DISPATCH MATRIX</span>
         </span>
@@ -177,14 +177,14 @@ export function EcommerceOrderDispatchMatrix() {
               )}
             >
               <div className="flex items-center justify-between">
-                <span className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")}>
+                <span className={cn("text-[10px] font-mono font-normal uppercase tracking-wider", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")}>
                   MODULE 0{idx + 1}
                 </span>
                 <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300 dark:bg-slate-700")} />
               </div>
 
               <div>
-                <p className={cn("text-xs md:text-sm font-bold leading-tight", isSelected ? "text-rose-400 dark:text-rose-100" : "text-foreground")}>
+                <p className={cn("text-xs md:text-sm font-normal leading-tight", isSelected ? "text-rose-400 dark:text-rose-100" : "text-foreground")}>
                   {mod.title}
                 </p>
               </div>
@@ -213,7 +213,7 @@ export function EcommerceOrderDispatchMatrix() {
           >
             {/* Left Info Column */}
             <div className="lg:col-span-5 space-y-6">
-              <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold border shadow-xs", curModule.badgeColor)}>
+              <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-normal border shadow-xs", curModule.badgeColor)}>
                 <Sparkles className="size-3.5" />
                 <span>{curModule.badge}</span>
               </span>
@@ -231,7 +231,7 @@ export function EcommerceOrderDispatchMatrix() {
                 {curModule.stats.map((st, i) => (
                   <div key={i} className="p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 backdrop-blur-md shadow-xs">
                     <p className="text-[10px] font-mono text-muted-foreground uppercase">{st.label}</p>
-                    <p className="text-base font-bold text-rose-400 dark:text-rose-400 mt-1">{st.value}</p>
+                    <p className="text-base font-normal text-rose-400 dark:text-rose-400 mt-1">{st.value}</p>
                   </div>
                 ))}
               </div>
@@ -244,7 +244,7 @@ export function EcommerceOrderDispatchMatrix() {
                 <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3">
                   <div className="flex items-center gap-2">
                     <span className="size-2.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="text-xs font-mono font-bold text-foreground uppercase tracking-wider">
+                    <span className="text-xs font-mono font-normal text-foreground uppercase tracking-wider">
                       Live E-Commerce Voice Agent
                     </span>
                   </div>
@@ -262,11 +262,11 @@ export function EcommerceOrderDispatchMatrix() {
                 {/* Order Details Chip */}
                 <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-mono font-bold text-rose-400 dark:text-rose-400">{curModule.orderNo}</p>
+                    <p className="font-mono font-normal text-rose-400 dark:text-rose-400">{curModule.orderNo}</p>
                     <p className="text-[11px] text-muted-foreground font-medium">{curModule.customer}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-foreground truncate max-w-[200px]">{curModule.item}</p>
+                    <p className="font-normal text-foreground truncate max-w-[200px]">{curModule.item}</p>
                   </div>
                 </div>
 
@@ -278,7 +278,7 @@ export function EcommerceOrderDispatchMatrix() {
                       <Bot className="size-4" />
                     </div>
                     <div className="p-3 rounded-2xl rounded-tl-xs bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/40 text-xs text-foreground font-medium leading-relaxed">
-                      <p className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 mb-0.5">9278 Voice AI Agent</p>
+                      <p className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400 mb-0.5">9278 Voice AI Agent</p>
                       {curModule.voiceCall.agent}
                     </div>
                   </div>
@@ -296,7 +296,7 @@ export function EcommerceOrderDispatchMatrix() {
                 </div>
 
                 {/* Status Result Bar */}
-                <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400 flex items-center justify-between">
+                <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono font-normal text-emerald-600 dark:text-emerald-400 flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
                     <CheckCheck className="size-4 text-emerald-500" />
                     {curModule.voiceCall.status}
@@ -311,7 +311,7 @@ export function EcommerceOrderDispatchMatrix() {
 
       {/* CTA Button */}
       <div className="mt-12 text-center">
-        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-bold cursor-pointer">
+        <Button asChild size="lg" className="btn-ai !text-rose-400 dark:!text-rose-300 h-12 rounded-full px-8 shadow-md font-normal cursor-pointer">
           <Link href="/get-started?industry=ecommerce">
             Deploy E-Commerce Voice Agent <ArrowRight className="ml-2 size-4" />
           </Link>

@@ -46,7 +46,7 @@ export default async function ThanksPage({
         <span className="grid size-14 place-items-center rounded-full bg-primary/15 text-primary">
           <CheckCircle2 className="size-7" aria-hidden />
         </span>
-        <h1 className="mt-6 text-balance text-3xl font-semibold tracking-tight md:text-4xl">
+        <h1 className="mt-6 text-balance text-3xl font-normal tracking-tight md:text-4xl">
           {paid ? "Payment received." : "You're on the list."}
         </h1>
         <p className="mt-4 text-pretty text-muted-foreground">

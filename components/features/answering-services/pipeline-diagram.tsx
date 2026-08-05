@@ -43,7 +43,7 @@ function StageCard({ stage }: { stage: Stage }) {
       <span className="flex size-7 items-center justify-center rounded-lg bg-primary/15 text-primary sm:size-8">
         <Icon className="size-3.5 sm:size-4" />
       </span>
-      <p className="mt-2 text-[10px] font-semibold leading-tight text-foreground sm:text-sm">{stage.title}</p>
+      <p className="mt-2 text-[10px] font-normal leading-tight text-foreground sm:text-sm">{stage.title}</p>
       <p className="mt-1 hidden text-[11px] leading-snug text-muted-foreground sm:block">{stage.desc}</p>
     </div>
   )

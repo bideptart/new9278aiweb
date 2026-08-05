@@ -64,7 +64,7 @@ export function NegotiationFlow() {
                 >
                   <Icon className="h-4 w-4" aria-hidden />
                 </span>
-                <p className="text-sm font-semibold text-foreground">{step.label}</p>
+                <p className="text-sm font-normal text-foreground">{step.label}</p>
                 <p className="text-pretty text-xs leading-relaxed text-muted-foreground">{step.detail}</p>
               </div>
             </StaggerItem>

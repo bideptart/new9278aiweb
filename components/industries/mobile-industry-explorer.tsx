@@ -99,7 +99,7 @@ export function MobileIndustryExplorer() {
           >
             <h3
               className={cn(
-                "text-left font-serif font-semibold leading-snug tracking-tight text-foreground",
+                "text-left font-serif font-normal leading-snug tracking-tight text-foreground",
                 TIGHT_SLUGS.has(industry.slug) ? "text-lg" : "text-xl",
               )}
             >

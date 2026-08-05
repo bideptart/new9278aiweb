@@ -76,7 +76,7 @@ export function HumanExperience() {
                         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary">
                           0{i + 1}
                         </span>
-                        <h3 className="mt-1.5 text-xl font-semibold tracking-tight">{f.title}</h3>
+                        <h3 className="mt-1.5 text-xl font-normal tracking-tight">{f.title}</h3>
                         <p className="mt-2 text-pretty text-[15px] leading-relaxed text-muted-foreground">
                           {f.description}
                         </p>

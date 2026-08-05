@@ -31,7 +31,7 @@ function Node({
       >
         <Icon className="h-5 w-5" aria-hidden />
       </span>
-      <span className="text-sm font-semibold text-foreground">{label}</span>
+      <span className="text-sm font-normal text-foreground">{label}</span>
       <span className="text-[11px] text-muted-foreground">{sub}</span>
     </div>
   )

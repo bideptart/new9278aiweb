@@ -117,13 +117,13 @@ export function RealEstateMouseTrailHero() {
                   fill
                   className="object-cover"
                 />
-                <span className="absolute top-1.5 left-1.5 rounded-full bg-primary/90 px-2 py-0.5 text-[9px] font-bold text-white shadow-xs">
+                <span className="absolute top-1.5 left-1.5 rounded-full bg-primary/90 px-2 py-0.5 text-[9px] font-normal text-white shadow-xs">
                   AI Lead Qualified
                 </span>
               </div>
               <div className="px-1">
-                <p className="text-xs font-bold text-foreground truncate">{item.title}</p>
-                <p className="text-[10px] text-primary font-semibold truncate">{item.tag}</p>
+                <p className="text-xs font-normal text-foreground truncate">{item.title}</p>
+                <p className="text-[10px] text-primary font-normal truncate">{item.tag}</p>
               </div>
             </motion.div>
           ))}
@@ -132,13 +132,13 @@ export function RealEstateMouseTrailHero() {
 
       {/* Hero Header Content */}
       <div className="text-center max-w-4xl mx-auto space-y-6 z-10 relative">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20 shadow-xs backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-normal uppercase tracking-wider text-primary border border-primary/20 shadow-xs backdrop-blur-md">
           <Building2 className="size-4 text-primary" />
           <span>AI Voice Agents for Real Estate</span>
           <span className="size-1.5 rounded-full bg-primary animate-ping" />
         </div>
 
-        <h1 className="text-4xl font-serif font-bold tracking-tight sm:text-6xl md:text-7xl text-foreground leading-[1.1]">
+        <h1 className="text-4xl font-serif font-normal tracking-tight sm:text-6xl md:text-7xl text-foreground leading-[1.1]">
           Qualify buyer & seller leads <span className="bg-gradient-to-r from-primary via-rose-600 to-primary bg-clip-text text-transparent underline decoration-primary/30 underline-offset-8">24/7</span>, book site visits instantly
         </h1>
 
@@ -148,7 +148,7 @@ export function RealEstateMouseTrailHero() {
 
         {/* Action CTAs */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-          <Button asChild size="lg" className="group btn-ai !text-rose-400 dark:!text-rose-300 h-13 rounded-full px-8 shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all text-sm font-bold">
+          <Button asChild size="lg" className="group btn-ai !text-rose-400 dark:!text-rose-300 h-13 rounded-full px-8 shadow-xl shadow-primary/25 hover:shadow-primary/40 hover:scale-[1.02] transition-all text-sm font-normal">
             <Link href="/get-started?industry=real-estate">
               Launch a real estate agent <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
             </Link>
@@ -157,7 +157,7 @@ export function RealEstateMouseTrailHero() {
             asChild
             size="lg"
             variant="outline"
-            className="h-13 rounded-full border-border/70 bg-card/60 px-8 backdrop-blur-md hover:border-primary/40 hover:bg-card/90 transition-all font-semibold text-sm"
+            className="h-13 rounded-full border-border/70 bg-card/60 px-8 backdrop-blur-md hover:border-primary/40 hover:bg-card/90 transition-all font-normal text-sm"
           >
             <Link href="/pricing">Compare plans & rates</Link>
           </Button>
@@ -165,7 +165,7 @@ export function RealEstateMouseTrailHero() {
 
         {/* Hover Cue Banner */}
         <div className="pt-3">
-          <span className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-muted-foreground/80 bg-muted/40 px-3.5 py-1 rounded-full border border-border/40">
+          <span className="inline-flex items-center gap-2 text-xs font-mono font-normal text-muted-foreground/80 bg-muted/40 px-3.5 py-1 rounded-full border border-border/40">
             <Sparkles className="size-3.5 text-primary animate-pulse" />
             Move cursor anywhere to trigger real estate property mouse-trail
           </span>

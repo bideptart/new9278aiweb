@@ -39,7 +39,7 @@ export function FAQ() {
                 >
                   <AccordionTrigger className="text-left text-base font-medium hover:no-underline data-[state=open]:text-primary">
                     <span className="flex items-start gap-4">
-                      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary/10 font-mono text-[11px] font-semibold text-primary ring-1 ring-primary/20">
+                      <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary/10 font-mono text-[11px] font-normal text-primary ring-1 ring-primary/20">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {item.q}

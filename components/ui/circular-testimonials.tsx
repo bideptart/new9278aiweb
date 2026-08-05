@@ -70,7 +70,7 @@ function TestimonialAvatar({
   }
   return (
     <div
-      className="absolute flex h-full w-full items-center justify-center rounded-[1.5rem] text-4xl font-bold text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] md:text-6xl"
+      className="absolute flex h-full w-full items-center justify-center rounded-[1.5rem] text-4xl font-normal text-white shadow-[0_10px_30px_rgba(0,0,0,0.2)] md:text-6xl"
       style={{
         ...style,
         backgroundImage:
@@ -221,7 +221,7 @@ export function CircularTestimonials({
               exit="exit"
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <h3 className="font-bold" style={{ color: colorName, fontSize: fontSizeName }}>
+              <h3 className="font-normal" style={{ color: colorName, fontSize: fontSizeName }}>
                 {activeTestimonial.name}
               </h3>
               <p className="mb-6 mt-1" style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>

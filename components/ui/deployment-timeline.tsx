@@ -109,7 +109,7 @@ export function DeploymentTimeline({ steps = DEFAULT_STEPS }: { steps?: Timeline
                 >
                   <span
                     className={cn(
-                      "relative flex size-12 shrink-0 items-center justify-center rounded-2xl border-2 text-sm font-semibold transition-all duration-300 shadow-sm",
+                      "relative flex size-12 shrink-0 items-center justify-center rounded-2xl border-2 text-sm font-normal transition-all duration-300 shadow-sm",
                       isActive
                         ? "scale-110 border-primary/50 bg-primary/10 text-primary shadow-md shadow-primary/10 ring-4 ring-primary/15"
                         : isDone
@@ -118,16 +118,16 @@ export function DeploymentTimeline({ steps = DEFAULT_STEPS }: { steps?: Timeline
                     )}
                   >
                     {isDone ? (
-                      <Check className="size-5 font-bold text-primary/80" aria-hidden="true" />
+                      <Check className="size-5 font-normal text-primary/80" aria-hidden="true" />
                     ) : (
                       <StepIcon className="size-5" aria-hidden="true" />
                     )}
                   </span>
                   <div className="sm:mt-2">
-                    <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary/60 sm:block hidden">
+                    <p className="text-[10px] font-mono font-normal uppercase tracking-wider text-primary/60 sm:block hidden">
                       0{i + 1}
                     </p>
-                    <p className={cn("text-xs sm:text-sm font-medium transition-colors sm:max-w-[8.5rem]", isActive ? "text-foreground font-bold" : "text-muted-foreground group-hover:text-foreground")}>
+                    <p className={cn("text-xs sm:text-sm font-medium transition-colors sm:max-w-[8.5rem]", isActive ? "text-foreground font-normal" : "text-muted-foreground group-hover:text-foreground")}>
                       {s.title}
                     </p>
                   </div>
@@ -153,13 +153,13 @@ export function DeploymentTimeline({ steps = DEFAULT_STEPS }: { steps?: Timeline
                 {/* Left Side Info */}
                 <div className="md:flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-primary/80">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-mono font-normal uppercase tracking-wider text-primary/80">
                       <span className="size-1.5 rounded-full bg-primary/75 animate-pulse" />
                       Step {String(active + 1).padStart(2, "0")} of {String(steps.length).padStart(2, "0")}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                  <h3 className="mt-4 text-2xl font-normal tracking-tight text-foreground sm:text-3xl">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -216,7 +216,7 @@ export function DeploymentTimeline({ steps = DEFAULT_STEPS }: { steps?: Timeline
                     type="button"
                     onClick={() => setActive((prev) => Math.min(steps.length - 1, prev + 1))}
                     disabled={active === steps.length - 1}
-                    className="flex items-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-3 py-1.5 font-semibold text-primary/80 disabled:opacity-40 hover:bg-primary/10 transition-colors cursor-pointer"
+                    className="flex items-center gap-1 rounded-lg border border-primary/20 bg-primary/5 px-3 py-1.5 font-normal text-primary/80 disabled:opacity-40 hover:bg-primary/10 transition-colors cursor-pointer"
                   >
                     Next <ChevronRight className="size-3.5" />
                   </button>

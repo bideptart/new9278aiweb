@@ -30,7 +30,7 @@ export function FaqItem({ index, question, answer, defaultOpen = false }: FaqIte
         <span className="flex items-center gap-3.5 pr-4">
           {index !== undefined && (
             <span
-              className={`inline-flex size-6 shrink-0 items-center justify-center rounded-md font-mono text-[11px] font-bold transition-colors ${
+              className={`inline-flex size-6 shrink-0 items-center justify-center rounded-md font-mono text-[11px] font-normal transition-colors ${
                 isOpen
                   ? "bg-primary text-primary-foreground shadow-xs"
                   : "bg-primary/10 text-primary ring-1 ring-primary/20"
@@ -39,7 +39,7 @@ export function FaqItem({ index, question, answer, defaultOpen = false }: FaqIte
               {String(index + 1).padStart(2, "0")}
             </span>
           )}
-          <span className={`text-base font-semibold transition-colors ${isOpen ? "text-primary" : "text-foreground"}`}>
+          <span className={`text-base font-normal transition-colors ${isOpen ? "text-primary" : "text-foreground"}`}>
             {question}
           </span>
         </span>

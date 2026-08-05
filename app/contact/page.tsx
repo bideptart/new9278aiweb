@@ -116,7 +116,7 @@ export default function ContactPage() {
                         <Icon className="h-5 w-5" aria-hidden />
                       </span>
                       <div className="min-w-0">
-                        <h3 className="font-semibold tracking-tight">{c.title}</h3>
+                        <h3 className="font-normal tracking-tight">{c.title}</h3>
                         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{c.description}</p>
                         {isExternal ? (
                           <a

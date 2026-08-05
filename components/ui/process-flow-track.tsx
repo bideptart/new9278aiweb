@@ -80,7 +80,7 @@ export function ProcessFlowTrack({
         <div className="mx-auto w-full max-w-5xl px-4 md:px-6">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-primary shadow-xs">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 font-mono text-xs font-normal uppercase tracking-wider text-primary shadow-xs">
               <span className="size-1.5 rounded-full bg-primary animate-pulse" />
               {eyebrow}
             </span>
@@ -150,7 +150,7 @@ export function ProcessFlowTrack({
                         className={cn("group outline-none cursor-pointer w-full", isLeft ? "md:text-right" : "md:text-left")}
                       >
                         <div className={cn("inline-flex items-center gap-2 mb-2", isLeft ? "md:flex-row-reverse" : "md:flex-row")}>
-                          <span className="font-mono text-xs font-bold uppercase tracking-widest text-primary/80">
+                          <span className="font-mono text-xs font-normal uppercase tracking-widest text-primary/80">
                             STEP {node.number}
                           </span>
                           <span className="h-px w-6 bg-primary/30" />
@@ -158,8 +158,8 @@ export function ProcessFlowTrack({
 
                         <h3
                           className={cn(
-                            "text-xl font-bold tracking-tight transition-colors",
-                            isActive ? "text-foreground font-bold" : "text-muted-foreground group-hover:text-foreground"
+                            "text-xl font-normal tracking-tight transition-colors",
+                            isActive ? "text-foreground font-normal" : "text-muted-foreground group-hover:text-foreground"
                           )}
                         >
                           {node.title}

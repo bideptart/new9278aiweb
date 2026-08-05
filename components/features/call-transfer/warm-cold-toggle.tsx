@@ -128,7 +128,7 @@ export function WarmColdToggle() {
             exit={reduced ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: transitionDuration, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h3 className="text-xl font-semibold tracking-tight">{content.title}</h3>
+            <h3 className="text-xl font-normal tracking-tight">{content.title}</h3>
             <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{content.description}</p>
             <ul className="mt-5 space-y-2.5">
               {content.points.map((p) => (

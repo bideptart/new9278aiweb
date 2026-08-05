@@ -25,7 +25,7 @@ export default async function SeoPage() {
     <div className="space-y-6">
       <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">SEO Audit</h1>
+          <h1 className="text-2xl font-normal">SEO Audit</h1>
           <p className="text-sm text-muted-foreground">
             Every page&apos;s title, description, canonical, and indexability — with linting against duplicates and length thresholds.
           </p>
@@ -49,19 +49,19 @@ export default async function SeoPage() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Pages</div>
-          <div className="mt-1 text-2xl font-semibold">{totals.pages}</div>
+          <div className="mt-1 text-2xl font-normal">{totals.pages}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Indexable</div>
-          <div className="mt-1 text-2xl font-semibold">{totals.indexable}</div>
+          <div className="mt-1 text-2xl font-normal">{totals.indexable}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Errors</div>
-          <div className="mt-1 text-2xl font-semibold text-rose-400">{totals.errors}</div>
+          <div className="mt-1 text-2xl font-normal text-rose-400">{totals.errors}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Warnings</div>
-          <div className="mt-1 text-2xl font-semibold text-amber-400">{totals.warnings}</div>
+          <div className="mt-1 text-2xl font-normal text-amber-400">{totals.warnings}</div>
         </Card>
       </div>
 

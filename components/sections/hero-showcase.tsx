@@ -138,7 +138,7 @@ function CallConnect() {
   return (
     <div className="flex h-full flex-col justify-between">
       <motion.div {...row(0)} className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white shadow-[0_4px_14px_-4px_var(--primary)]">
+        <span className="inline-flex items-center gap-2 rounded-full bg-primary px-2.5 py-1 text-[10px] font-normal uppercase tracking-[0.16em] text-white shadow-[0_4px_14px_-4px_var(--primary)]">
           <PhoneIncoming className="h-3 w-3" /> Incoming
         </span>
         <span className="rounded-full bg-black/[0.04] px-2.5 py-1 font-mono text-[11px] tabular-nums text-foreground">
@@ -167,16 +167,16 @@ function CallConnect() {
                 transition={{ duration: 2, delay: i * 1, repeat: Number.POSITIVE_INFINITY, ease: "easeOut" }}
               />
             ))}
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[var(--ai-magenta)] text-[15px] font-bold text-white shadow-[0_10px_24px_-8px_var(--primary)]">
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[var(--ai-magenta)] text-[15px] font-normal text-white shadow-[0_10px_24px_-8px_var(--primary)]">
             SM
           </span>
           <span className="absolute -bottom-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-emerald-500">
             <PhoneCall className="h-2.5 w-2.5 text-white" />
           </span>
         </span>
-        <p className="mt-2.5 text-[13.5px] font-semibold leading-tight text-foreground">Sarah Mitchell</p>
+        <p className="mt-2.5 text-[13.5px] font-normal leading-tight text-foreground">Sarah Mitchell</p>
         <p className="mt-0.5 text-[10.5px] text-muted-foreground">+1 (415) 555-0148 · San Francisco</p>
-        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold text-emerald-600">
+        <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-normal text-emerald-600">
           <Sparkles className="h-3 w-3" /> AI answered on first ring
         </span>
       </motion.div>
@@ -189,7 +189,7 @@ function CallConnect() {
           { icon: Waves, label: "Voice", value: "Ava" },
         ].map((s) => (
           <div key={s.label} className="rounded-xl border border-black/[0.06] bg-white px-2 py-1.5 text-center shadow-sm">
-            <p className="inline-flex items-center gap-1 font-mono text-[12px] font-semibold text-foreground">
+            <p className="inline-flex items-center gap-1 font-mono text-[12px] font-normal text-foreground">
               <s.icon className="h-3 w-3 text-primary" /> {s.value}
             </p>
             <p className="text-[8.5px] uppercase tracking-wider text-muted-foreground">{s.label}</p>
@@ -214,7 +214,7 @@ function LiveConversation() {
   return (
     <div className="flex h-full flex-col">
       <motion.div {...row(0)} className="flex items-center justify-between pb-2.5">
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-foreground">
+        <span className="inline-flex items-center gap-2 text-xs font-normal text-foreground">
           <Sparkles className="h-3.5 w-3.5 text-primary" /> Live conversation
         </span>
         <StatusDot label="Streaming" />
@@ -270,7 +270,7 @@ function LiveConversation() {
                 {["10:00 AM", "2:30 PM"].map((slot, i) => (
                   <span
                     key={slot}
-                    className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold transition-colors duration-300 ${
+                    className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-normal transition-colors duration-300 ${
                       step >= 4 && i === 0 ? "bg-white text-primary" : "bg-white/20 text-white"
                     }`}
                   >
@@ -311,7 +311,7 @@ function CallOutcome() {
   return (
     <div className="flex h-full flex-col justify-between">
       <motion.div {...row(0)} className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-foreground">
+        <span className="inline-flex items-center gap-2 text-xs font-normal text-foreground">
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
           </span>
@@ -347,7 +347,7 @@ function CallOutcome() {
             />
           </svg>
           <span className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-mono text-lg font-bold leading-none text-foreground">{sentiment}%</span>
+            <span className="font-mono text-lg font-normal leading-none text-foreground">{sentiment}%</span>
             <span className="mt-0.5 text-[7.5px] uppercase tracking-wider text-muted-foreground">positive</span>
           </span>
         </span>
@@ -406,7 +406,7 @@ function AnalyticsDashboard() {
   return (
     <div className="flex h-full flex-col justify-between">
       <motion.div {...row(0)} className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-foreground">
+        <span className="inline-flex items-center gap-2 text-xs font-normal text-foreground">
           <Activity className="h-3.5 w-3.5 text-primary" /> Today
         </span>
         <StatusDot label="Live" />
@@ -420,7 +420,7 @@ function AnalyticsDashboard() {
         {kpis.map((k) => (
           <div key={k.label} className="px-2 py-2 text-center">
             <k.icon className="mx-auto mb-1 h-3 w-3 text-primary" />
-            <p className="font-mono text-[13px] font-semibold tabular-nums leading-none text-foreground sm:text-sm">
+            <p className="font-mono text-[13px] font-normal tabular-nums leading-none text-foreground sm:text-sm">
               {k.value}
             </p>
             <p className="mt-0.5 text-[8.5px] uppercase tracking-wider text-muted-foreground">{k.label}</p>
@@ -430,7 +430,7 @@ function AnalyticsDashboard() {
 
       {/* area chart */}
       <motion.div {...row(2)} className="relative rounded-2xl border border-black/[0.06] bg-white p-3 shadow-sm">
-        <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-semibold text-emerald-600">
+        <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-normal text-emerald-600">
           <TrendingUp className="h-2.5 w-2.5" /> +18%
         </span>
         <svg viewBox="0 0 300 80" className="h-[92px] w-full" preserveAspectRatio="none">
@@ -497,7 +497,7 @@ function AgentBuilder() {
   return (
     <div className="flex h-full flex-col justify-between">
       <motion.div {...row(0)} className="flex items-center justify-between">
-        <span className="inline-flex items-center gap-2 text-xs font-semibold text-foreground">
+        <span className="inline-flex items-center gap-2 text-xs font-normal text-foreground">
           <Sparkles className="h-3.5 w-3.5 text-primary" /> Agent builder
         </span>
         <span className="rounded-full border border-black/[0.08] bg-white px-2 py-0.5 text-[9.5px] uppercase tracking-wider text-muted-foreground shadow-sm">
@@ -524,7 +524,7 @@ function AgentBuilder() {
                     transition={{ duration: 2.2, delay: i * 0.55, repeat: Number.POSITIVE_INFINITY, ease: "easeOut" }}
                   />
                 </span>
-                <p className="mt-1.5 text-[10px] font-semibold leading-tight text-foreground">{n.label}</p>
+                <p className="mt-1.5 text-[10px] font-normal leading-tight text-foreground">{n.label}</p>
                 <p className="text-[8.5px] text-muted-foreground">{n.sub}</p>
               </div>
               {i < FLOW_NODES.length - 1 && (
@@ -561,7 +561,7 @@ function AgentBuilder() {
         type="button"
         tabIndex={-1}
         aria-hidden="true"
-        className="group relative w-full overflow-hidden rounded-xl btn-ai px-3 py-2.5 text-[11.5px] font-semibold"
+        className="group relative w-full overflow-hidden rounded-xl btn-ai px-3 py-2.5 text-[11.5px] font-normal"
       >
         <span className="relative z-10 inline-flex items-center justify-center gap-1.5">
           <Rocket className="h-3.5 w-3.5" /> Deploy agent
@@ -684,7 +684,7 @@ export function HeroShowcase() {
           <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white px-3.5 py-2.5">
             <VoiceOrb />
             <span className="min-w-0">
-              <span className="block truncate text-[11.5px] font-semibold leading-tight text-foreground">
+              <span className="block truncate text-[11.5px] font-normal leading-tight text-foreground">
                 Ava · Front-desk agent
               </span>
               <AnimatePresence mode="wait">
@@ -704,7 +704,7 @@ export function HeroShowcase() {
               <span className="hidden h-4 w-14 sm:block">
                 <Equalizer bars={11} />
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.14em] text-primary">
+              <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[9px] font-normal uppercase tracking-[0.14em] text-primary">
                 <Sparkles className="h-2.5 w-2.5" /> Live
               </span>
             </span>

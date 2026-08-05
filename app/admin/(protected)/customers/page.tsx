@@ -11,7 +11,7 @@ export default async function CustomersPage() {
     <div className="mx-auto max-w-6xl">
       <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Customers</h1>
+          <h1 className="text-2xl font-normal tracking-tight">Customers</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {customers.length} {customers.length === 1 ? "account" : "accounts"} across all plans.
           </p>

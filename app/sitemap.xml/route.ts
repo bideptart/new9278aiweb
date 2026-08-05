@@ -32,10 +32,6 @@ function buildEntries(): Entry[] {
   const staticPages: Entry[] = [
     { path: "/", priority: 1.0, changefreq: "weekly", lastmod: now },
     { path: "/features", priority: 0.9, changefreq: "weekly", lastmod: now },
-    { path: "/features/ai-voice-receptionist", priority: 0.8, changefreq: "monthly", lastmod: now },
-    { path: "/features/appointment-setter", priority: 0.8, changefreq: "monthly", lastmod: now },
-    { path: "/features/answering-services", priority: 0.8, changefreq: "monthly", lastmod: now },
-    { path: "/features/call-transfer", priority: 0.8, changefreq: "monthly", lastmod: now },
     { path: "/pricing", priority: 0.9, changefreq: "weekly", lastmod: now },
     { path: "/industries", priority: 0.9, changefreq: "monthly", lastmod: now },
     { path: "/faq", priority: 0.7, changefreq: "monthly", lastmod: now },

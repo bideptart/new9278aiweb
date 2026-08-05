@@ -272,11 +272,11 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
                 className={cn(
                   "flex items-center gap-2.5 rounded-full px-4 py-2.5 text-xs font-normal transition-all duration-300 cursor-pointer select-none border whitespace-nowrap",
                   isSelected
-                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/25 scale-[1.04]"
+                    ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-500 shadow-sm scale-[1.04]"
                     : "bg-card/70 border-border/60 text-muted-foreground hover:bg-card hover:text-foreground hover:border-border"
                 )}
               >
-                <CatIcon className={cn("size-4 shrink-0", isSelected ? "text-primary-foreground" : "text-primary")} />
+                <CatIcon className={cn("size-4 shrink-0", isSelected ? "text-rose-400 dark:text-rose-400" : "text-primary")} />
                 <span>{cat.name}</span>
               </button>
             )
@@ -323,7 +323,7 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
                   className={cn(
                     "flex items-center justify-center gap-1.5 rounded-xl py-2 px-2 text-[11px] font-normal transition-all cursor-pointer border",
                     activeTab === "call"
-                      ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-500 shadow-xs"
                       : "bg-background/80 text-muted-foreground border-border/50 hover:bg-background"
                   )}
                 >
@@ -335,7 +335,7 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
                   className={cn(
                     "flex items-center justify-center gap-1.5 rounded-xl py-2 px-2 text-[11px] font-normal transition-all cursor-pointer border",
                     activeTab === "qualification"
-                      ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-500 shadow-xs"
                       : "bg-background/80 text-muted-foreground border-border/50 hover:bg-background"
                   )}
                 >
@@ -347,7 +347,7 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
                   className={cn(
                     "flex items-center justify-center gap-1.5 rounded-xl py-2 px-2 text-[11px] font-normal transition-all cursor-pointer border",
                     activeTab === "crm"
-                      ? "bg-primary text-primary-foreground border-primary shadow-xs"
+                      ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-500 shadow-xs"
                       : "bg-background/80 text-muted-foreground border-border/50 hover:bg-background"
                   )}
                 >
@@ -422,16 +422,16 @@ export function OtherIndustriesGrid({ currentSlug }: Props) {
                   </span>
                   <button
                     onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-primary text-primary-foreground px-3.5 py-1 text-xs font-normal transition-all hover:bg-primary/90 shadow-md cursor-pointer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-500 px-3.5 py-1 text-xs font-normal transition-all hover:bg-rose-500/25 shadow-xs cursor-pointer"
                   >
                     {isPlayingAudio ? (
                       <>
-                        <Pause className="size-3 fill-primary-foreground" />
+                        <Pause className="size-3 fill-rose-400" />
                         <span>Pause Spectrum</span>
                       </>
                     ) : (
                       <>
-                        <Play className="size-3 fill-primary-foreground" />
+                        <Play className="size-3 fill-rose-400" />
                         <span>Boost Spectrum</span>
                       </>
                     )}

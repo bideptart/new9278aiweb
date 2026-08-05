@@ -33,7 +33,7 @@ export function ConcurrencyComparison() {
           <span className="relative flex h-2.5 w-2.5">
             <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-muted-foreground/60" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="text-xs font-normal uppercase tracking-[0.14em] text-muted-foreground">
             Traditional answering service
           </p>
         </div>
@@ -61,7 +61,7 @@ export function ConcurrencyComparison() {
             )}
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
           </span>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">9278.ai answering</p>
+          <p className="text-xs font-normal uppercase tracking-[0.14em] text-primary">9278.ai answering</p>
         </div>
         <ul className="relative mt-5 space-y-4">
           {NINE_TWO_SEVEN_EIGHT.map((item) => (

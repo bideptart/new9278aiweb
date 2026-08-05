@@ -122,7 +122,7 @@ export function HomeServicesHero() {
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-7xl mx-auto px-4 pt-14 pb-8 md:px-6 md:pt-16 md:pb-12 overflow-hidden border-b border-border/40 bg-white dark:bg-gray-950"
+      className="relative w-full max-w-7xl mx-auto px-4 pt-28 pb-8 md:px-6 md:pt-24 md:pb-12 overflow-hidden border-b border-border/40 bg-white dark:bg-gray-950"
     >
       {/* Soft Ambient Light Glow & Subtle Red Blur Accent */}
       <div
@@ -331,7 +331,7 @@ export function HomeServicesHero() {
 
               {/* Typography Matching Uploaded Image */}
               <div className="relative z-10 mb-2 flex flex-col items-center max-w-full px-2">
-                <h2 className="text-base sm:text-lg md:text-xl font-extrabold tracking-wider text-rose-300 dark:text-rose-400 uppercase font-sans drop-shadow-xs text-center leading-tight">
+                <h2 className="text-base sm:text-lg md:text-xl font-normal tracking-wider text-rose-300 dark:text-rose-400 uppercase font-sans drop-shadow-xs text-center leading-tight">
                   HOME SERVICES
                 </h2>
               </div>

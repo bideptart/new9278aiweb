@@ -24,14 +24,14 @@ function ZeroLagIllustration() {
       />
 
       <div className="flex items-center justify-between z-10">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary border border-primary/20 shadow-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-normal text-primary border border-primary/20 shadow-xs">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
           </span>
           Analyzing audio stream
         </span>
-        <span className="font-mono text-[11px] font-semibold text-muted-foreground">0ms STT lag</span>
+        <span className="font-mono text-[11px] font-normal text-muted-foreground">0ms STT lag</span>
       </div>
 
       <div className="flex h-28 w-full items-center gap-[3px] my-3 z-10">
@@ -48,13 +48,13 @@ function ZeroLagIllustration() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 text-center text-xs font-semibold z-10">
+      <div className="grid grid-cols-2 gap-3 text-center text-xs font-normal z-10">
         <div className="rounded-2xl border border-primary/30 bg-primary/10 p-2.5 backdrop-blur-md transition-colors group-hover:bg-primary/15">
-          <p className="text-primary font-bold font-mono text-sm">&lt; 250ms</p>
+          <p className="text-primary font-normal font-mono text-sm">&lt; 250ms</p>
           <p className="text-[10px] text-muted-foreground font-medium">Real-Time Latency</p>
         </div>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-2.5 backdrop-blur-md transition-colors group-hover:bg-emerald-500/15">
-          <p className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm">100% Native</p>
+          <p className="text-emerald-600 dark:text-emerald-400 font-normal font-mono text-sm">100% Native</p>
           <p className="text-[10px] text-muted-foreground font-medium">Audio-to-Audio</p>
         </div>
       </div>
@@ -91,14 +91,14 @@ function SmartInterruptIllustration() {
       />
 
       <div className="flex items-center justify-between z-10">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary border border-primary/20 shadow-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-normal text-primary border border-primary/20 shadow-xs">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
           </span>
           Barge-in detected
         </span>
-        <span className="font-mono text-[11px] font-semibold text-muted-foreground">&lt;250ms interrupt</span>
+        <span className="font-mono text-[11px] font-normal text-muted-foreground">&lt;250ms interrupt</span>
       </div>
 
       <div className="relative h-24 w-full my-2 z-10">
@@ -123,7 +123,7 @@ function SmartInterruptIllustration() {
         </svg>
 
         <span
-          className="absolute bottom-0 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary shadow-xs backdrop-blur-md"
+          className="absolute bottom-0 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-[11px] font-normal text-primary shadow-xs backdrop-blur-md"
           style={{ left: `${(cutAt / 320) * 100}%` }}
         >
           <Zap className="h-3 w-3" strokeWidth={2.5} />
@@ -133,10 +133,10 @@ function SmartInterruptIllustration() {
 
       <div className="flex items-center justify-between border-t border-border/40 pt-3 z-10">
         <div className="flex items-center gap-2">
-          <span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
+          <span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary font-normal">
             <User className="size-4" />
           </span>
-          <span className="text-xs font-bold">Caller Speech</span>
+          <span className="text-xs font-normal">Caller Speech</span>
         </div>
 
         <div className="flex items-center gap-3">
@@ -144,7 +144,7 @@ function SmartInterruptIllustration() {
             <span
               key={s.key}
               className={cn(
-                "inline-flex items-center gap-1 text-[11px] font-bold transition-colors",
+                "inline-flex items-center gap-1 text-[11px] font-normal transition-colors",
                 phase === s.key ? "text-primary" : "text-muted-foreground/40"
               )}
             >
@@ -179,11 +179,11 @@ function CapacityIllustration() {
 
       {/* Top Header Row */}
       <div className="flex items-center justify-between z-10">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary border border-primary/20 shadow-xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-normal text-primary border border-primary/20 shadow-xs">
           <InfinityIcon className="size-3.5 text-primary" />
           ∞ Unlimited Scale
         </span>
-        <span className="font-mono text-[11px] font-semibold text-muted-foreground">No busy signals</span>
+        <span className="font-mono text-[11px] font-normal text-muted-foreground">No busy signals</span>
       </div>
 
       {/* Central Rotating Radar Visualizer with Glowing Rings */}
@@ -199,12 +199,12 @@ function CapacityIllustration() {
         </div>
 
         {/* Floating Satellite Status Badges */}
-        <div className="absolute -top-1 left-2 flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 backdrop-blur-md shadow-xs">
+        <div className="absolute -top-1 left-2 flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono font-normal text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 backdrop-blur-md shadow-xs">
           <span className="size-1.5 rounded-full bg-emerald-500 animate-ping" />
           100% Inbound SLA
         </div>
 
-        <div className="absolute -bottom-1 right-2 flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono font-bold text-primary border border-primary/20 backdrop-blur-md shadow-xs">
+        <div className="absolute -bottom-1 right-2 flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-mono font-normal text-primary border border-primary/20 backdrop-blur-md shadow-xs">
           <span className="size-1.5 rounded-full bg-primary animate-ping" />
           0 Queued Calls
         </div>
@@ -216,13 +216,13 @@ function CapacityIllustration() {
       </div>
 
       {/* Bottom Live Metrics Chips */}
-      <div className="grid grid-cols-2 gap-3 text-center text-xs font-semibold z-10">
+      <div className="grid grid-cols-2 gap-3 text-center text-xs font-normal z-10">
         <div className="rounded-2xl border border-primary/30 bg-primary/10 p-2.5 backdrop-blur-md transition-colors group-hover:bg-primary/15">
-          <p className="text-primary font-bold font-mono text-sm">{activeCallCount.toLocaleString()}+ Calls</p>
+          <p className="text-primary font-normal font-mono text-sm">{activeCallCount.toLocaleString()}+ Calls</p>
           <p className="text-[10px] text-muted-foreground font-medium">Concurrent Capacity</p>
         </div>
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-2.5 backdrop-blur-md transition-colors group-hover:bg-emerald-500/15">
-          <p className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm">0 Seconds</p>
+          <p className="text-emerald-600 dark:text-emerald-400 font-normal font-mono text-sm">0 Seconds</p>
           <p className="text-[10px] text-muted-foreground font-medium">Hold / Queue Time</p>
         </div>
       </div>
@@ -289,11 +289,11 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
     <section className="relative mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-24 border-t border-slate-200/60 dark:border-slate-800/60">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
           <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           THE HUMAN-KIND EXPERIENCE
         </span>
-        <h2 className="text-3xl font-serif font-semibold tracking-tight md:text-5xl text-foreground">
+        <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           Conversations indistinguishable from <span className="italic text-rose-400 dark:text-rose-400">your best agent.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
@@ -339,14 +339,14 @@ export function IndustryInteractiveShowcase({ industryName }: { industryName: st
               >
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="rounded-full bg-rose-500/15 px-2.5 py-0.5 text-xs font-mono font-bold text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
+                    <span className="rounded-full bg-rose-500/15 px-2.5 py-0.5 text-xs font-mono font-normal text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
                       {current.step}
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">
+                    <span className="text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">
                       {current.tag}
                     </span>
                   </div>
-                  <h3 className="text-2xl md:text-4xl font-serif font-semibold tracking-tight text-foreground">{current.title}</h3>
+                  <h3 className="text-2xl md:text-4xl font-serif font-normal tracking-tight text-foreground">{current.title}</h3>
                 </div>
 
                 <p className="text-muted-foreground text-sm md:text-base leading-relaxed">

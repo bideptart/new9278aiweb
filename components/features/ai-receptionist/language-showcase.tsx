@@ -93,7 +93,7 @@ export function LanguageShowcase() {
               exit={reduced ? undefined : { opacity: 0, y: -10 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">
+              <span className="text-[11px] font-normal uppercase tracking-[0.16em] text-primary">
                 {active.lang} · {active.tone}
               </span>
               <p className="mt-2 text-pretty font-serif text-xl italic leading-relaxed text-foreground sm:text-2xl">

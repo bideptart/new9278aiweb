@@ -317,7 +317,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
                 <span className="h-[5px] w-[5px] rounded-full bg-black/[0.12]" />
               </span>
               <span className="font-mono text-[8.5px] tracking-wide text-muted-foreground/70">live-call</span>
-              <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[2px] text-[8px] font-bold uppercase tracking-wider text-primary">
+              <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[2px] text-[8px] font-normal uppercase tracking-wider text-primary">
                 <span className="relative flex h-1 w-1">
                   {playing && (
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
@@ -351,7 +351,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
                       />
                     ))}
                   <span
-                    className="relative flex h-11 w-11 items-center justify-center rounded-full text-[13px] font-bold text-white ring-2 ring-white"
+                    className="relative flex h-11 w-11 items-center justify-center rounded-full text-[13px] font-normal text-white ring-2 ring-white"
                     style={{
                       backgroundImage:
                         "radial-gradient(circle at 34% 28%, color-mix(in oklch, var(--primary) 68%, white), var(--primary))",
@@ -362,7 +362,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
                 </span>
 
                 <div className="min-w-0 flex-1">
-                  <p className="flex items-center gap-1.5 truncate text-[13px] font-semibold tracking-tight">
+                  <p className="flex items-center gap-1.5 truncate text-[13px] font-normal tracking-tight">
                     Aria · 9278.ai
                     <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
                   </p>
@@ -398,7 +398,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
               {/* who's speaking + live level meter */}
               <div className="mt-3 flex items-center gap-2">
                 <span
-                  className={`rounded-md px-1.5 py-[3px] font-mono text-[8px] font-bold uppercase tracking-wider transition-colors duration-300 ${
+                  className={`rounded-md px-1.5 py-[3px] font-mono text-[8px] font-normal uppercase tracking-wider transition-colors duration-300 ${
                     speaking === "agent" ? "bg-primary text-white" : "bg-black/[0.05] text-muted-foreground"
                   }`}
                 >
@@ -454,7 +454,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
               </span>
               <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">First word</span>
             </div>
-            <p className="mt-1 font-mono text-xl font-bold leading-none tabular-nums text-primary">
+            <p className="mt-1 font-mono text-xl font-normal leading-none tabular-nums text-primary">
               280<span className="ml-0.5 text-[10px] font-medium text-primary/60">ms</span>
             </p>
           </Chip>
@@ -464,7 +464,7 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                 <ShieldCheck className="h-3 w-3 text-primary" strokeWidth={2.75} aria-hidden="true" />
               </span>
-              <span className="text-[11px] font-semibold leading-tight tracking-tight">Self-hosted</span>
+              <span className="text-[11px] font-normal leading-tight tracking-tight">Self-hosted</span>
             </div>
             <p className="mt-1 text-[9.5px] leading-snug text-muted-foreground">Your infra, your data.</p>
           </Chip>
@@ -472,14 +472,14 @@ export const HeroVoiceOrbPanel = forwardRef<CallConsoleHandle>(function HeroVoic
           <Chip className="bottom-[9%] left-[4%] hidden sm:block" delay={2.3} depth={62}>
             <span className="flex items-center gap-2">
               <Languages className="h-3.5 w-3.5 text-primary" strokeWidth={2.5} aria-hidden="true" />
-              <span className="text-[11px] font-semibold tracking-tight">32 languages</span>
+              <span className="text-[11px] font-normal tracking-tight">32 languages</span>
             </span>
           </Chip>
 
           <Chip className="bottom-[11%] right-[4%] hidden sm:block" delay={3.1} depth={44}>
             <span className="flex items-center gap-2">
               <AudioLines className="h-3.5 w-3.5 text-primary" strokeWidth={2.5} aria-hidden="true" />
-              <span className="text-[11px] font-semibold tracking-tight">Audio-native</span>
+              <span className="text-[11px] font-normal tracking-tight">Audio-native</span>
             </span>
           </Chip>
 

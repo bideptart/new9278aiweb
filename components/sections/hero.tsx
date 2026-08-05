@@ -202,7 +202,7 @@ export function Hero() {
             <Magnetic>
               <Link
                 href="/get-started"
-                className="btn-ai group relative inline-flex h-[3.25rem] items-center gap-2 overflow-hidden rounded-full px-7 text-[0.9375rem] font-semibold text-primary-foreground transition-[filter,transform] duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="btn-ai group relative inline-flex h-[3.25rem] items-center gap-2 overflow-hidden rounded-full px-7 text-[0.9375rem] font-normal text-primary-foreground transition-[filter,transform] duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <span className="relative z-10">Build Your AI Agent</span>
                 <ArrowRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -216,7 +216,7 @@ export function Hero() {
                 type="button"
                 onClick={toggleDemo}
                 aria-pressed={playing}
-                className="glass ring-gradient group relative inline-flex h-[3.25rem] items-center gap-2.5 overflow-hidden rounded-full px-6 text-[0.9375rem] font-semibold text-foreground transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="glass ring-gradient group relative inline-flex h-[3.25rem] items-center gap-2.5 overflow-hidden rounded-full px-6 text-[0.9375rem] font-normal text-foreground transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               >
                 <span
                   className={cn(
@@ -263,24 +263,24 @@ export function Hero() {
                   ))}
                 </span>
                 <span className="text-[13px] text-muted-foreground">
-                  <span className="font-semibold text-foreground">4.9/5</span> average rating
+                  <span className="font-normal text-foreground">4.9/5</span> average rating
                 </span>
               </span>
               <span className="hidden h-4 w-px bg-border sm:block" />
               <span className="text-[13px] text-muted-foreground">
-                <span className="font-semibold text-foreground">500+</span> businesses answering with 9278.ai
+                <span className="font-normal text-foreground">500+</span> businesses answering with 9278.ai
               </span>
             </div>
 
             <div className="flex flex-col gap-2.5 border-t border-border/50 pt-4 sm:flex-row sm:items-center sm:gap-5">
-              <span className="text-[9.5px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/70">
+              <span className="text-[9.5px] font-normal uppercase tracking-[0.2em] text-muted-foreground/70">
                 Integrates with
               </span>
               <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
                 {PARTNERS.map((name) => (
                   <li
                     key={name}
-                    className="cursor-default text-[13px] font-semibold tracking-tight text-muted-foreground/55 grayscale transition-all duration-300 hover:text-foreground/80 hover:grayscale-0"
+                    className="cursor-default text-[13px] font-normal tracking-tight text-muted-foreground/55 grayscale transition-all duration-300 hover:text-foreground/80 hover:grayscale-0"
                   >
                     {name}
                   </li>

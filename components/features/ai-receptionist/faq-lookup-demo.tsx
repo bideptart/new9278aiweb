@@ -163,7 +163,7 @@ export function FaqLookupDemo() {
               <p className="text-pretty font-serif text-lg italic leading-relaxed text-foreground sm:text-xl">
                 {pair.a}
               </p>
-              <span className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-semibold text-primary">
+              <span className="mt-2.5 inline-flex items-center gap-1.5 text-[11px] font-normal text-primary">
                 <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />
                 Answered in 0.4s
               </span>

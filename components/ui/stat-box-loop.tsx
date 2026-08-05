@@ -105,7 +105,7 @@ export function StatBoxLoop({
         </span>
 
         {/* Live Loop Pulse Badge */}
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 font-mono text-[9px] font-bold text-primary shadow-2xs">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 font-mono text-[9px] font-normal text-primary shadow-2xs">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
@@ -117,13 +117,13 @@ export function StatBoxLoop({
       {/* Main Looping Counter Display */}
       <div className="relative z-10 my-4 space-y-1">
         <div className="flex items-center justify-center gap-1">
-          <span className="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight text-primary/75 transition-all duration-150">
+          <span className="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-primary/75 transition-all duration-150">
             {displayString}
           </span>
         </div>
 
         {/* Label */}
-        <p className="text-base font-bold text-foreground tracking-tight">{label}</p>
+        <p className="text-base font-normal text-foreground tracking-tight">{label}</p>
       </div>
 
       {/* Subtitle & Telemetry Footer */}

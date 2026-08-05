@@ -170,7 +170,7 @@ function CallCard({ t }: { t: (typeof testimonials)[number] }) {
               <MetricIcon className="h-4.5 w-4.5" strokeWidth={2.25} aria-hidden="true" />
             </span>
             <div className="min-w-0">
-              <p className="truncate text-[13.5px] font-bold tracking-tight text-foreground">{t.metric}</p>
+              <p className="truncate text-[13.5px] font-normal tracking-tight text-foreground">{t.metric}</p>
               <p className="flex items-center gap-1 text-[10.5px] text-muted-foreground">
                 <Building2 className="h-2.5 w-2.5" strokeWidth={2.5} aria-hidden="true" />
                 {t.industry}
@@ -190,7 +190,7 @@ function CallCard({ t }: { t: (typeof testimonials)[number] }) {
           <div className="mt-5 flex items-center gap-3 border-t border-black/[0.06] pt-4">
             <span className="relative flex h-9 w-9 shrink-0 items-center justify-center">
               <span
-                className="flex h-9 w-9 items-center justify-center rounded-full text-[12px] font-bold text-white ring-2 ring-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-[12px] font-normal text-white ring-2 ring-white"
                 style={{
                   backgroundImage:
                     "radial-gradient(circle at 35% 28%, color-mix(in oklch, var(--primary) 62%, white), var(--primary))",
@@ -205,7 +205,7 @@ function CallCard({ t }: { t: (typeof testimonials)[number] }) {
               />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[12.5px] font-semibold tracking-tight">{t.author}</p>
+              <p className="truncate text-[12.5px] font-normal tracking-tight">{t.author}</p>
               <p className="truncate text-[10.5px] text-muted-foreground">
                 {t.role} · {t.company}
               </p>
@@ -270,7 +270,7 @@ export function Testimonials() {
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 ring-1 ring-primary/15 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-3 w-3 text-primary" strokeWidth={2.25} aria-hidden="true" />
                   </span>
-                  <p className="mt-1 font-mono text-xl font-bold leading-none text-primary sm:text-2xl">
+                  <p className="mt-1 font-mono text-xl font-normal leading-none text-primary sm:text-2xl">
                     <CountUp to={m.value} decimals={m.decimals} suffix={m.suffix} />
                   </p>
                   <p className="text-pretty text-[10px] leading-tight text-muted-foreground sm:text-[11px]">

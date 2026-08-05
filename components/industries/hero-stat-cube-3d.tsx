@@ -66,7 +66,7 @@ export function HeroStatCube3D({ title, liveTag, faces, intervalMs = 2600 }: Her
                   style={{ transform: `rotateY(${i * 90}deg) translateZ(${half}px)` }}
                 >
                   <Icon className="size-5 text-rose-400 dark:text-rose-300" />
-                  <p className="text-sm font-extrabold text-foreground tracking-tight">{f.value}</p>
+                  <p className="text-sm font-normal text-foreground tracking-tight">{f.value}</p>
                 </div>
               )
             })}
@@ -83,7 +83,7 @@ export function HeroStatCube3D({ title, liveTag, faces, intervalMs = 2600 }: Her
               exit={{ y: -4 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">
+              <p className="text-[10px] font-mono font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">
                 {face.label}
               </p>
               <p className="mt-1 text-xs text-foreground font-serif italic leading-relaxed">{face.caption}</p>

@@ -124,7 +124,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
       <motion.div
         animate={{ y: [6, -6, 6] }}
         transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: 0.5 }}
-        className="pointer-events-none absolute -bottom-2 -left-4 z-30 flex items-center gap-1.5 rounded-full border border-white/60 dark:border-white/10 bg-card/90 px-3 py-1 text-xs font-bold text-primary shadow-xl backdrop-blur-md"
+        className="pointer-events-none absolute -bottom-2 -left-4 z-30 flex items-center gap-1.5 rounded-full border border-white/60 dark:border-white/10 bg-card/90 px-3 py-1 text-xs font-normal text-primary shadow-xl backdrop-blur-md"
       >
         <Sparkles className="size-3.5 text-primary" />
         <span>Accuracy: {current.accuracy}</span>
@@ -154,13 +154,13 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
             <span className="size-3 rounded-full bg-rose-400/80 shadow-xs" />
             <span className="size-3 rounded-full bg-amber-400/80 shadow-xs" />
             <span className="size-3 rounded-full bg-emerald-400/80 shadow-xs" />
-            <span className="ml-2 text-xs font-mono font-bold text-foreground/90 flex items-center gap-1.5">
+            <span className="ml-2 text-xs font-mono font-normal text-foreground/90 flex items-center gap-1.5">
               9278.ai — Healthcare Voice Console
               <span className="size-1.5 rounded-full bg-rose-500 animate-pulse" />
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 px-2.5 py-0.5 text-[10px] font-semibold border border-rose-200 dark:border-rose-900/40">
+            <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 px-2.5 py-0.5 text-[10px] font-normal border border-rose-200 dark:border-rose-900/40">
               <ShieldCheck className="size-3 text-rose-300" />
               HIPAA Certified
             </span>
@@ -173,8 +173,8 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
           <div className="col-span-5 border-r border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-950/60 p-3 space-y-4">
             <div>
               <div className="flex items-center justify-between px-2 mb-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">PLAYBOOKS</span>
-                <span className="text-[9px] font-mono text-rose-400 dark:text-rose-400 font-bold">0{activePlaybook + 1}/0{playbooks.length}</span>
+                <span className="text-[10px] font-normal uppercase tracking-wider text-muted-foreground">PLAYBOOKS</span>
+                <span className="text-[9px] font-mono text-rose-400 dark:text-rose-400 font-normal">0{activePlaybook + 1}/0{playbooks.length}</span>
               </div>
 
               <div className="space-y-1">
@@ -190,7 +190,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                       className={cn(
                         "w-full text-left px-2.5 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between border cursor-pointer",
                         isActive
-                          ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 font-bold border-rose-300 dark:border-rose-800 shadow-xs scale-[1.02]"
+                          ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 font-normal border-rose-300 dark:border-rose-800 shadow-xs scale-[1.02]"
                           : "border-transparent text-muted-foreground hover:bg-rose-50/40 dark:hover:bg-rose-950/20 hover:text-foreground"
                       )}
                     >
@@ -203,7 +203,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
             </div>
 
             <div className="border-t border-slate-200/80 dark:border-slate-800 pt-3">
-              <span className="px-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">LIVE STREAM</span>
+              <span className="px-2 text-[10px] font-normal uppercase tracking-wider text-muted-foreground">LIVE STREAM</span>
               <div className="mt-2 space-y-2 px-2">
                 <div className="flex items-center justify-between text-xs font-medium">
                   <div className="flex items-center gap-2">
@@ -211,9 +211,9 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                       <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
                     </span>
-                    <span className="truncate font-semibold text-foreground">{current.patientName}</span>
+                    <span className="truncate font-normal text-foreground">{current.patientName}</span>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">LIVE</span>
+                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-normal">LIVE</span>
                 </div>
                 <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
                   <span className="size-2 rounded-full bg-emerald-500/60" />
@@ -228,10 +228,10 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
             <div>
               <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2 mb-3">
                 <div>
-                  <h4 className="text-xs font-bold text-foreground">{current.name}</h4>
+                  <h4 className="text-xs font-normal text-foreground">{current.name}</h4>
                   <p className="text-[10px] text-muted-foreground">{current.status}</p>
                 </div>
-                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-2 py-0.5 text-[9px] font-bold">
+                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-2 py-0.5 text-[9px] font-normal">
                   {current.badge}
                 </span>
               </div>
@@ -246,7 +246,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                   transition={{ duration: 0.2 }}
                   className="rounded-2xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/70 dark:bg-rose-950/20 p-3.5 space-y-2 shadow-xs"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-bold text-rose-400 dark:text-rose-400">
+                  <div className="flex items-center justify-between text-[11px] font-normal text-rose-400 dark:text-rose-400">
                     <span className="flex items-center gap-1.5">
                       <CheckCircle2 className="size-3.5" />
                       Agent Response · Sub-250ms
@@ -271,7 +271,7 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
                   {isPlaying ? <Pause className="size-3.5 fill-current" /> : <Play className="size-3.5 fill-current ml-0.5" />}
                 </button>
                 <div>
-                  <p className="text-xs font-bold text-foreground">Live Call · {current.patientName}</p>
+                  <p className="text-xs font-normal text-foreground">Live Call · {current.patientName}</p>
                   <p className="text-[10px] text-muted-foreground font-mono">{current.duration} · Transcript Active</p>
                 </div>
               </div>
@@ -305,16 +305,16 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
             </span>
-            <span className="text-xs font-bold text-foreground">9278.ai Voice Core</span>
+            <span className="text-xs font-normal text-foreground">9278.ai Voice Core</span>
           </div>
-          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono font-bold text-emerald-500 border border-emerald-500/20">
+          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[9px] font-mono font-normal text-emerald-500 border border-emerald-500/20">
             0ms STT Relay
           </span>
         </div>
 
         {/* Real-Time EHR Action Badge */}
         <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 mb-3 space-y-1">
-          <div className="flex items-center justify-between text-[10px] font-bold text-primary">
+          <div className="flex items-center justify-between text-[10px] font-normal text-primary">
             <span className="flex items-center gap-1">
               <Calendar className="size-3" />
               EHR Action Executed
@@ -324,14 +324,14 @@ export function HeroAgentConsoleMockup({ industryName, slug }: Props) {
               Synced
             </span>
           </div>
-          <p className="text-xs font-bold text-foreground truncate">
+          <p className="text-xs font-normal text-foreground truncate">
             {current.bookingDetail}
           </p>
         </div>
 
         {/* Live Audio Spectrum Equalizer Line */}
         <div className="rounded-2xl border border-border/50 bg-background/80 p-2.5 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-semibold">
+          <div className="flex items-center gap-2 text-xs font-normal">
             <Volume2 className="size-4 text-primary animate-pulse" />
             <span className="text-[11px] text-muted-foreground">Live Waveform</span>
           </div>
@@ -355,29 +355,29 @@ export function HeroMetricsCard() {
     <div className="mt-8 rounded-2xl border border-white/80 dark:border-white/10 bg-card/75 backdrop-blur-2xl p-4 md:p-5 shadow-xl transition-all hover:border-primary/40 hover:scale-[1.01]">
       <div className="grid grid-cols-3 divide-x divide-border/50 text-center">
         <div className="px-2 md:px-4">
-          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-semibold mb-1">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-normal mb-1">
             <Clock className="size-3.5 text-primary" />
             <span>Response</span>
           </div>
-          <p className="text-xl md:text-2xl font-bold text-primary tracking-tight">&lt; 3s</p>
+          <p className="text-xl md:text-2xl font-normal text-primary tracking-tight">&lt; 3s</p>
           <p className="text-[10px] md:text-xs text-muted-foreground font-medium mt-0.5">First-touch response</p>
         </div>
 
         <div className="px-2 md:px-4">
-          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-semibold mb-1">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-normal mb-1">
             <Phone className="size-3.5 text-primary" />
             <span>Capacity</span>
           </div>
-          <p className="text-xl md:text-2xl font-bold text-primary tracking-tight">40+</p>
+          <p className="text-xl md:text-2xl font-normal text-primary tracking-tight">40+</p>
           <p className="text-[10px] md:text-xs text-muted-foreground font-medium mt-0.5">Concurrent calls</p>
         </div>
 
         <div className="px-2 md:px-4">
-          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-semibold mb-1">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground font-normal mb-1">
             <DollarSign className="size-3.5 text-primary" />
             <span>Rate</span>
           </div>
-          <p className="text-xl md:text-2xl font-bold text-primary tracking-tight">$0.10</p>
+          <p className="text-xl md:text-2xl font-normal text-primary tracking-tight">$0.10</p>
           <p className="text-[10px] md:text-xs text-muted-foreground font-medium mt-0.5">Per-minute, from</p>
         </div>
       </div>

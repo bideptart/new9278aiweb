@@ -28,18 +28,18 @@ export function PlanCards() {
           )}
         >
           {plan.recommended && (
-            <span className="absolute -top-3 left-7 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
+            <span className="absolute -top-3 left-7 rounded-full bg-primary px-3 py-1 text-[11px] font-normal uppercase tracking-wider text-primary-foreground">
               Most popular
             </span>
           )}
 
           <div>
-            <h3 className="text-lg font-semibold tracking-tight">{plan.name}</h3>
+            <h3 className="text-lg font-normal tracking-tight">{plan.name}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{plan.tagline}</p>
           </div>
 
           <div className="mt-6 flex items-baseline gap-2">
-            <span className="text-5xl font-semibold tracking-tight">${plan.amount}</span>
+            <span className="text-5xl font-normal tracking-tight">${plan.amount}</span>
             <span className="text-sm text-muted-foreground">credit</span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">

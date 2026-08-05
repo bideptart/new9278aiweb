@@ -89,7 +89,7 @@ export function FaqExplorer({ groups }: { groups: FaqGroup[] }) {
             className="scroll-mt-24 border-b border-border/50 py-10 first:pt-0 last:border-b-0"
           >
             <ScrollReveal>
-              <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{group.title}</h2>
+              <h2 className="text-2xl font-normal tracking-tight md:text-3xl">{group.title}</h2>
             </ScrollReveal>
 
             <ScrollReveal className="mt-6">

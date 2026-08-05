@@ -176,11 +176,11 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
 
       {/* Section Header */}
       <div className="mb-12 text-center md:text-left">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-primary mb-3 shadow-xs border border-primary/20">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-primary mb-3 shadow-xs border border-primary/20">
           <Sparkles className="size-3.5 text-primary" />
           Interactive Playbooks
         </span>
-        <h2 className="text-3xl font-serif font-bold tracking-tight md:text-5xl text-foreground">
+        <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           What the agent does and <span className="bg-gradient-to-r from-primary via-rose-600 to-primary bg-clip-text text-transparent underline decoration-primary/30 underline-offset-8">how it sounds</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed max-w-3xl">
@@ -196,7 +196,7 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
             {/* Header with Step Indicator & Play/Pause */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">PLAYBOOKS</span>
+                <span className="text-xs font-normal uppercase tracking-wider text-muted-foreground">PLAYBOOKS</span>
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
                   className="rounded-full bg-muted p-1 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
@@ -206,7 +206,7 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                 </button>
               </div>
 
-              <span className="text-xs font-mono font-bold text-primary">
+              <span className="text-xs font-mono font-normal text-primary">
                 0{activeStep + 1} / 0{playbooks.length}
               </span>
             </div>
@@ -247,14 +247,14 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                     className={cn(
                       "w-full text-left p-4 rounded-2xl transition-all duration-300 flex items-center justify-between font-medium cursor-pointer border",
                       isActive
-                        ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm font-bold scale-[1.01]"
+                        ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm font-normal scale-[1.01]"
                         : "bg-white/80 dark:bg-slate-900/80 text-muted-foreground border-slate-200/80 dark:border-slate-800 hover:border-rose-200 dark:hover:border-rose-900/40 hover:text-rose-400 dark:hover:text-rose-400"
                     )}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
                       <span
                         className={cn(
-                          "flex size-7 shrink-0 items-center justify-center rounded-xl text-xs font-mono font-bold transition-colors border",
+                          "flex size-7 shrink-0 items-center justify-center rounded-xl text-xs font-mono font-normal transition-colors border",
                           isActive
                             ? "bg-rose-500/20 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800"
                             : "bg-slate-100 dark:bg-slate-800 text-slate-500 border-slate-200 dark:border-slate-700"
@@ -284,11 +284,11 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider text-foreground">LIVE AGENT PREVIEW</span>
+                <span className="text-xs font-normal uppercase tracking-wider text-foreground">LIVE AGENT PREVIEW</span>
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3 py-1 text-[11px] font-mono font-bold shadow-xs">
+                <span className="rounded-full bg-rose-50 text-rose-400 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 px-3 py-1 text-[11px] font-mono font-normal shadow-xs">
                   {current.badge}
                 </span>
 
@@ -319,9 +319,9 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                     <Bot className="size-4.5" />
                   </div>
                   <div className="rounded-2xl rounded-tl-xs bg-rose-50/80 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 p-4 text-xs md:text-sm text-foreground font-medium shadow-xs">
-                    <div className="flex items-center justify-between text-[10px] font-bold text-rose-400 dark:text-rose-400 mb-1">
+                    <div className="flex items-center justify-between text-[10px] font-normal text-rose-400 dark:text-rose-400 mb-1">
                       <span>Agent · AI Voice Assistant</span>
-                      <span className="font-mono text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md">{current.latency}</span>
+                      <span className="font-mono text-[9px] font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-md">{current.latency}</span>
                     </div>
                     <p className="leading-relaxed">&ldquo;{current.agentBubble}&rdquo;</p>
                   </div>
@@ -330,7 +330,7 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
                 {/* Caller Bubble */}
                 <div className="flex items-start gap-3 max-w-[90%] ml-auto justify-end">
                   <div className="rounded-2xl rounded-tr-xs bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-4 text-xs md:text-sm text-foreground font-medium text-right shadow-xs">
-                    <div className="text-[10px] font-bold text-muted-foreground mb-1">
+                    <div className="text-[10px] font-normal text-muted-foreground mb-1">
                       <span>Caller</span>
                     </div>
                     <p className="leading-relaxed">&ldquo;{current.callerBubble}&rdquo;</p>
@@ -355,11 +355,11 @@ export function IndustryPlaybooksPreview({ industryName = "Healthcare Clinics", 
               </button>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">Spoken AI Output</span>
+                  <span className="text-[10px] font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">Spoken AI Output</span>
                   <span className="size-1 rounded-full bg-slate-300 dark:bg-slate-700" />
                   <span className="text-[10px] font-mono text-muted-foreground">Natural Human Pacing</span>
                 </div>
-                <p className="text-xs text-foreground/90 font-semibold leading-relaxed italic">
+                <p className="text-xs text-foreground/90 font-normal leading-relaxed italic">
                   &ldquo;{current.bottomQuote}&rdquo;
                 </p>
               </div>

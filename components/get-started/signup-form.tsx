@@ -271,7 +271,7 @@ export function SignupForm() {
               </CardHeader>
               <CardContent>
                 <div className="mb-1">
-                  <span className="text-4xl font-bold tracking-tight">{usd(price)}</span>
+                  <span className="text-4xl font-normal tracking-tight">{usd(price)}</span>
                   <span className="ml-1 text-sm text-muted-foreground">
                     /{cycle === "yearly" ? "yr" : "mo"}
                   </span>
@@ -362,7 +362,7 @@ export function SignupForm() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <Card className="border-rose-200/60 dark:border-rose-800/40">
             <CardHeader className="pb-3">
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-rose-400 dark:text-rose-400">
+              <div className="flex items-center gap-2 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">
                 <Sparkles className="h-3.5 w-3.5" />
                 Order summary
               </div>
@@ -370,7 +370,7 @@ export function SignupForm() {
             <CardContent className="space-y-4 text-sm">
               <Row label="Plan">
                 <div className="text-right">
-                  <div className="font-semibold">
+                  <div className="font-normal">
                     {selectedPlan?.label} · {cycle === "yearly" ? "yearly" : "monthly"}
                   </div>
                   {selectedPlan && (
@@ -390,7 +390,7 @@ export function SignupForm() {
               <Separator />
 
               <Row label={`${selectedPlan?.label || "Plan"} credit`}>
-                <span className="font-semibold">{usd(planPrice)}</span>
+                <span className="font-normal">{usd(planPrice)}</span>
               </Row>
 
               <Row label="Voice rate">
@@ -402,7 +402,7 @@ export function SignupForm() {
               <Separator />
 
               <Row label="Billed today">
-                <span className="text-lg font-bold">{usd(totalAmount)}</span>
+                <span className="text-lg font-normal">{usd(totalAmount)}</span>
               </Row>
 
               <Separator />

@@ -69,7 +69,7 @@ export function StatsTicker() {
             <Icon className="size-3 text-primary" aria-hidden />
             {label}
           </dt>
-          <dd className="font-mono text-lg font-semibold tabular-nums text-foreground sm:text-xl">{value}</dd>
+          <dd className="font-mono text-lg font-normal tabular-nums text-foreground sm:text-xl">{value}</dd>
         </div>
       ))}
     </dl>

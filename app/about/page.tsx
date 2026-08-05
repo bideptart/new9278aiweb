@@ -117,7 +117,7 @@ export default function AboutPage() {
         <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-8 px-4 py-12 md:grid-cols-4 md:px-6">
           {STATS.map((s) => (
             <ScrollReveal key={s.label} className="text-center">
-              <p className="text-3xl font-semibold tracking-tight text-primary md:text-4xl">{s.value}</p>
+              <p className="text-3xl font-normal tracking-tight text-primary md:text-4xl">{s.value}</p>
               <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">{s.label}</p>
             </ScrollReveal>
           ))}
@@ -141,7 +141,7 @@ export default function AboutPage() {
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
-                  <h3 className="mt-5 text-lg font-semibold tracking-tight">{v.title}</h3>
+                  <h3 className="mt-5 text-lg font-normal tracking-tight">{v.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.description}</p>
                 </div>
               </ScrollReveal>
@@ -154,7 +154,7 @@ export default function AboutPage() {
       <section className="mx-auto w-full max-w-6xl px-4 pb-16 md:px-6 md:pb-20">
         <ScrollReveal className="grid gap-8 rounded-2xl border border-border/60 bg-card/30 p-8 md:grid-cols-2 md:p-12">
           <div>
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <span className="inline-flex items-center gap-2 text-xs font-normal uppercase tracking-[0.2em] text-primary">
               <Globe2 className="h-3.5 w-3.5" /> The company
             </span>
             <h2 className="mt-4 text-balance text-2xl font-serif font-normal tracking-tight md:text-3xl">

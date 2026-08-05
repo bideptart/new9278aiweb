@@ -221,7 +221,7 @@ export function FeatureExplorer() {
             <span className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 text-primary">
               <feature.icon className="size-6" aria-hidden="true" />
             </span>
-            <h3 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">{feature.title}</h3>
+            <h3 className="mt-6 text-2xl font-normal tracking-tight text-foreground">{feature.title}</h3>
             <p className="mt-3 max-w-md text-base leading-relaxed text-muted-foreground">{feature.description}</p>
             <div className="mt-8">
               <Preview />

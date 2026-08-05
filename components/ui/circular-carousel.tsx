@@ -275,7 +275,7 @@ export function CircularCarousel({
                 )}
               </div>
 
-              <h3 className="relative mt-4 text-[1.0625rem] font-semibold leading-snug tracking-tight text-foreground">
+              <h3 className="relative mt-4 text-[1.0625rem] font-normal leading-snug tracking-tight text-foreground">
                 {item.title}
               </h3>
               <p className="relative mt-2 line-clamp-3 text-[13px] leading-relaxed text-muted-foreground">

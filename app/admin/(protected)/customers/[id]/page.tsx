@@ -28,12 +28,12 @@ export default async function CustomerDetailPage({
 
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{customer.name || customer.email}</h1>
+          <h1 className="text-2xl font-normal tracking-tight">{customer.name || customer.email}</h1>
           <p className="mt-1 text-sm text-muted-foreground">{customer.email}</p>
         </div>
         <div className="text-right">
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Lifetime spend</p>
-          <p className="text-2xl font-semibold tracking-tight">{formatMoney(lifetime_paid_cents)}</p>
+          <p className="text-2xl font-normal tracking-tight">{formatMoney(lifetime_paid_cents)}</p>
         </div>
       </div>
 
@@ -52,7 +52,7 @@ export default async function CustomerDetailPage({
       )}
 
       <section className="mt-10">
-        <h2 className="text-lg font-semibold tracking-tight">Payments</h2>
+        <h2 className="text-lg font-normal tracking-tight">Payments</h2>
         <div className="mt-4 overflow-hidden rounded-lg border border-border/60">
           <table className="min-w-full text-sm">
             <thead className="bg-card/40 text-left text-xs uppercase tracking-wider text-muted-foreground">
@@ -89,7 +89,7 @@ export default async function CustomerDetailPage({
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-semibold tracking-tight">Phone numbers</h2>
+        <h2 className="text-lg font-normal tracking-tight">Phone numbers</h2>
         <div className="mt-4 overflow-hidden rounded-lg border border-border/60">
           <table className="min-w-full text-sm">
             <thead className="bg-card/40 text-left text-xs uppercase tracking-wider text-muted-foreground">

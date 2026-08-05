@@ -168,7 +168,7 @@ function VoiceOrbCenterpiece() {
 
       {/* live-calls readout, sitting directly under the orb — no card */}
       <div className="absolute -bottom-9 flex flex-col items-center">
-        <span className="font-mono text-xl font-bold leading-none tabular-nums text-foreground">{calls}</span>
+        <span className="font-mono text-xl font-normal leading-none tabular-nums text-foreground">{calls}</span>
         <span className="mt-1 text-[9.5px] uppercase tracking-[0.14em] text-muted-foreground">live calls now</span>
       </div>
     </div>
@@ -208,7 +208,7 @@ function CaptionTicker() {
         >
           <span
             className={cn(
-              "mr-1.5 font-semibold uppercase tracking-[0.1em]",
+              "mr-1.5 font-normal uppercase tracking-[0.1em]",
               line.who === "AI" ? "text-primary" : "text-muted-foreground",
             )}
           >
@@ -240,7 +240,7 @@ function StatRow() {
         <span key={s.label} className="inline-flex items-center gap-3">
           <span className="inline-flex items-center gap-1.5 text-[12px]">
             <s.icon className="h-3.5 w-3.5 text-primary" />
-            <span className="font-mono font-semibold tabular-nums text-foreground">{s.value}</span>
+            <span className="font-mono font-normal tabular-nums text-foreground">{s.value}</span>
             <span className="text-muted-foreground">{s.label}</span>
           </span>
           {i < stats.length - 1 && <span className="hidden h-3 w-px bg-border sm:block" />}
@@ -388,7 +388,7 @@ export function ExperienceMockup() {
 
       {/* floating "control center" label */}
       <motion.span
-        className="glass relative z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[9.5px] font-semibold uppercase tracking-[0.14em] text-primary"
+        className="glass relative z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[9.5px] font-normal uppercase tracking-[0.14em] text-primary"
         initial={{ opacity: 0, y: -8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

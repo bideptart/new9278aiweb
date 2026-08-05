@@ -184,11 +184,11 @@ export function LiveCallShowcase({
           >
             <span className="relative flex size-16 items-center justify-center">
               {!reduced && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/20" />}
-              <span className="relative flex size-16 items-center justify-center rounded-full bg-gradient-to-b from-primary/15 to-primary/5 text-lg font-semibold text-primary ring-1 ring-primary/20">
+              <span className="relative flex size-16 items-center justify-center rounded-full bg-gradient-to-b from-primary/15 to-primary/5 text-lg font-normal text-primary ring-1 ring-primary/20">
                 {active.caller[0]}
               </span>
             </span>
-            <p className="mt-3 text-base font-semibold text-foreground">{active.caller}</p>
+            <p className="mt-3 text-base font-normal text-foreground">{active.caller}</p>
             <p className="text-xs text-muted-foreground">{active.tag}</p>
             <span className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-muted/60 px-3 py-1 font-mono text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
               <span className="relative flex size-1.5">
@@ -228,7 +228,7 @@ export function LiveCallShowcase({
                     >
                       <span
                         className={cn(
-                          "flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold",
+                          "flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-normal",
                           isAi ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground",
                         )}
                       >
@@ -238,7 +238,7 @@ export function LiveCallShowcase({
                         className={cn(
                           "max-w-[80%] px-4 py-2.5 text-sm leading-relaxed shadow-sm sm:max-w-[70%]",
                           isAi
-                            ? "rounded-2xl rounded-br-md bg-primary/15 border border-primary/35 text-black font-semibold shadow-xs backdrop-blur-md"
+                            ? "rounded-2xl rounded-br-md bg-primary/15 border border-primary/35 text-black font-normal shadow-xs backdrop-blur-md"
                             : "rounded-2xl rounded-bl-md bg-muted text-foreground",
                         )}
                       >

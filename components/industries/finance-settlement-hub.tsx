@@ -81,7 +81,7 @@ export function FinanceSettlementHub() {
       <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-8">
         {/* Header Badge & Title */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
             <Award className="size-3.5 text-rose-300" />
             <span>LIVE FINANCIAL VOICE SIMULATOR</span>
           </span>
@@ -106,7 +106,7 @@ export function FinanceSettlementHub() {
                   setIsPlaying(false)
                 }}
                 className={cn(
-                  "px-4 py-2.5 rounded-full text-xs font-mono font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer border shadow-xs",
+                  "px-4 py-2.5 rounded-full text-xs font-mono font-normal transition-all duration-300 flex items-center gap-2 cursor-pointer border shadow-xs",
                   isSelected
                     ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm scale-105"
                     : "bg-white/80 dark:bg-slate-900/80 border-slate-200/80 dark:border-slate-800 text-muted-foreground hover:text-rose-400 dark:hover:text-rose-400 hover:bg-rose-50/40"
@@ -137,7 +137,7 @@ export function FinanceSettlementHub() {
                   <User className="size-4 text-muted-foreground" />
                 </div>
                 <div className="p-4 rounded-3xl rounded-tl-none bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm text-xs md:text-sm text-foreground font-medium leading-relaxed">
-                  <p className="text-[10px] font-mono text-muted-foreground font-bold mb-1">Customer Inbound Audio</p>
+                  <p className="text-[10px] font-mono text-muted-foreground font-normal mb-1">Customer Inbound Audio</p>
                   {curSc.custMsg}
                 </div>
               </div>
@@ -147,10 +147,10 @@ export function FinanceSettlementHub() {
                 <div className="size-8 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
                   <Bot className="size-4" />
                 </div>
-                <div className="p-4 rounded-3xl rounded-tr-none bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 shadow-md text-xs md:text-sm text-foreground font-semibold leading-relaxed">
+                <div className="p-4 rounded-3xl rounded-tr-none bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 shadow-md text-xs md:text-sm text-foreground font-normal leading-relaxed">
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">9278 Financial AI</span>
-                    <span className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400">9278 Financial AI</span>
+                    <span className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-normal bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                       ⚡ Sub-250ms Response
                     </span>
                   </div>
@@ -163,20 +163,20 @@ export function FinanceSettlementHub() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-sm p-6 rounded-3xl bg-gradient-to-br from-white via-rose-50/60 to-slate-100 dark:from-slate-900 dark:to-slate-950 border border-rose-200/80 dark:border-rose-900/50 shadow-xl backdrop-blur-xl space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-foreground">{curSc.title}</span>
-                  <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+                  <span className="text-xs font-mono font-normal text-foreground">{curSc.title}</span>
+                  <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     {curSc.tag}
                   </span>
                 </div>
 
                 <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/60 dark:border-slate-800 space-y-1">
                   <p className="text-[10px] font-mono text-muted-foreground">Action Outcome Status</p>
-                  <p className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">{curSc.actionStatus}</p>
+                  <p className="text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400">{curSc.actionStatus}</p>
                 </div>
 
                 <div className="p-3 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/40 space-y-1">
                   <p className="text-[10px] font-mono text-muted-foreground">Core Banking Audit Feed</p>
-                  <p className="text-xs font-mono font-bold text-rose-400 dark:text-rose-400">{curSc.systemMetric}</p>
+                  <p className="text-xs font-mono font-normal text-rose-400 dark:text-rose-400">{curSc.systemMetric}</p>
                 </div>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-muted-foreground pt-2 border-t border-slate-200/60 dark:border-slate-800">

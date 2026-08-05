@@ -15,7 +15,7 @@ export default function AuthErrorPage() {
         <div className="mb-10 flex justify-center">
           <Logo height={36} />
         </div>
-        <h1 className="text-2xl font-semibold tracking-tight">Sign-in link expired</h1>
+        <h1 className="text-2xl font-normal tracking-tight">Sign-in link expired</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           The link you used has already been consumed or has expired. Request a fresh one and try again.
         </p>

@@ -36,7 +36,7 @@ export function BlogExplorer({ posts }: { posts: BlogPost[] }) {
       <ScrollReveal>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Categories</span>
+            <span className="text-xs font-normal uppercase tracking-[0.2em] text-primary">Categories</span>
             <h2 className="mt-2 text-balance text-3xl font-serif font-normal tracking-tight md:text-4xl">
               Browse by categories
             </h2>
@@ -148,7 +148,7 @@ export function BlogExplorer({ posts }: { posts: BlogPost[] }) {
                     <Clock className="h-3.5 w-3.5" /> {post.readingMinutes} min
                   </span>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold tracking-tight transition-colors group-hover:text-primary">
+                <h3 className="mt-4 text-lg font-normal tracking-tight transition-colors group-hover:text-primary">
                   {post.title}
                 </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>

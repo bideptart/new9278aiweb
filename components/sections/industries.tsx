@@ -41,7 +41,7 @@ function CardFront({ industry, index }: { industry: Industry; index: number }) {
       <WaveLines />
 
       {/* Number */}
-      <span className="absolute right-2.5 top-2.5 z-10 rounded-md bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-primary ring-1 ring-primary/15">
+      <span className="absolute right-2.5 top-2.5 z-10 rounded-md bg-primary/10 px-1.5 py-0.5 text-[10px] font-normal tracking-wide text-primary ring-1 ring-primary/15">
         {String(index + 1).padStart(2, "0")}
       </span>
 
@@ -58,7 +58,7 @@ function CardFront({ industry, index }: { industry: Industry; index: number }) {
 
       {/* Name */}
       <div className="relative px-2 pb-3 text-center">
-        <h3 className="text-balance text-xs font-semibold leading-tight tracking-tight text-neutral-800">
+        <h3 className="text-balance text-xs font-normal leading-tight tracking-tight text-neutral-800">
           {industry.name}
         </h3>
       </div>
@@ -108,7 +108,7 @@ function MobileIndustryCard({ industry, index }: { industry: Industry; index: nu
               href={`/industries/${industry.slug}`}
               onClick={(e) => e.stopPropagation()}
               aria-label={`View the ${industry.name} playbook`}
-              className="group/link relative z-10 mt-3 inline-flex w-fit items-center gap-1 rounded text-xs font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+              className="group/link relative z-10 mt-3 inline-flex w-fit items-center gap-1 rounded text-xs font-normal text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
             >
               View playbook
               <ArrowRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5" aria-hidden />
@@ -151,7 +151,7 @@ function DesktopIndustryCard({ industry, index }: { industry: Industry; index: n
         <CardBack
           industry={industry}
           cta={
-            <span className="relative mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white">
+            <span className="relative mt-3 inline-flex items-center gap-1 text-xs font-normal text-white">
               View playbook
               <ArrowRight
                 className={cn(

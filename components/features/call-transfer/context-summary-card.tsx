@@ -31,7 +31,7 @@ export function ContextSummaryCard({
         className,
       )}
     >
-      <div className="mb-2 flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-primary">
+      <div className="mb-2 flex items-center gap-1.5 text-[9px] font-normal uppercase tracking-[0.16em] text-primary">
         <Sparkles className="size-3" aria-hidden />
         {label}
       </div>

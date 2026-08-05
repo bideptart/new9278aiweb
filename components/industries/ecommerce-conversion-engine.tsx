@@ -145,7 +145,7 @@ export function EcommerceConversionEngine() {
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
-        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs">
+        <span className="inline-flex items-center gap-2 rounded-full border border-rose-200 dark:border-rose-900/50 bg-rose-50/80 dark:bg-rose-950/30 px-4 py-1.5 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 shadow-xs">
           <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           <span>E-COMMERCE VOICE REVENUE & AUTOMATION ENGINE</span>
         </span>
@@ -172,7 +172,7 @@ export function EcommerceConversionEngine() {
               className={cn(
                 "p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer flex flex-col justify-between gap-3 relative overflow-hidden backdrop-blur-md",
                 isSelected
-                  ? "border-rose-300 dark:border-rose-700 bg-rose-50/90 dark:bg-rose-950/40 text-rose-400 dark:text-rose-300 shadow-md scale-[1.02]"
+                  ? "border-rose-300 dark:border-rose-500 bg-rose-50/90 dark:bg-rose-950/40 text-rose-400 dark:text-rose-300 shadow-md scale-[1.02]"
                   : "border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 text-muted-foreground hover:text-foreground hover:bg-rose-50/40 dark:hover:bg-rose-950/20 hover:border-rose-200 dark:hover:border-rose-900/40"
               )}
             >
@@ -181,19 +181,19 @@ export function EcommerceConversionEngine() {
                   className={cn(
                     "size-9 rounded-xl flex items-center justify-center border transition-colors",
                     isSelected
-                      ? "bg-rose-500/15 border-rose-300 dark:border-rose-800 text-rose-400 dark:text-rose-400"
+                      ? "bg-rose-500/15 border-rose-300 dark:border-rose-500 text-rose-400 dark:text-rose-400"
                       : "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
                   )}
                 >
                   <Icon className="size-4" />
                 </div>
-                <span className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")}>
+                <span className={cn("text-[10px] font-mono font-normal uppercase tracking-wider", isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground")}>
                   0{idx + 1}
                 </span>
               </div>
 
               <div>
-                <p className={cn("text-xs md:text-sm font-bold leading-tight", isSelected ? "text-rose-400 dark:text-rose-100" : "text-foreground")}>
+                <p className={cn("text-xs md:text-sm font-normal leading-tight", isSelected ? "text-rose-400 dark:text-rose-100" : "text-foreground")}>
                   {feat.title}
                 </p>
               </div>
@@ -201,7 +201,7 @@ export function EcommerceConversionEngine() {
               {isSelected && (
                 <motion.div
                   layoutId="activeTabIndicator"
-                  className="absolute bottom-0 left-0 right-0 h-1 bg-rose-500"
+                  className="absolute bottom-0 left-0 right-0 h-1 bg-rose-400"
                 />
               )}
             </button>
@@ -222,7 +222,7 @@ export function EcommerceConversionEngine() {
           >
             {/* Left Column: Value Prop & Metrics */}
             <div className="lg:col-span-5 space-y-6">
-              <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold border shadow-xs", curFeature.badgeClass)}>
+              <span className={cn("inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-normal border shadow-xs", curFeature.badgeClass)}>
                 <Sparkles className="size-3.5" />
                 <span>{curFeature.badge}</span>
               </span>
@@ -240,7 +240,7 @@ export function EcommerceConversionEngine() {
                 {curFeature.stats.map((st, i) => (
                   <div key={i} className="p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800 backdrop-blur-md shadow-xs">
                     <p className="text-[10px] font-mono text-muted-foreground uppercase">{st.label}</p>
-                    <p className="text-base font-bold text-foreground mt-1">{st.value}</p>
+                    <p className="text-base font-normal text-foreground mt-1">{st.value}</p>
                   </div>
                 ))}
               </div>
@@ -253,13 +253,13 @@ export function EcommerceConversionEngine() {
                 <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3.5">
                   <div className="flex items-center gap-2">
                     <span className="inline-flex size-2 rounded-full bg-emerald-500 animate-ping" />
-                    <p className="text-xs font-mono font-bold text-foreground uppercase tracking-wider">
+                    <p className="text-xs font-mono font-normal text-foreground uppercase tracking-wider">
                       Live Voice Workflow Execution
                     </p>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
+                    <div className="flex items-center gap-1 text-[11px] font-mono font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
                       <TrendingUp className="size-3.5" />
                       <span>{curFeature.metric} {curFeature.metricLabel}</span>
                     </div>
@@ -297,7 +297,7 @@ export function EcommerceConversionEngine() {
                         <div className="flex items-center gap-3 min-w-0">
                           <div
                             className={cn(
-                              "size-8 rounded-lg flex items-center justify-center shrink-0 font-mono font-bold text-xs border transition-all duration-300",
+                              "size-8 rounded-lg flex items-center justify-center shrink-0 font-mono font-normal text-xs border transition-all duration-300",
                               isActive
                                 ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-xs scale-105"
                                 : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700"
@@ -308,11 +308,11 @@ export function EcommerceConversionEngine() {
 
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                              <p className={cn("text-xs md:text-sm font-bold truncate", isActive ? "text-rose-400 dark:text-rose-300" : "text-foreground")}>
+                              <p className={cn("text-xs md:text-sm font-normal truncate", isActive ? "text-rose-400 dark:text-rose-300" : "text-foreground")}>
                                 {step.label}
                               </p>
                               {isActive && (
-                                <span className="inline-flex items-center gap-1 text-[9px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-1.5 py-0.2 rounded-full">
+                                <span className="inline-flex items-center gap-1 text-[9px] font-mono font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-1.5 py-0.2 rounded-full">
                                   ● Active Step
                                 </span>
                               )}
@@ -348,10 +348,10 @@ export function EcommerceConversionEngine() {
 
                 {/* Footer Status Bar */}
                 <div className="pt-2 flex items-center justify-between text-[11px] font-mono text-muted-foreground border-t border-slate-200/80 dark:border-slate-800">
-                  <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-bold">
+                  <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-normal">
                     <CheckCircle2 className="size-3.5" /> Shopify Sync Active
                   </span>
-                  <span className="text-rose-400 dark:text-rose-400 font-bold flex items-center gap-1">
+                  <span className="text-rose-400 dark:text-rose-400 font-normal flex items-center gap-1">
                     <Activity className="size-3.5 animate-pulse" /> 9278 Voice AI Engine
                   </span>
                 </div>

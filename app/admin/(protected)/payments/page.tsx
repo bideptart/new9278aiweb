@@ -11,7 +11,7 @@ export default async function PaymentsPage() {
   return (
     <div className="mx-auto max-w-6xl">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Payments</h1>
+        <h1 className="text-2xl font-normal tracking-tight">Payments</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Latest charges, refunds and failures across all customers.
         </p>

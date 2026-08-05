@@ -143,7 +143,7 @@ export function FinanceCoreIntegrations() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
             <Globe className="size-3.5 text-rose-300" />
             <span>INSTITUTIONAL CORE BANKING MESH</span>
           </span>
@@ -162,11 +162,11 @@ export function FinanceCoreIntegrations() {
           <div className="relative flex flex-col items-center justify-center p-4 md:p-6 min-h-[340px]">
             {/* Center Core Node */}
             <div className="z-10 p-4 rounded-3xl bg-white/95 dark:bg-slate-900/95 border-2 border-rose-200 dark:border-rose-800 shadow-xl text-center space-y-1 backdrop-blur-xl max-w-[200px]">
-              <div className="size-8 mx-auto rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center font-bold text-xs">
+              <div className="size-8 mx-auto rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center font-normal text-xs">
                 <Database className="size-4" />
               </div>
-              <p className="text-xs font-serif font-bold text-foreground">9278 Core Vault</p>
-              <p className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">256-Bit Encrypted</p>
+              <p className="text-xs font-serif font-normal text-foreground">9278 Core Vault</p>
+              <p className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-normal">256-Bit Encrypted</p>
             </div>
 
             {/* 4 Satellite Nodes Layout */}
@@ -190,9 +190,9 @@ export function FinanceCoreIntegrations() {
                   >
                     <div className="flex items-center justify-between">
                       <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300")} />
-                      <span className="text-[9px] font-mono font-bold text-rose-400 dark:text-rose-400">{nd.protocol}</span>
+                      <span className="text-[9px] font-mono font-normal text-rose-400 dark:text-rose-400">{nd.protocol}</span>
                     </div>
-                    <p className="text-xs font-bold text-foreground truncate">{nd.title}</p>
+                    <p className="text-xs font-normal text-foreground truncate">{nd.title}</p>
                   </button>
                 )
               })}
@@ -210,8 +210,8 @@ export function FinanceCoreIntegrations() {
               className="p-6 rounded-3xl bg-gradient-to-br from-white via-rose-50/60 to-slate-100 dark:from-slate-900 dark:to-slate-950 border border-rose-200/80 dark:border-rose-900/50 shadow-xl backdrop-blur-xl space-y-4"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-foreground">{curN.title}</span>
-                <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                <span className="text-xs font-mono font-normal text-foreground">{curN.title}</span>
+                <span className="text-[10px] font-mono font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
                   {curN.status}
                 </span>
               </div>
@@ -222,7 +222,7 @@ export function FinanceCoreIntegrations() {
 
               <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs font-mono">
                 <span className="text-muted-foreground">Gateway Protocol:</span>
-                <span className="font-bold text-rose-400 dark:text-rose-400">{curN.protocol}</span>
+                <span className="font-normal text-rose-400 dark:text-rose-400">{curN.protocol}</span>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -232,11 +232,11 @@ export function FinanceCoreIntegrations() {
         {/* 2. RESPONSIVE 3D BANKING CAPITAL BAROMETER WITH 3D TILT PHYSICS */}
         <div className="pt-4 space-y-6 max-w-4xl mx-auto">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+            <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
               <Award className="size-3.5 text-rose-300" />
               <span>INSTITUTIONAL RISK & CAPITAL BAROMETER</span>
             </span>
-            <h3 className="text-xl md:text-3xl font-serif font-bold text-foreground">
+            <h3 className="text-xl md:text-3xl font-serif font-normal text-foreground">
               Select your institution tier.
             </h3>
           </div>
@@ -261,10 +261,10 @@ export function FinanceCoreIntegrations() {
                   )}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs md:text-sm font-bold text-foreground">{tr.name}</span>
+                    <span className="text-xs md:text-sm font-normal text-foreground">{tr.name}</span>
                     <span className={cn("size-2 rounded-full shrink-0", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300")} />
                   </div>
-                  <p className="text-[10px] sm:text-xs font-mono font-bold text-rose-400 dark:text-rose-400">{tr.volume}</p>
+                  <p className="text-[10px] sm:text-xs font-mono font-normal text-rose-400 dark:text-rose-400">{tr.volume}</p>
                 </button>
               )
             })}
@@ -290,17 +290,17 @@ export function FinanceCoreIntegrations() {
               >
                 <div className="p-3.5 rounded-2xl bg-rose-50/90 dark:bg-rose-950/40 border border-rose-200/80 dark:border-rose-900/40 shadow-xs" style={{ transform: "translateZ(25px)" }}>
                   <p className="text-[10px] font-mono text-muted-foreground font-medium">Est. NPA Saved</p>
-                  <p className="text-sm sm:text-base font-mono font-extrabold text-rose-400 dark:text-rose-400 mt-0.5">{curTier.npaSaved}</p>
+                  <p className="text-sm sm:text-base font-mono font-normal text-rose-400 dark:text-rose-400 mt-0.5">{curTier.npaSaved}</p>
                 </div>
 
                 <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 shadow-xs" style={{ transform: "translateZ(35px)" }}>
                   <p className="text-[10px] font-mono text-muted-foreground font-medium">Overhead Reduction</p>
-                  <p className="text-sm sm:text-base font-mono font-extrabold text-emerald-600 dark:text-emerald-400 mt-0.5">{curTier.costCut}</p>
+                  <p className="text-sm sm:text-base font-mono font-normal text-emerald-600 dark:text-emerald-400 mt-0.5">{curTier.costCut}</p>
                 </div>
 
                 <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs" style={{ transform: "translateZ(25px)" }}>
                   <p className="text-[10px] font-mono text-muted-foreground font-medium">Disposal Acceleration</p>
-                  <p className="text-sm sm:text-base font-mono font-extrabold text-rose-400 dark:text-rose-400 mt-0.5">{curTier.speedup}</p>
+                  <p className="text-sm sm:text-base font-mono font-normal text-rose-400 dark:text-rose-400 mt-0.5">{curTier.speedup}</p>
                 </div>
               </motion.div>
             </AnimatePresence>

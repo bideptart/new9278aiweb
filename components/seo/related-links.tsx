@@ -71,11 +71,11 @@ function FlipCard({
           className="relative flex min-h-[92px] w-full flex-col gap-1 overflow-hidden rounded-2xl border border-border/60 bg-card/80 p-4 shadow-sm backdrop-blur-md outline-none"
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-xl font-bold leading-none text-primary/30">{number}</span>}
+            {showNumber && <span className="text-xl font-normal leading-none text-primary/30">{number}</span>}
             <span className={cn(!showNumber && "ml-auto")}>{frontIconBadge}</span>
           </div>
           <div>
-            <p className="text-sm font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="text-sm font-normal tracking-tight text-foreground">{link.title}</p>
             <p className="mt-0.5 text-xs leading-snug text-muted-foreground line-clamp-2">{link.description}</p>
           </div>
         </Link>
@@ -109,11 +109,11 @@ function FlipCard({
           }}
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-5xl font-bold font-serif leading-none text-primary/25">{number}</span>}
+            {showNumber && <span className="text-5xl font-normal font-serif leading-none text-primary/25">{number}</span>}
             <span className={cn(!showNumber && "ml-auto")}>{frontIconBadge}</span>
           </div>
           <div>
-            <p className="text-lg font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="text-lg font-normal tracking-tight text-foreground">{link.title}</p>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
           </div>
         </div>
@@ -130,11 +130,11 @@ function FlipCard({
           }}
         >
           <div className="flex items-start justify-between">
-            {showNumber && <span className="text-5xl font-bold font-serif leading-none text-primary/40">{number}</span>}
+            {showNumber && <span className="text-5xl font-normal font-serif leading-none text-primary/40">{number}</span>}
             <span className={cn(!showNumber && "ml-auto")}>{backIconBadge}</span>
           </div>
           <div>
-            <p className="text-lg font-bold tracking-tight text-foreground">{link.title}</p>
+            <p className="text-lg font-normal tracking-tight text-foreground">{link.title}</p>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{link.description}</p>
           </div>
         </div>
@@ -166,7 +166,7 @@ export function RelatedLinks({
     <section aria-labelledby="related-heading" className="mx-auto w-full max-w-6xl px-4 pb-24 md:px-6">
       <div className="mb-8 flex items-end justify-between gap-6">
         <div>
-          <h2 id="related-heading" className="text-balance text-2xl font-serif font-bold tracking-tight md:text-3xl">
+          <h2 id="related-heading" className="text-balance text-2xl font-serif font-normal tracking-tight md:text-3xl">
             {heading}
           </h2>
           <p className="mt-2 max-w-2xl text-pretty text-xs md:text-sm text-muted-foreground">{description}</p>
@@ -185,17 +185,17 @@ export function RelatedLinks({
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="ai-pill-magenta text-[10px] font-bold">
+                    <span className="ai-pill-magenta text-[10px] font-normal">
                       {l.href.toUpperCase()}
                     </span>
                     <span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                       <ArrowUpRight className="size-4" />
                     </span>
                   </div>
-                  <p className="text-base font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">{l.title}</p>
+                  <p className="text-base font-normal tracking-tight text-foreground group-hover:text-primary transition-colors">{l.title}</p>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{l.description}</p>
                 </div>
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-primary">
+                <span className="inline-flex items-center gap-1 text-xs font-normal text-primary">
                   Explore
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
                 </span>

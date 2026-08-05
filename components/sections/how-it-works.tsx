@@ -235,7 +235,7 @@ function KnowledgeMock() {
         <Quote className="mt-[1px] h-2.5 w-2.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
         <p className="text-[9px] leading-snug text-foreground/70">
           “Standard shipping is 3–5 days.”
-          <span className="ml-1 whitespace-nowrap rounded bg-primary/15 px-1 py-px font-mono text-[7px] font-semibold text-primary">
+          <span className="ml-1 whitespace-nowrap rounded bg-primary/15 px-1 py-px font-mono text-[7px] font-normal text-primary">
             support-faq.md
           </span>
         </p>
@@ -279,7 +279,7 @@ function LaunchMock() {
       <div className="flex shrink-0 items-center gap-1.5">
         <PhoneCall className="h-2.5 w-2.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
         <span className="font-mono text-[9px] text-foreground/70">+1 (415) 555-0142</span>
-        <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[2px] text-[8px] font-bold uppercase tracking-wider text-primary">
+        <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[2px] text-[8px] font-normal uppercase tracking-wider text-primary">
           <span className="relative flex h-1 w-1">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-1 w-1 rounded-full bg-primary" />
@@ -290,7 +290,7 @@ function LaunchMock() {
 
       <div className="shrink-0">
         <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground/70">Calls handled today</p>
-        <p className="mt-0.5 font-mono text-[24px] font-bold leading-none tabular-nums text-primary">
+        <p className="mt-0.5 font-mono text-[24px] font-normal leading-none tabular-nums text-primary">
           {calls.toLocaleString()}
         </p>
       </div>
@@ -368,7 +368,7 @@ function StepCard({
         </span>
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">{step.tag}</p>
-          <h3 className="text-lg font-semibold tracking-tight">{step.title}</h3>
+          <h3 className="text-lg font-normal tracking-tight">{step.title}</h3>
         </div>
       </div>
 
@@ -492,7 +492,7 @@ export function HowItWorks() {
         <ScrollReveal className="mt-12 flex flex-col items-center gap-3 text-center">
           <Link
             href="/get-started"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:gap-3"
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-normal text-white transition-all duration-300 hover:gap-3"
           >
             Build your first agent
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />

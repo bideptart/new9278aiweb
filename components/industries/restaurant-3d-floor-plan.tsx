@@ -87,11 +87,11 @@ export function Restaurant3DFloorPlan() {
       />
 
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
           <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           LIVE 3D DINING FLOOR
         </span>
-        <h2 className="text-3xl font-serif font-semibold tracking-tight md:text-5xl text-foreground">
+        <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           Every table, <span className="italic text-rose-400 dark:text-rose-400">tracked in real time.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
@@ -115,7 +115,7 @@ export function Restaurant3DFloorPlan() {
                   }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                   className={cn(
-                    "relative flex aspect-square items-center justify-center rounded-lg border text-[10px] font-mono font-bold transition-colors duration-300",
+                    "relative flex aspect-square items-center justify-center rounded-lg border text-[10px] font-mono font-normal transition-colors duration-300",
                     isActive
                       ? "border-rose-300 dark:border-rose-700 bg-white dark:bg-slate-900 shadow-xl"
                       : table.baseStatus === "occupied"
@@ -160,11 +160,11 @@ export function Restaurant3DFloorPlan() {
                     <StageIcon className="size-4.5" />
                   </span>
                   <div>
-                    <p className="text-xs font-mono font-bold uppercase tracking-wider text-foreground">Table {String(stage.tableId).padStart(2, "0")}</p>
+                    <p className="text-xs font-mono font-normal uppercase tracking-wider text-foreground">Table {String(stage.tableId).padStart(2, "0")}</p>
                     <p className="text-[10px] font-mono text-muted-foreground">Live floor sync</p>
                   </div>
                 </div>
-                <span className="rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">
+                <span className="rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1 text-[10px] font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">
                   {stage.status}
                 </span>
               </div>

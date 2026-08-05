@@ -38,7 +38,7 @@ export function TranscriptCard3D({
         {/* Phone Top Speaker Notch & System Bar */}
         <div className="space-y-2 border-b-2 border-border/80 pb-2.5 sm:pb-3">
           <div className="flex items-center justify-between text-[10px] font-mono opacity-80">
-            <span className="font-bold">09:41 AM</span>
+            <span className="font-normal">09:41 AM</span>
             {/* Phone Speaker Pill Notch */}
             <div className="h-2.5 w-14 sm:w-16 rounded-full bg-muted border-2 border-border/80 shadow-inner" />
             <div className="flex items-center gap-1.5">
@@ -54,14 +54,14 @@ export function TranscriptCard3D({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="font-mono text-[9.5px] sm:text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+              <span className="font-mono text-[9.5px] sm:text-[10px] font-normal uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                 <PhoneCall className="size-2.5" />
                 Live Call
               </span>
             </div>
 
             {/* Hover Theme Badge Pill */}
-            <span className="inline-flex items-center gap-1 rounded-full border-2 border-primary/40 bg-primary/10 px-2 sm:px-2.5 py-0.5 font-mono text-[9px] sm:text-[9.5px] font-bold text-primary shadow-2xs group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+            <span className="inline-flex items-center gap-1 rounded-full border-2 border-primary/40 bg-primary/10 px-2 sm:px-2.5 py-0.5 font-mono text-[9px] sm:text-[9.5px] font-normal text-primary shadow-2xs group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
               <Sparkle className="size-2.5 animate-pulse" />
               {tag}
             </span>
@@ -71,7 +71,7 @@ export function TranscriptCard3D({
         {/* Scenario Header */}
         <div className="flex items-center gap-1.5 rounded-xl bg-primary/5 px-2.5 sm:px-3 py-1.5 sm:py-2 border-2 border-primary/30 group-hover:border-primary/60 transition-colors">
           <Sparkles className="size-3.5 text-primary shrink-0" />
-          <h4 className="font-mono text-[10.5px] sm:text-[11px] font-bold leading-snug text-foreground">
+          <h4 className="font-mono text-[10.5px] sm:text-[11px] font-normal leading-snug text-foreground">
             {scenario}
           </h4>
         </div>
@@ -85,10 +85,10 @@ export function TranscriptCard3D({
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] sm:text-[9.5px] font-bold uppercase tracking-wider opacity-80">
+                <span className="font-mono text-[9px] sm:text-[9.5px] font-normal uppercase tracking-wider opacity-80">
                   Caller (Client)
                 </span>
-                <span className="font-mono text-[8px] sm:text-[8.5px] font-semibold opacity-60">00:04</span>
+                <span className="font-mono text-[8px] sm:text-[8.5px] font-normal opacity-60">00:04</span>
               </div>
               <p className="mt-1 text-[11.5px] sm:text-[12.5px] leading-relaxed italic font-medium text-foreground">
                 "{callerQuote}"
@@ -103,7 +103,7 @@ export function TranscriptCard3D({
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[9px] sm:text-[9.5px] font-bold uppercase tracking-wider text-primary flex items-center gap-1">
+                <span className="font-mono text-[9px] sm:text-[9.5px] font-normal uppercase tracking-wider text-primary flex items-center gap-1">
                   <Volume2 className="size-3 animate-pulse text-primary" />
                   AI Receptionist
                 </span>
@@ -128,7 +128,7 @@ export function TranscriptCard3D({
                 </div>
               </div>
 
-              <p className="mt-1 text-[11.5px] sm:text-[12.5px] leading-relaxed font-semibold text-foreground">
+              <p className="mt-1 text-[11.5px] sm:text-[12.5px] leading-relaxed font-normal text-foreground">
                 "{aiQuote}"
               </p>
             </div>
@@ -138,12 +138,12 @@ export function TranscriptCard3D({
 
       {/* Phone Screen Footer Controls & Move Handle Indicator */}
       <div className="relative z-10 mt-4 sm:mt-5 space-y-2 border-t-2 border-border/80 pt-2.5 sm:pt-3">
-        <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-semibold text-primary">
+        <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-normal text-primary">
           <span className="flex items-center gap-1 opacity-90 font-mono text-[9.5px] sm:text-[10px]">
             <Mic className="size-3 text-primary animate-pulse" />
             <span>Hover to Glow Theme</span>
           </span>
-          <span className="flex items-center gap-1 transition-transform duration-300 group-hover:translate-x-1 font-bold">
+          <span className="flex items-center gap-1 transition-transform duration-300 group-hover:translate-x-1 font-normal">
             Simulate Live Call <ArrowRight className="size-3.5" />
           </span>
         </div>

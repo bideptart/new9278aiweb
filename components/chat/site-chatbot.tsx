@@ -478,7 +478,7 @@ export function SiteChatbot() {
               }}
               className="text-left text-[12px] leading-snug text-foreground"
             >
-              <span className="mb-1 block font-semibold">👋 Need help?</span>
+              <span className="mb-1 block font-normal">👋 Need help?</span>
               Ask me anything about 9278.ai — pricing, features, or getting started.
             </button>
             <button
@@ -654,7 +654,7 @@ export function SiteChatbot() {
                 </span>
                 <span className={cn("h-6 w-px shrink-0", dark ? "bg-white/15" : "bg-black/10")} />
                 <span className="min-w-0">
-                  <span className="text-aurora block truncate text-[13px] font-bold leading-tight tracking-tight">
+                  <span className="text-aurora block truncate text-[13px] font-normal leading-tight tracking-tight">
                     9278.ai Assistant
                   </span>
                   <span className={cn("block truncate text-[9.5px]", dark ? "text-white/45" : "text-muted-foreground")}>
@@ -784,7 +784,7 @@ export function SiteChatbot() {
                           )}
                         </span>
                         <div>
-                          <p className={cn("text-[14px] font-semibold leading-tight", dark ? "text-white" : "text-foreground")}>
+                          <p className={cn("text-[14px] font-normal leading-tight", dark ? "text-white" : "text-foreground")}>
                             Hi! I&apos;m the 9278.ai Assistant
                           </p>
                           <p className={cn("mt-0.5 text-[11px] leading-snug", dark ? "text-white/55" : "text-muted-foreground")}>
@@ -817,7 +817,7 @@ export function SiteChatbot() {
                       </div>
 
                       <p className={cn("relative mt-3 text-center text-[9.5px]", dark ? "text-white/35" : "text-muted-foreground/60")}>
-                        Tip: type <span className="font-mono font-semibold text-primary">/</span> for quick commands
+                        Tip: type <span className="font-mono font-normal text-primary">/</span> for quick commands
                       </p>
                     </div>
                   </motion.div>
@@ -943,7 +943,7 @@ export function SiteChatbot() {
                   className={cn("border-t px-3 py-2", surface, hairline, expanded && "sm:px-8")}
                 >
                   <div className={cn("mx-auto space-y-0.5", expanded && "sm:max-w-2xl")}>
-                    <p className={cn("px-2 pb-1 text-[9px] font-semibold uppercase tracking-wider", dark ? "text-white/35" : "text-muted-foreground/60")}>
+                    <p className={cn("px-2 pb-1 text-[9px] font-normal uppercase tracking-wider", dark ? "text-white/35" : "text-muted-foreground/60")}>
                       Quick commands
                     </p>
                     {slashMatches.map((c, i) => (
@@ -965,7 +965,7 @@ export function SiteChatbot() {
                         <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10 text-primary">
                           <c.icon className="h-3 w-3" />
                         </span>
-                        <span className={cn("font-mono text-[11px] font-semibold", dark ? "text-white/85" : "text-foreground")}>
+                        <span className={cn("font-mono text-[11px] font-normal", dark ? "text-white/85" : "text-foreground")}>
                           {c.cmd}
                         </span>
                         <span className={cn("truncate text-[10.5px]", dark ? "text-white/45" : "text-muted-foreground")}>

@@ -48,8 +48,8 @@ function CallCard({
         <span
           className={
             urgent
-              ? "inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary"
-              : "inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"
+              ? "inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/15 px-2.5 py-1 text-[10px] font-normal uppercase tracking-[0.1em] text-primary"
+              : "inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-secondary px-2.5 py-1 text-[10px] font-normal uppercase tracking-[0.1em] text-muted-foreground"
           }
         >
           {urgent ? (

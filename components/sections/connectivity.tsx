@@ -300,7 +300,7 @@ function CarrierPhoneMockup() {
           >
             <c.icon className="mt-[1px] h-3.5 w-3.5 shrink-0 text-primary" strokeWidth={2.25} aria-hidden="true" />
             <span className="min-w-0 leading-tight">
-              <span className="block text-[9.5px] font-semibold leading-tight text-foreground">{c.title}</span>
+              <span className="block text-[9.5px] font-normal leading-tight text-foreground">{c.title}</span>
               <span className="block text-[8.5px] leading-tight text-muted-foreground">{c.sub}</span>
             </span>
           </div>
@@ -390,7 +390,7 @@ function InboundOutboundDashboardMockup() {
 
       {/* hub caption */}
       <div className="absolute left-1/2 top-[58%] z-20 -translate-x-1/2 text-center">
-        <p className="text-[10px] font-semibold leading-tight text-primary">One agent</p>
+        <p className="text-[10px] font-normal leading-tight text-primary">One agent</p>
         <p className="text-[9px] leading-tight text-muted-foreground">one number</p>
       </div>
 
@@ -598,7 +598,7 @@ export function Connectivity() {
                         />
                       </span>
                       <div className="min-w-0 flex-1">
-                        <h3 className="text-sm font-semibold tracking-tight transition-colors group-hover:text-primary">
+                        <h3 className="text-sm font-normal tracking-tight transition-colors group-hover:text-primary">
                           {item.title}
                         </h3>
                         <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{item.description}</p>

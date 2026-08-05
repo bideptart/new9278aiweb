@@ -11,7 +11,7 @@ export default async function PlanDistributionPage() {
   return (
     <div className="mx-auto max-w-6xl">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Plan distribution</h1>
+        <h1 className="text-2xl font-normal tracking-tight">Plan distribution</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Customer counts and conversion rate per credit tier.
         </p>
@@ -27,7 +27,7 @@ export default async function PlanDistributionPage() {
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">{planLabel(plan.id)}</p>
                 <p className="text-xs text-muted-foreground">${plan.amount} · ${plan.ratePerMin.toFixed(2)}/min</p>
               </div>
-              <p className="mt-4 text-3xl font-semibold tracking-tight">{count}</p>
+              <p className="mt-4 text-3xl font-normal tracking-tight">{count}</p>
               <p className="mt-1 text-xs text-muted-foreground">{share}% of paying customers</p>
               <div className="mt-4 h-2 overflow-hidden rounded-full bg-background/40">
                 <div

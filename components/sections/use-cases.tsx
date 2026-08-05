@@ -191,7 +191,7 @@ function FrontDeskScene() {
 
       {/* centre readout */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-mono text-xl font-bold leading-none text-primary">24/7</span>
+        <span className="font-mono text-xl font-normal leading-none text-primary">24/7</span>
         <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">always on</span>
       </div>
 
@@ -248,13 +248,13 @@ function GrowthScene() {
       <div className="flex items-end justify-between">
         <div>
           <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">Calls placed</p>
-          <p className="mt-0.5 font-mono text-xl font-bold leading-none tabular-nums text-primary">
+          <p className="mt-0.5 font-mono text-xl font-normal leading-none tabular-nums text-primary">
             {dialled.toLocaleString()}
           </p>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 ring-1 ring-primary/15">
           <PhoneOutgoing className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
-          <span className="font-mono text-[8.5px] font-semibold uppercase tracking-wider text-primary">outbound</span>
+          <span className="font-mono text-[8.5px] font-normal uppercase tracking-wider text-primary">outbound</span>
         </span>
       </div>
 
@@ -364,7 +364,7 @@ function MultilingualScene() {
             transition={{ duration: 0.32, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <span className="text-lg font-semibold leading-none tracking-tight text-primary">{active.hello}</span>
+            <span className="text-lg font-normal leading-none tracking-tight text-primary">{active.hello}</span>
             <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">
               detected · {active.name}
             </span>
@@ -378,7 +378,7 @@ function MultilingualScene() {
           <span
             key={l.code}
             className={cn(
-              "rounded-md px-1.5 py-[3px] font-mono text-[8.5px] font-bold transition-all duration-300",
+              "rounded-md px-1.5 py-[3px] font-mono text-[8.5px] font-normal transition-all duration-300",
               li === i
                 ? "bg-primary text-white"
                 : "bg-black/[0.05] text-muted-foreground/70",
@@ -422,7 +422,7 @@ function BookingScene() {
         <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-foreground">Friday agenda</p>
         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 ring-1 ring-primary/15">
           <CalendarCheck className="h-2.5 w-2.5 text-primary" strokeWidth={2.75} aria-hidden="true" />
-          <span className="font-mono text-[8.5px] font-semibold uppercase tracking-wider text-primary">
+          <span className="font-mono text-[8.5px] font-normal uppercase tracking-wider text-primary">
             {booked ? "auto-booked" : "searching"}
           </span>
         </span>
@@ -451,7 +451,7 @@ function BookingScene() {
                   className="absolute inset-0 flex items-center gap-1.5 rounded-md bg-gradient-to-r from-primary to-[color-mix(in_oklch,var(--primary)_75%,var(--ai-magenta))] px-2 shadow-[0_6px_14px_-6px_var(--primary)]"
                 >
                   <Check className="h-2.5 w-2.5 shrink-0 text-white" strokeWidth={3.5} aria-hidden="true" />
-                  <span className="truncate text-[8.5px] font-semibold text-white">Sarah M. · Consultation</span>
+                  <span className="truncate text-[8.5px] font-normal text-white">Sarah M. · Consultation</span>
                   {phase === 3 && (
                     <motion.span
                       initial={{ opacity: 0, scale: 0.6 }}
@@ -602,7 +602,7 @@ export function UseCases() {
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
                       <Icon className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
                     </span>
-                    <span className="rounded-full border border-border/60 bg-white/70 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    <span className="rounded-full border border-border/60 bg-white/70 px-2 py-0.5 text-[9px] font-normal uppercase tracking-wider text-muted-foreground">
                       {item.tag}
                     </span>
                   </div>
@@ -621,7 +621,7 @@ export function UseCases() {
                   {/* copy */}
                   <div className="mt-auto pt-4">
                     <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary">/ 0{i + 1}</p>
-                    <h3 className="mt-1.5 text-pretty text-[15px] font-semibold leading-tight tracking-tight transition-colors group-hover:text-primary">
+                    <h3 className="mt-1.5 text-pretty text-[15px] font-normal leading-tight tracking-tight transition-colors group-hover:text-primary">
                       {item.title}
                     </h3>
                     <p className="mt-1.5 text-pretty text-[11.5px] leading-snug text-muted-foreground">

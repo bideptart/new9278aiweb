@@ -32,7 +32,6 @@ import {
 	Mic,
 	Building2,
 	PhoneCall,
-	PhoneForwarded,
 	ArrowRight,
 	Info,
 	Newspaper,
@@ -94,7 +93,7 @@ function MobileAccordionSection({
 				<span className="flex flex-1 items-center gap-2 min-w-0">
 					<span
 						className={cn(
-							'text-[13px] font-semibold text-foreground transition-colors',
+							'text-[13px] font-normal text-foreground transition-colors',
 							(isOpen || active) && 'text-rose-400',
 						)}
 					>
@@ -187,8 +186,8 @@ export function Header() {
 							{/* Features Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isFeaturesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-normal rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-normal data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isFeaturesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-normal border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Features
 								</NavigationMenuTrigger>
@@ -206,7 +205,7 @@ export function Header() {
 												<Sparkles className="size-4 text-primary animate-pulse" />
 												Ready to hear human-like AI in action?
 											</span>
-											<Link href="/get-started" className="text-primary font-semibold hover:underline flex items-center gap-1.5 group/demo transition-all text-xs">
+											<Link href="/get-started" className="text-primary font-normal hover:underline flex items-center gap-1.5 group/demo transition-all text-xs">
 												Schedule a demo <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/demo:translate-x-1" />
 											</Link>
 										</p>
@@ -217,15 +216,15 @@ export function Header() {
 							{/* Industries Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isIndustriesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-normal rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-normal data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isIndustriesActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-normal border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Industries
 								</NavigationMenuTrigger>
 								<NavigationMenuContent className="p-1 border-0 shadow-none">
 									<div className="grid w-[680px] grid-cols-2 gap-4 p-3">
 										<ul className="space-y-2">
-											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Core Industries</div>
+											<div className="px-2 py-1 text-xs font-normal text-muted-foreground uppercase tracking-wider">Core Industries</div>
 											{industryLinks.slice(0, 3).map((item, i) => (
 												<li key={i}>
 													<ListItem {...item} />
@@ -233,7 +232,7 @@ export function Header() {
 											))}
 										</ul>
 										<ul className="space-y-2">
-											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">More Verticals</div>
+											<div className="px-2 py-1 text-xs font-normal text-muted-foreground uppercase tracking-wider">More Verticals</div>
 											{industryLinks.slice(3, 6).map((item, i) => (
 												<li key={i}>
 													<ListItem {...item} />
@@ -250,8 +249,8 @@ export function Header() {
 									<Link
 										href="/pricing"
 										className={cn(
-											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
-											isPricingActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+											"text-sm font-normal rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isPricingActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-normal border border-rose-200 dark:border-rose-900/50 shadow-xs"
 										)}
 									>
 										Pricing
@@ -262,15 +261,15 @@ export function Header() {
 							{/* Company Dropdown */}
 							<NavigationMenuItem>
 								<NavigationMenuTrigger className={cn(
-									"bg-transparent text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-bold data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
-									isCompanyActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+									"bg-transparent text-sm font-normal rounded-full px-4 py-2 transition-all duration-200 hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98] data-[state=open]:bg-rose-500/15 data-[state=open]:text-rose-400 dark:data-[state=open]:text-rose-400 data-[state=open]:font-normal data-[state=open]:border data-[state=open]:border-rose-200 dark:data-[state=open]:border-rose-900/50 data-[state=open]:shadow-xs",
+									isCompanyActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-normal border border-rose-200 dark:border-rose-900/50 shadow-xs"
 								)}>
 									Company
 								</NavigationMenuTrigger>
 								<NavigationMenuContent className="p-1 border-0 shadow-none">
 									<div className="grid w-[640px] grid-cols-2 gap-3 p-3">
 										<ul className="space-y-2">
-											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">About 9278.ai</div>
+											<div className="px-2 py-1 text-xs font-normal text-muted-foreground uppercase tracking-wider">About 9278.ai</div>
 											{companyMainLinks.map((item, i) => (
 												<li key={i}>
 													<ListItem {...item} />
@@ -278,7 +277,7 @@ export function Header() {
 											))}
 										</ul>
 										<ul className="space-y-1.5 p-2.5 bg-muted/30 rounded-xl border border-border/30">
-											<div className="px-2 py-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Legal & Support</div>
+											<div className="px-2 py-1 text-xs font-normal text-muted-foreground uppercase tracking-wider">Legal & Support</div>
 											{companyLegalLinks.map((item, i) => (
 												<li key={i}>
 													<NavigationMenuLink asChild>
@@ -303,8 +302,8 @@ export function Header() {
 									<Link
 										href="/faq"
 										className={cn(
-											"text-sm font-semibold rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
-											isFaqActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-bold border border-rose-200 dark:border-rose-900/50 shadow-xs"
+											"text-sm font-normal rounded-full px-4 py-2 transition-all duration-200 block hover:bg-rose-500/10 hover:text-rose-400 dark:hover:text-rose-400 hover:scale-[1.03] active:scale-[0.98]",
+											isFaqActive && "bg-rose-500/15 text-rose-400 dark:text-rose-400 font-normal border border-rose-200 dark:border-rose-900/50 shadow-xs"
 										)}
 									>
 										FAQ
@@ -399,7 +398,7 @@ export function Header() {
 							<Link
 								href="/pricing"
 								className={cn(
-									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-semibold transition-colors hover:bg-accent',
+									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-normal transition-colors hover:bg-accent',
 									isPricingActive && 'border-rose-200 bg-rose-500/15 text-rose-400 dark:border-rose-900/50',
 								)}
 							>
@@ -408,7 +407,7 @@ export function Header() {
 							<Link
 								href="/faq"
 								className={cn(
-									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-semibold transition-colors hover:bg-accent',
+									'flex-1 rounded-full border border-border/60 px-3 py-2 text-center text-xs font-normal transition-colors hover:bg-accent',
 									isFaqActive && 'border-rose-200 bg-rose-500/15 text-rose-400 dark:border-rose-900/50',
 								)}
 							>
@@ -488,7 +487,7 @@ function ListItem({
 					<Icon className="text-foreground size-5 group-hover:text-primary transition-colors group-hover:rotate-6" />
 				</div>
 				<div className="flex flex-col items-start justify-center overflow-hidden">
-					<span className="font-semibold text-xs text-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200">{title}</span>
+					<span className="font-normal text-xs text-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200">{title}</span>
 					{description && <span className="text-muted-foreground text-xs line-clamp-1 mt-0.5 group-hover:text-foreground/80 transition-colors">{description}</span>}
 				</div>
 			</Link>
@@ -500,27 +499,9 @@ function ListItem({
 const productLinks: LinkItem[] = [
 	{
 		title: 'AI Voice Receptionist',
-		href: '/features/ai-voice-receptionist',
+		href: '/features',
 		description: 'Answer every inbound call 24/7 with zero latency',
 		icon: PhoneCall,
-	},
-	{
-		title: 'Appointment Setter',
-		href: '/features/appointment-setter',
-		description: 'Calendar sync, slot negotiation, and SMS confirmations',
-		icon: Sparkles,
-	},
-	{
-		title: 'Answering Services',
-		href: '/features/answering-services',
-		description: 'After-hours coverage with unlimited concurrent calls',
-		icon: Headphones,
-	},
-	{
-		title: 'Call Transfer',
-		href: '/features/call-transfer',
-		description: 'Warm hand-offs to your team with full call context',
-		icon: PhoneForwarded,
 	},
 	{
 		title: 'Sub-second Audio Engine',
@@ -596,7 +577,7 @@ const industryLinks: LinkItem[] = [
 const useCaseLinks: LinkItem[] = [
 	{
 		title: 'Inbound Customer Support',
-		href: '/features/answering-services',
+		href: '/features',
 		icon: Headphones,
 	},
 	{
@@ -606,7 +587,7 @@ const useCaseLinks: LinkItem[] = [
 	},
 	{
 		title: 'Appointment Booking AI',
-		href: '/features/appointment-setter',
+		href: '/features',
 		icon: Sparkles,
 	},
 ];

@@ -36,7 +36,7 @@ export function CapabilityCard({
           <Icon className="size-4.5" aria-hidden="true" />
         </span>
         <p className="mt-4 text-[11px] font-medium uppercase tracking-wider text-primary/70">{label}</p>
-        <h3 className="mt-1 text-lg font-semibold tracking-tight text-foreground">{title}</h3>
+        <h3 className="mt-1 text-lg font-normal tracking-tight text-foreground">{title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
       </div>
 

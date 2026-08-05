@@ -163,7 +163,7 @@ export function HeroVoiceAura() {
 
       {/* Status metric chips — float top-right on desktop, wrap centered on mobile */}
       <div className="relative z-10 mb-8 flex flex-wrap items-center justify-center gap-2 md:absolute md:right-0 md:top-0 md:mb-0 md:flex-col md:items-end">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider text-primary backdrop-blur-md">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[9px] font-normal uppercase tracking-wider text-primary backdrop-blur-md">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
@@ -275,7 +275,7 @@ export function HeroVoiceAura() {
                   : "rounded-bl-sm border border-border/50 bg-card/75 text-foreground",
               )}
             >
-              <span className={cn("mb-0.5 block text-[9px] font-semibold uppercase tracking-wide", current.speaker === "Aria" ? "text-primary" : "text-muted-foreground")}>
+              <span className={cn("mb-0.5 block text-[9px] font-normal uppercase tracking-wide", current.speaker === "Aria" ? "text-primary" : "text-muted-foreground")}>
                 {current.speaker}
               </span>
               {current.text}

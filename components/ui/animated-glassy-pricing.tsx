@@ -36,13 +36,13 @@ export const PricingCard = ({
   // distinguished by its ring, scale and "Most Popular" badge instead.
   void buttonVariant;
   const buttonClasses = `
-    btn-ai text-primary-foreground mt-auto w-full py-3 px-5 rounded-full font-semibold text-[13px] transition font-sans
+    btn-ai text-primary-foreground mt-auto w-full py-3 px-5 rounded-full font-normal text-[13px] transition font-sans
   `;
 
   return (
     <div className={cardClasses.trim()}>
       {isPopular && (
-        <div className="absolute -top-3 right-3 px-2.5 py-0.5 text-[11px] font-semibold rounded-full bg-primary text-primary-foreground">
+        <div className="absolute -top-3 right-3 px-2.5 py-0.5 text-[11px] font-normal rounded-full bg-primary text-primary-foreground">
           Most Popular
         </div>
       )}

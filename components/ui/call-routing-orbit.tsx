@@ -274,7 +274,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              <span className="text-[8.5px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+              <span className="text-[8.5px] font-normal uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                 ONLINE
               </span>
             </div>
@@ -298,7 +298,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                       <activeNode.icon className="size-3.5 text-primary" aria-hidden />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[11px] font-bold text-foreground leading-tight truncate">
+                      <p className="text-[11px] font-normal text-foreground leading-tight truncate">
                         {activeNode.label}
                       </p>
                       <p className="text-[9.5px] font-medium text-muted-foreground truncate">
@@ -307,7 +307,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                     </div>
                   </div>
 
-                  <span className="shrink-0 rounded-full bg-primary/10 border border-primary/25 px-2 py-0.5 text-[8px] font-bold text-primary">
+                  <span className="shrink-0 rounded-full bg-primary/10 border border-primary/25 px-2 py-0.5 text-[8px] font-normal text-primary">
                     {activeNode.badge}
                   </span>
                 </div>
@@ -334,7 +334,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
 
                 {/* Active Status Info Box */}
                 <div className="rounded-xl border border-border/60 bg-card/70 p-2 text-left shadow-2xs">
-                  <p className="text-[9.5px] font-bold text-foreground flex items-center gap-1 leading-tight">
+                  <p className="text-[9.5px] font-normal text-foreground flex items-center gap-1 leading-tight">
                     <Sparkles className="size-3 text-primary shrink-0" />
                     <span className="truncate">{activeNode.title}</span>
                   </p>
@@ -358,7 +358,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                 <Mic className="size-2.5 text-primary animate-pulse shrink-0" />
                 <span>Live Assistant</span>
               </span>
-              <span className="text-primary font-bold">Auto 0.2s ➔</span>
+              <span className="text-primary font-normal">Auto 0.2s ➔</span>
             </div>
           </div>
         </div>
@@ -425,7 +425,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                         : "size-8 sm:size-8.5 bg-card/95 text-foreground border-border/80 hover:border-primary/40 hover:text-primary hover:bg-primary/5"
                     )}
                   >
-                    <Icon className={isActive ? "size-4 text-primary font-bold" : "size-3.5 text-primary/80"} aria-hidden />
+                    <Icon className={isActive ? "size-4 text-primary font-normal" : "size-3.5 text-primary/80"} aria-hidden />
                   </span>
                 </div>
 
@@ -434,7 +434,7 @@ export function CallRoutingOrbit({ className }: { className?: string }) {
                   className={cn(
                     "whitespace-nowrap rounded-full px-2.5 py-0.5 text-[9px] sm:text-[9.5px] transition-all duration-200 shadow-2xs border",
                     isActive
-                      ? "bg-gradient-to-r from-primary/15 via-primary/10 to-primary/5 text-primary border-primary/35 font-bold shadow-xs backdrop-blur-md scale-105"
+                      ? "bg-gradient-to-r from-primary/15 via-primary/10 to-primary/5 text-primary border-primary/35 font-normal shadow-xs backdrop-blur-md scale-105"
                       : "bg-background/95 text-muted-foreground border-border/70 group-hover:text-foreground group-hover:border-border font-medium"
                   )}
                 >

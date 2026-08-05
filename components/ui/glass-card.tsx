@@ -39,12 +39,12 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
             {/* Top Status */}
             <div>
               <div className="flex items-center gap-2 mb-3 pr-14">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 px-3 py-1 text-[11px] font-mono font-bold text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-800 shadow-xs truncate">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/15 px-3 py-1 text-[11px] font-mono font-normal text-rose-400 dark:text-rose-300 border border-rose-300 dark:border-rose-800 shadow-xs truncate">
                   <span className="size-1.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
                   {badgeText}
                 </span>
               </div>
-              <span className="block text-2xl font-serif font-bold text-foreground tracking-tight leading-tight">
+              <span className="block text-2xl font-serif font-normal text-foreground tracking-tight leading-tight">
                 {title}
               </span>
               {/* Rich Visual 3-Step Order Pipeline & Voice Graphic */}
@@ -53,13 +53,13 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
                 <div className="p-3 rounded-2xl bg-slate-50/90 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/80 shadow-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="size-6 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center font-bold text-[10px]">
+                      <div className="size-6 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center font-normal text-[10px]">
                         <Bot className="size-3.5" />
                       </div>
-                      <span className="text-[11px] font-mono font-bold text-foreground">Voice AI Relay</span>
+                      <span className="text-[11px] font-mono font-normal text-foreground">Voice AI Relay</span>
                     </div>
 
-                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-normal bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
                       ⚡ Sub-250ms
                     </span>
                   </div>
@@ -79,24 +79,24 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
 
                 {/* Visual 3-Step Pipeline Graphic */}
                 <div className="p-3 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/40 shadow-xs space-y-2">
-                  <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
+                  <div className="flex items-center justify-between text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400">
                     <span>Live Order Pipeline:</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">Auto Dispatched</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-normal">Auto Dispatched</span>
                   </div>
 
                   {/* 3 Step Nodes Graphic */}
                   <div className="grid grid-cols-3 gap-1.5 pt-1 text-center">
                     <div className="p-1.5 rounded-xl bg-white dark:bg-slate-900 border border-rose-200/60 dark:border-rose-900/40 flex flex-col items-center gap-0.5 shadow-xs">
                       <ShoppingBag className="size-3 text-rose-300" />
-                      <span className="text-[9px] font-mono font-bold text-foreground">Placed</span>
+                      <span className="text-[9px] font-mono font-normal text-foreground">Placed</span>
                     </div>
                     <div className="p-1.5 rounded-xl bg-rose-500/15 border border-rose-300 dark:border-rose-800 flex flex-col items-center gap-0.5 shadow-xs">
                       <Zap className="size-3 text-rose-400 dark:text-rose-400" />
-                      <span className="text-[9px] font-mono font-extrabold text-rose-400 dark:text-rose-300">Verified</span>
+                      <span className="text-[9px] font-mono font-normal text-rose-400 dark:text-rose-300">Verified</span>
                     </div>
                     <div className="p-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col items-center gap-0.5 shadow-xs">
                       <Truck className="size-3 text-emerald-500" />
-                      <span className="text-[9px] font-mono font-bold text-emerald-600 dark:text-emerald-400">Dispatched</span>
+                      <span className="text-[9px] font-mono font-normal text-emerald-600 dark:text-emerald-400">Dispatched</span>
                     </div>
                   </div>
                 </div>
@@ -119,11 +119,11 @@ const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
                     style={{ transitionDelay: delay }}
                   >
                     <Icon className="h-3.5 w-3.5 transition-colors stroke-[2.5] shrink-0" />
-                    <span className="text-[10px] font-mono font-bold whitespace-nowrap">{label}</span>
+                    <span className="text-[10px] font-mono font-normal whitespace-nowrap">{label}</span>
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-0.5 cursor-pointer transition-all duration-200 ease-in-out hover:[transform:translate3d(0,0,15px)] text-rose-400 dark:text-rose-400 font-mono font-bold text-[11px] shrink-0 pl-1">
+              <div className="flex items-center gap-0.5 cursor-pointer transition-all duration-200 ease-in-out hover:[transform:translate3d(0,0,15px)] text-rose-400 dark:text-rose-400 font-mono font-normal text-[11px] shrink-0 pl-1">
                 <span>Demo</span>
                 <ChevronRight className="h-3.5 w-3.5 stroke-[3]" />
               </div>

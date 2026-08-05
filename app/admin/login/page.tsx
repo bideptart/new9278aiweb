@@ -36,7 +36,7 @@ export default async function AdminLoginPage({
           <Logo height={36} />
         </div>
 
-        <h1 className="text-balance text-2xl font-semibold tracking-tight">Super-admin access</h1>
+        <h1 className="text-balance text-2xl font-normal tracking-tight">Super-admin access</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Sign-in is restricted to whitelisted internal emails. We&apos;ll send a one-time link to your inbox.
         </p>

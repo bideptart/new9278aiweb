@@ -15,14 +15,14 @@ export default async function PhoneNumbersPage() {
     <div className="mx-auto max-w-6xl">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Phone numbers</h1>
+          <h1 className="text-2xl font-normal tracking-tight">Phone numbers</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             All provisioned DIDs across customers, regions and statuses.
           </p>
         </div>
         <div className="rounded-md border border-border/60 bg-card/40 px-4 py-2 text-right">
           <p className="text-xs uppercase tracking-wider text-muted-foreground">Active MRR</p>
-          <p className="text-lg font-semibold tracking-tight">{formatMoney(totalMrr)}</p>
+          <p className="text-lg font-normal tracking-tight">{formatMoney(totalMrr)}</p>
         </div>
       </div>
 

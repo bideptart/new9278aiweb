@@ -20,7 +20,7 @@ export default async function TrafficPage({ searchParams }: { searchParams: Prom
       {/* Header + range selector */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Traffic Analytics</h1>
+          <h1 className="text-2xl font-normal">Traffic Analytics</h1>
           <p className="text-sm text-muted-foreground">First-party pageview tracking (no third-party scripts)</p>
         </div>
         <div className="flex gap-1.5">
@@ -44,19 +44,19 @@ export default async function TrafficPage({ searchParams }: { searchParams: Prom
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Pageviews</div>
-          <div className="mt-1 text-2xl font-semibold">{data.totals.pageviews.toLocaleString()}</div>
+          <div className="mt-1 text-2xl font-normal">{data.totals.pageviews.toLocaleString()}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Visitors</div>
-          <div className="mt-1 text-2xl font-semibold">{data.totals.visitors.toLocaleString()}</div>
+          <div className="mt-1 text-2xl font-normal">{data.totals.visitors.toLocaleString()}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Sessions</div>
-          <div className="mt-1 text-2xl font-semibold">{data.totals.sessions.toLocaleString()}</div>
+          <div className="mt-1 text-2xl font-normal">{data.totals.sessions.toLocaleString()}</div>
         </Card>
         <Card className="p-4">
           <div className="text-xs text-muted-foreground">Bot pageviews (filtered)</div>
-          <div className="mt-1 text-2xl font-semibold">{data.totals.botPageviews.toLocaleString()}</div>
+          <div className="mt-1 text-2xl font-normal">{data.totals.botPageviews.toLocaleString()}</div>
         </Card>
       </div>
 

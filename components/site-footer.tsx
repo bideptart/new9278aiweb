@@ -40,7 +40,7 @@ const LEGAL: FooterLink[] = [
 function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
   return (
     <div className="min-w-0">
-      <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-200 sm:tracking-[0.2em]">
+      <h3 className="text-[11px] font-normal uppercase tracking-[0.14em] text-slate-200 sm:tracking-[0.2em]">
         {title}
       </h3>
       <ul className="mt-3 space-y-2.5 text-xs leading-snug sm:mt-5 sm:space-y-3 sm:text-sm">

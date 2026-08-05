@@ -41,7 +41,7 @@ export function RoutingCard({ icon: Icon, title, description }: (typeof ROUTING_
         <Icon className="h-5 w-5" aria-hidden />
       </span>
       <div>
-        <p className="text-sm font-semibold tracking-tight text-foreground">{title}</p>
+        <p className="text-sm font-normal tracking-tight text-foreground">{title}</p>
         <p className="mt-1.5 text-pretty text-xs leading-relaxed text-muted-foreground">{description}</p>
       </div>
     </div>

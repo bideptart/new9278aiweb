@@ -98,7 +98,7 @@ export default function LegalCenterPage() {
         <div className="flex flex-col gap-14">
           {GROUPS.map((group) => (
             <ScrollReveal key={group.heading}>
-              <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <h2 className="text-xs font-normal uppercase tracking-[0.2em] text-muted-foreground">
                 {group.heading}
               </h2>
               <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -109,7 +109,7 @@ export default function LegalCenterPage() {
                     className="card-glow group flex items-start justify-between gap-4 rounded-2xl p-5 transition-colors"
                   >
                     <div className="min-w-0">
-                      <h3 className="font-semibold tracking-tight transition-colors group-hover:text-primary">
+                      <h3 className="font-normal tracking-tight transition-colors group-hover:text-primary">
                         {doc.title}
                       </h3>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{doc.description}</p>

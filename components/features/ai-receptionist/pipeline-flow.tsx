@@ -60,7 +60,7 @@ export function PipelineFlow() {
                 <div>
                   <p
                     className={cn(
-                      "text-xs font-semibold uppercase tracking-wide transition-colors duration-500",
+                      "text-xs font-normal uppercase tracking-wide transition-colors duration-500",
                       lit ? "text-foreground" : "text-muted-foreground",
                     )}
                   >

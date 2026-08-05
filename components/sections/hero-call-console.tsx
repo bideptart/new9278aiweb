@@ -426,7 +426,7 @@ export const HeroCallConsole = forwardRef<CallConsoleHandle>(function HeroCallCo
               <PhoneCall className="h-3 w-3 text-primary" aria-hidden="true" />
             </span>
             <span className="min-w-0 leading-tight">
-              <span className="block truncate text-[10px] font-semibold text-foreground">{chip.city}</span>
+              <span className="block truncate text-[10px] font-normal text-foreground">{chip.city}</span>
               <span className="block truncate text-[9px] text-muted-foreground">{chip.intent}</span>
             </span>
           </motion.div>

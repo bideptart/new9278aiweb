@@ -142,7 +142,7 @@ export default async function IndustryPage({
                       <span className="relative inline-flex size-2 rounded-full bg-primary" />
                     </span>
                     <Icon className="size-3.5 text-primary" aria-hidden />
-                    <span className="font-bold">{industry.name}</span>
+                    <span className="font-normal">{industry.name}</span>
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/60 px-3 py-1 text-xs font-mono font-medium text-muted-foreground backdrop-blur-md">
                     <ShieldCheck className="size-3.5 text-primary" />
@@ -249,7 +249,7 @@ function Stat({ label, value, sub }: { label: string; value: string; sub: string
         <Sparkles className="size-4 text-primary" aria-hidden />
         {label}
       </div>
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-foreground">{value}</p>
+      <p className="mt-3 text-3xl font-normal tracking-tight text-foreground">{value}</p>
       <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{sub}</p>
     </div>
   )

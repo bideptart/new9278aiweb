@@ -150,7 +150,7 @@ export function FinanceVaultMatrix() {
       <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
             <BadgeCheck className="size-3.5 text-rose-300" />
             <span>INSTITUTIONAL BANKING 3D AI CIRCUIT</span>
           </span>
@@ -186,7 +186,7 @@ export function FinanceVaultMatrix() {
                 )}
               >
                 {/* Node Number & Pulse Dot */}
-                <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold">
+                <div className="flex items-center gap-1.5 text-[10px] font-mono font-normal">
                   <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300")} />
                   <span className={isSelected ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground"}>
                     NODE {nd.number}
@@ -207,7 +207,7 @@ export function FinanceVaultMatrix() {
 
                 {/* Short Title */}
                 <div>
-                  <p className="text-xs font-bold text-foreground leading-tight">{nd.shortTitle}</p>
+                  <p className="text-xs font-normal text-foreground leading-tight">{nd.shortTitle}</p>
                   <p className="text-[9px] font-mono text-muted-foreground mt-0.5">{nd.category}</p>
                 </div>
               </button>
@@ -246,7 +246,7 @@ export function FinanceVaultMatrix() {
 
                 {/* Category Pill Floating in 3D */}
                 <span
-                  className="text-[10px] font-mono font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 bg-rose-500/10 px-3 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50"
+                  className="text-[10px] font-mono font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 bg-rose-500/10 px-3 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50"
                   style={{ transform: "translateZ(30px)" }}
                 >
                   {currentNode.category}
@@ -254,14 +254,14 @@ export function FinanceVaultMatrix() {
 
                 {/* Core Stat Big Metric */}
                 <div
-                  className="text-4xl md:text-5xl font-serif font-extrabold text-foreground tracking-tight pt-1"
+                  className="text-4xl md:text-5xl font-serif font-normal text-foreground tracking-tight pt-1"
                   style={{ transform: "translateZ(40px)" }}
                 >
                   {currentNode.stat}
                 </div>
 
                 <span
-                  className="text-xs font-mono font-bold text-muted-foreground"
+                  className="text-xs font-mono font-normal text-muted-foreground"
                   style={{ transform: "translateZ(30px)" }}
                 >
                   {currentNode.statLabel}
@@ -282,7 +282,7 @@ export function FinanceVaultMatrix() {
                       />
                     ))}
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
+                  <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400">
                     Live 24/7 AI Stream
                   </span>
                 </div>
@@ -293,15 +293,15 @@ export function FinanceVaultMatrix() {
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+                  <span className="text-xs font-mono font-normal text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     Active Node {currentNode.number}
                   </span>
-                  <span className="text-xs font-mono text-muted-foreground font-semibold">
+                  <span className="text-xs font-mono text-muted-foreground font-normal">
                     {currentNode.compliance}
                   </span>
                 </div>
 
-                <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground">
+                <h3 className="text-2xl md:text-3xl font-serif font-normal text-foreground">
                   {currentNode.title}
                 </h3>
               </div>
@@ -317,7 +317,7 @@ export function FinanceVaultMatrix() {
                     <div className="size-6 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 flex items-center justify-center shrink-0 border border-rose-200 dark:border-rose-900/50">
                       <CheckCircle2 className="size-3.5" />
                     </div>
-                    <span className="text-xs md:text-sm font-semibold text-foreground">{item}</span>
+                    <span className="text-xs md:text-sm font-normal text-foreground">{item}</span>
                   </motion.div>
                 ))}
               </div>
@@ -328,7 +328,7 @@ export function FinanceVaultMatrix() {
                   <ShieldCheck className="size-4 text-rose-300" />
                   RBI Regulatory Framework
                 </span>
-                <span className="flex items-center gap-1.5 text-rose-400 dark:text-rose-400 font-bold">
+                <span className="flex items-center gap-1.5 text-rose-400 dark:text-rose-400 font-normal">
                   <span>3D Telemetry Active</span>
                   <ArrowRight className="size-3.5" />
                 </span>

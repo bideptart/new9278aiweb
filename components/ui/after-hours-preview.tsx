@@ -44,7 +44,7 @@ export function AfterHoursPreview() {
             <Moon className="size-3.5 text-primary" aria-hidden="true" />
             Answering right now
           </span>
-          <p className="font-mono text-xs font-semibold tabular-nums text-primary">
+          <p className="font-mono text-xs font-normal tabular-nums text-primary">
             {handled.toLocaleString()} after-hours calls this month
           </p>
         </div>
@@ -112,15 +112,15 @@ export function AfterHoursPreview() {
       <div className="mt-5 grid grid-cols-3 gap-2 text-center sm:mt-6">
         <div>
           <span className="block text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Answer Rate</span>
-          <span className="mt-0.5 block text-xs font-bold text-emerald-600 dark:text-emerald-400">100% Active</span>
+          <span className="mt-0.5 block text-xs font-normal text-emerald-600 dark:text-emerald-400">100% Active</span>
         </div>
         <div>
           <span className="block text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Response</span>
-          <span className="mt-0.5 block text-xs font-bold text-primary">&lt; 0.5 Seconds</span>
+          <span className="mt-0.5 block text-xs font-normal text-primary">&lt; 0.5 Seconds</span>
         </div>
         <div>
           <span className="block text-[10px] font-mono uppercase tracking-wider text-muted-foreground">Dispatch</span>
-          <span className="mt-0.5 block text-xs font-bold text-foreground">Instant Alert</span>
+          <span className="mt-0.5 block text-xs font-normal text-foreground">Instant Alert</span>
         </div>
       </div>
     </div>

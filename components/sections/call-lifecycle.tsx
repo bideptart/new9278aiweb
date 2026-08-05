@@ -24,8 +24,8 @@ function FrontDeskMock() {
           transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
         />
         <div className="flex flex-col items-center">
-          <span className="font-mono text-[13px] font-bold leading-none text-primary">24/7</span>
-          <span className="mt-0.5 text-[6.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <span className="font-mono text-[13px] font-normal leading-none text-primary">24/7</span>
+          <span className="mt-0.5 text-[6.5px] font-normal uppercase tracking-[0.14em] text-muted-foreground">
             Always on
           </span>
         </div>
@@ -55,9 +55,9 @@ function GrowthMock() {
       <div className="flex items-center justify-between">
         <div>
           <p className="font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground/70">Calls placed</p>
-          <p className="font-mono text-[15px] font-bold leading-none text-primary">{calls.toLocaleString()}</p>
+          <p className="font-mono text-[15px] font-normal leading-none text-primary">{calls.toLocaleString()}</p>
         </div>
-        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[3px] text-[7px] font-bold uppercase tracking-wider text-primary">
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[3px] text-[7px] font-normal uppercase tracking-wider text-primary">
           Outbound
         </span>
       </div>
@@ -113,7 +113,7 @@ function MultilingualMock() {
         <Languages className="h-5 w-5" strokeWidth={2.25} aria-hidden="true" />
       </motion.span>
       <div className="text-center leading-tight">
-        <p className="font-serif text-[13px] font-semibold text-foreground">Hello</p>
+        <p className="font-serif text-[13px] font-normal text-foreground">Hello</p>
         <p className="text-[6.5px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
           Detected · English
         </p>
@@ -123,7 +123,7 @@ function MultilingualMock() {
           <span
             key={l}
             className={cn(
-              "rounded-md px-1.5 py-[3px] text-[7px] font-bold transition-colors duration-300",
+              "rounded-md px-1.5 py-[3px] text-[7px] font-normal transition-colors duration-300",
               i === active ? "bg-primary text-white" : "bg-black/[0.05] text-muted-foreground",
             )}
           >
@@ -146,7 +146,7 @@ function CalendarMock() {
     <div className="relative flex h-full flex-col overflow-hidden rounded-xl bg-[#f7f7f8] p-2.5">
       <div className="flex items-center justify-between">
         <p className="font-mono text-[7px] uppercase tracking-[0.14em] text-muted-foreground/70">Friday agenda</p>
-        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[3px] text-[7px] font-bold uppercase tracking-wider text-primary">
+        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-1.5 py-[3px] text-[7px] font-normal uppercase tracking-wider text-primary">
           <Search className="h-2 w-2" strokeWidth={2.5} aria-hidden="true" />
           Searching
         </span>
@@ -158,12 +158,12 @@ function CalendarMock() {
             <span className="min-w-0 flex-1 truncate text-[7.5px] font-medium text-foreground/80">{a.label}</span>
             {a.state === "done" && <Check className="h-2 w-2 shrink-0 text-primary" strokeWidth={3} aria-hidden="true" />}
             {a.state === "booked" && (
-              <span className="shrink-0 rounded-full bg-primary px-1.5 py-[1px] text-[6px] font-bold uppercase text-white">
+              <span className="shrink-0 rounded-full bg-primary px-1.5 py-[1px] text-[6px] font-normal uppercase text-white">
                 Booked
               </span>
             )}
             {a.state === "open" && (
-              <span className="shrink-0 rounded-full bg-black/[0.06] px-1.5 py-[1px] text-[6px] font-bold uppercase text-muted-foreground">
+              <span className="shrink-0 rounded-full bg-black/[0.06] px-1.5 py-[1px] text-[6px] font-normal uppercase text-muted-foreground">
                 Open
               </span>
             )}
@@ -241,7 +241,7 @@ export function CallLifecycle() {
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-4 w-4" strokeWidth={2.25} aria-hidden="true" />
                     </span>
-                    <span className="rounded-full bg-black/[0.05] px-2 py-[3px] text-[9px] font-bold uppercase tracking-wider text-muted-foreground">
+                    <span className="rounded-full bg-black/[0.05] px-2 py-[3px] text-[9px] font-normal uppercase tracking-wider text-muted-foreground">
                       {c.tag}
                     </span>
                   </div>
@@ -251,10 +251,10 @@ export function CallLifecycle() {
                   </div>
 
                   <div className="relative mt-4">
-                    <span className="pointer-events-none absolute -left-0.5 -top-1 font-mono text-[10px] font-semibold text-primary/50">
+                    <span className="pointer-events-none absolute -left-0.5 -top-1 font-mono text-[10px] font-normal text-primary/50">
                       /{String(i + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="pl-6 text-[15px] font-semibold tracking-tight">{c.title}</h3>
+                    <h3 className="pl-6 text-[15px] font-normal tracking-tight">{c.title}</h3>
                     <p className="mt-1.5 text-[12.5px] leading-relaxed text-muted-foreground">{c.description}</p>
                   </div>
                 </div>

@@ -28,7 +28,7 @@ export function AgentScreenCard() {
             <Phone className="relative size-4 text-primary" aria-hidden />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-foreground">Incoming transfer · Jane D.</p>
+            <p className="truncate text-sm font-normal text-foreground">Incoming transfer · Jane D.</p>
             <p className="truncate text-xs text-muted-foreground">Forwarded from AI Agent · ringing</p>
           </div>
         </div>

@@ -88,11 +88,11 @@ export function RestaurantScenarioCarousel3D() {
       />
 
       <div className="text-center max-w-3xl mx-auto mb-14">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
           <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           CALL SCENARIO DRUM
         </span>
-        <h2 className="text-3xl font-serif font-semibold tracking-tight md:text-5xl text-foreground">
+        <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           One engine, <span className="italic text-rose-400 dark:text-rose-400">every kind of call.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
@@ -136,13 +136,13 @@ export function RestaurantScenarioCarousel3D() {
                     </span>
                     <p
                       className={cn(
-                        "text-[10px] font-mono font-bold uppercase tracking-wider",
+                        "text-[10px] font-mono font-normal uppercase tracking-wider",
                         isActive ? "text-rose-400 dark:text-rose-400" : "text-muted-foreground/70"
                       )}
                     >
                       {scenario.frontTag}
                     </p>
-                    <p className={cn("text-sm font-serif font-bold leading-snug", isActive ? "text-foreground" : "text-muted-foreground")}>
+                    <p className={cn("text-sm font-serif font-normal leading-snug", isActive ? "text-foreground" : "text-muted-foreground")}>
                       {scenario.title}
                     </p>
                   </div>
@@ -168,14 +168,14 @@ export function RestaurantScenarioCarousel3D() {
                   <ActiveIcon className="size-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-mono font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400">{active.frontTag}</p>
-                  <p className="text-base font-serif font-bold text-foreground">{active.title}</p>
+                  <p className="text-xs font-mono font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400">{active.frontTag}</p>
+                  <p className="text-base font-serif font-normal text-foreground">{active.title}</p>
                 </div>
               </div>
 
               <p className="text-sm text-foreground leading-relaxed font-medium">{active.outcome}</p>
 
-              <span className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1 text-xs font-bold text-rose-400 dark:text-rose-400">
+              <span className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 px-3 py-1 text-xs font-normal text-rose-400 dark:text-rose-400">
                 {active.metric}
               </span>
 

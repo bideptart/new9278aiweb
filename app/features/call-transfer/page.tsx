@@ -230,7 +230,7 @@ function Stat({ label, value, sub }: { label: string; value: string; sub: string
         <Sparkles className="size-4 text-primary" aria-hidden />
         {label}
       </div>
-      <p className="mt-3 text-2xl font-semibold tracking-tight">{value}</p>
+      <p className="mt-3 text-2xl font-normal tracking-tight">{value}</p>
       <p className="mt-1 text-sm text-muted-foreground">{sub}</p>
     </div>
   )

@@ -113,7 +113,7 @@ export function HomeServicesDispatchSimulator() {
         
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
+          <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
             <Radio className="size-3.5 text-rose-300 animate-pulse" />
             <span>3D FIELD SERVICE DISPATCH COMMAND SPHERE</span>
           </span>
@@ -156,14 +156,14 @@ export function HomeServicesDispatchSimulator() {
                     <Icon className="size-4" />
                   </div>
 
-                  <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+                  <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     {dp.tag}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-bold text-foreground">{dp.trade}</h3>
-                  <p className="text-[11px] font-mono text-rose-400 dark:text-rose-400 font-extrabold mt-0.5">{dp.eta}</p>
+                  <h3 className="text-sm font-normal text-foreground">{dp.trade}</h3>
+                  <p className="text-[11px] font-mono text-rose-400 dark:text-rose-400 font-normal mt-0.5">{dp.eta}</p>
                 </div>
               </button>
             )
@@ -195,17 +195,17 @@ export function HomeServicesDispatchSimulator() {
                     <TradeIcon className="size-5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
+                    <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded border border-rose-200 dark:border-rose-900/50">
                       {curD.tag}
                     </span>
-                    <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mt-0.5">
+                    <h3 className="text-xl md:text-2xl font-serif font-normal text-foreground mt-0.5">
                       {curD.trade}
                     </h3>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                  <span className="text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                     ⚡ {curD.software}
                   </span>
                 </div>
@@ -217,7 +217,7 @@ export function HomeServicesDispatchSimulator() {
 
               {/* Spoken AI Dispatch Quote Capsule */}
               <div className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-2" style={{ transform: "translateZ(40px)" }}>
-                <div className="flex items-center justify-between text-[10px] font-mono font-bold text-rose-400 dark:text-rose-400">
+                <div className="flex items-center justify-between text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400">
                   <span>9278 Voice AI Dispatcher</span>
                   {/* 6-Bar Equalizer */}
                   <div className="flex items-center gap-1 h-3">
@@ -226,17 +226,17 @@ export function HomeServicesDispatchSimulator() {
                     ))}
                   </div>
                 </div>
-                <p className="text-xs font-mono font-bold text-foreground leading-relaxed">{curD.speech}</p>
+                <p className="text-xs font-mono font-normal text-foreground leading-relaxed">{curD.speech}</p>
               </div>
 
               {/* GPS & Tech Telemetry Footer */}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-200/60 dark:border-slate-800 text-xs font-mono" style={{ transform: "translateZ(25px)" }}>
-                <span className="flex items-center gap-1.5 text-rose-400 dark:text-rose-400 font-bold">
+                <span className="flex items-center gap-1.5 text-rose-400 dark:text-rose-400 font-normal">
                   <MapPin className="size-3.5 text-rose-300" />
                   {curD.tech} ({curD.distance})
                 </span>
 
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                <span className="text-emerald-600 dark:text-emerald-400 font-normal bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                   ✓ {curD.eta}
                 </span>
               </div>

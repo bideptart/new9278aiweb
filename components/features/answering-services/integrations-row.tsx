@@ -28,7 +28,7 @@ export function IntegrationsRow() {
             <item.icon className="size-4" aria-hidden />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-foreground">{item.name}</p>
+            <p className="text-sm font-normal text-foreground">{item.name}</p>
             <p className="truncate text-xs text-muted-foreground">{item.note}</p>
           </div>
           <motion.span

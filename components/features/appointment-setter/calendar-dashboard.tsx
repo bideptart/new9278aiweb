@@ -46,7 +46,7 @@ function SlotCell({ status, label, delay, reduced }: { status: SlotStatus; label
     >
       <span
         className={cn(
-          "text-[11px] font-semibold tabular-nums",
+          "text-[11px] font-normal tabular-nums",
           status === "booked" ? "text-white" : "text-foreground",
         )}
       >
@@ -77,7 +77,7 @@ export function CalendarDashboard({ step, reduced }: { step: Step; reduced: bool
 
       {/* Header */}
       <div className="relative flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-2 text-sm font-semibold text-foreground">
+        <span className="inline-flex items-center gap-2 text-sm font-normal text-foreground">
           <CalendarDays className="h-4 w-4 text-primary" aria-hidden />
           {DAY_LABEL}
         </span>

@@ -30,11 +30,11 @@ export function RestaurantReceiptPrinter() {
       />
 
       <div className="text-center max-w-3xl mx-auto mb-14">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-4 shadow-xs border border-rose-200 dark:border-rose-900/50">
           <Sparkles className="size-3.5 text-rose-300 animate-pulse" />
           LIVE KDS PRINTOUT
         </span>
-        <h2 className="text-3xl font-serif font-semibold tracking-tight md:text-5xl text-foreground">
+        <h2 className="text-3xl font-serif font-normal tracking-tight md:text-5xl text-foreground">
           Straight to the pass, <span className="italic text-rose-400 dark:text-rose-400">in real time.</span>
         </h2>
         <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
@@ -49,7 +49,7 @@ export function RestaurantReceiptPrinter() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <Printer className="size-3.5 text-slate-500 dark:text-slate-400" />
-                <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <span className="text-[9px] font-mono font-normal uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   AI Ticket Printer
                 </span>
               </div>
@@ -68,7 +68,7 @@ export function RestaurantReceiptPrinter() {
               {loop.map((line, i) => (
                 <div key={i} className="flex items-center justify-between gap-2 px-4 py-3">
                   <span className="truncate font-mono text-[11px] text-foreground">{line.label}</span>
-                  <span className="shrink-0 font-mono text-[11px] font-bold text-rose-400 dark:text-rose-400">{line.value}</span>
+                  <span className="shrink-0 font-mono text-[11px] font-normal text-rose-400 dark:text-rose-400">{line.value}</span>
                 </div>
               ))}
             </motion.div>
