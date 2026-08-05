@@ -32,6 +32,7 @@ import {
 	Mic,
 	Building2,
 	PhoneCall,
+	PhoneForwarded,
 	ArrowRight,
 	Info,
 	Newspaper,
@@ -499,9 +500,27 @@ function ListItem({
 const productLinks: LinkItem[] = [
 	{
 		title: 'AI Voice Receptionist',
-		href: '/features',
+		href: '/features/ai-voice-receptionist',
 		description: 'Answer every inbound call 24/7 with zero latency',
 		icon: PhoneCall,
+	},
+	{
+		title: 'Appointment Setter',
+		href: '/features/appointment-setter',
+		description: 'Calendar sync, slot negotiation, and SMS confirmations',
+		icon: Sparkles,
+	},
+	{
+		title: 'Answering Services',
+		href: '/features/answering-services',
+		description: 'After-hours coverage with unlimited concurrent calls',
+		icon: Headphones,
+	},
+	{
+		title: 'Call Transfer',
+		href: '/features/call-transfer',
+		description: 'Warm hand-offs to your team with full call context',
+		icon: PhoneForwarded,
 	},
 	{
 		title: 'Sub-second Audio Engine',
@@ -577,7 +596,7 @@ const industryLinks: LinkItem[] = [
 const useCaseLinks: LinkItem[] = [
 	{
 		title: 'Inbound Customer Support',
-		href: '/features',
+		href: '/features/answering-services',
 		icon: Headphones,
 	},
 	{
@@ -587,7 +606,7 @@ const useCaseLinks: LinkItem[] = [
 	},
 	{
 		title: 'Appointment Booking AI',
-		href: '/features',
+		href: '/features/appointment-setter',
 		icon: Sparkles,
 	},
 ];
