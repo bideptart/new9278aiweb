@@ -3,22 +3,19 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import {
-  PhoneCall,
   ShieldCheck,
   Bot,
   User,
-  Zap,
-  CheckCircle2,
   Lock,
-  TrendingUp,
-  AlertTriangle,
-  Building2,
-  ChevronRight,
-  Activity,
-  Sparkles,
+  CheckCircle2,
   Award,
+  Play,
+  Pause,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+const AUTOPLAY_MS = 3500
+const BARCODE_WIDTHS = [2, 1, 3, 1, 2, 4, 1, 2, 3, 1, 1, 2, 4, 1, 3, 2, 1, 2, 1, 3, 2, 1, 4, 1, 2]
 
 export function FinanceSettlementHub() {
   const [activeScenario, setActiveScenario] = useState(0)
@@ -63,12 +60,14 @@ export function FinanceSettlementHub() {
     if (isPlaying) {
       timer = setInterval(() => {
         setActiveScenario((prev) => (prev + 1) % scenarios.length)
-      }, 3500)
+      }, AUTOPLAY_MS)
     }
     return () => clearInterval(timer)
   }, [isPlaying, scenarios.length])
 
   const curSc = scenarios[activeScenario]
+  const angleFor = (idx: number) => -90 + idx * (360 / scenarios.length)
+  const needleAngle = angleFor(activeScenario)
 
   return (
     <section className="relative overflow-hidden py-10 md:py-16">
@@ -78,121 +77,190 @@ export function FinanceSettlementHub() {
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 size-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-rose-500/10 via-amber-500/8 to-transparent blur-3xl opacity-20"
       />
 
-      <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-8">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 space-y-6">
         {/* Header Badge & Title */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-2 rounded-full bg-rose-50/80 dark:bg-rose-950/30 px-3.5 py-1 text-xs font-normal uppercase tracking-wider text-rose-400 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 shadow-xs">
             <Award className="size-3.5 text-rose-300" />
-            <span>LIVE FINANCIAL VOICE SIMULATOR</span>
+            <span>LIVE VAULT DIAL SIMULATOR</span>
           </span>
           <h2 className="text-balance text-3xl font-serif font-normal leading-tight md:text-5xl text-foreground">
             Experience real-time <span className="italic text-rose-400 dark:text-rose-400">banking AI calls.</span>
           </h2>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-            See how 9278.ai handles high-value loan intake, fraud alerts, and EMI recovery calls with sub-250ms latency and empathetic human-like tone.
+            Turn the vault dial to any scenario below and read the printed transaction receipt for that live banking call.
           </p>
-        </div>
-
-        {/* 3 Scenario Selector Capsules */}
-        <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">
-          {scenarios.map((sc, idx) => {
-            const isSelected = activeScenario === idx
-            return (
-              <button
-                key={sc.id}
-                type="button"
-                onClick={() => {
-                  setActiveScenario(idx)
-                  setIsPlaying(false)
-                }}
-                className={cn(
-                  "px-4 py-2.5 rounded-full text-xs font-mono font-normal transition-all duration-300 flex items-center gap-2 cursor-pointer border shadow-xs",
-                  isSelected
-                    ? "bg-rose-500/15 text-rose-400 dark:text-rose-300 border-rose-300 dark:border-rose-800 shadow-sm scale-105"
-                    : "bg-white/80 dark:bg-slate-900/80 border-slate-200/80 dark:border-slate-800 text-muted-foreground hover:text-rose-400 dark:hover:text-rose-400 hover:bg-rose-50/40"
-                )}
-              >
-                <span className={cn("size-2 rounded-full", isSelected ? "bg-rose-500 animate-ping" : "bg-slate-300")} />
-                <span>{sc.title}</span>
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Simulation Dialogue & Core Banking Feed (Open Organic Canvas - No Heavy Outer Box!) */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={curSc.id}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4 max-w-5xl mx-auto"
+          <button
+            type="button"
+            onClick={() => setIsPlaying((p) => !p)}
+            className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-rose-200 dark:border-rose-900/50 bg-white/80 dark:bg-slate-900/80 px-3.5 py-1.5 text-[11px] font-normal text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
           >
-            {/* Left Column: Floating Dialogue Bubbles */}
-            <div className="lg:col-span-7 space-y-4">
-              {/* Customer Speech Bubble */}
-              <div className="flex items-start gap-3 max-w-[92%]">
-                <div className="size-8 rounded-full bg-slate-100 dark:bg-slate-800 text-foreground flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700 shadow-xs">
-                  <User className="size-4 text-muted-foreground" />
-                </div>
-                <div className="p-4 rounded-3xl rounded-tl-none bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm text-xs md:text-sm text-foreground font-medium leading-relaxed">
-                  <p className="text-[10px] font-mono text-muted-foreground font-normal mb-1">Customer Inbound Audio</p>
-                  {curSc.custMsg}
-                </div>
+            {isPlaying ? <Pause className="size-3 fill-current" /> : <Play className="size-3 fill-current" />}
+            {isPlaying ? "Pause Autoplay" : "Resume Autoplay"}
+          </button>
+        </div>
+
+        {/* Side-by-side: rotating vault dial on the left, printed receipt on the right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center max-w-5xl mx-auto">
+
+          {/* VAULT COMBINATION DIAL */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative aspect-square w-[260px] sm:w-[300px]">
+              {/* Autoplay progress ring (native SMIL — no framer SVG quirks) */}
+              <svg className="absolute inset-0 size-full -rotate-90" viewBox="0 0 100 100" aria-hidden>
+                <circle cx="50" cy="50" r="47" fill="none" stroke="rgb(251 113 133 / 0.15)" strokeWidth="1.5" />
+                {isPlaying && (
+                  <circle
+                    cx="50" cy="50" r="47" fill="none"
+                    stroke="rgb(253 164 175)" strokeWidth="1.5" strokeLinecap="round"
+                    strokeDasharray={295} strokeDashoffset={295}
+                  >
+                    <animate
+                      key={activeScenario}
+                      attributeName="stroke-dashoffset"
+                      from="295" to="0"
+                      dur={`${AUTOPLAY_MS / 1000}s`}
+                      fill="freeze"
+                      repeatCount="1"
+                    />
+                  </circle>
+                )}
+              </svg>
+
+              {/* Dial face */}
+              <div className="absolute inset-[8%] rounded-full border-2 border-rose-200/60 dark:border-rose-900/40 bg-gradient-to-br from-white via-rose-50/50 to-slate-50 dark:from-slate-900 dark:to-slate-950 shadow-inner" />
+
+              {/* Minor tick marks */}
+              {Array.from({ length: 24 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="absolute left-1/2 top-1/2 h-[6%] w-px bg-rose-300/50 dark:bg-rose-800/50 origin-bottom"
+                  style={{ transform: `rotate(${i * 15}deg) translateY(-42%)` }}
+                />
+              ))}
+
+              {/* Rotating needle */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 h-[34%] w-[3px] origin-bottom rounded-full bg-gradient-to-t from-rose-300 to-rose-100 z-[5]"
+                style={{ marginLeft: -1.5, marginTop: "-34%" }}
+                animate={{ rotate: needleAngle }}
+                transition={{ type: "spring", stiffness: 85, damping: 13 }}
+              />
+
+              {/* Center vault hub */}
+              <div className="absolute left-1/2 top-1/2 z-10 flex size-14 sm:size-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-rose-50 dark:from-rose-950/50 dark:to-rose-900/20 border border-rose-200 dark:border-rose-800 text-rose-500 dark:text-rose-400 shadow-md">
+                <Lock className="size-5 sm:size-6" />
               </div>
 
-              {/* Financial AI Voice Response Bubble */}
-              <div className="flex items-start gap-3 max-w-[95%] ml-auto flex-row-reverse">
-                <div className="size-8 rounded-full bg-rose-500/15 text-rose-400 dark:text-rose-400 border border-rose-300 dark:border-rose-800 flex items-center justify-center shrink-0 shadow-xs">
-                  <Bot className="size-4" />
-                </div>
-                <div className="p-4 rounded-3xl rounded-tr-none bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 shadow-md text-xs md:text-sm text-foreground font-normal leading-relaxed">
-                  <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400">9278 Financial AI</span>
-                    <span className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-normal bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                      ⚡ Sub-250ms Response
+              {/* Scenario position markers */}
+              {scenarios.map((sc, idx) => {
+                const angle = (angleFor(idx) * Math.PI) / 180
+                const radius = 44
+                const x = 50 + radius * Math.cos(angle)
+                const y = 50 + radius * Math.sin(angle)
+                const isSelected = idx === activeScenario
+
+                return (
+                  <button
+                    key={sc.id}
+                    type="button"
+                    style={{ left: `${x}%`, top: `${y}%` }}
+                    onClick={() => {
+                      setActiveScenario(idx)
+                      setIsPlaying(false)
+                    }}
+                    className="absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+                    aria-label={sc.title}
+                  >
+                    <span
+                      className={cn(
+                        "flex items-center justify-center rounded-full border font-mono text-[10px] font-normal transition-all duration-300",
+                        isSelected
+                          ? "size-9 bg-white dark:bg-slate-900 border-rose-300 dark:border-rose-700 text-rose-400 shadow-md scale-110"
+                          : "size-7 bg-white/80 dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 text-slate-400 hover:border-rose-200"
+                      )}
+                    >
+                      {idx + 1}
                     </span>
-                  </div>
-                  {curSc.aiMsg}
-                </div>
-              </div>
+                  </button>
+                )
+              })}
             </div>
+          </div>
 
-            {/* Right Column: Live Banking Telemetry & Action Card */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm p-6 rounded-3xl bg-gradient-to-br from-white via-rose-50/60 to-slate-100 dark:from-slate-900 dark:to-slate-950 border border-rose-200/80 dark:border-rose-900/50 shadow-xl backdrop-blur-xl space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-normal text-foreground">{curSc.title}</span>
-                  <span className="text-[10px] font-mono font-normal text-rose-400 dark:text-rose-400 bg-rose-500/15 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
+          {/* PRINTED TRANSACTION RECEIPT */}
+          <div className="lg:col-span-7 flex justify-center [perspective:1200px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={curSc.id}
+                initial={{ opacity: 0, rotateX: -8, y: -10 }}
+                animate={{ opacity: 1, rotateX: 0, y: 0 }}
+                exit={{ opacity: 0, rotateX: 8, y: 10 }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  clipPath:
+                    "polygon(0% 0%,100% 0%,100% 90%,95% 100%,90% 90%,85% 100%,80% 90%,75% 100%,70% 90%,65% 100%,60% 90%,55% 100%,50% 90%,45% 100%,40% 90%,35% 100%,30% 90%,25% 100%,20% 90%,15% 100%,10% 90%,5% 100%,0% 90%)",
+                }}
+                className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl p-6 pb-10 font-mono"
+              >
+                {/* Barcode header */}
+                <div className="flex items-end gap-[2px] mb-4 h-6">
+                  {BARCODE_WIDTHS.map((w, i) => (
+                    <span key={i} className="bg-slate-800 dark:bg-slate-200" style={{ width: `${w}px`, height: "100%" }} />
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground">Transaction Receipt</span>
+                  <span className="text-[10px] font-normal text-rose-400 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-full border border-rose-200 dark:border-rose-900/50">
                     {curSc.tag}
                   </span>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/60 dark:border-slate-800 space-y-1">
-                  <p className="text-[10px] font-mono text-muted-foreground">Action Outcome Status</p>
-                  <p className="text-xs font-mono font-normal text-emerald-600 dark:text-emerald-400">{curSc.actionStatus}</p>
+                <h3 className="text-sm font-sans font-normal text-foreground mb-1">{curSc.title}</h3>
+                <p className="text-[10px] text-muted-foreground mb-4">{curSc.subtitle}</p>
+
+                <div className="border-t border-dashed border-slate-300 dark:border-slate-700 my-3" />
+
+                <div className="flex items-start gap-2 mb-3">
+                  <User className="size-3.5 text-muted-foreground mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-[9px] uppercase tracking-wider text-muted-foreground mb-1">Customer Inbound Audio</p>
+                    <p className="text-xs text-foreground leading-relaxed">{curSc.custMsg}</p>
+                  </div>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/40 space-y-1">
-                  <p className="text-[10px] font-mono text-muted-foreground">Core Banking Audit Feed</p>
-                  <p className="text-xs font-mono font-normal text-rose-400 dark:text-rose-400">{curSc.systemMetric}</p>
+                <div className="border-t border-dashed border-slate-300 dark:border-slate-700 my-3" />
+
+                <div className="flex items-start gap-2 mb-3">
+                  <Bot className="size-3.5 text-rose-400 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-[9px] uppercase tracking-wider text-rose-400 dark:text-rose-400 mb-1">9278 Financial AI · Sub-250ms Response</p>
+                    <p className="text-xs text-foreground leading-relaxed">{curSc.aiMsg}</p>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between text-[10px] font-mono text-muted-foreground pt-2 border-t border-slate-200/60 dark:border-slate-800">
-                  <span className="flex items-center gap-1">
+                <div className="border-t border-dashed border-slate-300 dark:border-slate-700 my-3" />
+
+                <div className="flex items-center justify-between text-[10px] mb-1.5">
+                  <span className="flex items-center gap-1.5 text-muted-foreground">
+                    <CheckCircle2 className="size-3 text-emerald-500" />
+                    Action Outcome
+                  </span>
+                  <span className="text-emerald-600 dark:text-emerald-400">{curSc.actionStatus}</span>
+                </div>
+                <div className="flex items-center justify-between text-[10px]">
+                  <span className="flex items-center gap-1.5 text-muted-foreground">
                     <ShieldCheck className="size-3 text-rose-300" />
-                    Finacle Synced
+                    Core Banking Feed
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Activity className="size-3 text-emerald-500 animate-pulse" />
-                    24/7 Active
-                  </span>
+                  <span className="text-rose-400 dark:text-rose-400">{curSc.systemMetric}</span>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
       </div>
     </section>
   )
